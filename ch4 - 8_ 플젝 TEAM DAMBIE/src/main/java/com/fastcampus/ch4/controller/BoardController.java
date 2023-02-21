@@ -24,7 +24,7 @@ public class BoardController {
     BoardServiceImpl_JH boardService_JH;
 
 //    git test HYEBIN
-    
+
     @GetMapping("/list")
     public String list(HttpServletRequest request, HttpSession session, Model m,
                        @RequestParam(defaultValue = "1")Integer page,
