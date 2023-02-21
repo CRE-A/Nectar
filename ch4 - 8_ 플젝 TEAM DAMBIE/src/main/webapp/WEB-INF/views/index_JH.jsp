@@ -81,8 +81,9 @@
 </div>
 <div id="homeText" style="text-align: center">
     <h1>This is Home</h1>
-    <h1>This is Home</h1>
-    <h1>This is Home</h1>
+    <h1>Nectar</h1>
+    <h1>Nectar</h1>
+    <h1>Nectar</h1>
 </div>
 
 </body>
