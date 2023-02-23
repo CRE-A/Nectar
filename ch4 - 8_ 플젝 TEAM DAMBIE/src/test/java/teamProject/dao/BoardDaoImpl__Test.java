@@ -1,7 +1,6 @@
 package teamProject.dao;
 
 import teamProject.domain.BoardDto;
-//import teamProject.domain.BoardDto_JH;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

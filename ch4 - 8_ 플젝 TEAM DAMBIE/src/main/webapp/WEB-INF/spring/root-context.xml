@@ -13,11 +13,9 @@
 		<!--property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property-->
 		<!--property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/springbasic?useUnicode=true&amp;characterEncoding=utf8"></property-->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-
 <!--		<property name="url" value="jdbc:mysql://localhost:3306/springbasic?useUnicode=true&amp;characterEncoding=utf8"></property>-->
 		<property name="url" value="jdbc:mysql://172.30.1.65:3306/springbasic?useUnicode=true&amp;characterEncoding=utf8"></property>
-		<property name="username" value="CREA"></property>
-							<!--value를 내 usernaem  CREA로 변환	-->
+		<property name="username" value="CREA"></property>	<!--value를 내 usernaem  CREA로 변환	-->
 		<property name="password" value="1234"></property>
 	</bean>
 

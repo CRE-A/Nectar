@@ -1,7 +1,6 @@
 package teamProject.controller;
 
 import teamProject.domain.BoardDto;
-import teamProject.domain.BoardDto;
 import teamProject.domain.PageHandler;
 import teamProject.service.BoardService;
 import teamProject.service.BoardServiceImpl;
@@ -24,7 +23,6 @@ import java.util.List;
 public class BoardController {
     @Autowired
     BoardService boardService;
-
 
     @GetMapping("/list")
     public String list(HttpServletRequest request, HttpSession session, Model m,
