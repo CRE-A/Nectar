@@ -22,9 +22,10 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<context:component-scan base-package="com.fastcampus.ch4"/>
+<!--	<context:component-scan base-package="com.fastcampus.ch4"/>-->
+	<context:component-scan base-package="teamProject"/>
 
-	<view-controller path="/" view-name="index_JH"/>
+	<view-controller path="/" view-name="index"/>
 					<!--root로 방문하면(path="/" index.jsp를 보여준다-->
 </beans:beans>
 

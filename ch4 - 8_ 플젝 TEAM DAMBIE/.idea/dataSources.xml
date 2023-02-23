@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="springbasic@localhost" uuid="0eb8f372-29bf-4448-8bb9-bd00c1f55533">
+    <data-source source="LOCAL" name="springbasic@127.30.1.65" uuid="c22918d7-8d66-43b5-baa1-49d35adfdeda">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/springbasic</jdbc-url>
+      <jdbc-url>jdbc:mysql://127.30.1.65:3306/springbasic</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
