@@ -23,7 +23,7 @@ import java.util.List;
 public class BoardController {
     @Autowired
     BoardService boardService;
-
+//git branch test
     @GetMapping("/list")
     public String list(HttpServletRequest request, HttpSession session, Model m,
                        @RequestParam(defaultValue = "1")Integer page,
