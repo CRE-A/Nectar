@@ -19,7 +19,7 @@ import java.net.URLEncoder;
 public class LoginController {
     @Autowired
     UserDao userDao;
-
+    //git branch test
     @GetMapping("/login")
     public String loginForm(){
         return "loginForm";
