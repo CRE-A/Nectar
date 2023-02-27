@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias alias="BoardDto" type="project.nectar.domain.BoardDto"/>
+        <typeAlias alias="CafeDto" type="project.nectar.domain.CafeDto"/>
+        <typeAlias alias="SearchCondition" type="project.nectar.domain.SearchCondition"/>
+<!--        <typeAlias alias="BoardDto_JH" type="project.nectar.domain.BoardDto_JH"/>-->
+    </typeAliases>
+</configuration>
