@@ -23,10 +23,8 @@
 //    @Autowired
 //    BoardServiceImpl boardService;
 //    @GetMapping("/list")
-//    public String list(HttpServletRequest request, HttpSession session, Model m,
-//                       @RequestParam(defaultValue = "1")Integer page,
-//                       @RequestParam(defaultValue = "10")Integer pageSize
-//                       ) {
+//    public String list(HttpServletRequest request, HttpSession session, Model m,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer pageSize) {
+//
 //        if (!loginCheck(session)) {
 //            return "redirect:/login/login?toURL=" + request.getRequestURL();
 //        }

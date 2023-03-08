@@ -24,8 +24,6 @@
 
         a{
             text-decoration : none;
-            color : black;
-            font-weight: normal;
         }
 
         div>ul{
@@ -41,13 +39,14 @@
         div>ul>li{
             color : white;
             font-size : 22px;
+            margin-right: 20px;
         }
 
         div>ul>li>a{
             color : white;
             align-items : center;
             transition : all 300ms ease-in-out;
-            margin-left : 40px;
+            margin-left : 20px;
         }
 
         div>ul>li>a:hover{
@@ -56,10 +55,11 @@
         }
 
         #menu_title{
-            padding-left : 40px;
+            padding-left : 10px;
             margin-right : auto;
             display: flex;
         }
+
         /* index_JH css   */
 
         #board_h2{
@@ -109,12 +109,12 @@
 <body>
 <div id="menu">
     <ul>
-        <li id="menu_title">CREA_WORLD</li>
-        <li><a href="<c:url value='/'/>">Home</a></li>
-        <li><a href="<c:url value='/board/list'/>">Board</a></li>
+        <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
+        <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
+        <li><a href="<c:url value='/cafe/list'/>">카페리스트</a></li>
         <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a> </li>
-        <li><a href="<c:url value='/register/add'/>">Sign in</a> </li>
-        <li><a href=""><i class="fa-solid fa-magnifying-glass"></i></a></li>
+        <%--        <li><a href="<c:url value='/register/add'/>">Sign in</a> </li>--%>
+        <%--        <li><a href=""><i class="fa-solid fa-magnifying-glass"></i></a></li>--%>
     </ul>
 </div>
 
@@ -137,9 +137,9 @@
         <input type="hidden" name="bno" value="${dto.bno}" readonly="readonly" />
         <input type="text" name="title" value="${dto.title}" ${mode=="new"? "" : "readonly='readonly'"} />
         <textarea name="content" rows="10" cols="30" ${mode=="new"? "" : "readonly='readonly'"}>${dto.content}</textarea>
-        <button id="writeBtn" class="board_btn">등록</button>
-        <button id="modifyBtn" class="board_btn" type="button">수정</button>
-        <button id="deleteBtn" class="board_btn">삭제</button>
+<%--        <button id="writeBtn" class="board_btn">등록</button>--%>
+<%--        <button id="modifyBtn" class="board_btn" type="button">수정</button>--%>
+<%--        <button id="deleteBtn" class="board_btn">삭제</button>--%>
         <button id="listBtn" class="board_btn" type="button">목록</button>
 
     </form>
@@ -150,48 +150,45 @@
     $(document).ready(()=>{
         $('#listBtn').on('click',()=>{
             // alert("listBtn clicked")
-            location.href="<c:url value='/board/list'/>?page=${page}&pageSize=${pageSize}"
-            location.href="<c:url value='/board/list?page=${page}&pageSize=${pageSize}'/>"
-            <%--location.href="<c:url value='/board/list'/>?page=${page}&pageSize=${pageSize}";--%>
-
+            location.href="<c:url value='/cafe/list?page=${page}&pageSize=${pageSize}'/>"
         })
 
-        $('#deleteBtn').on('click',()=>{
-            if(!confirm("정말로 삭제하시겠습니까?")) return ;
-            let form = $('#board_form')
-            form.attr("action","<c:url value='/board/delete'/>?page=${page}&pageSize=${pageSize}")
-            form.attr("method","post")
-            form.submit();
-        })
+<%--        &lt;%&ndash;$('#deleteBtn').on('click',()=>{&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    if(!confirm("정말로 삭제하시겠습니까?")) return ;&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    let form = $('#board_form')&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    form.attr("action","<c:url value='/board/delete'/>?page=${page}&pageSize=${pageSize}")&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    form.attr("method","post")&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    form.submit();&ndash;%&gt;--%>
+<%--        &lt;%&ndash;})&ndash;%&gt;--%>
+<%--        --%>
+<%--        &lt;%&ndash;$('#writeBtn').on('click',()=>{&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    let form = $('#board_form')&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    form.attr("action","<c:url value='/board/write'/>")&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    form.attr("method","post")&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    form.submit()&ndash;%&gt;--%>
+<%--        &lt;%&ndash;})&ndash;%&gt;--%>
+<%--        --%>
+<%--        &lt;%&ndash;$('#modifyBtn').on('click',()=>{&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    //읽기 모드면, 수정 상태로 변경&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    let form = $('#board_form')&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    let isReadOnly = $("input[name=title]").attr("readonly")&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    // alert("modifyBtn clicked")&ndash;%&gt;--%>
+<%--        &lt;%&ndash;    if(isReadOnly=='readonly'){&ndash;%&gt;--%>
+<%--        &lt;%&ndash;        // alert("readonly= 'readonly'");&ndash;%&gt;--%>
+<%--        &lt;%&ndash;        $('#board_h2').html("게시물 수정")&ndash;%&gt;--%>
+<%--        &lt;%&ndash;        $('input[name=title]').attr("readonly",false);&ndash;%&gt;--%>
+<%--        &lt;%&ndash;        $('textarea[name=content]').attr("readonly",false);&ndash;%&gt;--%>
+<%--        &lt;%&ndash;        $('#modifyBtn').html("<i class='fa fa-pencil'></i> 등록")&ndash;%&gt;--%>
+<%--        &lt;%&ndash;        $('#writeBtn').html("글쓰기등록")&ndash;%&gt;--%>
+<%--        &lt;%&ndash;        return ;&ndash;%&gt;--%>
+<%--            }--%>
+<%--                &lt;%&ndash;form.attr("action","<c:url value='/board/modify'/>?page=${page}&pageSize=${pageSize}")&ndash;%&gt;--%>
+<%--                form.attr("action","<c:url value='/board/modify?page=${page}&pageSize=${pageSize}'/>")--%>
+<%--                form.attr("method","post")--%>
+<%--                form.submit();--%>
 
-        $('#writeBtn').on('click',()=>{
-            let form = $('#board_form')
-            form.attr("action","<c:url value='/board/write'/>")
-            form.attr("method","post")
-            form.submit()
-        })
-
-        $('#modifyBtn').on('click',()=>{
-            //읽기 모드면, 수정 상태로 변경
-            let form = $('#board_form')
-            let isReadOnly = $("input[name=title]").attr("readonly")
-            // alert("modifyBtn clicked")
-            if(isReadOnly=='readonly'){
-                // alert("readonly= 'readonly'");
-                $('#board_h2').html("게시물 수정")
-                $('input[name=title]').attr("readonly",false);
-                $('textarea[name=content]').attr("readonly",false);
-                $('#modifyBtn').html("<i class='fa fa-pencil'></i> 등록")
-                $('#writeBtn').html("글쓰기등록")
-                return ;
-            }
-                <%--form.attr("action","<c:url value='/board/modify'/>?page=${page}&pageSize=${pageSize}")--%>
-                form.attr("action","<c:url value='/board/modify?page=${page}&pageSize=${pageSize}'/>")
-                form.attr("method","post")
-                form.submit();
-
-            //수정 모드면, 등록
-        })
+<%--            //수정 모드면, 등록--%>
+<%--        })--%>
 
     })
 </script>

@@ -5,8 +5,12 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="BoardDto" type="project.nectar.domain.BoardDto"/>
-        <typeAlias alias="CafeDto" type="project.nectar.domain.CafeDto"/>
+        <typeAlias alias="RestrDto" type="project.nectar.domain.RestrDto"/>
         <typeAlias alias="SearchCondition" type="project.nectar.domain.SearchCondition"/>
-<!--        <typeAlias alias="BoardDto_JH" type="project.nectar.domain.BoardDto_JH"/>-->
+        <typeAlias alias="UserDto" type="project.nectar.domain.UserDto"/>
+        <typeAlias alias="BizAccountDto" type="project.nectar.domain.BizAccountDto"/>
+        <typeAlias alias="AdminDto" type="project.nectar.domain.AdminDto"/>
+        <typeAlias alias="ReviewDto" type="project.nectar.domain.ReviewDto"/>
+        <typeAlias alias="LikelistDto" type="project.nectar.domain.LikelistDto"/>
     </typeAliases>
 </configuration>

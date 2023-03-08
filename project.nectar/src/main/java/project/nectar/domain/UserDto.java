@@ -1,107 +1,105 @@
 package project.nectar.domain;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class UserDto {
-    private String id;
-    private String pwd;
-    private String name;
-    private String email;
-    private Date birth;
-    private String sns;
-    private Date reg_date;
+    private String user_email;
+    private String user_pwd;
+    private String user_name;
+    private String user_phone;
+    private String user_picture;
+    private String user_regdate;
+    private String user_state_code;
 
-    public UserDto(){}
-    public UserDto(String id, String pwd, String name, String email, Date birth, String sns, Date reg_date) {
-        this.id = id;
-        this.pwd = pwd;
-        this.name = name;
-        this.email = email;
-        this.birth = birth;
-        this.sns = sns;
-        this.reg_date = reg_date;
+    public UserDto(){};
+    public UserDto(String user_email, String user_pwd, String user_name, String user_phone, String user_picture) {
+        this.user_email = user_email;
+        this.user_pwd = user_pwd;
+        this.user_name = user_name;
+        this.user_phone = user_phone;
+        this.user_picture = user_picture;
     }
+
+    public String getUser_email() {
+        return user_email;
+    }
+
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
+    }
+
+    public String getUser_pwd() {
+        return user_pwd;
+    }
+
+    public void setUser_pwd(String user_pwd) {
+        this.user_pwd = user_pwd;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getUser_phone() {
+        return user_phone;
+    }
+
+    public void setUser_phone(String user_phone) {
+        this.user_phone = user_phone;
+    }
+
+    public String getUser_picture() {
+        return user_picture;
+    }
+
+    public void setUser_picture(String user_picture) {
+        this.user_picture = user_picture;
+    }
+
+    public String getUser_regdate() {
+        return user_regdate;
+    }
+
+    public void setUser_regdate(String user_regdate) {
+        this.user_regdate = user_regdate;
+    }
+
+    public String getUser_state_code() {
+        return user_state_code;
+    }
+
+    public void setUser_state_code(String user_state_code) {
+        this.user_state_code = user_state_code;
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDto userDto = (UserDto) o;
-        return id.equals(userDto.id) && Objects.equals(pwd, userDto.pwd) && Objects.equals(name, userDto.name) && Objects.equals(email, userDto.email) && Objects.equals(birth, userDto.birth) && Objects.equals(sns, userDto.sns);
+        return Objects.equals(user_email, userDto.user_email) && Objects.equals(user_pwd, userDto.user_pwd) && Objects.equals(user_name, userDto.user_name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, pwd, name, email, birth, sns, reg_date);
+        return Objects.hash(user_email, user_pwd, user_name);
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", birth=" + birth +
-                ", sns='" + sns + '\'' +
-                ", reg_date=" + reg_date +
+        return "UserDto{" +
+                "user_email='" + user_email + '\'' +
+                ", user_pwd='" + user_pwd + '\'' +
+                ", user_name='" + user_name + '\'' +
+                ", user_phone='" + user_phone + '\'' +
+                ", user_picture='" + user_picture + '\'' +
+                ", user_regdate='" + user_regdate + '\'' +
+                ", user_state_code='" + user_state_code + '\'' +
                 '}';
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-
-    public String getSns() {
-        return sns;
-    }
-
-    public void setSns(String sns) {
-        this.sns = sns;
-    }
-
-    public Date getReg_date() {
-        return reg_date;
-    }
-
-    public void setReg_date(Date reg_date) {
-        this.reg_date = reg_date;
     }
 }

@@ -155,7 +155,7 @@
     <c:forEach var="dto" items="${list}">
     <tr id="table_main">
         <td>${dto.bno}</td>
-        <td><a href="<c:url value='/board/read?bno=${dto.bno}&page=${page}&pageSize=${pageSize}'/>">${dto.title}</a></td>
+        <td><a href="<c:url value='/cafe/read?bno=${dto.bno}  ~~ ${likelist.star}~~~ &page=${page}&pageSize=${pageSize}'/>">${dto.title}</a></td>
         <td>${dto.writer}</td>
         <td>${dto.reg_date}</td>
         <td>${dto.view_cnt}</td>
@@ -166,15 +166,15 @@
 <%--model 에서 list, ph, page, pageSize 넘겨줘야함--%>
 <div id="navBar">
     <c:if test="${ph.showPrev}">
-        <a href="<c:url value='/board/list?page=${ph.beginPage-1}&pageSize=${pageSize}'/>">&lt;</a>
+        <a href="<c:url value='/cafe/list?page=${ph.beginPage-1}&pageSize=${pageSize}'/>">&lt;</a>
 
     </c:if>
     <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-        <a href="<c:url value='/board/list?page=${i}&pageSize=${pageSize}'/>">${i}</a>
+        <a href="<c:url value='/cafe/list?page=${i}&pageSize=${pageSize}'/>">${i}</a>
     </c:forEach>
 
     <c:if test="${ph.showNext}">
-        <a href="<c:url value='/board/list?page=${ph.endPage+1}&pageSize=${pageSize}'/>">&gt;</a>
+        <a href="<c:url value='/cafe/list?page=${ph.endPage+1}&pageSize=${pageSize}'/>">&gt;</a>
     </c:if>
 </div>
 </body>
