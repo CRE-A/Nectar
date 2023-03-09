@@ -2,6 +2,7 @@ package project.nectar.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import project.nectar.domain.RestrDto;
 import project.nectar.domain.SearchCondition;
 import project.nectar.repository.RestrDao;
@@ -24,6 +25,7 @@ public class RestrServiceImpl implements RestrService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public RestrDto read(int restr_NUM) throws Exception {
         restrDao.updateViewCnt(restr_NUM);
         return restrDao.select(restr_NUM);
