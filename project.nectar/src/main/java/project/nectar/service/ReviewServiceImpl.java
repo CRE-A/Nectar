@@ -35,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewDto> readMyReviews(String user_email) throws Exception{
+    public List<ReviewDto> getMyReviews(String user_email) throws Exception{
          return reviewDao.selectMyReviews(user_email);
     }
 

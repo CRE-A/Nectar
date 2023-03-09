@@ -20,9 +20,6 @@ public class ReviewController {
     public String write(ReviewDto reviewDto, RestrDto restrDto, RedirectAttributes rattr, Model m){
 
         try {
-            //user_email을 안보내주면
-            //String user_email = (String)session.getAttribute('User_id')
-            //reviewDto.setUser_email(user_email);
             reviewService.write(reviewDto, restrDto);
             rattr.addFlashAttribute("msg","WRT_OK");
             return "restr";
@@ -30,7 +27,7 @@ public class ReviewController {
             e.printStackTrace();
             rattr.addFlashAttribute("msg","WRT_ERR");
             m.addAttribute("ReviewDto",reviewDto);
-            return "restr";
+            return "restr"; //에러 발생시 에러전담 페이지로?
         }
     }
 
@@ -44,7 +41,7 @@ public class ReviewController {
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg","DEL_ERR");
-            return "restr";
+            return "restr"; //에러 발생시 에러전담 페이지로?
         }
     }
 
@@ -57,7 +54,7 @@ public class ReviewController {
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg","MOD_ERR");
-            return "restr";
+            return "restr"; //에러 발생시 에러전담 페이지로?
         }
     }
 

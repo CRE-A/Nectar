@@ -61,7 +61,7 @@
         delete from restr
     </delete>
 
-    <delete id="delete" parameterType="RestrDto">
+    <delete id="delete" parameterType="int">
         delete from restr
         where restr_NUM=#{restr_NUM}
     </delete>

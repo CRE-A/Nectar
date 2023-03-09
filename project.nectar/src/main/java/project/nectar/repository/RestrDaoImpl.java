@@ -42,8 +42,8 @@ public class RestrDaoImpl implements RestrDao {
     }
 
     @Override
-    public int delete(RestrDto restrDto) throws Exception{
-        return session.delete(namespace+"delete", restrDto);
+    public int delete(Integer restr_NUM) throws Exception{
+        return session.delete(namespace+"delete", restr_NUM);
     }
 
     @Override
@@ -76,10 +76,6 @@ public class RestrDaoImpl implements RestrDao {
         map.put("restr_NUM", restr_NUM);
         return session.update(namespace+"updateLikeCnt", map);
     }
-    // LikelistServiceImpl 의 @Transactional public int write(LikelistDto likelistDto) throws Exceptions{
-    // restr.updateLikeCnt(restrDto.getRestr_NUM(),1)
-    // return LikelistDao.insert(likelistDto);
-    // }
 
     @Override
     public int updateStar(RestrDto restrDto) throws Exception{

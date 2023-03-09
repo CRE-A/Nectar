@@ -188,7 +188,7 @@
     <ul>
         <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
         <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
-        <li><a href="<c:url value='/cafe/list'/>">카페리스트</a></li>
+        <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
         <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
     </ul>
 </div>
@@ -199,16 +199,16 @@
         <div id="inputBox">
             <div id="inputBox1">
                 <i class="fa-solid fa-id-badge"></i>
-                <input type="text" name="email" placeholder="이메일" value="${cookie.Admin_email.value}" autofocus>
+                <input type="text" name="email" placeholder="이메일" value="${cookie.User_email.value}" autofocus>
             </div>
 
             <div id="inputBox2">
                 <i class="fa-sharp fa-solid fa-key"></i>
-                <input type="password" name="pwd" placeholder="비밀번호" value="${cookie.Admin_pwd.value}">
+                <input type="password" name="pwd" placeholder="비밀번호" value="${cookie.User_pwd.value}">
             </div>
         </div>
         <input type="hidden" name="toURL" value="${param.toURL}">
-        <label><input type="checkbox" name="rememberEmailPwd" ${not empty cookie.Admin_email.value? "checked":""}>로그인 상태
+        <label><input type="checkbox" name="rememberEmailPwd" ${not empty cookie.User_email.value? "checked":""}>로그인 상태
             유지</label>
         <div id="msg">
             ${param.msg}

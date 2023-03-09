@@ -14,7 +14,7 @@ public interface RestrService {
 
     int deleteAll() throws Exception;
 
-    int delete(RestrDto restrDto) throws Exception;
+    int delete(Integer restr_NUM) throws Exception;
 
     int insertAll(RestrDto restrDto) throws Exception;
 
