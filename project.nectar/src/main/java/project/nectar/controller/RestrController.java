@@ -40,10 +40,11 @@ public class RestrController {
 
             List<RestrDto> list = restrService.SearchResultPage(sc);
             m.addAttribute("list", list);
+
+            //m.addAtrrivute("hotdealDto",hotdealDto); // 핫딜 이벤트 진행여부
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute("msg", "LIST_ERR");
-            m.addAttribute("totalCnt", 0);
         }
         return "restrList";
     }
@@ -77,6 +78,9 @@ public class RestrController {
             m.addAttribute("likelistDto",likelistDto);
             // 유저가 로그인 해서 게시물 들어갔을 때, 좋아요 누른 게시물인지 확인용
             //${not empty likelistDto.restr_NUM ? "checked" : ""} 값이 존재하면 하트(체크박스)에 체크되서 빨간색 불 들어옴
+
+            //m.addAtrrivute("restrMenu",restrMenuDto); // 메뉴
+            //m.addAtrrivute("hotdealDto",hotdealDto); // 핫딜 이벤트 진행여부
 
         } catch (Exception e) {
             e.printStackTrace();

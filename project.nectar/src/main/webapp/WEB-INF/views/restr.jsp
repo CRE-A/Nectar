@@ -75,6 +75,8 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <img src="<c:url value='/images/pizza.png'/>" />
+<%--        <img src="${restrPic.restr_pic_path}" />--%>
+<%--        restr_pic 테이블에 사진이 여러장(4~5장)이라, foreach를 쓰면서 restr_pic의 list를 나열 --%>
       </div>
       <div class="swiper-slide">
         <img src="<c:url value='/images/pizza.png'/>" />
@@ -116,7 +118,7 @@
       </div>
       <div class="info">
 
-        <h4 class="menu">${restrDto.restr_menu}</h4>    <!--헷갈림-->
+        <h4 class="menu">${restrDto.restr_menu}</h4>    <!--헷갈림 // 나중에 restr_menu의 data 넘겨줌-->
         <ul class="menuList">
           <li class="menu">
             <span class="menuName">${restrMenuDto.menu}</span>
@@ -150,7 +152,7 @@
 
 
   <div class="review-box">
-    <form action="" method="">
+    <form action="<c:url value="/review/write"/>" method="post">
       <div class="review__header">${restrDto.restr_name}</div>
       <span class="text">에 대한 솔직한 리뷰를 써주세요.</span>
 
@@ -214,13 +216,21 @@
           <div class="review__picWrap">
             <img src="/img/hani.jpg" alt="" />
           </div>
-          <span class="reivew__userName">홍혜빈</span>
+          <span class="reivew__userName">
+<%--            ${reviewDto.user_email}--%>
+<%--            ${reviewDto.user_name}--%>
+            홍혜빈
+          </span>
         </div>
       </div>
       <div class="review__content">
         <div class="review__content__wrap">
-          <span class="review__regdate">2023. 03. 06</span>
+          <span class="review__regdate">
+<%--            ${reviewDto.review_update}--%>
+            2023. 03. 06
+          </span>
           <div class="review__text">
+<%--            ${reviewDto.review_comment}--%>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Inventore repudiandae nulla qui hic quod aperiam odio animi
             aliquid exercitationem, at accusantium voluptatum saepe nobis
@@ -235,6 +245,7 @@
           <li class="review__picture">
             <div class="review__picture__wrap">
               <img src="<c:url value='/images/pizza.png'/>" alt="" class="reviewPicture" />
+<%--              <img src=${reviewDto.review_picture} alt="" class="reviewPicture" />--%>
             </div>
           </li>
         </ul>
@@ -248,8 +259,7 @@
     </li>
   </ul>
 </section>
-</body>
-</html>
+
 
 </body>
 </html>

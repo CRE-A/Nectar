@@ -57,6 +57,15 @@ public class RestrDaoImplTest {
             restrDao.insertAll(restrDto);
         }
     }
+
+    @Test
+    public void insert_Data2()throws Exception{
+
+        for (Integer i = 1000; i <= 1030; i++) {
+            RestrDto restrDto = new RestrDto("Test맛집"+i,1.234+i,i+4.321,"서울 강남구 신사동", "신사 강남역 강남 가로수길", "02-1234-5678","10:00-20:00", 2.3f ,"양식","1만원대","주차가능","데이트 분위기 좋은곳  가로수길 인스타그램 인스타 핫플 커플 예쁜 셀카","파스타 스테이크 빵 스프", "서울에 위치한 프랑스 가정요리 맛집이다. 예쁜 카페분위기 때문에 데이트 장소로 유명하다.","ASDFOIJSADFAS","신사/압구정", "biz_reg_num"+i);
+            restrDao.insertAll(restrDto);
+        }
+    }
 }
 
 

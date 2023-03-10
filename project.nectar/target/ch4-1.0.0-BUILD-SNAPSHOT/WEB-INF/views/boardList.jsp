@@ -155,7 +155,7 @@
     <c:forEach var="dto" items="${list}">
     <tr id="table_main">
         <td>${dto.bno}</td>
-        <td><a href="<c:url value='/cafe/read?bno=${dto.bno}  ~~ ${likelist.star}~~~ &page=${page}&pageSize=${pageSize}'/>">${dto.title}</a></td>
+        <td><a href="<c:url value='/cafe/read?bno=${dto.bno}&${likelist.star}&page=${page}&pageSize=${pageSize}'/>">${dto.title}</a></td>
         <td>${dto.writer}</td>
         <td>${dto.reg_date}</td>
         <td>${dto.view_cnt}</td>

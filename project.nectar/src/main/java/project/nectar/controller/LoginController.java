@@ -56,7 +56,7 @@ public class LoginController {
     }
 
 
-    @GetMapping("/auth/google/callback")
+    @GetMapping("/auth/google")
     public String snsLoginCallback(Model m, @RequestParam String code, HttpSession session) throws Exception{
 
         SnsLogin snsLogin = new SnsLogin(googleSns);

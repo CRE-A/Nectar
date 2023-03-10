@@ -53,17 +53,17 @@
                         class="star">${restrDto.restr_star}</span>
                 </div>
                 <div class="restr__location">
-                    ${restrDto.restr_location}
-                  <span class="foodType">${restrDto.restr_foodType}</span>
+                    ${restrDto.restr_location} - <span class="foodType">${restrDto.restr_foodType}</span>
                 </div>
                 <div class="restr__reaction">
                   <i class="fa-regular fa-eye"></i> <span>${restrDto.restr_viewCnt}</span>
                   <i class="fa-solid fa-pencil"></i> <span>${restrDto.restr_reviewCnt}</span>
+                  <i class="fa-regular fa-heart"></i> <span>${restrDto.restr_likeCnt}</span>
                 </div>
               </div>
-              <div class="restr__like">
-                <i class="fa-regular fa-heart"></i>
-              </div>
+<%--              <div class="restr__like">--%>
+<%--                  <i class="fa-regular fa-heart"></i>--%>
+<%--              </div>--%>
             </div>
           </div>
 

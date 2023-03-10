@@ -136,8 +136,6 @@
     </ul>
 </div>
 
-
-
 <div style="text-align:center">
     <div class="board-container">
         <h2 style="text-align: center">멍멍이도 야옹하는 그 맛, 매일 새로운 핫딜<br>넥터 </h2>
