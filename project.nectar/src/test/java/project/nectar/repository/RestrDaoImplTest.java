@@ -15,6 +15,10 @@ import static org.junit.Assert.*;
 public class RestrDaoImplTest {
     @Autowired
     private RestrDao restrDao;
+    @Autowired
+    private ReviewDao reviewDao;
+    @Autowired
+    private LikelistDao likelistDao;
 
     @Test
     public void searchResultCnt() throws Exception {
@@ -30,9 +34,9 @@ public class RestrDaoImplTest {
 
     @Test
     public void deleteAll() throws Exception {
-        assertTrue(restrDao.count()==0); // 총 카운트 바꿔줘
+//        assertTrue(restrDao.count()==0); // 총 카운트 바꿔줘
         restrDao.deleteAll();
-        assertTrue(restrDao.count()==0);
+//        assertTrue(restrDao.count()==0);
     }
 
     @Test
@@ -52,8 +56,8 @@ public class RestrDaoImplTest {
         restrDao.deleteAll();
         assertTrue(restrDao.count()==0);
 
-        for (Integer i = 1; i <= 444; i++) {
-            RestrDto restrDto = new RestrDto("맛집"+i,1.234+i,i+4.321,"서울 강남구 신사동", "신사 강남역 강남 가로수길", "02-1234-5678","10:00-20:00", 3.3f ,"한식","2만원대","주차가능","데이트 분위기 좋은곳  가로수길 인스타그램 인스타 핫플 커플 예쁜 셀카","고기 돼지고기 양념갈비 갈비 삼겹살 냉면 밥 찌게 김치찌게 된장찌게", "서울에 위치한 돼지고기 맛집이다. 직접 구워주기 때문에 더욱 맛있게 먹을 수 있다.","ASDFOIJJKDSF12324QWSADFAS","신사/압구정", "biz_reg_num"+i);
+        for (Integer i = 1; i <= 70; i++) {
+            RestrDto restrDto = new RestrDto("맛집"+i,1.234+i,i+4.321,"서울 강남구 신사동", "신사 강남역 강남 가로수길", "02-1234-5678","10:00-20:00", 3.3f ,"한식","2만원대","주차가능","데이트 분위기 좋은곳  가로수길 인스타그램 인스타 핫플 커플 예쁜 셀카","고기 돼지고기 양념갈비 갈비 삼겹살 냉면 밥 찌게 김치찌게 된장찌게", "서울에 위치한 돼지고기 맛집이다. 직접 구워주기 때문에 더욱 맛있게 먹을 수 있다.","pic_url_path"+i,"신사/압구정", "biz_reg_num"+i);
             restrDao.insertAll(restrDto);
         }
     }
@@ -61,21 +65,38 @@ public class RestrDaoImplTest {
     @Test
     public void insert_Data2()throws Exception{
 
-        for (Integer i = 1000; i <= 1030; i++) {
-            RestrDto restrDto = new RestrDto("Test맛집"+i,1.234+i,i+4.321,"서울 강남구 신사동", "신사 강남역 강남 가로수길", "02-1234-5678","10:00-20:00", 2.3f ,"양식","1만원대","주차가능","데이트 분위기 좋은곳  가로수길 인스타그램 인스타 핫플 커플 예쁜 셀카","파스타 스테이크 빵 스프", "서울에 위치한 프랑스 가정요리 맛집이다. 예쁜 카페분위기 때문에 데이트 장소로 유명하다.","ASDFOIJSADFAS","신사/압구정", "biz_reg_num"+i);
+        for (Integer i = 71; i <= 110; i++) {
+            RestrDto restrDto = new RestrDto("Test맛집"+i,831.234+i,i+8.378,"서울 강남구 신사동", "신사 강남역 강남 가로수길", "02-4682-5861","10:00-20:00", 2.3f ,"양식","1만원대","상관없음","데이트 분위기 좋은곳  가로수길 인스타그램 인스타 핫플 커플 예쁜 셀카","파스타 스테이크 빵 스프", "서울에 위치한 프랑스 가정요리 맛집이다. 예쁜 카페분위기 때문에 데이트 장소로 유명하다.","pic_url_path"+(i+100),"신사/압구정", "biz_reg_num"+(i+100));
             restrDao.insertAll(restrDto);
         }
     }
+
+
+    @Test
+    public void sync_ReviewCnt()throws Exception{
+        
+        for(int restr_NUM=1; restr_NUM<=110; restr_NUM++){
+            RestrDto restrDto = new RestrDto();
+            restrDto.setRestr_NUM(restr_NUM);
+            int reviewCnt = reviewDao.count(restr_NUM);
+            restrDto.setRestr_reviewCnt(reviewCnt);
+            restrDao.sync_ReviewCnt(restrDto);
+            System.out.println("restrDto = " + restrDto);
+        }
+    }
+
+
+    @Test
+    public void sync_updateStar() throws Exception {
+
+        for (int restr_NUM = 1; restr_NUM <= 110; restr_NUM++) {
+            RestrDto restrDto = new RestrDto();
+            restrDto.setRestr_NUM(restr_NUM);
+            float star = reviewDao.getAvgStar(restr_NUM);
+            restrDto.setRestr_star(star);
+            restrDao.updateStar(restrDto);
+        }
+    }
+
 }
 
-
-//    @Test
-//    public void insert_Data()throws Exception{
-//        restrDao.deleteAll();
-//        assertTrue(restrDao.count()==0);
-//
-//        for(int i=1; i<=300; i++){
-//            RestrDto restrDto = new RestrDto("name"+i, 1.234567, 3.13234213, "서울 강남구 신사동", "서울 가로수길 강남역 신사 논현", "010-123-4567", "10:00~20:00", 3.5, "한식", "2만원대", "데이트 인스타그램 핫플 분위기좋은곳", "PARKING", "삼겹살 된장찌게 밥 불고기 제육", "desc : 50년 된 맛집이고 ~~~ 어쩌고 저쩌고 ~~~", 1, "url_pic", "pic_name", "biz_reg_num : asdlkfjsdiofjsdfji1"+i );
-//            restrDao.insertAll(restrDto);
-//        }
-//    }

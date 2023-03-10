@@ -7,22 +7,27 @@ public class ReviewDto {
     private Integer review_NUM;
     private Integer restr_NUM;
     private String user_email;
+    private String user_name;
+    private String user_picture;
+
     private String review_comment;
     private String review_picture;
     private float review_star;
     private Date review_regdate;
     private Date review_update;
 
-    public ReviewDto(){this(455,"User_157@google.com","내 리뷰를 이용하라","asdf123",3.0f);}
-    public ReviewDto(Integer restr_NUM, String user_email, String review_comment, String review_picture, float review_star) {
-        this.restr_NUM = restr_NUM;
-        this.user_email = user_email;
-        this.review_comment = review_comment;
-        this.review_picture = review_picture;
-        this.review_star = review_star;
-    }
+    public ReviewDto(){this(455,"User_157@google.com", "홍혜빈","user_pic" , "내 리뷰를 이용하라","asdf123",3.0f);}
+    public ReviewDto(Integer restr_NUM, String user_email, String user_name, String user_picture, String review_comment, String review_picture, float review_star) {
+            this.restr_NUM = restr_NUM;
+            this.user_email = user_email;
+            this.user_name = user_name;
+            this.user_picture = user_picture;
+            this.review_comment = review_comment;
+            this.review_picture = review_picture;
+            this.review_star = review_star;
+        }
 
-    public Integer getReview_NUM() {
+        public Integer getReview_NUM() {
         return review_NUM;
     }
 
@@ -44,6 +49,23 @@ public class ReviewDto {
 
     public void setUser_email(String user_email) {
         this.user_email = user_email;
+    }
+
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getUser_picture() {
+        return user_picture;
+    }
+
+    public void setUser_picture(String user_picture) {
+        this.user_picture = user_picture;
     }
 
     public String getReview_comment() {
@@ -105,6 +127,8 @@ public class ReviewDto {
                 "review_NUM=" + review_NUM +
                 ", restr_NUM=" + restr_NUM +
                 ", user_email='" + user_email + '\'' +
+                ", user_name='" + user_name + '\'' +
+                ", user_picture='" + user_picture + '\'' +
                 ", review_comment='" + review_comment + '\'' +
                 ", review_picture='" + review_picture + '\'' +
                 ", review_star=" + review_star +

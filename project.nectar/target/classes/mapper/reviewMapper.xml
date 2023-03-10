@@ -31,9 +31,9 @@
 
     <insert id="insert" parameterType="ReviewDto">
         INSERT INTO review
-            (restr_NUM, user_email, review_comment, review_picture, review_star, review_regdate, review_update)
+            (restr_NUM, user_email, user_name, user_picture, review_comment, review_picture, review_star, review_regdate, review_update)
         VALUES
-            (#{restr_NUM}, #{user_email}, #{review_comment}, #{review_picture}, ${review_star}, now(), now())
+            (#{restr_NUM}, #{user_email}, #{user_name},#{user_picture},  #{review_comment}, #{review_picture}, ${review_star}, now(), now())
     </insert>
 
 

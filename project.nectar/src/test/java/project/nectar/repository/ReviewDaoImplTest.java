@@ -13,8 +13,6 @@ import static org.junit.Assert.*;
 public class ReviewDaoImplTest {
     @Autowired
     private ReviewDao reviewDao;
-    @Autowired
-    private RestrDao restrDao;
 
     @Test
     public void count() {
@@ -50,22 +48,18 @@ public class ReviewDaoImplTest {
 
     @Test
     public void insert_Data() throws Exception{
-//        reviewDao.deleteAll(445);
-//        assertTrue(reviewDao.count(445)==0);
 
-        for(int i=1; i<=33; i++){
-            ReviewDto reviewDto = new ReviewDto(445,"User_"+i+"@google.com","음식이 나쁘진 않은데, 가격대비 구림 -hb"+i,"asd323",1.5f);
-                    reviewDao.insert(reviewDto);
+        for(int i=1; i<=110; i++){
+            ReviewDto reviewDto = new ReviewDto(0+i,"User_"+(301-i)+"@google.com", "name"+(301-i), "user_pic", "음식이 나쁘진 않은데, 가격대비 구림 -hb"+i,"asd323",((int)(Math.random()*5)+1));
+            reviewDao.insert(reviewDto);
         }
     }
 
     @Test
     public void insert_Data2() throws Exception{
-//        reviewDao.deleteAll(445);
-//        assertTrue(reviewDao.count(445)==0);
 
-        for(int i=1; i<=300; i++){
-            ReviewDto reviewDto = new ReviewDto(445+i,"User_500@google.com","옥수수 찐만두보다 못하네 ㅉㅉ","kkk323",2.5f);
+        for(int i=1; i<=110; i++){
+            ReviewDto reviewDto = new ReviewDto(0+i,"User_"+(501-i)+"@google.com", "name"+(501-i), "user_pic","옥수수 찐만두보다 못하네 ㅉㅉ","kkk323",((int)(Math.random()*5)+1));
             reviewDao.insert(reviewDto);
         }
     }
@@ -73,11 +67,10 @@ public class ReviewDaoImplTest {
     @Test
     public void insert_Data3() throws Exception{
 //        reviewDao.deleteAll(445);
-//        assertTrue(reviewDao.count(445)==0);
 
-        for(int i=1; i<=300; i++){
-            for(int j=1; j<=20; j++){
-                ReviewDto reviewDto = new ReviewDto(444+i,"User_"+j+"google.com","나의 리뷰를 이용하라 m.blog.naver.com/intae","no pic",((int)(Math.random()*5)+1));
+        for(int i=1; i<=100; i++){
+            for(int j=1; j<=7; j++){
+                ReviewDto reviewDto = new ReviewDto(0+i,"User_"+j+"google.com", "name"+j,"user_pic","나의 리뷰를 이용하라 m.blog.naver.com/intae"+j,"pic_url_path",((int)(Math.random()*5)+1));
                 reviewDao.insert(reviewDto);
             }
         }

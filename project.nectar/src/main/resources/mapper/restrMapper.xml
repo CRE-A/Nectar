@@ -107,6 +107,15 @@
         where restr_NUM=#{restr_NUM}
     </update>
 
+
+
+
+    <update id="sync_ReviewCnt" parameterType="RestrDto">
+        update restr
+        set restr_reviewCnt = #{restr_reviewCnt}
+        where restr_NUM=#{restr_NUM}
+    </update>
+
 </mapper>
 
 

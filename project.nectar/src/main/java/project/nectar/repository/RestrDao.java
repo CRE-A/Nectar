@@ -29,4 +29,6 @@ public interface RestrDao {
     int updateLikeCnt(Integer restr_NUM, int cnt) throws Exception;
 
     int updateStar(RestrDto restrDto) throws Exception;
+
+    int sync_ReviewCnt(RestrDto restrDto) throws Exception;
 }

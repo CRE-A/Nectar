@@ -81,4 +81,9 @@ public class RestrDaoImpl implements RestrDao {
     public int updateStar(RestrDto restrDto) throws Exception{
         return session.update(namespace+"updateStar",restrDto);
     }
+
+    @Override
+    public int sync_ReviewCnt(RestrDto restrDto) throws Exception{
+        return session.update(namespace+"sync_ReviewCnt", restrDto);
+    }
 }

@@ -21,13 +21,13 @@ public class RestrDto {
     private String restr_picture;
     private String restr_category_loc;
     private String biz_reg_num;
-    private String restr_viewCnt;
-    private String restr_reviewCnt;
-    private String restr_likeCnt;
+    private Integer restr_viewCnt;
+    private Integer restr_reviewCnt;
+    private Integer restr_likeCnt;
 
 
     public RestrDto() {
-        this("", 0.0, 0.0, "", "", "", "", 3.5f, "", "", "", "", "", "", "", "","");
+        this("", 0.0, 0.0, "", "", "", "", ((int)(Math.random()*5)+1), "", "", "", "", "", "", "", "","");
     }
 
     public RestrDto(String restr_name, double restr_latitude, double restr_longitude, String restr_location, String restr_location_tag, String restr_phone, String restr_time, float restr_star, String restr_foodType, String restr_cost, String restr_parking, String restr_tag, String restr_menu, String restr_desc, String restr_picture, String restr_category_loc, String biz_reg_num) {
@@ -207,27 +207,27 @@ public class RestrDto {
         this.biz_reg_num = biz_reg_num;
     }
 
-    public String getRestr_viewCnt() {
+    public Integer getRestr_viewCnt() {
         return restr_viewCnt;
     }
 
-    public void setRestr_viewCnt(String restr_viewCnt) {
+    public void setRestr_viewCnt(Integer restr_viewCnt) {
         this.restr_viewCnt = restr_viewCnt;
     }
 
-    public String getRestr_reviewCnt() {
+    public Integer getRestr_reviewCnt() {
         return restr_reviewCnt;
     }
 
-    public void setRestr_reviewCnt(String restr_reviewCnt) {
+    public void setRestr_reviewCnt(Integer restr_reviewCnt) {
         this.restr_reviewCnt = restr_reviewCnt;
     }
 
-    public String getRestr_likeCnt() {
+    public Integer getRestr_likeCnt() {
         return restr_likeCnt;
     }
 
-    public void setRestr_likeCnt(String restr_likeCnt) {
+    public void setRestr_likeCnt(Integer restr_likeCnt) {
         this.restr_likeCnt = restr_likeCnt;
     }
 

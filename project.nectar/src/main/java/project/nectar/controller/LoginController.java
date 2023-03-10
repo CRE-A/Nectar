@@ -56,11 +56,12 @@ public class LoginController {
     }
 
 
-    @GetMapping("/auth/google")
-    public String snsLoginCallback(Model m, @RequestParam String code, HttpSession session) throws Exception{
+    @GetMapping("/auth/google/callback")
+    public String snsLoginCallback(Model m, @RequestParam String code, HttpSession session, String toURL) throws Exception{
 
         SnsLogin snsLogin = new SnsLogin(googleSns);
         UserDto snsUser = snsLogin.getUserProfile(code);                                   // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
+        System.out.println("snsUser = " + snsUser);
 
         String result = loginCheck(snsUser.getUser_email(), snsUser.getUser_pwd());        //    loginCheck() 실행결과  "Admin","Biz","User","LoginFail" 중 하나 반환
         if (result.equals("LoginFail")){                                                   // 1. loginCheck() 실패 시, 회원가입 시킨 후 메인페이지로 이동시킨다.
@@ -70,7 +71,8 @@ public class LoginController {
         session.setAttribute(result + "_email", snsUser.getUser_email());               // 2. loginCheck() 성공 시, 세션 id ( "Admin_email",  "Biz_email",  "User_email" 중 하나 ) 추가
         System.out.println("session id = " + result+"_email");
 
-        return "redirect:/";
+        toURL = toURL == null || toURL.equals("") ? "/" : toURL;
+        return "redirect:" + toURL;
     }
 
 
@@ -82,8 +84,11 @@ public class LoginController {
             String msg = URLEncoder.encode("email 또는 pwd를 잘못 입력했습니다.", "utf-8");
             return "redirect:/login/login?msg=" + msg;
         }
-        session.setAttribute(result + "_email", email);                                 // 2. loginCheck() 성공 시, 세션 id ( "Admin_email",  "Biz_email",  "User_email" 중 하나 ) 추가
-        System.out.println("session id = " + result+"_email");
+        session.setAttribute(result + "_email", email);                                 // 2. loginCheck() 성공 시, 세션에 ( "Admin_email",  "Biz_email",  "User_email" 중 하나 ) 추가
+        System.out.println("session check = " + result+"계정으로 로그인");
+        System.out.println("session id = " + session.getAttribute(result+"_email"));
+
+
 
         if (rememberEmailPwd) {                                                            //                       , 쿠키 id ( "Admin_email",  "Biz_email",  "User_email" 중 하나 ) 추가
             Cookie cookieEmail = new Cookie(result + "_email", email);
@@ -153,6 +158,13 @@ public class LoginController {
         return user != null && user.getUser_pwd().equals(pwd);
     }
 
+    @GetMapping("/beforeReview")
+    private String LoginBeforeReview(Integer restr_NUM){
+        String toURL = "/restr/read?restr_NUM="+restr_NUM;
+        return "redirect:/login/login?toURL="+toURL;
+    }
+    // restr.jsp에서 리뷰를 작성하기 전 로그인이 되어있지 않으면, 로그인 할 지를 물어보고 동의하면 /login//beforeReview 로 보낸다.
+    // toURL에 /restr/read 를 담고, 로그인 성공 후 toURL로 이동한다.
 }
 
 

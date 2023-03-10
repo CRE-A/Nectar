@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<c:set var="loginID"  value="${not empty pageContext.request.getSession(false)? pageContext.request.session.getAttribute('Admin_email'):''}"/>
+<c:set var="loginID"  value="${not empty pageContext.request.getSession(false)? pageContext.request.session.getAttribute('User_email'):''}"/>
 <c:set var="loginOut" value="${not empty loginID ?'logout' : 'logIn'}"/>
 <c:set var="loginOutLink" value="${not empty loginID ?'/login/logout' : '/login/login'}"/>
 
@@ -184,7 +184,7 @@
         </label>
         </span>
 
-        <input type="radio" id="pking31" name="parking" value="주차불가">
+        <input type="radio" id="pking31" name="parking" value="상관없음">
         <label for="pking31">
           <span> 주차불가 </span>
         </label>
