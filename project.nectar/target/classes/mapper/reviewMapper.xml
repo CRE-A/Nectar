@@ -50,7 +50,7 @@
 
     <update id="update" parameterType="ReviewDto">
         UPDATE review
-        SET review_comment = #{review_comment}, review_star = #{review_star}, up_date = now()
+        SET review_comment = #{review_comment}, review_star = #{review_star}, review_update = now()
         WHERE review_NUM = #{review_NUM}
     </update>
 

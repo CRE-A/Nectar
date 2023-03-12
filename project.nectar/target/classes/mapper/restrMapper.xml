@@ -79,32 +79,32 @@
 
     <update id="update" parameterType="RestrDto">
         update restr
-        set restr_name=#{restr_name}
-        where restr_NUM=#{restr_NUM}
+        set restr_name = #{restr_name}
+        where restr_NUM = #{restr_NUM}
     </update>
 
     <update id="updateViewCnt" parameterType="int">
         update restr
         set restr_viewCnt = restr_viewCnt+1
-        where restr_NUM=#{restr_NUM}
+        where restr_NUM = #{restr_NUM}
     </update>
 
-    <update id="updateReviewCnt" parameterType="map">
+    <update id="updateReviewCnt" parameterType="RestrDto">
         update restr
-        set restr_reviewCnt = restr_reviewCnt+#{cnt}
-        where restr_NUM=#{restr_NUM}
+        set restr_reviewCnt = #{restr_reviewCnt}
+        where restr_NUM = #{restr_NUM}
     </update>
 
-    <update id="updateLikeCnt" parameterType="map">
+    <update id="updateLikeCnt" parameterType="RestrDto">
         update restr
-        set restr_likeCnt = restr_likeCnt+#{cnt}
-        where restr_NUM=#{restr_NUM}
+        set restr_likeCnt = #{restr_likeCnt}
+        where restr_NUM = #{restr_NUM}
     </update>
 
     <update id="updateStar" parameterType="RestrDto">
         update restr
         set restr_star = #{restr_star}
-        where restr_NUM=#{restr_NUM}
+        where restr_NUM = #{restr_NUM}
     </update>
 
 
@@ -113,7 +113,7 @@
     <update id="sync_ReviewCnt" parameterType="RestrDto">
         update restr
         set restr_reviewCnt = #{restr_reviewCnt}
-        where restr_NUM=#{restr_NUM}
+        where restr_NUM = #{restr_NUM}
     </update>
 
 </mapper>

@@ -92,9 +92,8 @@ public class RestrDaoImplTest {
         for (int restr_NUM = 1; restr_NUM <= 110; restr_NUM++) {
             RestrDto restrDto = new RestrDto();
             restrDto.setRestr_NUM(restr_NUM);
-            float star = reviewDao.getAvgStar(restr_NUM);
-            restrDto.setRestr_star(star);
-            restrDao.updateStar(restrDto);
+            float avgStar = reviewDao.getAvgStar(restr_NUM);
+            restrDao.updateStar(restr_NUM, avgStar);
         }
     }
 

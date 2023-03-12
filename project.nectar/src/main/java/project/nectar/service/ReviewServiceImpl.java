@@ -1,10 +1,8 @@
 package project.nectar.service;
 
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.nectar.domain.RestrDto;
 import project.nectar.domain.ReviewDto;
 import project.nectar.repository.RestrDao;
 import project.nectar.repository.ReviewDao;
@@ -39,45 +37,48 @@ public class ReviewServiceImpl implements ReviewService {
          return reviewDao.selectMyReviews(user_email);
     }
 
+
+    // Write() : 리뷰를 작성한다?
+    //1. [review 테이블]에 방금 작성한 리뷰(content, star, .. )를 insert
+    //2. [review 테이블]에서 리뷰의 총 개수 count(*)를  select
+    //3. [restr 테이블]에 리뷰의 총 개수 count(*)를 upate
+    //4. [review 테이블]에서 별점의 평균 avg(review_star)를 select
+    //5. [restr 테이블]에 별점의 평균 avg(review_star)를 update
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int write(ReviewDto reviewDto) throws Exception {
+        reviewDao.insert(reviewDto);
+        int reviewCnt = reviewDao.count(reviewDto.getRestr_NUM());
+        restrDao.updateReviewCnt(reviewDto.getRestr_NUM(), reviewCnt);
+        float avgStar = reviewDao.getAvgStar(reviewDto.getRestr_NUM());
+        return restrDao.updateStar(reviewDto.getRestr_NUM(), avgStar);
+    }   //reviewCnt를 임의로 +1,-1 하던 방식에서  실제 reviewCnt 반영되도록 수정했어요.
+
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int delete(ReviewDto reviewDto) throws Exception{
+        reviewDao.delete(reviewDto);
+        int reviewCnt = reviewDao.count(reviewDto.getRestr_NUM());
+        restrDao.updateReviewCnt(reviewDto.getRestr_NUM(), reviewCnt);
+        float avgStar = reviewDao.getAvgStar(reviewDto.getRestr_NUM());
+        return restrDao.updateStar(reviewDto.getRestr_NUM(), avgStar);
+    }   //reviewCnt를 임의로 +1,-1 하던 방식에서  실제 reviewCnt 반영되도록 수정했어요.
+
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int modify(ReviewDto reviewDto) throws Exception{
+        reviewDao.update(reviewDto);
+        float avgStar = reviewDao.getAvgStar(reviewDto.getRestr_NUM());
+        return restrDao.updateStar(reviewDto.getRestr_NUM(), avgStar);
+    }
+
+
+
 //    public int deleteAll(int restr_NUM) throws Exception{
 //        return reviewDao.deleteAll(restr_NUM);
 //    }
-
-
-    // Write() : 리뷰를 작성한다?
-    //1. [restr 테이블]에 reviewCnt +1  를 update
-    //2. [review 테이블]에 작성한 리뷰(content, star)를 insert
-    //3. [review 테이블]에서 avg(review_star)를 select
-    //4. [restr 테이블]에 avg(review_star)를 update
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public int write(ReviewDto reviewDto, RestrDto restrDto) throws Exception {
-         restrDao.updateReviewCnt(restrDto.getRestr_NUM(), 1);
-         reviewDao.insert(reviewDto);
-         float avgStar = reviewDao.getAvgStar(restrDto.getRestr_NUM());
-         restrDto.setRestr_star(avgStar);
-         return restrDao.updateStar(restrDto);
-     }
-
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public int delete(ReviewDto reviewDto, RestrDto restrDto) throws Exception{
-        restrDao.updateReviewCnt(restrDto.getRestr_NUM(), -1);
-        reviewDao.delete(reviewDto);
-        float avgStar = reviewDao.getAvgStar(restrDto.getRestr_NUM());
-        restrDto.setRestr_star(avgStar);
-        return restrDao.updateStar(restrDto);
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public int modify(ReviewDto reviewDto, RestrDto restrDto) throws Exception{
-        reviewDao.update(reviewDto);
-        float avgStar = reviewDao.getAvgStar(restrDto.getRestr_NUM());
-        restrDto.setRestr_star(avgStar);
-        return restrDao.updateStar(restrDto);
-    }
 
 }

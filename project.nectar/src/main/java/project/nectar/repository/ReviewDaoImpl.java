@@ -19,12 +19,12 @@ public class ReviewDaoImpl implements ReviewDao {
     }
 
     @Override
-    public List<ReviewDto> selectAll(int restr_NUM) throws Exception{
+    public List<ReviewDto> selectAll(Integer restr_NUM) throws Exception{
         return session.selectList(namespace+"selectAll",restr_NUM);
     }
 
     @Override
-    public ReviewDto select(int review_NUM) throws Exception{
+    public ReviewDto select(Integer review_NUM) throws Exception{
         return session.selectOne(namespace+"select",review_NUM);
     }
 
@@ -39,7 +39,7 @@ public class ReviewDaoImpl implements ReviewDao {
     }
 
     @Override
-    public int deleteAll(int restr_NUM) throws Exception{
+    public int deleteAll(Integer restr_NUM) throws Exception{
         return session.delete(namespace+"delete",restr_NUM);
     }
 
@@ -54,7 +54,7 @@ public class ReviewDaoImpl implements ReviewDao {
     }
 
     @Override
-    public float getAvgStar(int restr_NUM) throws Exception{
+    public float getAvgStar(Integer restr_NUM) throws Exception{
         return session.selectOne(namespace+"getAvgStar", restr_NUM);
     }
 

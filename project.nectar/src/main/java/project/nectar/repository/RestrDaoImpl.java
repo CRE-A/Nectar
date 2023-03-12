@@ -62,23 +62,26 @@ public class RestrDaoImpl implements RestrDao {
     }
 
     @Override
-    public int updateReviewCnt(Integer restr_NUM, int cnt) throws Exception{
-        HashMap map = new HashMap();
-        map.put("cnt",cnt);
-        map.put("restr_NUM", restr_NUM);
-        return session.update(namespace+"updateReviewCnt", map);
+    public int updateReviewCnt(Integer restr_NUM, Integer reviewCnt) throws Exception{
+        RestrDto restrDto = new RestrDto();
+        restrDto.setRestr_NUM(restr_NUM);
+        restrDto.setRestr_reviewCnt(reviewCnt);
+        return session.update(namespace+"updateReviewCnt", restrDto);
     }
 
     @Override
-    public int updateLikeCnt(Integer restr_NUM, int cnt) throws Exception{
-        HashMap map = new HashMap();
-        map.put("cnt",cnt);
-        map.put("restr_NUM", restr_NUM);
-        return session.update(namespace+"updateLikeCnt", map);
+    public int updateLikeCnt(Integer restr_NUM, Integer likeCnt) throws Exception{
+        RestrDto restrDto = new RestrDto();
+        restrDto.setRestr_NUM(restr_NUM);
+        restrDto.setRestr_likeCnt(likeCnt);
+        return session.update(namespace+"updateLikeCnt", restrDto);
     }
 
     @Override
-    public int updateStar(RestrDto restrDto) throws Exception{
+    public int updateStar(Integer restr_NUM, float avgStar) throws Exception{
+        RestrDto restrDto = new RestrDto();
+        restrDto.setRestr_NUM(restr_NUM);
+        restrDto.setRestr_star(avgStar);
         return session.update(namespace+"updateStar",restrDto);
     }
 

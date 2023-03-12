@@ -91,7 +91,7 @@ public class LoginController {
 
         SnsLogin snsLogin = new SnsLogin(googleSns);                                       // google 소셜 로그인
         UserDto snsUser = snsLogin.getUserProfile(code);                                   // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
-        System.out.println("snsUser = " + snsUser);
+//        System.out.println("snsUser = " + snsUser);
 
         String result = loginCheck(snsUser.getUser_email(), snsUser.getUser_pwd());        //    loginCheck() 실행결과  "Admin","Biz","User","LoginFail" 중 하나 반환
         if (result.equals("LoginFail")){                                                   // 1. loginCheck() 실패 시, 회원가입 시킨 후 메인페이지로 이동시킨다.

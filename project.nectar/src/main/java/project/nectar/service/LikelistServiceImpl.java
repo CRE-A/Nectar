@@ -17,30 +17,14 @@ public class LikelistServiceImpl implements LikelistService {
     RestrDao restrDao;
 
     @Override
-    public LikelistDto select(Integer restr_NUM) throws Exception{
-        return likelistDao.select(restr_NUM);
-    } // 유저가 로그인 해서 게시물 들어갔을 때, 좋아요 누른 게시물인지 확인용
+    public LikelistDto select(LikelistDto likelistDto) throws Exception{
+        return likelistDao.select(likelistDto);
+    } // 유저가 로그인 해서 게시물(restr.jsp)에 들어갔을 때, 좋아요 누른 가게인지 확인용
 
     @Override
     public List<LikelistDto> getMyLikeList(String user_email) throws Exception{
         return likelistDao.selectAll(user_email);
     } // MyPage 에서 selectAll 하면 내가 좋아요 누른 모든 가게가 나옴
-
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public int addLike(LikelistDto likelistDto) throws Exception{
-        restrDao.updateLikeCnt(likelistDto.getRestr_NUM(),1);
-        return likelistDao.insert(likelistDto);
-    }
-
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public int cancelLike(LikelistDto likelistDto) throws Exception{
-        restrDao.updateLikeCnt(likelistDto.getRestr_NUM(),-1);
-        return likelistDao.delete(likelistDto);
-    }
 
 
     @Override
@@ -55,6 +39,25 @@ public class LikelistServiceImpl implements LikelistService {
     } // MyPage 에서 removeMyLikeList 하면 내가 좋아요 누른 모든 가게가 모두 삭제
 
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int addLike(LikelistDto likelistDto) throws Exception{
+        likelistDao.insert(likelistDto);
+        int likeCnt = likelistDao.count(likelistDto.getRestr_NUM());
+        return restrDao.updateLikeCnt(likelistDto.getRestr_NUM(),likeCnt);
+    }   //likeCnt를 임의로 +1,-1 하던 방식에서  실제 likeCnt 반영되도록 수정했어요.
 
-    // likelistMapper에서 count() 와 deleteAll()은 쓰이지 않음.
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int cancelLike(LikelistDto likelistDto) throws Exception{
+        likelistDao.delete(likelistDto);
+        int likeCnt = likelistDao.count(likelistDto.getRestr_NUM());
+        return restrDao.updateLikeCnt(likelistDto.getRestr_NUM(),likeCnt);
+    }   //likeCnt를 임의로 +1,-1 하던 방식에서  실제 likeCnt 반영되도록 수정했어요.
+
+
+
+
+    // likelistMapper에서 위의 deleteAll()은 쓰이지 않음.
 }

@@ -9,7 +9,7 @@ public interface LikelistDao {
 
     List<LikelistDto> selectAll(String user_email) throws Exception;
 
-    LikelistDto select(Integer restr_NUM) throws Exception;
+    LikelistDto select(LikelistDto likelistDto) throws Exception;
 
     int insert(LikelistDto likelistDto) throws Exception;
 

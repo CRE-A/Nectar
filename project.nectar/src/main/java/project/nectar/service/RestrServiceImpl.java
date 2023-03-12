@@ -38,7 +38,7 @@ public class RestrServiceImpl implements RestrService {
     public int deleteAll() throws Exception {
         //TX
         return restrDao.deleteAll();
-    }
+    } // 나중에 쓰일 때 tx로 몪어서 처리해야함.
 
     @Override
     @Transactional(rollbackFor = Exception.class)

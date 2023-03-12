@@ -24,11 +24,11 @@ public interface RestrDao {
 
     int updateViewCnt(Integer restr_NUM) throws Exception;
 
-    int updateReviewCnt(Integer restr_NUM, int cnt) throws Exception;
+    int updateReviewCnt(Integer restr_NUM, Integer reviewCnt) throws Exception;
 
-    int updateLikeCnt(Integer restr_NUM, int cnt) throws Exception;
+    int updateLikeCnt(Integer restr_NUM, Integer likeCnt) throws Exception;
 
-    int updateStar(RestrDto restrDto) throws Exception;
+    int updateStar(Integer restr_NUM, float avgStar) throws Exception;
 
     int sync_ReviewCnt(RestrDto restrDto) throws Exception;
 }

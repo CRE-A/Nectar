@@ -16,11 +16,11 @@ public interface ReviewService {
     List<ReviewDto> getMyReviews(String user_email) throws Exception;
 
     @Transactional(rollbackFor = Exception.class)
-    int write(ReviewDto reviewDto, RestrDto restrDto) throws Exception;
+    int write(ReviewDto reviewDto) throws Exception;
 
     @Transactional(rollbackFor = Exception.class)
-    int delete(ReviewDto reviewDto, RestrDto restrDto) throws Exception;
+    int delete(ReviewDto reviewDto) throws Exception;
 
     @Transactional(rollbackFor = Exception.class)
-    int modify(ReviewDto reviewDto, RestrDto restrDto) throws Exception;
+    int modify(ReviewDto reviewDto) throws Exception;
 }

@@ -12,16 +12,14 @@
   <meta charset="UTF-8">
   <title>CREA_WORLD</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <!-- CSS -->
+  <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
+  <link rel="stylesheet" href="<c:url value='/css/restrList.css'/>"/>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script
           src="https://kit.fontawesome.com/43ede2213f.js"
           crossorigin="anonymous"
   ></script>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
-  <link rel="stylesheet" href="<c:url value='/css/restrList.css'/>"/>
-
 
 </head>
 <body>

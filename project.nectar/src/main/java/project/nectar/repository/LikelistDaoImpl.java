@@ -20,12 +20,12 @@ public class LikelistDaoImpl implements LikelistDao {
 
     @Override
     public List<LikelistDto> selectAll(String user_email) throws Exception{
-        return session.selectList(namespace+"selectAll");
+        return session.selectList(namespace+"selectAll",user_email);
     }
 
     @Override
-    public LikelistDto select(Integer restr_NUM) throws Exception{
-        return session.selectOne(namespace+"select");
+    public LikelistDto select(LikelistDto likelistDto) throws Exception{
+        return session.selectOne(namespace+"select",likelistDto);
     }
 
     @Override

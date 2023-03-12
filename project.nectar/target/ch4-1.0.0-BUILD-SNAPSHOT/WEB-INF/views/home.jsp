@@ -18,9 +18,6 @@
   <link rel="stylesheet" href="<c:url value='/css/popFilter.css'/>" />
 
   <script src="https://kit.fontawesome.com/43ede2213f.js" crossorigin="anonymous"></script>
-
-
-
 </head>
 <body>
 <div id="menu">
@@ -29,6 +26,9 @@
     <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
     <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
     <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+    <li><a href="<c:url value='${loginOutLink}'/>">
+        <i class="fa-light fa-snowman-head"></i>
+    </a></li>
   </ul>
 </div>
 

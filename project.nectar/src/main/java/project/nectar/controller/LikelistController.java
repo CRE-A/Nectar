@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.nectar.domain.LikelistDto;
 import project.nectar.service.LikelistService;
 
@@ -15,29 +14,29 @@ public class LikelistController {
     LikelistService likelistService;
 
     @PostMapping("/add")
-    public String addLike(LikelistDto likelistDto, RedirectAttributes rattr) {
+    public String addLike(LikelistDto likelistDto) {
 
         try {
             likelistService.addLike(likelistDto);
-            rattr.addFlashAttribute("msg","ADD_OK");
-            return "restr";
+            return "redirect:/restr/read?restr_NUM=" + likelistDto.getRestr_NUM();
+
         } catch (Exception e) {
             e.printStackTrace();
-            rattr.addFlashAttribute("msg","ADD_ERR");
-            return "restr"; //에러 발생시 에러전담 페이지로?
+            return "redirect:/restr/read? restr_NUM=" + likelistDto.getRestr_NUM();
         }
     }
 
+
     @PostMapping("/cancel")
-    public String cancelLike(LikelistDto likelistDto, RedirectAttributes rattr) {
+    public String cancelLike(LikelistDto likelistDto) {
+
         try {
             likelistService.cancelLike(likelistDto);
-            rattr.addFlashAttribute("msg","CANCEL_OK");
-            return "restr";
+            return "redirect:/restr/read?restr_NUM=" + likelistDto.getRestr_NUM();
+
         } catch (Exception e) {
             e.printStackTrace();
-            rattr.addFlashAttribute("msg","CANCEL_ERR");
-            return "restr"; //에러 발생시 에러전담 페이지로?
+            return "redirect:/restr/read? restr_NUM=" + likelistDto.getRestr_NUM();
         }
     }
 }
