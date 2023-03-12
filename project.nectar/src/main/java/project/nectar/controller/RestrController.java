@@ -31,7 +31,7 @@ public class RestrController {
     UserDao userDao;
 
     @GetMapping("/list")
-    public String list(Model m, SearchCondition sc, HttpSession session) {
+    public String list(Model m, SearchCondition sc) {
 //        loginCheck(session, m);
         // loginCheck()로 관리자계정(Admin)임을 확인하면, 모델에 (AccessCode,Admin)을 담아 보낸다.
         // restrList.jsp에서 관리자계정(Admin)만 보고 누를 수 있는 버튼(수정,삭제)이 표시되도록
@@ -84,11 +84,14 @@ public class RestrController {
             LikelistDto likelistDto = likelistService.select(restr_NUM);
             m.addAttribute("likelistDto",likelistDto);
 
-            // 유저가 로그인 해서 게시물 들어갔을 때, 좋아요 누른 게시물인지 확인용
             //${not empty likelistDto.restr_NUM ? "checked" : ""} 값이 존재하면 하트(체크박스)에 체크되서 빨간색 불 들어옴
+            // 유저가 로그인 해서 게시물 들어갔을 때, 좋아요 누른 게시물인지 확인용
 
             UserDto userDto = userDao.select((String) session.getAttribute("User_email"));
             m.addAttribute("UserDto",userDto);
+            // 로그인 했다면, 로그인 계정(유저)에 대한 정보
+
+
 
 
             //m.addAtrrivute("restrMenu",restrMenuDto); // 메뉴

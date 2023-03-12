@@ -1,28 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false"%>
-
-<%--<C:set var="Admin_email" value="${pageContext.request.session.getAttribute('Admin_email')}"/>--%>
-<%--<C:set var="Biz_email" value="${pageContext.request.session.getAttribute('Biz_email')}"/>--%>
-<%--<C:set var="User_email" value="${pageContext.request.session.getAttribute('User_email')}"/>--%>
-
-<%--&lt;%&ndash;삼항 연산자 두번 쓰는게 안되네&ndash;%&gt;--%>
-<%--<c:set var="CheckEmail" value="${not empty Admin_email? Admin_email: ${not empty Biz_email? Biz_email : User_email}}"/>--%>
-<%--<c:set var="loginEmail" value="${not empty pageContext.request.getSession(false)? CheckEmail:''}"/>--%>
-
-<%--(x>0 ? 양수 : "0이거나 음수")--%>
-<%--(X>0 ? "양수" : (X<0 ?"움수" :0 ))--%>
-<%--<c:if test="${Apple}">--%>
-<%--    코드 실행 시작--%>
-<%--    ${not empty}--%>
-<%--</c:if>--%>
-
-
-<c:set var="loginEmail" value="${not empty pageContext.request.getSession(false)? pageContext.request.session.getAttribute('User_email'):''}"/>
+<%@ page session="false" %>
+<c:set var="loginEmail"  value="${not empty pageContext.request.getSession(false)? 'loginEmail':''}"/>
 <c:set var="loginOut" value="${not empty loginEmail ?'logout' : 'logIn'}"/>
 <c:set var="loginOutLink" value="${not empty loginEmail ?'/login/logout' : '/login/login'}"/>
-
-
 
 
 <!DOCTYPE html>
@@ -178,8 +159,6 @@
             margin-bottom: 20px;
         }
 
-
-
     </style>
 
 </head>
@@ -199,16 +178,16 @@
         <div id="inputBox">
             <div id="inputBox1">
                 <i class="fa-solid fa-id-badge"></i>
-                <input type="text" name="email" placeholder="이메일" value="${cookie.User_email.value}" autofocus>
+                <input type="text" name="email" placeholder="이메일" value="${cookie.email.value}" autofocus>
             </div>
 
             <div id="inputBox2">
                 <i class="fa-sharp fa-solid fa-key"></i>
-                <input type="password" name="pwd" placeholder="비밀번호" value="${cookie.User_pwd.value}">
+                <input type="password" name="pwd" placeholder="비밀번호" value="${cookie.pwd.value}">
             </div>
         </div>
         <input type="hidden" name="toURL" value="${param.toURL}">
-        <label><input type="checkbox" name="rememberEmailPwd" ${not empty cookie.User_email.value? "checked":""}>로그인 상태
+        <label><input type="checkbox" name="rememberEmailPwd" ${not empty cookie.email.value? "checked":""}>로그인 상태
             유지</label>
         <div id="msg">
             ${param.msg}

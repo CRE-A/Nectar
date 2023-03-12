@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<c:set var="loginID"  value="${not empty pageContext.request.getSession(false)? pageContext.request.session.getAttribute('User_email'):''}"/>
-<c:set var="loginOut" value="${not empty loginID ?'logout' : 'logIn'}"/>
-<c:set var="loginOutLink" value="${not empty loginID ?'/login/logout' : '/login/login'}"/>
+<c:set var="loginEmail"  value="${not empty pageContext.request.getSession(false)? 'loginEmail':''}"/>
+<c:set var="loginOut" value="${not empty loginEmail ?'logout' : 'logIn'}"/>
+<c:set var="loginOutLink" value="${not empty loginEmail ?'/login/logout' : '/login/login'}"/>
 
 
 <!DOCTYPE html>

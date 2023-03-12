@@ -35,39 +35,37 @@ public class ReviewController {
             String queryString = "?restr_NUM="+restrDto.getRestr_NUM()+"&review_comment="+comment
                     +"&review_picture="+reviewDto.getReview_picture()+"&review_star="+reviewDto.getReview_star();
             return "redirect:/restr/read"+queryString;
-//            return "redirect:/restr/read?restr_NUM="+restrDto.getRestr_NUM();
-//            return "restr"; //에러 발생시 에러전담 페이지로?
         }
     }
 
     @PostMapping("/delete")
     public String delete(ReviewDto reviewDto, RestrDto restrDto, RedirectAttributes rattr){
-//        System.out.println("reviewDto = " + reviewDto);
-//        System.out.println("restrDto = " + restrDto);
+        System.out.println("reviewDto = " + reviewDto); // 삭제하는 review_NUM 이 넘어와야함
+        System.out.println("restrDto = " + restrDto);
         try {
             reviewService.delete(reviewDto,restrDto);
-            rattr.addFlashAttribute("msg","DEL_OK");
+//            rattr.addFlashAttribute("msg","DEL_OK");
             return "redirect:/restr/read?restr_NUM="+restrDto.getRestr_NUM();
         } catch (Exception e) {
             e.printStackTrace();
-            rattr.addFlashAttribute("msg","DEL_ERR");
-            return "restr"; //에러 발생시 에러전담 페이지로?
+//            rattr.addFlashAttribute("msg","DEL_ERR");
+            return "redirect:/restr/read?restr_NUM="+restrDto.getRestr_NUM();
         }
     }
 
     @PostMapping("/modify")
-    public String modify(ReviewDto reviewDto, RestrDto restrDto, RedirectAttributes rattr, Model m){
-//        System.out.println("reviewDto = " + reviewDto);
-//        System.out.println("restrDto = " + restrDto);
+    public String modify(ReviewDto reviewDto, RestrDto restrDto, RedirectAttributes rattr) throws UnsupportedEncodingException {
+        System.out.println("reviewDto = " + reviewDto);  // 삭제하는 review_NUM 이 넘어와야함
+        System.out.println("restrDto = " + restrDto);
         try {
             reviewService.modify(reviewDto,restrDto);
-            rattr.addFlashAttribute("msg","MOD_OK");
+//            rattr.addFlashAttribute("msg","MOD_OK");
             return "redirect:/restr/read?restr_NUM="+restrDto.getRestr_NUM();
         } catch (Exception e) {
-            e.printStackTrace();
-            rattr.addFlashAttribute("msg","MOD_ERR");
-            m.addAttribute("reviewDto",reviewDto);
-            return "restr"; //에러 발생시 에러전담 페이지로?
+            String comment = URLEncoder.encode(reviewDto.getReview_comment(),"utf-8");
+            String queryString = "?restr_NUM="+restrDto.getRestr_NUM()+"&review_comment="+comment
+                    +"&review_picture="+reviewDto.getReview_picture()+"&review_star="+reviewDto.getReview_star();
+            return "redirect:/restr/read"+queryString;
         }
     }
 
