@@ -2,8 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <c:set var="loginUserEmail" value="${sessionScope.User_email}"/>
-<c:set var="loginOut" value="${not empty loginUserEmail ?'logout' : 'logIn'}"/>
-<c:set var="loginOutLink" value="${not empty loginUserEmail ?'/login/logout' : '/login/login'}"/>
 
 
 <!DOCTYPE html>
@@ -26,9 +24,20 @@
 <div id="menu">
   <ul>
     <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
+    <li>
+      <div>
+        <form action="<c:url value="/restr/list"/>" class="search-form" method="get">
+          <input type="hidden" name="option" value="searchEngine"/>
+          <input type="text" name="keyword" class="search-input" value="${ph.sc.keyword}" placeholder="지역, 식당 또는 음식"
+                 th:field="food01">
+          <input type="submit" class="search-button" value="검색">
+        </form>
+      </div>
+    </li>
     <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
     <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
-    <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+    <%--    <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>--%>
+    <li><a href="<c:url value='/mypage/main'/>"><i class="fa-solid fa-user"></i></a></li>
   </ul>
 </div>
 
@@ -59,9 +68,9 @@
                   <i class="fa-regular fa-heart"></i> <span>${restrDto.restr_likeCnt}</span>
                 </div>
               </div>
-<%--              <div class="restr__like">--%>
-<%--                  <i class="fa-regular fa-heart"></i>--%>
-<%--              </div>--%>
+                <%--              <div class="restr__like">--%>
+                <%--                  <i class="fa-regular fa-heart"></i>--%>
+                <%--              </div>--%>
             </div>
           </div>
 

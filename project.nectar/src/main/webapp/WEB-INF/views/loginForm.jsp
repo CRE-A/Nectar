@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <c:set var="loginEmail"  value="${not empty pageContext.request.getSession(false)? 'loginEmail':''}"/>
-<c:set var="loginOut" value="${not empty loginEmail ?'logout' : 'logIn'}"/>
-<c:set var="loginOutLink" value="${not empty loginEmail ?'/login/logout' : '/login/login'}"/>
+<%--<c:set var="loginOut" value="${not empty loginEmail ?'logout' : 'logIn'}"/>--%>
+<%--<c:set var="loginOutLink" value="${not empty loginEmail ?'/login/logout' : '/login/login'}"/>--%>
 
 
 <!DOCTYPE html>
@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <title>CREA_WORLD</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <script src="https://kit.fontawesome.com/43ede2213f.js" crossorigin="anonymous"></script>
 
 
     <style>
@@ -168,7 +169,8 @@
         <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
         <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
         <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
-        <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+        <%--        <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>--%>
+        <li><a href="<c:url value='/mypage/main'/>"><i class="fa-solid fa-user"></i></a></li>
     </ul>
 </div>
 

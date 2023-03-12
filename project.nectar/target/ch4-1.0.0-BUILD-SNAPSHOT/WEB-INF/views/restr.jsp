@@ -2,9 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <c:set var="loginUserEmail" value="${sessionScope.User_email}"/>
-<c:set var="loginOut" value="${not empty loginUserEmail ?'logout' : 'logIn'}"/>
-<c:set var="loginOutLink" value="${not empty loginUserEmail ?'/login/logout' : '/login/login'}"/>
-7
+
+
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +14,7 @@
     <!-- Swiper Css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <!-- CSS -->
-    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>" />
+    <%--    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>" />--%>
     <link rel="stylesheet" href="<c:url value='/css/restr.css'/>"/>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <script src="https://kit.fontawesome.com/43ede2213f.js" crossorigin="anonymous"></script>
@@ -27,7 +26,8 @@
         <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
         <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
         <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
-        <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+        <%--        <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>--%>
+        <li><a href="<c:url value='/mypage/main'/>"><i class="fa-solid fa-user"></i></a></li>
     </ul>
 </div>
 
@@ -277,15 +277,15 @@
                     />
                 </div>
 
-<%--                <c:if test="${mode eq 'User'}">--%>
+                <%--                <c:if test="${mode eq 'User'}">--%>
                 <div class="buttons">
-<%--                    <button type="submit" class="uploadBtn">리뷰작성</button>--%>
-                        <%--type=submit으로 하면 작동을 안해요. 일단 type=button으로 바꾸고 jquery로 작동시킬게요.  --%>
+                    <%--                    <button type="submit" class="uploadBtn">리뷰작성</button>--%>
+                    <%--type=submit으로 하면 작동을 안해요. 일단 type=button으로 바꾸고 jquery로 작동시킬게요.  --%>
 
                     <button type="button" id="submitBtn" class="uploadBtn">리뷰작성</button>
                     <button type="button" class="delBtn">취소</button>
                 </div>
-<%--                </c:if>--%>
+                <%--                </c:if>--%>
 
         </form>
     </div>
@@ -431,6 +431,23 @@
 
 
         // 20230312 여기 하는 중 !
+
+        // 혜빈 좋아요 버튼 이거 로직 틀렸어요. 사업자로 로그인해서 좋아요 누르면 로그인 하라는 알림 계속 떠요.
+        // 오빠가 만든 리뷰작성 버튼의 로직 보고 비슷하게 만들어 보세요.
+        //  아래를 참고해요.
+
+        <%--$(document).ready(() => {--%>
+        <%--    $("#review-editor").on("click", () => {--%>
+        <%--        if (${not empty sessionScope.User_email}) {      // 사용자(User) 계정으로 로그인 했니?--%>
+        <%--            return;--%>
+        <%--        }else if (${not empty sessionScope.Biz_email}) { // 사업자(Biz) 계정으로 로그인 했니?--%>
+        <%--            if (!confirm("사용자 계정으로 로그인을 해야 리뷰를 남길 수 있습니다. 사용자 계정으로 로그인 하시겠습니까?")) return;--%>
+        <%--            location.href = "<c:url value='/login/beforeReview?restr_NUM=${restrDto.restr_NUM}'/> ";--%>
+        <%--        }else{--%>
+        <%--            if (!confirm("로그인을 해야 리뷰를 남길 수 있습니다. 로그인 하시겠습니까?")) return;--%>
+        <%--            location.href = "<c:url value='/login/beforeReview?restr_NUM=${restrDto.restr_NUM}'/> ";--%>
+        <%--        }--%>
+        <%--    });--%>
 
         $("#likeBtn").on("click", function (e) {
 

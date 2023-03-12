@@ -44,7 +44,9 @@ public class RestrController {
             //m.addAtrrivute("hotdealDto",hotdealDto); // 핫딜 이벤트 진행여부
         } catch (Exception e) {
             e.printStackTrace();
-            m.addAttribute("msg", "LIST_ERR");
+            return "searchERR";
+//          SQL ERROR. 입력값이 없으면 가져오질 못함.
+//          나중에 에러 컨트롤러 만들 예정
         }
         return "restrList";
     }
