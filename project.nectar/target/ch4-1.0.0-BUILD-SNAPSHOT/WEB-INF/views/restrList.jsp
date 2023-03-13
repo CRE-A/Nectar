@@ -68,9 +68,11 @@
                   <i class="fa-regular fa-heart"></i> <span>${restrDto.restr_likeCnt}</span>
                 </div>
               </div>
-                <%--              <div class="restr__like">--%>
-                <%--                  <i class="fa-regular fa-heart"></i>--%>
-                <%--              </div>--%>
+              <div class="restr__hotdeal">
+                <i class="fa-regular fa-heart"></i>
+<%--                  ${restrDto.hotdeal}--%>
+                핫딜 진행중
+              </div>
             </div>
           </div>
 
@@ -99,6 +101,19 @@
     <a href="<c:url value="/restr/list${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
   </c:if>
 </div>
+
+
+
+
+<%--담비 파트--%>
+<%-- 사이드 바에 지도 띄우기--%>
+<%--<c:forEach var="restrDto" items="${list}">--%>
+<%--${restrDto.restr_latitude}--%>
+<%--${restrDto.restr_longitude}--%>
+<%--${restrDto.restr_location}--%>
+<%--${restrDto.restr_name}--%>
+<%--</c:forEach>--%>
+
 
 </body>
 </html>
