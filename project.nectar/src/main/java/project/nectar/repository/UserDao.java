@@ -1,5 +1,6 @@
 package project.nectar.repository;
 
+import project.nectar.domain.RestrDto;
 import project.nectar.domain.UserDto;
 
 public interface UserDao {
@@ -14,4 +15,5 @@ public interface UserDao {
     int deleteAll();
 
     int count();
+
 }

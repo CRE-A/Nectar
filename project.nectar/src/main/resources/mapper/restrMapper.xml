@@ -70,11 +70,11 @@
         insert into restr
         (restr_name, restr_latitude, restr_longitude, restr_location, restr_location_tag, restr_phone, restr_time,
          restr_star, restr_foodType, restr_cost, restr_parking, restr_tag, restr_menu, restr_desc,
-         restr_picture, restr_category_loc, biz_reg_num)
+         restr_picture, restr_category_loc, bizAccount_email, biz_reg_num)
         values (#{restr_name}, #{restr_latitude}, #{restr_longitude}, #{restr_location}, #{restr_location_tag},
                 #{restr_phone}, #{restr_time}, #{restr_star}, #{restr_foodType}, #{restr_cost},
                 #{restr_parking}, #{restr_tag}, #{restr_menu}, #{restr_desc},#{restr_picture},  #{restr_category_loc},
-                #{biz_reg_num});
+                #{bizAccount_email}, #{biz_reg_num});
     </insert>
 
     <update id="update" parameterType="RestrDto">
@@ -114,6 +114,12 @@
         update restr
         set restr_reviewCnt = #{restr_reviewCnt}
         where restr_NUM = #{restr_NUM}
+    </update>
+
+    <update id="updateHotdeal" parameterType="RestrDto">
+        UPDATE restr
+        SET  restr_hotdeal_NUM = #{restr_hotdeal_NUM}
+        WHERE restr_NUM = #{restr_NUM}
     </update>
 
 </mapper>

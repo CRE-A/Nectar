@@ -9,7 +9,6 @@ public class ReviewDto {
     private String user_email;
     private String user_name;
     private String user_picture;
-
     private String review_comment;
     private String review_picture;
     private float review_star;

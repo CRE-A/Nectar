@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.nectar.domain.RestrMenuDto;
 
+import java.util.List;
+
 @Repository
 public class RestrMenuDaoImpl implements RestrMenuDao {
     @Autowired
@@ -12,13 +14,13 @@ public class RestrMenuDaoImpl implements RestrMenuDao {
     private String namespace="project.nectar.repository.RestrMenuMapper.";
 
     @Override
-    public RestrMenuDto selectAllMenu(Integer restr_NUM) throws Exception{
-        return session.selectOne(namespace+"selectAllMenu", restr_NUM);
+    public List<RestrMenuDto> selectAllMenu(Integer restr_NUM) throws Exception{
+        return session.selectList(namespace+"selectAllMenu", restr_NUM);
     }
 
     @Override
     public int insert(RestrMenuDto restrMenuDto) throws Exception{
-        return session.insert(namespace+"insert",restrMenuDto);
+        return session.insert(namespace+"insert", restrMenuDto);
     }
 
     @Override

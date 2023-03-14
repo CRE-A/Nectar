@@ -8,9 +8,13 @@ public class RestrMenuDto {
     private String restr_menu_food;
     private Integer restr_menu_price;
     private String restr_menu_desc;
-    private Integer restr_menu_hotdeal;   // 평상 시 : 0 , 핫딜 이벤트 진행 시 : 1
+    private Integer restr_menu_hotdeal_NUM;   // 평상 시 : -1 , 핫딜 이벤트 진행 시 : hotdeal_NUM
 
-    public RestrMenuDto(){this(1,"파스타",5000,"스테디 셀러.  시그니쳐 메뉴");}
+
+    public RestrMenuDto(){
+        this(1,"파스타",10000,"스테디 셀러.시그니쳐 메뉴");
+    }
+
     public RestrMenuDto(Integer restr_NUM, String restr_menu_food, Integer restr_menu_price, String restr_menu_desc) {
         this.restr_NUM = restr_NUM;
         this.restr_menu_food = restr_menu_food;
@@ -58,12 +62,12 @@ public class RestrMenuDto {
         this.restr_menu_desc = restr_menu_desc;
     }
 
-    public Integer getRestr_menu_hotdeal() {
-        return restr_menu_hotdeal;
+    public Integer getRestr_menu_hotdeal_NUM() {
+        return restr_menu_hotdeal_NUM;
     }
 
-    public void setRestr_menu_hotdeal(Integer restr_menu_hotdeal) {
-        this.restr_menu_hotdeal = restr_menu_hotdeal;
+    public void setRestr_menu_hotdeal_NUM(Integer restr_menu_hotdeal_NUM) {
+        this.restr_menu_hotdeal_NUM = restr_menu_hotdeal_NUM;
     }
 
     @Override
@@ -71,12 +75,12 @@ public class RestrMenuDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RestrMenuDto that = (RestrMenuDto) o;
-        return Objects.equals(restr_menu_NUM, that.restr_menu_NUM) && Objects.equals(restr_NUM, that.restr_NUM);
+        return Objects.equals(restr_menu_NUM, that.restr_menu_NUM) && Objects.equals(restr_NUM, that.restr_NUM) && Objects.equals(restr_menu_food, that.restr_menu_food);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(restr_menu_NUM, restr_NUM);
+        return Objects.hash(restr_menu_NUM, restr_NUM, restr_menu_food);
     }
 
     @Override
@@ -87,7 +91,7 @@ public class RestrMenuDto {
                 ", restr_menu_food='" + restr_menu_food + '\'' +
                 ", restr_menu_price=" + restr_menu_price +
                 ", restr_menu_desc='" + restr_menu_desc + '\'' +
-                ", restr_menu_hotdeal=" + restr_menu_hotdeal +
+                ", restr_menu_hotdeal_NUM=" + restr_menu_hotdeal_NUM +
                 '}';
     }
 }

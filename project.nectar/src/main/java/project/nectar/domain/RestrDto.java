@@ -20,18 +20,19 @@ public class RestrDto {
     private String restr_desc;
     private String restr_picture;
     private String restr_category_loc;
-    private String biz_reg_num;
-    private Integer restr_hotdeal; // 평상시 : 0,  핫딜 이벤트 진행시 : 1
+    private String bizAccount_email;   // 점주의 사업자 계정
+    private String biz_reg_num;        // 점주의 사업자 등록번호
+    private Integer restr_hotdeal_NUM; // 평상시 : -1 ,  핫딜 이벤트 진행시 : hotdeal_NUM
     private Integer restr_viewCnt;
     private Integer restr_reviewCnt;
     private Integer restr_likeCnt;
 
 
     public RestrDto() {
-        this("", 0.0, 0.0, "", "", "", "", ((int)(Math.random()*5)+1), "", "", "", "", "", "", "", "","");
+        this("", 0.0, 0.0, "", "", "", "", ((int)(Math.random()*5)+1), "", "", "","", "", "", "", "", "","");
     }
 
-    public RestrDto(String restr_name, double restr_latitude, double restr_longitude, String restr_location, String restr_location_tag, String restr_phone, String restr_time, float restr_star, String restr_foodType, String restr_cost, String restr_parking, String restr_tag, String restr_menu, String restr_desc, String restr_picture, String restr_category_loc, String biz_reg_num) {
+    public RestrDto(String restr_name, double restr_latitude, double restr_longitude, String restr_location, String restr_location_tag, String restr_phone, String restr_time, float restr_star, String restr_foodType, String restr_cost, String restr_parking, String restr_tag, String restr_menu, String restr_desc, String restr_picture, String restr_category_loc, String bizAccount_email, String biz_reg_num) {
         this.restr_name = restr_name;
         this.restr_latitude = restr_latitude;
         this.restr_longitude = restr_longitude;
@@ -48,20 +49,8 @@ public class RestrDto {
         this.restr_desc = restr_desc;
         this.restr_picture = restr_picture;
         this.restr_category_loc = restr_category_loc;
+        this.bizAccount_email = bizAccount_email;
         this.biz_reg_num = biz_reg_num;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RestrDto restrDto = (RestrDto) o;
-        return Double.compare(restrDto.restr_latitude, restr_latitude) == 0 && Double.compare(restrDto.restr_longitude, restr_longitude) == 0 && Objects.equals(restr_NUM, restrDto.restr_NUM) && Objects.equals(restr_name, restrDto.restr_name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(restr_NUM, restr_name, restr_latitude, restr_longitude);
     }
 
     public Integer getRestr_NUM() {
@@ -200,6 +189,14 @@ public class RestrDto {
         this.restr_category_loc = restr_category_loc;
     }
 
+    public String getBizAccount_email() {
+        return bizAccount_email;
+    }
+
+    public void setBizAccount_email(String bizAccount_email) {
+        this.bizAccount_email = bizAccount_email;
+    }
+
     public String getBiz_reg_num() {
         return biz_reg_num;
     }
@@ -208,12 +205,12 @@ public class RestrDto {
         this.biz_reg_num = biz_reg_num;
     }
 
-    public Integer getRestr_hotdeal() {
-        return restr_hotdeal;
+    public Integer getRestr_hotdeal_NUM() {
+        return restr_hotdeal_NUM;
     }
 
-    public void setRestr_hotdeal(Integer restr_hotdeal) {
-        this.restr_hotdeal = restr_hotdeal;
+    public void setRestr_hotdeal_NUM(Integer restr_hotdeal_NUM) {
+        this.restr_hotdeal_NUM = restr_hotdeal_NUM;
     }
 
     public Integer getRestr_viewCnt() {
@@ -241,6 +238,19 @@ public class RestrDto {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RestrDto restrDto = (RestrDto) o;
+        return Objects.equals(restr_NUM, restrDto.restr_NUM) && Objects.equals(restr_name, restrDto.restr_name) && Objects.equals(bizAccount_email, restrDto.bizAccount_email) && Objects.equals(biz_reg_num, restrDto.biz_reg_num);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(restr_NUM, restr_name, bizAccount_email, biz_reg_num);
+    }
+
+    @Override
     public String toString() {
         return "RestrDto{" +
                 "restr_NUM=" + restr_NUM +
@@ -260,8 +270,9 @@ public class RestrDto {
                 ", restr_desc='" + restr_desc + '\'' +
                 ", restr_picture='" + restr_picture + '\'' +
                 ", restr_category_loc='" + restr_category_loc + '\'' +
+                ", bizAccount_email='" + bizAccount_email + '\'' +
                 ", biz_reg_num='" + biz_reg_num + '\'' +
-                ", restr_hotdeal=" + restr_hotdeal +
+                ", restr_hotdeal_NUM=" + restr_hotdeal_NUM +
                 ", restr_viewCnt=" + restr_viewCnt +
                 ", restr_reviewCnt=" + restr_reviewCnt +
                 ", restr_likeCnt=" + restr_likeCnt +

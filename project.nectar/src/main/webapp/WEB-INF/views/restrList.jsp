@@ -13,10 +13,16 @@
   <!-- CSS -->
   <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
   <link rel="stylesheet" href="<c:url value='/css/restrList.css'/>"/>
+  <%--  script --%>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script
           src="https://kit.fontawesome.com/43ede2213f.js"
           crossorigin="anonymous"
+  ></script>
+  <script defer src="<c:url value="/restr/list"/>"></script>
+  <script
+          defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGgEEcmo8EbPKj8kwDcpC8W18nIZvnq2U&callback=initMap"
   ></script>
 
 </head>
@@ -36,7 +42,6 @@
     </li>
     <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
     <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
-    <%--    <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>--%>
     <li><a href="<c:url value='/mypage/main'/>"><i class="fa-solid fa-user"></i></a></li>
   </ul>
 </div>
@@ -45,7 +50,7 @@
 <!-- Main -->
 <section id="main">
   <ul id="restrList">
-    <c:forEach var="restrDto" items="${list}">
+    <c:forEach var="restrDto" items="${restrDto}">
       <form id="restrForm" action="" method="">
         <!-- 게시글 번호 data-restrNum 에 저장-->
         <li class="restr" data-restrNum="${restrDto.restr_NUM}">
@@ -69,20 +74,17 @@
                 </div>
               </div>
               <div class="restr__hotdeal">
-                <i class="fa-regular fa-heart"></i>
-<%--                  ${restrDto.hotdeal}--%>
-                핫딜 진행중
+                  <c:if test="${restrDto.restr_hotdeal_NUM ne '-1'}">       hotdeal_NUM 이 -1이 아니면
+                    <i class="fa-solid fa-gift"></i>핫딜 진행중</c:if>
               </div>
             </div>
           </div>
 
-          <c:if test="${mode eq 'Admin_access'}">
+          <c:if test="${sessionScope.Admin_email}">
             <button class="delBtn" type="button">삭제</button>
           </c:if>
-
         </li>
       </form>
-
     </c:forEach>
 
   </ul>
@@ -104,7 +106,6 @@
 
 
 
-
 <%--담비 파트--%>
 <%-- 사이드 바에 지도 띄우기--%>
 <%--<c:forEach var="restrDto" items="${list}">--%>
@@ -114,6 +115,65 @@
 <%--${restrDto.restr_name}--%>
 <%--</c:forEach>--%>
 
+
+<div id="googleMap" style="width:350px;height:350px; float: right;top:initial;" >
+
+  <%--google MAP part--%>
+  <SCRIPT>
+    window.initMap = function () {
+      const map = new google.maps.Map(document.getElementById('googleMap'), {
+        conter: {let: 37.513921, lng: 126.943701},
+        zoom: 10
+      });
+
+      const malls = [
+
+        <c:forEach var="restrDto" items="${restrDto}">
+          {label: "${restrDto.restr_name}", name: "", lat: ${restrDto.restr_latitude}, lng: ${restrDto.restr_longitude}},
+        </c:forEach>
+
+
+      ];
+      const bounds = new google.maps.LatLngBounds();
+      const infoWindow = new google.maps.InfoWindow();
+
+      malls.forEach(({label, name, lat, lng}) => {
+        const marker = new google.maps.Marker({
+          position: {lat, lng},
+          label,
+          map
+        });
+        bounds.extend(marker.position);
+
+        marker.addListener("click", () => {
+          map.PanTo(marker.position);
+          infowindow.setContent(name);
+          infowindow.open({
+            anchor: marker,
+            map
+          });
+        });
+      });
+
+      map.fitBounds(bounds)
+    };
+
+  </script>
+
+
+  <%--  <c:forEach var="restrDto" items="${list}">--%>
+  <%--    ${restrDto.restr_latitude}--%>
+  <%--    ${restrDto.restr_longitude}--%>
+  <%--    ${restrDto.restr_location}--%>
+  <%--    ${restrDto.restr_name}--%>
+  <%--  </c:forEach>--%>
+</div>
+
+
+
+
+
+<%-- 지도 끝--%>
 
 </body>
 </html>

@@ -41,8 +41,8 @@ public class RestrController {
             PageHandler pageHandler = new PageHandler(sc,totalCnt);
             m.addAttribute("ph", pageHandler);
 
-            List<RestrDto> list = restrService.SearchResultPage(sc);
-            m.addAttribute("list", list);
+            List<RestrDto> restrDto = restrService.SearchResultPage(sc);
+            m.addAttribute("restrDto", restrDto);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,9 +64,8 @@ public class RestrController {
             m.addAttribute("restrDto", restrDto);
             // 레스토랑에 대한 data
 
-            RestrMenuDto restrMenuDto = restrMenuDao.selectAllMenu(restr_NUM);
+            List<RestrMenuDto> restrMenuDto = restrMenuDao.selectAllMenu(restr_NUM);
             m.addAttribute("restrMenuDto",restrMenuDto);
-            System.out.println("restrMenuDto = " + restrMenuDto);
             // 레스토랑 메뉴에 대한 data
 
             List<ReviewDto> reviewDto = reviewService.selectAll(restr_NUM);

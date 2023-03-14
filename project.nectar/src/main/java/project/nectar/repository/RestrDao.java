@@ -31,4 +31,6 @@ public interface RestrDao {
     int updateStar(Integer restr_NUM, float avgStar) throws Exception;
 
     int sync_ReviewCnt(RestrDto restrDto) throws Exception;
+
+    int updateHotdeal(RestrDto restrDto) throws Exception;
 }

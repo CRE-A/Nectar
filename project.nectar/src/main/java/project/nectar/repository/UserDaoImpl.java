@@ -3,6 +3,7 @@ package project.nectar.repository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import project.nectar.domain.RestrDto;
 import project.nectar.domain.UserDto;
 
 @Repository
@@ -40,6 +41,9 @@ public class UserDaoImpl implements UserDao {
     public int count() {
         return session.selectOne(namespace + "count");
     }
+
+
+
 
 
 }

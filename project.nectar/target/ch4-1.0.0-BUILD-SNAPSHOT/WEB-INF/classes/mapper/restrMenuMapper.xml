@@ -14,7 +14,7 @@
         insert into restr_menu
             (restr_NUM, restr_menu_food, restr_menu_price, restr_menu_desc)
         values
-            (#{restr_NUM}, #{restr_menu_food}, #restr_menu_price}, #{restr_menu_desc});
+            (#{restr_NUM}, #{restr_menu_food}, #{restr_menu_price}, #{restr_menu_desc} );
     </insert>
 
     <delete id="deleteAll" parameterType="int">
@@ -35,7 +35,7 @@
 
     <update id="updateHotdeal" parameterType="RestrMenuDto">
         UPDATE restr_menu
-        SET restr_menu_hotdeal = #{restr_menu_hotdeal}
+        SET  restr_menu_hotdeal_NUM = #{restr_menu_hotdeal_NUM}
         WHERE restr_menu_NUM = #{restr_menu_NUM}
     </update>
 

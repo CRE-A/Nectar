@@ -2,8 +2,10 @@ package project.nectar.repository;
 
 import project.nectar.domain.RestrMenuDto;
 
+import java.util.List;
+
 public interface RestrMenuDao {
-    RestrMenuDto selectAllMenu(Integer restr_NUM) throws Exception;
+    List<RestrMenuDto> selectAllMenu(Integer restr_NUM) throws Exception;
 
     int insert(RestrMenuDto restrMenuDto) throws Exception;
 

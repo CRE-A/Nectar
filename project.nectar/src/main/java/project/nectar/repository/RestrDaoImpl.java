@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import project.nectar.domain.RestrDto;
 import project.nectar.domain.SearchCondition;
 
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -88,5 +87,11 @@ public class RestrDaoImpl implements RestrDao {
     @Override
     public int sync_ReviewCnt(RestrDto restrDto) throws Exception{
         return session.update(namespace+"sync_ReviewCnt", restrDto);
+    }
+
+
+    @Override
+    public int updateHotdeal(RestrDto restrDto) throws Exception{
+        return session.update(namespace+"updateHotdeal", restrDto);
     }
 }

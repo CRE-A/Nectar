@@ -115,15 +115,24 @@
                 <p class="location-name">${restrDto.restr_desc}</p>
             </div>
             <div class="info">
-
-                <h4 class="menu">${restrDto.restr_menu}</h4>    <!--헷갈림 // 나중에 restr_menu의 data 넘겨줌-->
+                <h4 class="menu">메뉴</h4>
+                <c:forEach var="restrMenuDto" items="${restrMenuDto}">
                 <ul class="menuList">
                     <li class="menu">
-                        <span class="menuName">${restrMenuDto.menu}</span>
-                        <span class="price">${restrMenuDto.price} </span>
+                        <span class="food">${restrMenuDto.restr_menu_food}</span>
+                        <span class="price">${restrMenuDto.restr_menu_price} </span>
+                        <span class="description">${restrMenuDto.restr_menu_desc} </span>
+                        <%--핫딜 이벤트 진행 메뉴에는 "핫딜 진행중" 이라는 링크가 나타나고, 링크를 누르면 해당 핫딜 페이지로 넘어갑니다.--%>
+                        <c:if test="${restrMenuDto.restr_menu_hotdeal_NUM ne '-1'}">
+                            <span class="hotdeal">
+                                <a href="<c:url value='/hotdeal/read?hotdeal_NUM=${restrMenuDto.restr_menu_hotdeal_NUM}'/>">
+                                    <i class="fa-solid fa-gift">핫딜로 이동하기</i>
+                                </a>
+                            </span>
+                        </c:if>
                     </li>
-
                 </ul>
+                </c:forEach>
             </div>
         </section>
         <section class="section-right">
