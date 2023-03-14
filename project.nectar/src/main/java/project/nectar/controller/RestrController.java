@@ -57,7 +57,8 @@ public class RestrController {
 
     @GetMapping("/read")
     public String read(LikelistDto likeDto, Integer restr_NUM, SearchCondition sc, Model m, HttpSession session){
-            likeDto.setUser_email((String) session.getAttribute("User_email"));
+        String User_email = (String)session.getAttribute("User_email");
+        likeDto.setUser_email(User_email);
 
         try {
             RestrDto restrDto = restrService.read(restr_NUM);
@@ -76,8 +77,8 @@ public class RestrController {
             m.addAttribute("likelistDto",likelistDto);
             // 로그인 했다면, 로그인 계정(유저)가 누른 좋아요에 대한 data
             
-            UserDto userDto = userDao.select((String) session.getAttribute("User_email"));
-            m.addAttribute("UserDto",userDto);
+            UserDto userDto = userDao.select(User_email);
+            m.addAttribute("userDto",userDto);
             // 로그인 했다면, 로그인 계정(유저)에 대한 data
 
         } catch (Exception e) {

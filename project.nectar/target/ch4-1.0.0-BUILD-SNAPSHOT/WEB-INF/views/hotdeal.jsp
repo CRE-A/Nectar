@@ -70,9 +70,7 @@
         <tr>
             <td class="">${hotdealDto.hotdeal_NUM}</td>
             <td class="">${hotdealDto.restr_NUM}</td>
-            <td class="title"><a
-                    href="<c:url value="/board/read?hotdeal_NUM=${hotdealDto.hotdeal_NUM}"/>">${hotdealDto.restr_name}</a>
-            </td>
+            <td class="">${hotdealDto.restr_name}</td>
             <td class="">${hotdealDto.restr_category_loc}</td>
             <td class="">${hotdealDto.restr_menu_NUM}</td>
             <td class="">${hotdealDto.restr_menu_picture}</td>

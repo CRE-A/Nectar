@@ -37,9 +37,9 @@
 
     <insert id="insert" parameterType="HotdealDto">
         INSERT INTO hotdeal
-            (restr_NUM, restr_menu_NUM, restr_menu_food, restr_menu_price, hotdeal_price, hotdeal_discountRate, hotdeal_desc, hotdeal_useDate, hotdeal_eventDuration, hotdeal_MaxSalesVolume, bizAccount_email)
+            (restr_NUM, restr_name, restr_category_loc, restr_menu_NUM, restr_menu_picture, restr_menu_food, restr_menu_price, hotdeal_price, hotdeal_discountRate, hotdeal_desc, hotdeal_useDate, hotdeal_eventDuration, hotdeal_MaxSalesVolume, bizAccount_email)
         VALUES
-            (#{restr_NUM}, #{restr_menu_NUM}, #{restr_menu_food},#{restr_menu_price},  #{hotdeal_price}, #{hotdeal_discountRate}, ${hotdeal_desc}, ${hotdeal_useDate}, ${hotdeal_eventDuration}, ${hotdeal_MaxSalesVolume}, ${bizAccount_email} )
+            (#{restr_NUM}, ${restr_name}, ${restr_category_loc}, ${restr_menu_NUM}, ${restr_menu_picture},#{restr_menu_food}, #{restr_menu_price},  #{hotdeal_price}, #{hotdeal_discountRate}, ${hotdeal_desc}, ${hotdeal_useDate}, ${hotdeal_eventDuration}, ${hotdeal_MaxSalesVolume}, ${bizAccount_email} )
     </insert>
 
 

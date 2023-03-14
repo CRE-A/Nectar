@@ -22,12 +22,15 @@ public class HotdealDto {
     private Integer hotdeal_MaxSalesVolume;
     private String bizAccount_email;
 
-    public HotdealDto() {this(1,1,"김치찌게",6000,3000,"50%","파격세일. 빨리사라","90일","2023/03/14 ~ 2023/03/27",70,"Biz_1@google.com");
+    public HotdealDto() {this(1,"맛집1","신사/압구정",1,"no pic","김치찌게",6000,3000,"50%","파격세일. 빨리사라","90일","2023/03/14 ~ 2023/03/27",70,"Biz_1@google.com");
     }
 
-    public HotdealDto(Integer restr_NUM, Integer restr_menu_NUM, String restr_menu_food, Integer restr_menu_price, Integer hotdeal_price, String hotdeal_discountRate, String hotdeal_desc, String hotdeal_useDate, String hotdeal_eventDuration, Integer hotdeal_MaxSalesVolume, String bizAccount_email) {
+    public HotdealDto(Integer restr_NUM, String restr_name, String restr_category_loc, Integer restr_menu_NUM, String restr_menu_picture, String restr_menu_food, Integer restr_menu_price, Integer hotdeal_price, String hotdeal_discountRate, String hotdeal_desc, String hotdeal_useDate, String hotdeal_eventDuration, Integer hotdeal_MaxSalesVolume, String bizAccount_email) {
         this.restr_NUM = restr_NUM;
+        this.restr_name = restr_name;
+        this.restr_category_loc = restr_category_loc;
         this.restr_menu_NUM = restr_menu_NUM;
+        this.restr_menu_picture = restr_menu_picture;
         this.restr_menu_food = restr_menu_food;
         this.restr_menu_price = restr_menu_price;
         this.hotdeal_price = hotdeal_price;
@@ -38,7 +41,6 @@ public class HotdealDto {
         this.hotdeal_MaxSalesVolume = hotdeal_MaxSalesVolume;
         this.bizAccount_email = bizAccount_email;
     }
-
 
     public Integer getHotdeal_NUM() {
         return hotdeal_NUM;
