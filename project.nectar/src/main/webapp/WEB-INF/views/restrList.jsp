@@ -105,14 +105,14 @@
 
 
 
-담비 파트
- 사이드 바에 지도 띄우기
-<c:forEach var="restrDto" items="${list}">
-${restrDto.restr_latitude}
-${restrDto.restr_longitude}
-${restrDto.restr_location}
-${restrDto.restr_name}
-</c:forEach>
+<%--담비 파트--%>
+<%-- 사이드 바에 지도 띄우기--%>
+<%--<c:forEach var="restrDto" items="${list}">--%>
+<%--${restrDto.restr_latitude}--%>
+<%--${restrDto.restr_longitude}--%>
+<%--${restrDto.restr_location}--%>
+<%--${restrDto.restr_name}--%>
+<%--</c:forEach>--%>
 
 
 </body>

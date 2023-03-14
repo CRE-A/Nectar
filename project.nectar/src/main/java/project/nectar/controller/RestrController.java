@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.nectar.domain.*;
+import project.nectar.repository.RestrMenuDao;
 import project.nectar.repository.UserDao;
 import project.nectar.service.LikelistService;
 import project.nectar.service.RestrService;
@@ -29,6 +30,8 @@ public class RestrController {
     LikelistService likelistService;
     @Autowired
     UserDao userDao;
+    @Autowired
+    RestrMenuDao restrMenuDao;
 
     @GetMapping("/list")
     public String list(Model m, SearchCondition sc) {
@@ -41,7 +44,6 @@ public class RestrController {
             List<RestrDto> list = restrService.SearchResultPage(sc);
             m.addAttribute("list", list);
 
-            //m.addAtrrivute("hotdealDto",hotdealDto); // 핫딜 이벤트 진행여부
         } catch (Exception e) {
             e.printStackTrace();
             return "searchERR";
@@ -60,23 +62,27 @@ public class RestrController {
         try {
             RestrDto restrDto = restrService.read(restr_NUM);
             m.addAttribute("restrDto", restrDto);
-            // 레스토랑에 대한 모든 data
+            // 레스토랑에 대한 data
+
+            RestrMenuDto restrMenuDto = restrMenuDao.selectAllMenu(restr_NUM);
+            m.addAttribute("restrMenuDto",restrMenuDto);
+            System.out.println("restrMenuDto = " + restrMenuDto);
+            // 레스토랑 메뉴에 대한 data
 
             List<ReviewDto> reviewDto = reviewService.selectAll(restr_NUM);
             m.addAttribute("reviewDto", reviewDto);
-            // 리뷰에 대한 모든 data
-
-            UserDto userDto = userDao.select((String) session.getAttribute("User_email"));
-            m.addAttribute("UserDto",userDto);
-            // 로그인 했다면, 로그인 계정(유저)에 대한 data
+            // 리뷰에 대한 data
 
             LikelistDto likelistDto = likelistService.select(likeDto);
             m.addAttribute("likelistDto",likelistDto);
             // 로그인 했다면, 로그인 계정(유저)가 누른 좋아요에 대한 data
+            
+            UserDto userDto = userDao.select((String) session.getAttribute("User_email"));
+            m.addAttribute("UserDto",userDto);
+            // 로그인 했다면, 로그인 계정(유저)에 대한 data
 
 
 
-            //m.addAtrrivute("restrMenu",restrMenuDto); // 메뉴
             //m.addAtrrivute("hotdealDto",hotdealDto); // 핫딜 이벤트 진행여부
 
 

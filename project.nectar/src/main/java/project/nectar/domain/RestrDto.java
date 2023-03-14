@@ -21,6 +21,7 @@ public class RestrDto {
     private String restr_picture;
     private String restr_category_loc;
     private String biz_reg_num;
+    private Integer restr_hotdeal; // 평상시 : 0,  핫딜 이벤트 진행시 : 1
     private Integer restr_viewCnt;
     private Integer restr_reviewCnt;
     private Integer restr_likeCnt;
@@ -207,6 +208,14 @@ public class RestrDto {
         this.biz_reg_num = biz_reg_num;
     }
 
+    public Integer getRestr_hotdeal() {
+        return restr_hotdeal;
+    }
+
+    public void setRestr_hotdeal(Integer restr_hotdeal) {
+        this.restr_hotdeal = restr_hotdeal;
+    }
+
     public Integer getRestr_viewCnt() {
         return restr_viewCnt;
     }
@@ -252,9 +261,10 @@ public class RestrDto {
                 ", restr_picture='" + restr_picture + '\'' +
                 ", restr_category_loc='" + restr_category_loc + '\'' +
                 ", biz_reg_num='" + biz_reg_num + '\'' +
-                ", restr_viewCnt='" + restr_viewCnt + '\'' +
-                ", restr_reviewCnt='" + restr_reviewCnt + '\'' +
-                ", restr_likeCnt='" + restr_likeCnt + '\'' +
+                ", restr_hotdeal=" + restr_hotdeal +
+                ", restr_viewCnt=" + restr_viewCnt +
+                ", restr_reviewCnt=" + restr_reviewCnt +
+                ", restr_likeCnt=" + restr_likeCnt +
                 '}';
     }
 }
