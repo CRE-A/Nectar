@@ -37,5 +37,9 @@
         where restr_NUM=#{restr_NUM} AND user_email=#{user_email}
     </delete>
 
+    <delete id="deleteRestr" parameterType="int">
+        delete from likelist
+        where restr_NUM=#{restr_NUM}
+    </delete>
 
 </mapper>

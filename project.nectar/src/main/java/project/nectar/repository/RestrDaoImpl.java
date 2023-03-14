@@ -31,16 +31,6 @@ public class RestrDaoImpl implements RestrDao {
     }
 
     @Override
-    public int count() throws Exception{
-        return session.selectOne(namespace+"count");
-    }
-
-    @Override
-    public int deleteAll() throws Exception{
-        return session.delete(namespace+"deleteAll");
-    }
-
-    @Override
     public int delete(Integer restr_NUM) throws Exception{
         return session.delete(namespace+"delete", restr_NUM);
     }

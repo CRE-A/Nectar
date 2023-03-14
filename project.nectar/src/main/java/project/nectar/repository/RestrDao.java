@@ -12,10 +12,6 @@ public interface RestrDao {
 
     RestrDto select(int restr_NUM) throws Exception;
 
-    int count() throws Exception;
-
-    int deleteAll() throws Exception;
-
     int delete(Integer restr_NUM) throws Exception;
 
     int insertAll(RestrDto restrDto) throws Exception;

@@ -16,4 +16,6 @@ public interface LikelistDao {
     int deleteAll(String user_email) throws Exception;
 
     int delete(LikelistDto likelistDto) throws Exception;
+
+    int deleteRestr(Integer restr_NUM) throws Exception;
 }

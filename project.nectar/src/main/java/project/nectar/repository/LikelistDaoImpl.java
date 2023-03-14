@@ -42,4 +42,9 @@ public class LikelistDaoImpl implements LikelistDao {
     public int delete(LikelistDto likelistDto) throws Exception {
         return session.delete(namespace + "delete", likelistDto);
     }
+
+    @Override
+    public int deleteRestr(Integer restr_NUM) throws Exception {
+        return session.delete(namespace + "deleteRestr", restr_NUM);
+    }
 }

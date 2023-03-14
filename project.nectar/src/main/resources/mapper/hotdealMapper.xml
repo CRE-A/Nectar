@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.nectar.repository.HotdealMapper">
+
+
+    <select id="selectMyHotdeals" parameterType="int" resultType="HotdealDto">
+        SELECT *
+        FROM hotdeal
+        WHERE  bizAccount_email = #{bizAccount_email}
+        ORDER BY hotdeal_regdate DESC
+    </select>
+
+    <select id="select" parameterType="int" resultType="HotdealDto">
+        SELECT *
+        FROM review
+        WHERE hotdeal_NUM = #{hotdeal_NUM}
+    </select>
+
+    <delete id="delete" parameterType="HotdealDto">
+        DELETE FROM review
+        WHERE hotdeal_NUM = #{hotdeal_NUM}
+    </delete>
+
+    <update id="update" parameterType="HotdealDto">
+        UPDATE review
+        SET restr_menu_NUM = #{restr_menu_NUM}, restr_menu_food = #{restr_menu_food}, restr_menu_price = #{restr_menu_price} ,hotdeal_update = now()
+        WHERE review_NUM = #{review_NUM}
+    </update>
+
+    <insert id="insert" parameterType="HotdealDto">
+        INSERT INTO review
+        (restr_NUM, user_email, user_name, user_picture, review_comment, review_picture, review_star, review_regdate, review_update)
+        VALUES
+            (#{restr_NUM}, #{user_email}, #{user_name},#{user_picture},  #{review_comment}, #{review_picture}, ${review_star}, now(), now())
+    </insert>
+
+
+
+</mapper>

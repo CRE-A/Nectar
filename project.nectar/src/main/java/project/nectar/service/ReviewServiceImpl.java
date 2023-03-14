@@ -76,9 +76,4 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
 
-
-//    public int deleteAll(int restr_NUM) throws Exception{
-//        return reviewDao.deleteAll(restr_NUM);
-//    }
-
 }

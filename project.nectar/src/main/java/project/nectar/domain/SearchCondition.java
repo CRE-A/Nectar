@@ -16,7 +16,7 @@ public class SearchCondition {
     private String  location = "";
     private String  parking = "";
     private String  tag = "";
-//    private Integer offset;
+    private Integer offset;
 
     public static final int MIN_PAGE_SIZE = 5;
     public static final int DEFAULT_PAGE_SIZE = 10;

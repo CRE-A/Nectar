@@ -80,7 +80,7 @@
             </div>
           </div>
 
-          <c:if test="${sessionScope.Admin_email}">
+          <c:if test="${not empty sessionScope.Admin_email}">
             <button class="delBtn" type="button">삭제</button>
           </c:if>
         </li>
@@ -92,7 +92,7 @@
 
 
 <%--model 에서 list, ph(page, pageSize 포함) 넘겨줘야함--%>
-<div id="pageBar">
+<div id="pageBar" style="text-align:center">
   <c:if test="${ph.showPrev}">
     <a href="<c:url value="/restr/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
   </c:if>
@@ -106,17 +106,9 @@
 
 
 
-<%--담비 파트--%>
-<%-- 사이드 바에 지도 띄우기--%>
-<%--<c:forEach var="restrDto" items="${list}">--%>
-<%--${restrDto.restr_latitude}--%>
-<%--${restrDto.restr_longitude}--%>
-<%--${restrDto.restr_location}--%>
-<%--${restrDto.restr_name}--%>
-<%--</c:forEach>--%>
 
 
-<div id="googleMap" style="width:350px;height:350px; float: right;top:initial;" >
+<div id="googleMap" style="width:350px;height:350px; float: right;top:initial; margin:20px;" >
 
   <%--google MAP part--%>
   <SCRIPT>
@@ -160,20 +152,8 @@
 
   </script>
 
-
-  <%--  <c:forEach var="restrDto" items="${list}">--%>
-  <%--    ${restrDto.restr_latitude}--%>
-  <%--    ${restrDto.restr_longitude}--%>
-  <%--    ${restrDto.restr_location}--%>
-  <%--    ${restrDto.restr_name}--%>
-  <%--  </c:forEach>--%>
 </div>
 
-
-
-
-
-<%-- 지도 끝--%>
 
 </body>
 </html>
@@ -191,5 +171,10 @@
       form.submit();
     })
   })
+</script>
+
+<script>
+  let msg = "${msg}";
+  if(msg=="DEL_ERR") alert("게시물 삭제에 실패하였습니다. 다시 시도해 주세요.");
 </script>
 
