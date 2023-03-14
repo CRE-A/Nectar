@@ -5,7 +5,10 @@ import java.util.Objects;
 public class HotdealDto {
     private Integer hotdeal_NUM;
     private Integer restr_NUM;
+    private String restr_name;
+    private String restr_category_loc;
     private Integer restr_menu_NUM;
+    private String restr_menu_picture;
     private String  restr_menu_food;
     private Integer restr_menu_price;
     private Integer hotdeal_price;
@@ -36,6 +39,7 @@ public class HotdealDto {
         this.bizAccount_email = bizAccount_email;
     }
 
+
     public Integer getHotdeal_NUM() {
         return hotdeal_NUM;
     }
@@ -52,12 +56,36 @@ public class HotdealDto {
         this.restr_NUM = restr_NUM;
     }
 
+    public String getRestr_name() {
+        return restr_name;
+    }
+
+    public void setRestr_name(String restr_name) {
+        this.restr_name = restr_name;
+    }
+
+    public String getRestr_category_loc() {
+        return restr_category_loc;
+    }
+
+    public void setRestr_category_loc(String restr_category_loc) {
+        this.restr_category_loc = restr_category_loc;
+    }
+
     public Integer getRestr_menu_NUM() {
         return restr_menu_NUM;
     }
 
     public void setRestr_menu_NUM(Integer restr_menu_NUM) {
         this.restr_menu_NUM = restr_menu_NUM;
+    }
+
+    public String getRestr_menu_picture() {
+        return restr_menu_picture;
+    }
+
+    public void setRestr_menu_picture(String restr_menu_picture) {
+        this.restr_menu_picture = restr_menu_picture;
     }
 
     public String getRestr_menu_food() {
@@ -174,7 +202,10 @@ public class HotdealDto {
         return "HotdealDto{" +
                 "hotdeal_NUM=" + hotdeal_NUM +
                 ", restr_NUM=" + restr_NUM +
+                ", restr_name='" + restr_name + '\'' +
+                ", restr_category_loc='" + restr_category_loc + '\'' +
                 ", restr_menu_NUM=" + restr_menu_NUM +
+                ", restr_menu_picture='" + restr_menu_picture + '\'' +
                 ", restr_menu_food='" + restr_menu_food + '\'' +
                 ", restr_menu_price=" + restr_menu_price +
                 ", hotdeal_price=" + hotdeal_price +
@@ -184,8 +215,8 @@ public class HotdealDto {
                 ", hotdeal_eventDuration='" + hotdeal_eventDuration + '\'' +
                 ", hotdeal_regdate='" + hotdeal_regdate + '\'' +
                 ", hotdeal_update='" + hotdeal_update + '\'' +
-                ", hotdeal_salesVolume='" + hotdeal_salesVolume + '\'' +
-                ", hotdeal_MaxSalesVolume='" + hotdeal_MaxSalesVolume + '\'' +
+                ", hotdeal_salesVolume=" + hotdeal_salesVolume +
+                ", hotdeal_MaxSalesVolume=" + hotdeal_MaxSalesVolume +
                 ", bizAccount_email='" + bizAccount_email + '\'' +
                 '}';
     }

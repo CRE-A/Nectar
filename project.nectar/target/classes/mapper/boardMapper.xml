@@ -4,5 +4,6 @@
 
 <mapper namespace="project.nectar.repository.BoardMapper">
 
-
 </mapper>
+
+        <!--이거 지우면 톰캣 실행이 안됨-->
