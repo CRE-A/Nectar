@@ -46,20 +46,10 @@
         <include refid="searchCondition"/>
     </select>
 
-
-
     <select id="select" parameterType="int" resultType="RestrDto">
         SELECT * from restr
         where restr_NUM=#{restr_NUM}
     </select>
-
-    <select id="count" resultType="int">
-        select count(*) from restr
-    </select>
-
-    <delete id="deleteAll">
-        delete from restr
-    </delete>
 
     <delete id="delete" parameterType="int">
         delete from restr
