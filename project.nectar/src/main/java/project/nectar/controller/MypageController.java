@@ -5,9 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import project.nectar.domain.LikelistDto;
-import project.nectar.domain.ReviewDto;
-import project.nectar.domain.UserDto;
+import project.nectar.domain.*;
+import project.nectar.repository.BizAccountDao;
 import project.nectar.repository.LikelistDao;
 import project.nectar.repository.ReviewDao;
 import project.nectar.repository.UserDao;
@@ -30,6 +29,8 @@ public class MypageController {
     HotdealService hotdealService;
     @Autowired
     UserDao userDao;
+    @Autowired
+    BizAccountDao bizAccountDao;
 
 //    @Autowired
 //    Payment payment;
@@ -45,6 +46,7 @@ public class MypageController {
         } // 로그인 안되있니?
         return "redirect:/login/login?toURL=" + request.getRequestURL();
     }
+
 
     @GetMapping("/user")
     public String UserMyPage(HttpSession session, Model m){
@@ -65,7 +67,7 @@ public class MypageController {
 
             UserDto userDto = userDao.select(User_email);
             m.addAttribute("userDto",userDto);
-            // 로그인 했다면, 로그인 계정(유저)에 대한 data
+            // 사용자(User)에 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,11 +77,27 @@ public class MypageController {
         return "mypage/user";
     }
 
+
     @GetMapping("/biz")
     public String BizMyPage(HttpSession session, Model m){
-        String User_email = (String)session.getAttribute("Biz_email");
+        String Biz_email = (String)session.getAttribute("Biz_email");
 
         try {
+            List<HotdealDto> hotdealDto = hotdealService.selectMyHotdeals(Biz_email);
+            m.addAttribute("hotdealDto",hotdealDto);
+            // 사업자(BizAccount)가 진행한 모든 핫딜에 대한 data
+
+//            List<Payment> payment = paymentService.getMyPayments(User_email);
+//            m.addAttribute("paymentService",paymentService);
+            // 사업자(BizAccount)가 판매한 핫딜의 모든 거래내역(payment)에 대한 data
+
+            BizAccountDto bizAccountDto = bizAccountDao.select(Biz_email);
+            m.addAttribute("bizAccountDto",bizAccountDto);
+            // 사업자(BizAccount)에 대한 data
+
+
+
+            // ...
             // 곧 채워넣겠습니다.
 
         } catch (Exception e) {
@@ -90,6 +108,7 @@ public class MypageController {
         return "mypage/biz";
     }
     // 핫딜 목록, 본인 가게, (핫딜 판매 목록 - payment)
+
 
     @GetMapping("/admin")
     public String AdminMyPage(HttpSession session, Model m){
