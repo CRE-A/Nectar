@@ -42,7 +42,7 @@ public class RestrController {
 
             List<RestrDto> restrDto = restrService.SearchResultPage(sc);
             m.addAttribute("restrDto", restrDto);
-            // 검색 조건에 부합하는 레스토랑에 대한 data
+            // 검색 조건에 부합하는 레스토랑 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,7 +53,6 @@ public class RestrController {
 
         return "restrList";
     }
-
 
 
     @GetMapping("/read")
@@ -94,7 +93,7 @@ public class RestrController {
     // 아래부터는 (관리자)admin 계정만 접근 가능한 Delete, Write, Modify
 
     @PostMapping("/delete")
-    public String delete(Integer restr_NUM, Integer page, Integer pageSize, Model m, RedirectAttributes rattr, SearchCondition sc){
+    public String delete(Integer restr_NUM, RedirectAttributes rattr, SearchCondition sc){
         try {
             restrService.delete(restr_NUM);
 //            throw new Exception("delete failed");
@@ -102,7 +101,7 @@ public class RestrController {
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg","DEL_ERR"); //
-            return "redirect:/restr/list"+sc.getQueryString();
+            return "redirect:/";
         }
 
         return "redirect:/restr/list"+sc.getQueryString();
@@ -110,13 +109,8 @@ public class RestrController {
 
 
 
+    //
 
-//    @GetMapping("/write")
-//    public String write(Model m){
-//        m.addAttribute("mode","new");
-//        return "board";
-//    }
-//
 //    @PostMapping("/write")
 //    public String write(BoardDto boardDto, HttpSession session, RedirectAttributes rattr, Model m){
 //
