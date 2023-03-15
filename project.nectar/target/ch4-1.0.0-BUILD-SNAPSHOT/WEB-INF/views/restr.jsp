@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="true" %>
 <c:set var="loginUserEmail" value="${sessionScope.User_email}"/>
 
 
@@ -24,10 +23,24 @@
 <div id="menu">
     <ul>
         <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
+        <li>
+            <form action="<c:url value="/restr/list"/>" class="search-form" method="get">
+                <input type="hidden" name="option" value="searchEngine"/>
+                <input type="text" name="keyword" class="search-input" value="${ph.sc.keyword}" placeholder="지역, 식당 또는 음식">
+                <input type="submit" class="search-button" value="검색">
+            </form>
+        </li>
         <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
         <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
-        <%--        <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>--%>
-        <li><a href="<c:url value='/mypage/main'/>"><i class="fa-solid fa-user"></i></a></li>
+        <li>
+            <a href="<c:url value='/mypage/main'/>">
+            <c:choose>
+                <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
+                <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
+                <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
+                <c:otherwise><i class="fa-regular fa-user"></i></a></c:otherwise>
+            </c:choose>
+        </li>
     </ul>
 </div>
 
@@ -174,9 +187,9 @@
     <div class="review-box">
         <form id="form" action="<c:url value="/review/write"/>" method="post">
             <input type="text" name="restr_NUM" value="${restrDto.restr_NUM}">
-            <input type="text" name="user_email" value="${UserDto.user_email}">
-            <input type="hidden" name="user_name" value="${UserDto.user_name}">
-            <input type="hidden" name="user_picture" value="${UserDto.user_picture}">
+            <input type="text" name="user_email" value="${userDto.user_email}">
+            <input type="hidden" name="user_name" value="${userDto.user_name}">
+            <input type="hidden" name="user_picture" value="${userDto.user_picture}">
             <div class="review__header">${restrDto.restr_name}</div>
             <span class="text">에 대한 솔직한 리뷰를 써주세요.</span>
 
@@ -266,7 +279,7 @@
                             cols="30"
                             rows="10"
                     <%--                    ${mode=="User_access" ? "" : 'readonly' = "readonly"}--%>
-                            placeholder="${UserDto.user_name}님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"
+                            placeholder="${userDto.user_name}님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"
                     >${param.review_comment}</textarea>
                 </div>
 

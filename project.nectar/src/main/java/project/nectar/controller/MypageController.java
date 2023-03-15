@@ -98,7 +98,6 @@ public class MypageController {
 
 
             // ...
-            // 곧 채워넣겠습니다.
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,7 +114,7 @@ public class MypageController {
         String User_email = (String)session.getAttribute("Admin_email");
 
         try {
-            //  곧 채워넣겠습니다.
+            //  ...
 
         } catch (Exception e) {
             e.printStackTrace();

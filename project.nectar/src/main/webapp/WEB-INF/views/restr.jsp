@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="true" %>
 <c:set var="loginUserEmail" value="${sessionScope.User_email}"/>
 
 
@@ -24,10 +23,24 @@
 <div id="menu">
     <ul>
         <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
+        <li>
+            <form action="<c:url value="/restr/list"/>" class="search-form" method="get">
+                <input type="hidden" name="option" value="searchEngine"/>
+                <input type="text" name="keyword" class="search-input" value="${ph.sc.keyword}" placeholder="지역, 식당 또는 음식">
+                <input type="submit" class="search-button" value="검색">
+            </form>
+        </li>
         <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
         <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
-        <%--        <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>--%>
-        <li><a href="<c:url value='/mypage/main'/>"><i class="fa-solid fa-user"></i></a></li>
+        <li>
+            <a href="<c:url value='/mypage/main'/>">
+            <c:choose>
+                <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
+                <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
+                <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
+                <c:otherwise><i class="fa-regular fa-user"></i></a></c:otherwise>
+            </c:choose>
+        </li>
     </ul>
 </div>
 
