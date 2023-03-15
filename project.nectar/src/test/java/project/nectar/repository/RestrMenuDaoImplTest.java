@@ -42,11 +42,21 @@ public class RestrMenuDaoImplTest {
 //        restrMenuDto.setRestr_menu_hotdeal_NUM(10); // 메뉴
 //        restrMenuDao.updateHotdeal(restrMenuDto);
 //
-        RestrMenuDto restrMenuDto = new RestrMenuDto();
-        restrMenuDto.setRestr_menu_NUM(6); //
-        restrMenuDto.setRestr_menu_hotdeal_NUM(11); // 메뉴
-        restrMenuDao.updateHotdeal(restrMenuDto);
+        for(Integer i=1; i<=3;i++){
+            RestrMenuDto restrMenuDto = new RestrMenuDto();
+            restrMenuDto.setRestr_menu_NUM(15*i-2); //
+            restrMenuDto.setRestr_menu_hotdeal_NUM(i); // 메뉴
+            restrMenuDao.updateHotdeal(restrMenuDto);
+        }
 
+        for(Integer i=4; i<=6;i++){
+            RestrMenuDto restrMenuDto = new RestrMenuDto();
+            restrMenuDto.setRestr_menu_NUM(15*i-4); //
+            restrMenuDto.setRestr_menu_hotdeal_NUM(i); // 메뉴
+            restrMenuDao.updateHotdeal(restrMenuDto);
+        }
+
+    // 핫딜 daoimpltest에서 메뉴랑 restr 업데이트 한번에 묶어서 진행함
 
 
 

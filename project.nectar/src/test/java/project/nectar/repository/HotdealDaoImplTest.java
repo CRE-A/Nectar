@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import project.nectar.domain.HotdealDto;
+import project.nectar.domain.RestrDto;
+import project.nectar.domain.RestrMenuDto;
 
 import static org.junit.Assert.*;
 
@@ -14,6 +16,10 @@ import static org.junit.Assert.*;
 public class HotdealDaoImplTest {
     @Autowired
     HotdealDao hotdealDao;
+    @Autowired
+    RestrMenuDao restrMenuDao;
+    @Autowired
+    RestrDao restrDao;
 
     @Test
     public void selectMyHotdeals() {
@@ -63,8 +69,39 @@ public class HotdealDaoImplTest {
 
         }
 
+    }
 
 
+    @Test
+    public void updateHotdeal() throws Exception {
+
+        for (Integer i = 1; i <= 3; i++) {
+            RestrMenuDto restrMenuDto = new RestrMenuDto();
+            restrMenuDto.setRestr_menu_NUM(15 * i - 2);
+            restrMenuDto.setRestr_menu_hotdeal_NUM(i);
+            restrMenuDao.updateHotdeal(restrMenuDto);
+        }
+
+        for (Integer i = 4; i <= 6; i++) {
+            RestrMenuDto restrMenuDto = new RestrMenuDto();
+            restrMenuDto.setRestr_menu_NUM(15 * i - 4);
+            restrMenuDto.setRestr_menu_hotdeal_NUM(i);
+            restrMenuDao.updateHotdeal(restrMenuDto);
+        }
+        // 여기까지 menu update
+
+
+        for (Integer i = 1; i <= 6; i++) {
+            RestrDto restrDto=new RestrDto();
+            restrDto.setRestr_NUM(3*i);           // 1번 레스토랑에서 핫딜 진행중
+            restrDto.setRestr_hotdeal_NUM(i);
+            restrDao.updateHotdeal(restrDto);
+        }
+        // 여기까지 restr update
 
     }
+
+
+
+
 }
