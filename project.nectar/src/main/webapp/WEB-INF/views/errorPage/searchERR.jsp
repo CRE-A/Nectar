@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
-<c:set var="loginUserEmail" value="${sessionScope.User_email}"/>
 
 
 <!DOCTYPE html>
@@ -36,10 +35,10 @@
         <li>
             <a href="<c:url value='/mypage/main'/>">
                 <c:choose>
-                <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
-            <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
-            <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
-            <c:otherwise><i class="fa-regular fa-user"></i></a></c:otherwise>
+                    <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
+                    <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
+                    <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
+                    <c:otherwise><i class="fa-regular fa-user"></i></a></c:otherwise>
             </c:choose>
         </li>
     </ul>

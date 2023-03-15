@@ -13,8 +13,8 @@
     <!-- Swiper Css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <!-- CSS -->
-    <%--    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>" />--%>
     <link rel="stylesheet" href="<c:url value='/css/restr.css'/>"/>
+    <%--    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>" />--%>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <script src="https://kit.fontawesome.com/43ede2213f.js" crossorigin="anonymous"></script>
 

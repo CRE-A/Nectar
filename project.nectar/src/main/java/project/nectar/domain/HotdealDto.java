@@ -12,7 +12,7 @@ public class HotdealDto {
     private String  restr_menu_food;
     private Integer restr_menu_price;
     private Integer hotdeal_price;
-    private String hotdeal_discountRate;
+    private Integer hotdeal_discountRate;
     private String hotdeal_desc;
     private String hotdeal_useDate;
     private String hotdeal_eventDuration;
@@ -22,10 +22,9 @@ public class HotdealDto {
     private Integer hotdeal_MaxSalesVolume;
     private String bizAccount_email;
 
-    public HotdealDto() {this(1,"맛집1","신사/압구정",1,"no pic","김치찌게",6000,3000,"50%","파격세일. 빨리사라","90일","2023/03/14 ~ 2023/03/27",70,"Biz_1@google.com");
-    }
+    public HotdealDto() {this(1,"맛집1","신사/압구정",1,"no pic","김치찌게",6000,3000,50,"파격세일. 빨리사라","90일","2023/03/14 ~ 2023/03/27",0,100,"Biz_1@google.com");}
 
-    public HotdealDto(Integer restr_NUM, String restr_name, String restr_category_loc, Integer restr_menu_NUM, String restr_menu_picture, String restr_menu_food, Integer restr_menu_price, Integer hotdeal_price, String hotdeal_discountRate, String hotdeal_desc, String hotdeal_useDate, String hotdeal_eventDuration, Integer hotdeal_MaxSalesVolume, String bizAccount_email) {
+    public HotdealDto(Integer restr_NUM, String restr_name, String restr_category_loc, Integer restr_menu_NUM, String restr_menu_picture, String restr_menu_food, Integer restr_menu_price, Integer hotdeal_price, Integer hotdeal_discountRate, String hotdeal_desc, String hotdeal_useDate, String hotdeal_eventDuration, Integer hotdeal_salesVolume, Integer hotdeal_MaxSalesVolume, String bizAccount_email) {
         this.restr_NUM = restr_NUM;
         this.restr_name = restr_name;
         this.restr_category_loc = restr_category_loc;
@@ -38,6 +37,7 @@ public class HotdealDto {
         this.hotdeal_desc = hotdeal_desc;
         this.hotdeal_useDate = hotdeal_useDate;
         this.hotdeal_eventDuration = hotdeal_eventDuration;
+        this.hotdeal_salesVolume = hotdeal_salesVolume;
         this.hotdeal_MaxSalesVolume = hotdeal_MaxSalesVolume;
         this.bizAccount_email = bizAccount_email;
     }
@@ -114,11 +114,11 @@ public class HotdealDto {
         this.hotdeal_price = hotdeal_price;
     }
 
-    public String getHotdeal_discountRate() {
+    public Integer getHotdeal_discountRate() {
         return hotdeal_discountRate;
     }
 
-    public void setHotdeal_discountRate(String hotdeal_discountRate) {
+    public void setHotdeal_discountRate(Integer hotdeal_discountRate) {
         this.hotdeal_discountRate = hotdeal_discountRate;
     }
 

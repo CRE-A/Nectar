@@ -41,15 +41,30 @@ public class HotdealDaoImplTest {
 
 
     @Test
-    public void insert_data()throws Exception{
+    public void insert_data() throws Exception {
 
-        hotdealDao.insert(new HotdealDto(0+1,"맛집1","신사/압구정",1,"no pic","김치찌게",0+6000,0+3000,"50%","파격세일. 빨리사라","90일","2023/03/14 ~ 2023/03/27",0+70,"Biz_1@google.com"));
-
+//        HotdealDto hotdealDto = new HotdealDto(1, "맛집1", "신사/압구정", 1, "no pic", "김치찌게", 6000, 3000, "50%", "파격세일. 빨리사라", "90일", "2023/03/14 ~ 2023/03/27", 70, "Biz_1@google.com");
+//        hotdealDao.insert(hotdealDto);
+        //test data를 매우 단순하게 넣어서 1개만 넣어보자.
 
 //        for(int i=1; i<=15;i++){
 //            HotdealDto hotdealDto = new HotdealDto();
 //            hotdealDao.insert(hotdealDto);
 //        }
+
+        for(Integer i=1; i<=3; i++){
+            HotdealDto hotdealDto1 = new HotdealDto(3*i,"맛집"+3*i,"신사/압구정",15*i-2,"pic_url", "제육덮밥", 6500, 4550, 30,"시그니쳐 메뉴, 집밥 감성 제육", "2023-03-15 ~ 2023-04-01","90일", 0, 100,"Biz_"+3*i+"@google.com");
+            hotdealDao.insert(hotdealDto1);
+        }
+
+        for(Integer i=4; i<=6; i++){
+            HotdealDto hotdealDto1 = new HotdealDto(3*i,"맛집"+3*i,"신사/압구정",15*i-4,"pic_url", "김치찌게", 7000, 5250, 25,"어머니 손맛 그대로 얼큰 칼칼하게", "2023-03-24 ~ 2023-04-10","90일", 0, 80,"Biz_"+3*i+"@google.com");
+            hotdealDao.insert(hotdealDto1);
+
+        }
+
+
+
 
     }
 }

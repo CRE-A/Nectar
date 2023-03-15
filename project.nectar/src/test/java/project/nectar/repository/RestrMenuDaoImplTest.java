@@ -75,13 +75,11 @@ public class RestrMenuDaoImplTest {
             RestrMenuDto restrMenuDto8 = new RestrMenuDto(2*i,"치즈김밥",4200,"짜지않은 채다치즈가 들어갔어요");
             RestrMenuDto restrMenuDto9 = new RestrMenuDto(2*i,"야채김밥",3000,"4가지 야채가 들어간 기본김밥");
             RestrMenuDto restrMenuDto10 = new RestrMenuDto(2*i,"고기만두",4500,"고기가 들어간 만두");
-            RestrMenuDto restrMenuDto11 = new RestrMenuDto(2*i,"김치만두",4200,"다진김치를 속으로 넣은 만두");
             restrMenuDao.insert(restrMenuDto6);
             restrMenuDao.insert(restrMenuDto7);
             restrMenuDao.insert(restrMenuDto8);
             restrMenuDao.insert(restrMenuDto9);
             restrMenuDao.insert(restrMenuDto10);
-            restrMenuDao.insert(restrMenuDto11);
 
         }
 

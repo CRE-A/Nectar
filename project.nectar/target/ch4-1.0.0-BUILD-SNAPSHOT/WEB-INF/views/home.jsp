@@ -19,13 +19,6 @@
 <div id="menu">
   <ul>
     <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
-    <li>
-      <form action="<c:url value="/restr/list"/>" class="search-form" method="get">
-        <input type="hidden" name="option" value="searchEngine"/>
-        <input type="text" name="keyword" class="search-input" value="${ph.sc.keyword}" placeholder="지역, 식당 또는 음식">
-        <input type="submit" class="search-button" value="검색">
-      </form>
-    </li>
     <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
     <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
     <li>
@@ -124,7 +117,6 @@
           <input type="radio" id="price04" name="cost" value="3만원대">
           <label for="price04">
             <span> 3만원대 </span></label>
-
         </p>
       </div>
       <hr>
@@ -206,7 +198,6 @@
     </form>
   </div>
 </section>
-
 
 
 
@@ -310,140 +301,4 @@
 
 
 </script>
-
-
-
-
-
-<%--/////////TagFilter 시작///////////////////////////////////////////////--%>
-
-<%--<br>--%>
-
-<%--<div id="tagss">--%>
-<%--  <form  name="tags" enctype="multipart/form-data"method="post">--%>
-
-<%--    <div  id="tag01">--%>
-<%--      <label for="tag01" >--%>
-<%--        <a href="<c:url value='/restr/list?option=tagFilter&tag=예쁜'/>" class="atag1"> #예쁜--%>
-<%--&lt;%&ndash;          <img src="images/전체.png">&ndash;%&gt;--%>
-<%--        </a>--%>
-<%--      </label>--%>
-
-
-<%--      <label for="tag01" >--%>
-<%--        <a href="<c:url value='/restr/list?option=tagFilter&tag=데이트'/>" class="atag2"> #데이트--%>
-<%--&lt;%&ndash;          <img src="images/데이트.png">&ndash;%&gt;--%>
-<%--        </a>--%>
-<%--      </label>--%>
-
-<%--      <label for="tag01" >--%>
-<%--        <a href="<c:url value='/restr/list?option=tagFilter&tag=인스타그램'/>" class="atag3"> #인스타그램--%>
-<%--          &lt;%&ndash;          <img src="images/데이트.png">&ndash;%&gt;--%>
-<%--        </a>--%>
-<%--      </label>--%>
-<%--    </div>--%>
-<%--    <br>--%>
-
-<%--    <div id="tag02">--%>
-<%--      <label for="tag02">--%>
-<%--        <a href="<c:url value='/restr/list?option=tagFilter&tag=분위기 좋은곳'/>" class="atag4"> #분위기 좋은곳--%>
-<%--&lt;%&ndash;          <img src="images/분위기 좋은곳.png">&ndash;%&gt;--%>
-<%--        </a>--%>
-<%--      </label>--%>
-
-<%--      <label for="tag02">--%>
-<%--        <a href="<c:url value='/restr/list?option=tagFilter&tag=가로수길'/>" class="atag5"> #가로수길--%>
-<%--&lt;%&ndash;          <img src="images/가로수길.png">&ndash;%&gt;--%>
-<%--        </a>--%>
-<%--      </label>--%>
-
-<%--      <label for="tag02" >--%>
-<%--        <a href="<c:url value='/restr/list?option=tagFilter&tag=데이트'/>" class="atag6"> #데이트--%>
-<%--          &lt;%&ndash;          <img src="images/데이트.png">&ndash;%&gt;--%>
-<%--        </a>--%>
-<%--      </label>--%>
-<%--    </div>--%>
-<%--    <br>--%>
-
-<%--    <div  id="tag03">--%>
-<%--      <label for="tag03">--%>
-<%--        <a href="<c:url value='/restr/list?option=tagFilter&tag=핫플'/>" class="atag7"> #핫플--%>
-<%--&lt;%&ndash;          <img src="images/핫플.png">&ndash;%&gt;--%>
-<%--        </a>--%>
-<%--      </label>--%>
-
-
-<%--      <label for="tag03">--%>
-<%--        <a href="<c:url value='/restr/list?option=tagFilter&tag=커플'/>" class="atag8"> #커플--%>
-<%--&lt;%&ndash;          <img src="images/가족.png">&ndash;%&gt;--%>
-<%--        </a>--%>
-<%--      </label>--%>
-
-<%--      <label for="tag01" >--%>
-<%--        <a href="<c:url value='/restr/list?option=tagFilter&tag=예쁜'/>" class="atag9"> #셀카--%>
-<%--          &lt;%&ndash;          <img src="images/데이트.png">&ndash;%&gt;--%>
-<%--        </a>--%>
-<%--      </label>--%>
-<%--    </div>--%>
-<%--    <br>--%>
-
-
-<%--  </form>--%>
-<%--</div>--%>
-
-<%--</body>--%>
-<%--</html>--%>
-<%--&lt;%&ndash;////////////////////////////////////////////////////////&ndash;%&gt;--%>
-
-
-
-<%--<script>--%>
-
-
-<%--  const filterBtn = document.querySelector(".filterBtn");--%>
-<%--  filterBtn.addEventListener("click", () => {--%>
-<%--    const filterModal = document.querySelector(".filter__modal");--%>
-<%--    filterModal.classList.toggle("active");--%>
-
-<%--  })--%>
-
-<%--  const filterModal = document.querySelector(".filter__modal");--%>
-<%--  filterModal.addEventListener("click", (e) => {--%>
-
-<%--    // 여백 누르면 모달창 꺼지게 만들기--%>
-<%--    e.target === filterModal ? filterModal.classList.toggle('active') : false--%>
-
-<%--  })--%>
-
-<%--  const cancelBtn = document.querySelector(".cancelBtn");--%>
-<%--  cancelBtn.addEventListener("click", (e) => {--%>
-<%--    filterModal.classList.toggle("active");--%>
-<%--  })--%>
-
-
-<%--</script>--%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

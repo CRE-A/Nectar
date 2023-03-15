@@ -20,7 +20,7 @@ public class HotdealDaoImpl implements HotdealDao {
 
     @Override
     public List<HotdealDto> selectAll() throws Exception{
-        return session.selectOne(namespace+"selectAll");
+        return session.selectList(namespace+"selectAll");
     }
     @Override
     public HotdealDto select(Integer hotdeal_NUM) throws Exception{
@@ -39,7 +39,7 @@ public class HotdealDaoImpl implements HotdealDao {
 
     @Override
     public int insert(HotdealDto hotdealDto) throws Exception{
-        return session.insert(session+"insert",hotdealDto);
+        return session.insert(namespace+"insert", hotdealDto);
     }
 
 
