@@ -34,7 +34,7 @@ public class RestrServiceImpl implements RestrService {
         return restrDao.searchResultCnt(sc);
     }
 
-
+    // 약점. 아무것도 검색 안해도 바로 넘어간다면, keyword가 null도 들어온다.
 
     // SearchResultPage() : 검색 결과를 가져온다?(검색한다)
     //2. [browser history 테이블]에 검색어(sc)를 insert
@@ -42,7 +42,10 @@ public class RestrServiceImpl implements RestrService {
 
     @Override
     public List<RestrDto> SearchResultPage(SearchCondition sc) throws Exception {
-//        BrowserHistoryDto browserHistoryDto = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"), sc.getKeyword(), null, null);
+//        System.out.println("session.getId() = " + session.getId());
+//        System.out.println("(String) session.getAttribute('User_email') = " + (String) session.getAttribute("User_email"));
+//        System.out.println("sc.getKeyword() = " + sc.getKeyword());
+//        BrowserHistoryDto browserHistoryDto = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"), (sc.getKeyword()!=null? sc.getKeyword() : ""));
 //        browserHistoryDao.insertKeyword(browserHistoryDto);
         return restrDao.SearchResultPage(sc);
     }

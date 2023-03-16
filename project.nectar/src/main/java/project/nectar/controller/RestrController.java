@@ -63,6 +63,35 @@ public class RestrController {
         return "restrList";
     }
 
+//
+//    @GetMapping("/search")
+//    public String searchResult(Model m, SearchCondition sc, HttpSession session) {
+//        BrowserHistoryDto browserHistory = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"));
+//
+//        try {
+//            int totalCnt = restrService.SearchResultCnt(sc);
+//            PageHandler pageHandler = new PageHandler(sc,totalCnt);
+//            m.addAttribute("ph", pageHandler);
+//            // 페이징에 대한 data
+//
+//            List<RestrDto> restrDto = restrService.SearchResultPage(sc);
+//            m.addAttribute("restrDto", restrDto);
+//            // 검색 조건에 부합하는 레스토랑 대한 data
+//
+////            List<BrowserHistoryDto> browserHistoryDto = browserHistoryDao.selectByJSESSIONID(browserHistory);
+////            m.addAttribute("browserHistoryDto",browserHistoryDto);
+//            // 최근에 본 (레스토랑)게시물에 대한 data
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return "errorPage/searchERR";
+////          SQL ERROR. 입력값이 없으면 가져오질 못함.
+////          나중에 에러 컨트롤러 만들 예정
+//        }
+//
+//        return "restrList";
+//    }
+
 
     @GetMapping("/read")
     public String read(LikelistDto likeDto, Integer restr_NUM, SearchCondition sc, Model m, HttpSession session){
