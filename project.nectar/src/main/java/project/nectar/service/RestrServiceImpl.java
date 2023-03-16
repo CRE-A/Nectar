@@ -57,7 +57,7 @@ public class RestrServiceImpl implements RestrService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public RestrDto read(Integer restr_NUM) throws Exception {
-        BrowserHistoryDto browserHistoryDto = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"), null, restr_NUM, null);
+//        BrowserHistoryDto browserHistoryDto = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"), null, restr_NUM, null);
 //        browserHistoryDao.insertRestrNUM(browserHistoryDto);
         restrDao.updateViewCnt(restr_NUM);  // 게시물을 읽으면, 조회수 +1
         return restrDao.select(restr_NUM);
