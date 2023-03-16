@@ -1,5 +1,6 @@
 package project.nectar.domain;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class UserDto {
@@ -8,7 +9,7 @@ public class UserDto {
     private String user_name;
     private String user_phone;
     private String user_picture;
-    private String user_regdate;
+    private Date user_regdate;
     private String user_state_code;
 
     public UserDto(){};
@@ -60,11 +61,11 @@ public class UserDto {
         this.user_picture = user_picture;
     }
 
-    public String getUser_regdate() {
+    public Date getUser_regdate() {
         return user_regdate;
     }
 
-    public void setUser_regdate(String user_regdate) {
+    public void setUser_regdate(Date user_regdate) {
         this.user_regdate = user_regdate;
     }
 

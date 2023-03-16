@@ -14,5 +14,7 @@
         <typeAlias alias="LikelistDto" type="project.nectar.domain.LikelistDto"/>
         <typeAlias alias="HotdealDto" type="project.nectar.domain.HotdealDto"/>
 <!--        <typeAlias alias="PaymentDto" type="project.nectar.domain.PaymentDto"/>-->
+        <typeAlias alias="BrowserHistoryDto" type="project.nectar.domain.BrowserHistoryDto"/>
+
     </typeAliases>
 </configuration>

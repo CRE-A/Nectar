@@ -19,7 +19,7 @@ public class RestrDto {
     private String restr_menu;
     private String restr_desc;
     private String restr_picture;
-    private String restr_category_loc;
+    private String restr_category_loc; // 레스토랑 주소의 카테고리
     private String bizAccount_email;   // 점주의 사업자 계정
     private String biz_reg_num;        // 점주의 사업자 등록번호
     private Integer restr_hotdeal_NUM; // 평상시 : -1 ,  핫딜 이벤트 진행시 : hotdeal_NUM

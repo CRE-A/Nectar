@@ -48,7 +48,14 @@
         <input type="submit" class="search-button" value="검색">
       </form>
     </div>
-  </div>
+<%--&lt;%&ndash;  인기 검색어 5개  &ndash;%&gt;--%>
+<%--    <div class="TopSearchKeyword">--%>
+<%--        <c:forEach var="browserHistoryDto" items="${browserHistoryDto}">--%>
+<%--          ${browserHistoryDto.searchKeyword}--%>
+<%--        </c:forEach>--%>
+<%--    </div>--%>
+<%--&lt;%&ndash;    &ndash;%&gt;--%>
+<%--  </div>--%>
 </div>
 
 <section class="filter__modal">

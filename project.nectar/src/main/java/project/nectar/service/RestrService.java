@@ -10,7 +10,7 @@ public interface RestrService {
 
     List<RestrDto> SearchResultPage(SearchCondition sc) throws Exception;
 
-    RestrDto read(int restr_NUM) throws Exception;
+    RestrDto read(Integer restr_NUM) throws Exception;
 
     int delete(Integer restr_NUM) throws Exception;
 

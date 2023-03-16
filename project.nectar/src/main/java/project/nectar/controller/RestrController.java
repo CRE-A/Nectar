@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.nectar.domain.*;
+import project.nectar.repository.BrowserHistoryDao;
 import project.nectar.repository.RestrMenuDao;
 import project.nectar.repository.UserDao;
 import project.nectar.service.LikelistService;
@@ -30,9 +31,13 @@ public class RestrController {
     UserDao userDao;
     @Autowired
     RestrMenuDao restrMenuDao;
+    @Autowired
+    BrowserHistoryDao browserHistoryDao;
+
 
     @GetMapping("/list")
-    public String list(Model m, SearchCondition sc) {
+    public String list(Model m, SearchCondition sc, HttpSession session) {
+        BrowserHistoryDto browserHistory = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"));
 
         try {
             int totalCnt = restrService.SearchResultCnt(sc);
@@ -43,6 +48,10 @@ public class RestrController {
             List<RestrDto> restrDto = restrService.SearchResultPage(sc);
             m.addAttribute("restrDto", restrDto);
             // 검색 조건에 부합하는 레스토랑 대한 data
+
+//            List<BrowserHistoryDto> browserHistoryDto = browserHistoryDao.selectByJSESSIONID(browserHistory);
+//            m.addAttribute("browserHistoryDto",browserHistoryDto);
+            // 최근에 본 (레스토랑)게시물에 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();

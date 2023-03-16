@@ -44,7 +44,7 @@ public class HotdealController {
     public String read(Integer hotdeal_NUM, Model m, HttpSession session){
 
         try {
-            HotdealDto hotdealDto = hotdealService.select(hotdeal_NUM);
+            HotdealDto hotdealDto = hotdealService.read(hotdeal_NUM);
             m.addAttribute("hotdealDto", hotdealDto);
             // 선택한 핫딜 게시물에 대한 data
 

@@ -66,6 +66,7 @@ public class LoginController {
         session.setAttribute(result + "_email", email);                                 // 2. loginCheck() 성공 시, 세션에 ("Admin_email",email)  ("Biz_email",email)  ("User_email",email) 중 하나 추가
         System.out.println("session check = " + result+"계정으로 로그인");
         System.out.println("session id = " + session.getAttribute(result+"_email"));
+        System.out.println("session.getID = " + session.getId());
 
 
         if (rememberEmailPwd) {

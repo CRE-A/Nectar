@@ -9,7 +9,7 @@ public interface HotdealService {
 
     List<HotdealDto> selectAll() throws Exception;
 
-    HotdealDto select(Integer hotdeal_NUM) throws Exception;
+    HotdealDto read(Integer hotdeal_NUM) throws Exception;
 
     int delete(Integer hotdeal_NUM) throws Exception;
 

@@ -1,5 +1,6 @@
 package project.nectar.domain;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class HotdealDto {
@@ -16,8 +17,8 @@ public class HotdealDto {
     private String hotdeal_desc;
     private String hotdeal_useDate;
     private String hotdeal_eventDuration;
-    private String hotdeal_regdate;
-    private String hotdeal_update;
+    private Date hotdeal_regdate;
+    private Date hotdeal_update;
     private Integer hotdeal_salesVolume;
     private Integer hotdeal_MaxSalesVolume;
     private String bizAccount_email;
@@ -146,19 +147,19 @@ public class HotdealDto {
         this.hotdeal_eventDuration = hotdeal_eventDuration;
     }
 
-    public String getHotdeal_regdate() {
+    public Date getHotdeal_regdate() {
         return hotdeal_regdate;
     }
 
-    public void setHotdeal_regdate(String hotdeal_regdate) {
+    public void setHotdeal_regdate(Date hotdeal_regdate) {
         this.hotdeal_regdate = hotdeal_regdate;
     }
 
-    public String getHotdeal_update() {
+    public Date getHotdeal_update() {
         return hotdeal_update;
     }
 
-    public void setHotdeal_update(String hotdeal_update) {
+    public void setHotdeal_update(Date hotdeal_update) {
         this.hotdeal_update = hotdeal_update;
     }
 
