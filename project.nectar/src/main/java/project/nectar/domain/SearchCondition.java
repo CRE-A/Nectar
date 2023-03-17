@@ -16,17 +16,19 @@ public class SearchCondition {
     private String  location = "";
     private String  parking = "";
     private String  tag = "";
-    private Integer offset;
+    private Integer offset = DEFAULT_OFFSET;
+
 
     public static final int MIN_PAGE_SIZE = 5;
     public static final int DEFAULT_PAGE_SIZE = 10;
     public static final int MAX_PAGE_SIZE = 50;
+    public static final int DEFAULT_OFFSET = 0;
 
     public SearchCondition() {}
     public SearchCondition(Integer page, Integer pageSize) {
-        this(page,pageSize,"","","","","","","");
+        this(page,pageSize,"","","","","","","",0);
     }
-    public SearchCondition(Integer page, Integer pageSize, String option, String keyword, String foodType, String cost, String location, String parking, String tag) {
+    public SearchCondition(Integer page, Integer pageSize, String option, String keyword, String foodType, String cost, String location, String parking, String tag, Integer offset) {
         this.page = page;
         this.pageSize = pageSize;
         this.option = option;
@@ -36,6 +38,7 @@ public class SearchCondition {
         this.location = location;
         this.parking = parking;
         this.tag = tag;
+        this.offset = (page-1)*pageSize;
     }
     public String getQueryString() {
         return getQueryString(page);
@@ -117,11 +120,11 @@ public class SearchCondition {
         this.parking = parking;
     }
 
-    public String gettag() {
+    public String getTag() {
         return tag;
     }
 
-    public void settag(String tag) {
+    public void setTag(String tag) {
         this.tag = tag;
     }
 
@@ -129,17 +132,25 @@ public class SearchCondition {
         return (page-1)*pageSize;
     }
 
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
+
+
     @Override
     public String toString() {
         return "SearchCondition{" +
                 "page=" + page +
                 ", pageSize=" + pageSize +
+                ", option='" + option + '\'' +
                 ", keyword='" + keyword + '\'' +
                 ", foodType='" + foodType + '\'' +
                 ", cost='" + cost + '\'' +
                 ", location='" + location + '\'' +
                 ", parking='" + parking + '\'' +
                 ", tag='" + tag + '\'' +
+                ", offset=" + offset +
                 '}';
     }
 }

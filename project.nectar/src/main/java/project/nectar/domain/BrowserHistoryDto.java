@@ -15,10 +15,13 @@ public class BrowserHistoryDto {
 
 
 
-    public BrowserHistoryDto(){this("","","",-1, -1);}
+    public BrowserHistoryDto(){this("","",null,null   , null);}
 
-    public BrowserHistoryDto(String JSESSIONID, String user_email){this(JSESSIONID,user_email,"",-1,-1);}
-    public BrowserHistoryDto(String JSESSIONID, String user_email, String searchKeyword){this(JSESSIONID,user_email,searchKeyword,-1,-1);}
+    public BrowserHistoryDto(String JSESSIONID, String user_email){this(JSESSIONID,user_email,null,null,null);}
+    public BrowserHistoryDto(String JSESSIONID, String user_email, String searchKeyword){this(JSESSIONID,user_email,searchKeyword,null,null);}
+    public BrowserHistoryDto(String JSESSIONID, String user_email, Integer restr_NUM){this(JSESSIONID,user_email,null,restr_NUM,null);}
+//    public BrowserHistoryDto(String JSESSIONID, String user_email, Integer hotdeal_NUM){this(JSESSIONID,user_email,null,null,hotdeal_NUM);}
+
     public BrowserHistoryDto(String JSESSIONID, String user_email, String searchKeyword, Integer restr_NUM, Integer hotdeal_NUM) {
         this.JSESSIONID = JSESSIONID;
         this.user_email = user_email;

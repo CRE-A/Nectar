@@ -26,7 +26,6 @@ public class RestrServiceImpl implements RestrService {
     @Autowired
     BrowserHistoryDao browserHistoryDao;
 
-    HttpSession session;
 
 
     @Override
@@ -34,19 +33,20 @@ public class RestrServiceImpl implements RestrService {
         return restrDao.searchResultCnt(sc);
     }
 
-    // 약점. 아무것도 검색 안해도 바로 넘어간다면, keyword가 null도 들어온다.
+
+
+
+
+    // 약점. 아무것도 검색 안해도 restr/list로 이동 가능하다면, keyword 가 null도 들어온다. // 해결
 
     // SearchResultPage() : 검색 결과를 가져온다?(검색한다)
     //2. [browser history 테이블]에 검색어(sc)를 insert
     //3. [restr 테이블]에서 검색어(sc)에 해당하는 모든 레스토랑을 select
 
+        HttpSession session;
     @Override
-    public List<RestrDto> SearchResultPage(SearchCondition sc) throws Exception {
-//        System.out.println("session.getId() = " + session.getId());
-//        System.out.println("(String) session.getAttribute('User_email') = " + (String) session.getAttribute("User_email"));
-//        System.out.println("sc.getKeyword() = " + sc.getKeyword());
-//        BrowserHistoryDto browserHistoryDto = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"), (sc.getKeyword()!=null? sc.getKeyword() : ""));
-//        browserHistoryDao.insertKeyword(browserHistoryDto);
+    public List<RestrDto> SearchResultPage(SearchCondition sc, BrowserHistoryDto browserHistoryDto) throws Exception {
+        browserHistoryDao.insertKeyword(browserHistoryDto);
         return restrDao.SearchResultPage(sc);
     }
 
@@ -59,9 +59,8 @@ public class RestrServiceImpl implements RestrService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public RestrDto read(Integer restr_NUM) throws Exception {
-//        BrowserHistoryDto browserHistoryDto = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"), null, restr_NUM, null);
-//        browserHistoryDao.insertRestrNUM(browserHistoryDto);
+    public RestrDto read(Integer restr_NUM, BrowserHistoryDto browserHistoryDto) throws Exception {
+        browserHistoryDao.insertRestrNUM(browserHistoryDto);
         restrDao.updateViewCnt(restr_NUM);  // 게시물을 읽으면, 조회수 +1
         return restrDao.select(restr_NUM);
     }
@@ -95,3 +94,7 @@ public class RestrServiceImpl implements RestrService {
     } // TDD
 
 }
+
+
+
+

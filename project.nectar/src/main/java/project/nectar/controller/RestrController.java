@@ -37,7 +37,16 @@ public class RestrController {
 
     @GetMapping("/list")
     public String list(Model m, SearchCondition sc, HttpSession session) {
-        BrowserHistoryDto browserHistory = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"));
+
+        return "restrTagList";
+    }
+
+
+    @GetMapping("/search")
+    public String SearchResult(Model m, SearchCondition sc, HttpSession session) {
+        String searchKeyword = (sc.getKeyword()!=""? sc.getKeyword() : ( sc.getFoodType())!=""? sc.getFoodType() : sc.getTag() );
+        BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"), searchKeyword);
+
 
         try {
             int totalCnt = restrService.SearchResultCnt(sc);
@@ -45,12 +54,12 @@ public class RestrController {
             m.addAttribute("ph", pageHandler);
             // 페이징에 대한 data
 
-            List<RestrDto> restrDto = restrService.SearchResultPage(sc);
+            List<RestrDto> restrDto = restrService.SearchResultPage(sc, bh);
             m.addAttribute("restrDto", restrDto);
             // 검색 조건에 부합하는 레스토랑 대한 data
 
-//            List<BrowserHistoryDto> browserHistoryDto = browserHistoryDao.selectByJSESSIONID(browserHistory);
-//            m.addAttribute("browserHistoryDto",browserHistoryDto);
+            List<BrowserHistoryDto> browserHistoryList = browserHistoryDao.selectByJSESSIONID(bh);
+            m.addAttribute("browserHistoryDto",browserHistoryList);
             // 최근에 본 (레스토랑)게시물에 대한 data
 
         } catch (Exception e) {
@@ -63,43 +72,16 @@ public class RestrController {
         return "restrList";
     }
 
-//
-//    @GetMapping("/search")
-//    public String searchResult(Model m, SearchCondition sc, HttpSession session) {
-//        BrowserHistoryDto browserHistory = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"));
-//
-//        try {
-//            int totalCnt = restrService.SearchResultCnt(sc);
-//            PageHandler pageHandler = new PageHandler(sc,totalCnt);
-//            m.addAttribute("ph", pageHandler);
-//            // 페이징에 대한 data
-//
-//            List<RestrDto> restrDto = restrService.SearchResultPage(sc);
-//            m.addAttribute("restrDto", restrDto);
-//            // 검색 조건에 부합하는 레스토랑 대한 data
-//
-////            List<BrowserHistoryDto> browserHistoryDto = browserHistoryDao.selectByJSESSIONID(browserHistory);
-////            m.addAttribute("browserHistoryDto",browserHistoryDto);
-//            // 최근에 본 (레스토랑)게시물에 대한 data
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return "errorPage/searchERR";
-////          SQL ERROR. 입력값이 없으면 가져오질 못함.
-////          나중에 에러 컨트롤러 만들 예정
-//        }
-//
-//        return "restrList";
-//    }
-
 
     @GetMapping("/read")
     public String read(LikelistDto likeDto, Integer restr_NUM, SearchCondition sc, Model m, HttpSession session){
         String User_email = (String)session.getAttribute("User_email");
         likeDto.setUser_email(User_email);
+        BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), User_email, restr_NUM);
+
 
         try {
-            RestrDto restrDto = restrService.read(restr_NUM);
+            RestrDto restrDto = restrService.read(restr_NUM, bh);
             m.addAttribute("restrDto", restrDto);
             // 레스토랑에 대한 data
 
@@ -121,7 +103,7 @@ public class RestrController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/restr/list"+sc.getQueryString();
+            return "redirect:/restr/search"+sc.getQueryString();
         }
 
         return "restr";
@@ -143,7 +125,7 @@ public class RestrController {
             return "redirect:/";
         }
 
-        return "redirect:/restr/list"+sc.getQueryString();
+        return "redirect:/restr/search"+sc.getQueryString();
     }
 
 

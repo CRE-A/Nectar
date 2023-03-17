@@ -40,9 +40,8 @@ public class HotdealServiceImpl implements HotdealService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public HotdealDto read(Integer hotdeal_NUM) throws Exception{
-//        BrowserHistoryDto browserHistoryDto = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"), null, null, hotdeal_NUM);
-//        browserHistoryDao.insertHotdealNUM(browserHistoryDto);
+    public HotdealDto read(Integer hotdeal_NUM, BrowserHistoryDto browserHistoryDto) throws Exception{
+        browserHistoryDao.insertHotdealNUM(browserHistoryDto);
         return hotdealDao.select(hotdeal_NUM);
     }
 

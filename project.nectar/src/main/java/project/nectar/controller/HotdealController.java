@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import project.nectar.domain.BrowserHistoryDto;
 import project.nectar.domain.HotdealDto;
 import project.nectar.domain.UserDto;
 import project.nectar.repository.UserDao;
@@ -42,9 +43,12 @@ public class HotdealController {
 
     @GetMapping("/read")
     public String read(Integer hotdeal_NUM, Model m, HttpSession session){
+        String User_email = (String) session.getAttribute("User_email");
+        BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), User_email,null, null, hotdeal_NUM);
+
 
         try {
-            HotdealDto hotdealDto = hotdealService.read(hotdeal_NUM);
+            HotdealDto hotdealDto = hotdealService.read(hotdeal_NUM, bh);
             m.addAttribute("hotdealDto", hotdealDto);
             // 선택한 핫딜 게시물에 대한 data
 

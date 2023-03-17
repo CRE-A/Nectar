@@ -25,7 +25,7 @@
     <ul>
         <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
         <li>
-            <form action="<c:url value="/restr/list"/>" class="search-form" method="get">
+            <form action="<c:url value="/restr/search"/>" class="search-form" method="get">
                 <input type="hidden" name="option" value="searchEngine"/>
                 <input type="text" name="keyword" class="search-input" value="${ph.sc.keyword}" placeholder="지역, 식당 또는 음식">
                 <input type="submit" class="search-button" value="검색">

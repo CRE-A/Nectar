@@ -42,7 +42,7 @@
       <button class="filterBtn">
         <i class="fa-solid fa-sliders"></i>
       </button>
-      <form action="<c:url value="/restr/list"/>" class="search-form" method="get">
+      <form action="<c:url value="/restr/search"/>" class="search-form" method="get">
         <input type="hidden" name="option" value="searchEngine"/>
         <input type="text" name="keyword" class="search-input" value="${ph.sc.keyword}" placeholder="지역, 식당 또는 음식">
         <input type="submit" class="search-button" value="검색">
@@ -60,7 +60,7 @@
 
 <section class="filter__modal">
   <div style="text-align:center" id="filter__container">
-    <form action="<c:url value="/restr/list"/>" class="search-form">
+    <form action="<c:url value="/restr/search"/>" class="search-form">
       <input type="hidden" name="option" value="homeFilter"/>
       <div class="filter-item">
         <label>음식종류</label><br>
@@ -211,16 +211,24 @@
 
 <%--/////////TagFilter 시작///////////////////////////////////////////////--%>
 
-<div id="tag01" class="tag__list__wrap">
+  <div id="tag10" class="tag__list__wrap">
+    <label>
+      <a href="<c:url value='/restr/search?option=tagFilter&tag='/>">#전체</a>
+      <img src=""> ${tagPic}
+    </label>
+  </div>
+
+
+  <div id="tag01" class="tag__list__wrap">
   <label>
-    <a href="<c:url value='/restr/list?option=tagFilter&tag=인스타그램'/>">#인스타그램</a>
+    <a href="<c:url value='/restr/search?option=tagFilter&tag=인스타그램'/>">#인스타그램</a>
     <img src=""> ${tagPic}
   </label>
 </div>
 
 <div id="tag02" class="tag__list__wrap">
   <label>
-    <a href="<c:url value='/restr/list?option=tagFilter&tag=데이트'/>">#데이트</a>
+    <a href="<c:url value='/restr/search?option=tagFilter&tag=데이트'/>">#데이트</a>
     <img src="">
   </label>
 </div>
@@ -228,7 +236,7 @@
 
 <div id="tag03" class="tag__list__wrap">
   <label>
-    <a href="<c:url value='/restr/list?option=tagFilter&tag=분위기 좋은곳'/>">#분위기 좋은곳</a>
+    <a href="<c:url value='/restr/search?option=tagFilter&tag=분위기 좋은곳'/>">#분위기 좋은곳</a>
     <img src="">
   </label>
 </div>
@@ -236,21 +244,21 @@
 
 <div id="tag04" class="tag__list__wrap">
   <label>
-    <a href="<c:url value='/restr/list?option=tagFilter&tag=가로수길'/>">#가로수길</a>
+    <a href="<c:url value='/restr/search?option=tagFilter&tag=가로수길'/>">#가로수길</a>
     <img src="">
   </label>
 </div>
 
 <div id="tag05" class="tag__list__wrap">
   <label>
-    <a href="<c:url value='/restr/list?option=tagFilter&tag=핫플'/>">#핫플</a>
+    <a href="<c:url value='/restr/search?option=tagFilter&tag=핫플'/>">#핫플</a>
     <img src="">
   </label>
 </div>
 
 <div id="tag06" class="tag__list__wrap">
   <label>
-    <a href="<c:url value='/restr/list?option=tagFilter&tag=커플'/>">#커플</a>
+    <a href="<c:url value='/restr/search?option=tagFilter&tag=커플'/>">#커플</a>
     <img src="">
   </label>
 </div>
@@ -258,21 +266,21 @@
 
 <div id="tag07" class="tag__list__wrap">
   <label>
-    <a href="<c:url value='/restr/list?option=tagFilter&tag=예쁜'/>">#예쁜</a>
+    <a href="<c:url value='/restr/search?option=tagFilter&tag=예쁜'/>">#예쁜</a>
     <img src="">
   </label>
 </div>
 
 <div id="tag08" class="tag__list__wrap">
   <label>
-    <a href="<c:url value='/restr/list?option=tagFilter&tag=셀카'/>">#셀카</a>
+    <a href="<c:url value='/restr/search?option=tagFilter&tag=셀카'/>">#셀카</a>
     <img src="">
   </label>
 </div>
 
 <div id="tag09" class="tag__list__wrap">
   <label>
-    <a href="<c:url value='/restr/list?option=tagFilter&tag=셀카'/>">#인스타</a>
+    <a href="<c:url value='/restr/search?option=tagFilter&tag=셀카'/>">#인스타</a>
     <img src="">
   </label>
 </div>
