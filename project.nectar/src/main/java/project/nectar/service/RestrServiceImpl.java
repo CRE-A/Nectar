@@ -40,8 +40,8 @@ public class RestrServiceImpl implements RestrService {
     // 약점. 아무것도 검색 안해도 restr/list로 이동 가능하다면, keyword 가 null도 들어온다. // 해결
 
     // SearchResultPage() : 검색 결과를 가져온다?(검색한다)
-    //2. [browser history 테이블]에 검색어(sc)를 insert
-    //3. [restr 테이블]에서 검색어(sc)에 해당하는 모든 레스토랑을 select
+    //1. [browser history 테이블]에 검색어(sc)를 insert
+    //2. [restr 테이블]에서 검색어(sc)에 해당하는 모든 레스토랑을 select
 
         HttpSession session;
     @Override
