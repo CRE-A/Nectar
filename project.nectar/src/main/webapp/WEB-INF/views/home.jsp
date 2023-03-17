@@ -42,7 +42,7 @@
       <button class="filterBtn">
         <i class="fa-solid fa-sliders"></i>
       </button>
-      <form action="<c:url value="/restr/search"/>" class="search-form" method="get">
+      <form action="<c:url value="/restr/search"/>" class="search-form" method="get" onsubmit="return keywordFormCheck(this)">
         <input type="hidden" name="option" value="searchEngine"/>
         <input type="text" name="keyword" class="search-input" value="${ph.sc.keyword}" placeholder="지역, 식당 또는 음식">
         <input type="submit" class="search-button" value="검색">
@@ -315,5 +315,14 @@
   })
 
 
+</script>
+
+<script>
+  function keywordFormCheck(form){
+    if(form.keyword.value.length == 0){
+      alert("검색어를 입력해 주세요.")
+      return false;
+    }
+  }
 </script>
 
