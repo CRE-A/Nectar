@@ -181,13 +181,13 @@
         >
     </div>
     <div class="tag item">
-        <a href="<c:url value='/restr/search?option=tagFilter&tag='/>">
+        <a href="<c:url value='/restr/search?option=tagFilter&tag=예쁜'/>">
             <img
                     src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
                     alt=""
             />
             <div class="background">
-                <span class="text">#전체</span>
+                <span class="text">#크레아</span>
             </div>
         </a
         >
@@ -350,13 +350,62 @@
 <%--  ///////////////////////////////////////// 최근 방문한 페이지 //////////////////////////////////////////////////--%>
 
 <div id="browserhistory">
-    </br>
-    <h3>I KNOW What you saw</h3>
-    <%--    <c:forEach var="browserHistoryDto" items="${browserHistoryDto}">--%>
-    <%--      ${browserHistoryDto.restr_NUM}--%>
-    <%--      ${browserHistoryDto.hotdeal_NUM}--%>
-    <%--    </c:forEach>--%>
-    <br/>
+    <c:choose>
+        <c:when test="${empty sessionScope.User_email}">
+            </br>
+            <h3>I KNOW What you saw</h3>
+            <h4> LOGIN ? 'NO' </h4>
+            <c:forEach var="getVisitedPageList" items="${getVisitedPageList}">
+                ---------------login X-------------</br>
+                ${getVisitedPageList.restr_NUM} </br>
+                ${getVisitedPageList.restr_name}</br>
+                ${getVisitedPageList.restr_location}</br>
+                ${getVisitedPageList.restr_phone}</br>
+                ${getVisitedPageList.restr_time}</br>
+                ${getVisitedPageList.restr_star}</br>
+                ${getVisitedPageList.restr_foodType}</br>
+                ${getVisitedPageList.restr_cost}</br>
+                ${getVisitedPageList.restr_parking}</br>
+                ${getVisitedPageList.restr_tag}</br>
+                ${getVisitedPageList.restr_menu}</br>
+                ${getVisitedPageList.restr_cost}</br>
+                ${getVisitedPageList.restr_menu}</br>
+                ${getVisitedPageList.restr_picture}</br>
+                ${getVisitedPageList.restr_viewCnt}</br>
+                ${getVisitedPageList.restr_reviewCnt}</br>
+                ${getVisitedPageList.restr_likeCnt}</br>
+                --------------------------------------</br>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <br/>
+            <h3>I KNOW What you saw</h3>
+            <h4> LOGIN ? 'YES' </h4>
+            <c:forEach var="getVisitedPageList_User" items="${getVisitedPageList_User}">
+                ---------------login O-------------</br>
+                ${getVisitedPageList_User.restr_NUM} </br>
+                ${getVisitedPageList_User.restr_name}</br>
+                ${getVisitedPageList_User.restr_location}</br>
+                ${getVisitedPageList_User.restr_phone}</br>
+                ${getVisitedPageList_User.restr_time}</br>
+                ${getVisitedPageList_User.restr_star}</br>
+                ${getVisitedPageList_User.restr_foodType}</br>
+                ${getVisitedPageList_User.restr_cost}</br>
+                ${getVisitedPageList_User.restr_parking}</br>
+                ${getVisitedPageList_User.restr_tag}</br>
+                ${getVisitedPageList_User.restr_menu}</br>
+                ${getVisitedPageList_User.restr_cost}</br>
+                ${getVisitedPageList_User.restr_menu}</br>
+                ${getVisitedPageList_User.restr_picture}</br>
+                ${getVisitedPageList_User.restr_viewCnt}</br>
+                ${getVisitedPageList_User.restr_reviewCnt}</br>
+                ${getVisitedPageList_User.restr_likeCnt}</br>
+                --------------------------------------</br>
+            </c:forEach>
+            <br/>
+        </c:otherwise>
+    </c:choose>
+
 </div>
 
 <br/>

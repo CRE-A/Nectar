@@ -10,7 +10,7 @@
         from (select row_number() over (order by count(searchkeyword) desc) rn, searchkeyword, count(searchkeyword)
               from browserhistory
               group by searchkeyword
-              having NOT browserhistory.searchkeyword is NULL) Popular_SearchKeyword_LIST
+              having browserhistory.searchkeyword is NOT NULL) Popular_SearchKeyword_LIST
         where rn between 1 and 5;
     </select>
 
@@ -23,14 +23,14 @@
     <select id="selectByJSESSIONID" parameterType="BrowserHistoryDto" resultType="BrowserHistoryDto">
         select *
         from browserhistory
-        where JSESSIONID=#{JSESSIONID}
+        where JSESSIONID=#{JSESSIONID} AND restr_NUM is NOT NULL
         order by browserHistory_regdate desc ;
     </select>
 
     <select id="selectByUser_email" parameterType="BrowserHistoryDto" resultType="BrowserHistoryDto">
         select *
         from browserhistory
-        where user_email=#{user_email}
+        where user_email=#{user_email} AND restr_NUM is NOT NULL
         order by browserHistory_regdate desc ;
     </select>
 

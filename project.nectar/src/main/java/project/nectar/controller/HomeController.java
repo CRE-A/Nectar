@@ -10,6 +10,7 @@ import project.nectar.repository.BrowserHistoryDao;
 import project.nectar.repository.RestrDao;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,32 +24,34 @@ public class HomeController {
     @RequestMapping("/")
     public String getTopSearchKeyword(Model m, HttpSession session) {
         BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), (String)session.getAttribute("User_email"));
-
         try {
             List<BrowserHistoryDto> topSearchKeywordList = browserHistoryDao.select_TopSearchKeyword();
             m.addAttribute("topSearchKeywordList", topSearchKeywordList);
             // 인기 검색어에 대한 data
 
-            List<RestrDto> browserHis = null;
-            List<BrowserHistoryDto> browserHistoryList = browserHistoryDao.selectByJSESSIONID(bh);
-//////            System.out.println("browserHistoryList = " + browserHistoryList);
-//            for(BrowserHistoryDto browserHistoryDto: browserHistoryList){
-//////                System.out.println("browserHistoryDto = " + browserHistoryDto);
-//                if(browserHistoryDto.getRestr_NUM()==null){
-////                    return ;
-//                }
-//                restrDtoList.add(restrDao.select(browserHistoryDto.getRestr_NUM()));
-//
-////                }
-//                m.addAttribute("restrDtoList",restrDtoList);
-//            }
-////            m.addAttribute("restrDtoList",restrDtoList);
-////            // 최근에 본 레스토랑(게시물)에 대한 data
+
+            List<RestrDto> getVisitedPageList = new ArrayList<>();
+            List<BrowserHistoryDto> viewBrowserHistoryList = browserHistoryDao.selectByJSESSIONID(bh);
+            for(BrowserHistoryDto dto: viewBrowserHistoryList){
+                getVisitedPageList.add(restrDao.select(dto.getRestr_NUM()));
+            }
+            m.addAttribute("getVisitedPageList",getVisitedPageList);
+//            // 로그인 안한 이용자가, 최근에 본 게시물에 대한 data
+
+
+            List<RestrDto> getVisitedPageList_User = new ArrayList<>();
+            List<BrowserHistoryDto> viewBrowserHistoryList_User = browserHistoryDao.selectByUser_email(bh);
+            for(BrowserHistoryDto dto: viewBrowserHistoryList_User){
+                getVisitedPageList_User.add(restrDao.select(dto.getRestr_NUM()));
+            }
+            m.addAttribute("getVisitedPageList_User",getVisitedPageList_User);
+//            // 로그인 한 User 가, 최근에 본 게시물에 대한 data
+
 
         } catch (Exception e) {
             e.printStackTrace();
 //            return "redirect:/errpage";
-            return "home"; // 데이터가 없어서 sql 에러뜸. 일단은 home으로 보내놓겠음.
+            return "restrList"; // 데이터가 없어서 sql 에러뜸. 일단은 home으로 보내놓겠음.
         }
 
         return "home";
