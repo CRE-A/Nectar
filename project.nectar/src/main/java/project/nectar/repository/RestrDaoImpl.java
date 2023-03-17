@@ -26,7 +26,7 @@ public class RestrDaoImpl implements RestrDao {
     }
 
     @Override
-    public RestrDto select(int restr_NUM) throws Exception{
+    public RestrDto select(Integer restr_NUM) throws Exception{
         return session.selectOne(namespace+"select", restr_NUM);
     }
 

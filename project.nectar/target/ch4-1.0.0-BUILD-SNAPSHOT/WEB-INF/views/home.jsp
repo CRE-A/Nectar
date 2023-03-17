@@ -48,14 +48,6 @@
         <input type="submit" class="search-button" value="검색">
       </form>
     </div>
-<%--&lt;%&ndash;  인기 검색어 5개  &ndash;%&gt;--%>
-<%--    <div class="TopSearchKeyword">--%>
-<%--        <c:forEach var="browserHistoryDto" items="${browserHistoryDto}">--%>
-<%--          ${browserHistoryDto.searchKeyword}--%>
-<%--        </c:forEach>--%>
-<%--    </div>--%>
-<%--&lt;%&ndash;    &ndash;%&gt;--%>
-<%--  </div>--%>
 </div>
 
 <section class="filter__modal">
@@ -205,6 +197,31 @@
     </form>
   </div>
 </section>
+
+
+
+<%--  ///////////////////////////////////////////// 인기검색어 //////////////////////////////////////////////////////--%>
+</br>
+<h3>top search keyword</h3>
+  <c:forEach var="topSearchKeyword" items="${topSearchKeywordList}">
+    <a href="<c:url value='/restr/search?option=searchEngine&keyword=${topSearchKeyword.searchKeyword}'/>">${topSearchKeyword.searchKeyword}</a>
+  </c:forEach>
+<br/>
+<br/>
+  <%--  ///////////////////////////////////////// 최근 방문한 페이지 //////////////////////////////////////////////////--%>
+
+  <div id="browserhistory">
+    </br>
+    <h3>I KNOW What you saw</h3>
+<%--    <c:forEach var="browserHistoryDto" items="${browserHistoryDto}">--%>
+<%--      ${browserHistoryDto.restr_NUM}--%>
+<%--      ${browserHistoryDto.hotdeal_NUM}--%>
+<%--    </c:forEach>--%>
+    <br/>
+  </div>
+
+  <br/>
+  <%--  /////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
 
 
 

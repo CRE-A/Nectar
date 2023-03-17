@@ -94,20 +94,17 @@
 </section>
 
 
-<%--model 에서 list, ph(page, pageSize 포함) 넘겨줘야함--%>
 <div id="pageBar" style="text-align:center">
   <c:if test="${ph.showPrev}">
-    <a href="<c:url value="/restr/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
+    <a href="<c:url value="/restr/search${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
   </c:if>
   <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-    <a href="<c:url value='/restr/list${ph.sc.getQueryString(i)}'/>">${i}</a>
+    <a href="<c:url value='/restr/search${ph.sc.getQueryString(i)}'/>">${i}</a>
   </c:forEach>
   <c:if test="${ph.showNext}">
-    <a href="<c:url value="/restr/list${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
+    <a href="<c:url value="/restr/search${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
   </c:if>
 </div>
-
-
 
 
 

@@ -5,22 +5,18 @@
 <mapper namespace="project.nectar.repository.BrowserHistoryMapper">
 
 
-<!--    <select id="selectPopularSearchKeyword"  resultType="BrowserHistoryDto">-->
-<!--        SELECT rownum, count(keyword)-->
-<!--        FROM browserhistory -->
-<!--        WHERE rownum <=5-->
-<!--        ORDER BY count(keyword) DESC;-->
-<!--&#45;&#45;         select count(keyword) from browserhistory-->
-<!--    </select>-->
-
-
-
-
-
-    <select id="select_TopSearchKeyword" resultType="BrowserHistoryDto">
-<!--        select rownum, count(searchKeyword)-->
-<!--        where rownum<=5;-->
+    <select id="select_TopSearchKeyword"  resultType="BrowserHistoryDto">
+        select *
+        from (select row_number() over (order by count(searchkeyword) desc) rn, searchkeyword, count(searchkeyword)
+              from browserhistory
+              group by searchkeyword
+              having NOT browserhistory.searchkeyword is NULL) Popular_SearchKeyword_LIST
+        where rn between 1 and 5;
     </select>
+
+
+
+
 
 
 

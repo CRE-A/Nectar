@@ -36,17 +36,16 @@ public class RestrController {
 
 
     @GetMapping("/list")
-    public String list(Model m, SearchCondition sc, HttpSession session) {
-
+    public String list() {
         return "restrTagList";
     }
 
 
     @GetMapping("/search")
     public String SearchResult(Model m, SearchCondition sc, HttpSession session) {
-        String searchKeyword = (sc.getKeyword()!=""? sc.getKeyword() : ( sc.getFoodType())!=""? sc.getFoodType() : sc.getTag() );
-        BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), (String) session.getAttribute("User_email"), searchKeyword);
 
+        String searchKeyword = (sc.getKeyword()!=""? sc.getKeyword() : ( sc.getFoodType())!=""? sc.getFoodType() : sc.getTag() );
+        BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), (String)session.getAttribute("User_email"),searchKeyword);
 
         try {
             int totalCnt = restrService.SearchResultCnt(sc);
@@ -56,11 +55,8 @@ public class RestrController {
 
             List<RestrDto> restrDto = restrService.SearchResultPage(sc, bh);
             m.addAttribute("restrDto", restrDto);
-            // 검색 조건에 부합하는 레스토랑 대한 data
+            // 검색 조건에 해당하는 레스토랑 대한 data
 
-            List<BrowserHistoryDto> browserHistoryList = browserHistoryDao.selectByJSESSIONID(bh);
-            m.addAttribute("browserHistoryDto",browserHistoryList);
-            // 최근에 본 (레스토랑)게시물에 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,10 +71,9 @@ public class RestrController {
 
     @GetMapping("/read")
     public String read(LikelistDto likeDto, Integer restr_NUM, SearchCondition sc, Model m, HttpSession session){
-        String User_email = (String)session.getAttribute("User_email");
-        likeDto.setUser_email(User_email);
-        BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), User_email, restr_NUM);
 
+        BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), (String)session.getAttribute("User_email"),restr_NUM);
+        likeDto.setUser_email(bh.getUser_email());
 
         try {
             RestrDto restrDto = restrService.read(restr_NUM, bh);
@@ -97,7 +92,7 @@ public class RestrController {
             m.addAttribute("likelistDto",likelistDto);
             // 로그인 했다면, 로그인 계정(유저)가 누른 좋아요에 대한 data
             
-            UserDto userDto = userDao.select(User_email);
+            UserDto userDto = userDao.select(bh.getUser_email());
             m.addAttribute("userDto",userDto);
             // 로그인 했다면, 로그인 계정(유저)에 대한 data
 

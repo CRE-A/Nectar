@@ -10,7 +10,7 @@ public interface RestrDao {
 
     List<RestrDto> SearchResultPage(SearchCondition sc) throws Exception;
 
-    RestrDto select(int restr_NUM) throws Exception;
+    RestrDto select(Integer restr_NUM) throws Exception;
 
     int delete(Integer restr_NUM) throws Exception;
 

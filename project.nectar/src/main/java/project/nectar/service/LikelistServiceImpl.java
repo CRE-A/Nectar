@@ -27,11 +27,18 @@ public class LikelistServiceImpl implements LikelistService {
     } // MyPage 에서 selectAll 하면 내가 좋아요 누른 모든 가게가 나옴
 
 
+
+    // removeMyLikeList() : 내가 좋아요 눌렀던 '모든' 가게의 like 를 취소
+    // 1. [likelist 테이블]에서 (user_email)에 해당하는 레스토랑 정보를 select
+    // 2. 1에서 select 한 data를 list에 담고, 향상된 for문을 이용해 list를 하나씩 읽으면서 cancelLike()를 실행.
+    // 3. cancelLike() : 내가 좋아요 눌렀던 가게의 like를 취소
+    //     3.1. [likelist 테이블]에서 (restr_NUM)번, (user_email)에 해당하는 like를 delete
+    //     3.2. [likelist 테이블]에서 (restr_NUM)번에 해당하는 like의 총 개수 count() 를 select
+    //     3.3. [restr 테이블]에 like의 총 개수 count() 를 insert
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeMyLikeList(String user_email) throws Exception {
-//        likelistDao.deleteAll(likelistDto.getUser_email());
-
         List<LikelistDto> getRestrList = likelistDao.selectAll(user_email);
         for(LikelistDto likelistDto :getRestrList){
             cancelLike(likelistDto);

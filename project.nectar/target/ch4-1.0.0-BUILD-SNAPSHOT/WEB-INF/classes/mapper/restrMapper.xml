@@ -21,11 +21,8 @@
                 And  (restr_location     LIKE concat('%', #{location}, '%')  OR  restr_location_tag LIKE concat('%', #{location}, '%'))
                 And   restr_parking      LIKE concat('%', #{parking},  '%'))
             </when>
-            <when test='option=="tagFilter"'>
-                AND(  restr_tag     LIKE concat('%', #{tag}, '%'))
-            </when>
             <otherwise>
-                AND(  restr_tag     LIKE concat('%', '', '%'))
+                AND(  restr_tag     LIKE concat('%', #{tag}, '%'))
             </otherwise>
         </choose>
     </sql>
