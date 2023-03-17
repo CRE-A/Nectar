@@ -16,39 +16,61 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
-  <link rel="stylesheet" href="<c:url value='/css/mypage.css'/>"/>
+  <link rel="stylesheet" href="<c:url value='/css/user.css'/>"/>
 
 </head>
 
 
 <body>
-<div id="menu">
-  <ul>
-    <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
-    <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
-    <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
-    <li>
+<section id="navbar">
+  <div class="logo">
+    <a href="<c:url value='/'/>">  <img src="<c:url value="/images/nectarLogo.png"/>" alt="" class="logo__img" /></a>
+  </div>
+  <div class="searchBar">
+    <form action="" class="search-form" method="get">
+      <button type="button" class="searchBtn" value="검색">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <input type="hidden" name="option" value="searchEngine" />
+      <input
+              type="text"
+              name="keyword"
+              class="search-input"
+              value="${ph.sc.keyword}"
+              placeholder="지역, 식당 또는 음식"
+      />
+      <button type="submit" class="search-button" value="검색">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+  </div>
+  <ul class="menu">
+    <li class="menu item">
+      <a href="<c:url value='/hotdeal/list'/>">HOTDEAL</a>
+    </li>
+    <li class="menu item">
+      <a href="<c:url value='/restr/list'/>">맛집리스트</a>
+    </li>
+    <li class="menu item">
       <a href="<c:url value='/mypage/main'/>">
         <c:choose>
         <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
       <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
       <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
-      <c:otherwise><i class="fa-regular fa-user"></i></a></c:otherwise>
+      <c:otherwise>LOGIN</i></a></c:otherwise>
       </c:choose>
     </li>
   </ul>
-</div>
+</section>
 
 <h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 
 
-<h1>MYPAGE FOR USER</h1>
-<h1>MYPAGE FOR USER</h1>
-<h1>MYPAGE FOR USER</h1>
 
+<%-- My Page--%>
 <section id="myPage">
   <div class="sideMenu">
-    <button class="userInfoUpdate">회원정보</button>
+    <button class="userInfoUpdate">My Page</button>
     <button class="userInfoUpdate">회원정보</button>
   </div>
   <div class="userInfo">
@@ -56,7 +78,11 @@
     <form action="" id="userInfoForm">
       <div class="userInfo__box">
         <div class="userInfo__profile">
-          <img src="./img/hani.jpg" alt="" class="user-profile" />
+          <img
+                  src="https://i.pinimg.com/564x/da/f8/77/daf8770e27db98bad904b66d48168a39.jpg"
+                  alt=""
+                  class="user-profile"
+          />
           <label
                   for="userPrflUpld"
                   class="updateUserProfile"
@@ -67,13 +93,17 @@
         </div>
         <div class="userInfo__items">
           <div class="userNameId">
-            <label for="">이름</label>
-            <input type="text" name="name" />
-            <label for="">아이디</label>
-            <input type="text" name="id" />
+            <div class="userNameId item">
+              <span class="details">이름</span>
+              <input type="text" name="id" required />
+            </div>
+            <div class="userNameId item">
+              <span class="details">휴대폰</span>
+              <input type="text" name="id" required />
+            </div>
           </div>
           <div class="userEmail">
-            <label for="">이메일</label>
+            <span for="">이메일</span>
             <input type="text" name="email" />
           </div>
         </div>

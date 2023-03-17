@@ -103,7 +103,7 @@ form>div>i{
     margin-left : 10px;
 }
 
-input[type="text"], input[type="password"]{
+.detail{
     width : 400px;
     height: 40px;
     border-radius : 5px;

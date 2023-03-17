@@ -25,29 +25,47 @@
 
 </head>
 <body>
-<div id="menu">
-  <ul>
-    <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
-    <li>
-      <form action="<c:url value="/restr/list"/>" class="search-form" method="get">
-        <input type="hidden" name="option" value="searchEngine"/>
-        <input type="text" name="keyword" class="search-input" value="${ph.sc.keyword}" placeholder="지역, 식당 또는 음식">
-        <input type="submit" class="search-button" value="검색">
-      </form>
+
+<section id="navbar">
+  <div class="logo">
+    <a href="<c:url value='/'/>">  <img src="<c:url value="/images/nectarLogo.png"/>" alt="" class="logo__img" /></a>
+  </div>
+  <div class="searchBar">
+    <form action="" class="search-form" method="get">
+      <button type="button" class="searchBtn" value="검색">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <input type="hidden" name="option" value="searchEngine" />
+      <input
+              type="text"
+              name="keyword"
+              class="search-input"
+              value="${ph.sc.keyword}"
+              placeholder="지역, 식당 또는 음식"
+      />
+      <button type="submit" class="search-button" value="검색">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+  </div>
+  <ul class="menu">
+    <li class="menu item">
+      <a href="<c:url value='/hotdeal/list'/>">HOTDEAL</a>
     </li>
-    <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
-    <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
-    <li>
+    <li class="menu item">
+      <a href="<c:url value='/restr/list'/>">맛집리스트</a>
+    </li>
+    <li class="menu item">
       <a href="<c:url value='/mypage/main'/>">
-      <c:choose>
+        <c:choose>
           <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
           <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
           <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
-          <c:otherwise><i class="fa-regular fa-user"></i></a></c:otherwise>
-      </c:choose>
+          <c:otherwise>LOGIN</i></a></c:otherwise>
+        </c:choose>
     </li>
   </ul>
-</div>
+</section>
 
 
 <!-- Main -->
@@ -77,8 +95,8 @@
                 </div>
               </div>
               <div class="restr__hotdeal">
-                  <c:if test="${restrDto.restr_hotdeal_NUM ne '-1'}">
-                    <i class="fa-solid fa-gift"></i>핫딜 진행중</c:if>
+                <c:if test="${restrDto.restr_hotdeal_NUM ne '-1'}">
+                  <i class="fa-solid fa-gift"></i>핫딜 진행중</c:if>
               </div>
             </div>
           </div>
@@ -94,6 +112,7 @@
 </section>
 
 
+<%--model 에서 list, ph(page, pageSize 포함) 넘겨줘야함--%>
 <div id="pageBar" style="text-align:center">
   <c:if test="${ph.showPrev}">
     <a href="<c:url value="/restr/search${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
@@ -105,6 +124,8 @@
     <a href="<c:url value="/restr/search${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
   </c:if>
 </div>
+
+
 
 
 
@@ -121,7 +142,7 @@
       const malls = [
 
         <c:forEach var="restrDto" items="${restrDto}">
-          {label: "${restrDto.restr_name}", name: "", lat: ${restrDto.restr_latitude}, lng: ${restrDto.restr_longitude}},
+        {label: "${restrDto.restr_name}", name: "", lat: ${restrDto.restr_latitude}, lng: ${restrDto.restr_longitude}},
         </c:forEach>
 
 

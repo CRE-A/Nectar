@@ -3,16 +3,12 @@ package project.nectar.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.nectar.domain.BrowserHistoryDto;
-import project.nectar.domain.PageHandler;
 import project.nectar.domain.RestrDto;
-import project.nectar.domain.SearchCondition;
 import project.nectar.repository.BrowserHistoryDao;
 import project.nectar.repository.RestrDao;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -33,17 +29,21 @@ public class HomeController {
             m.addAttribute("topSearchKeywordList", topSearchKeywordList);
             // 인기 검색어에 대한 data
 
-//            List<BrowserHistoryDto> browserHistoryList = browserHistoryDao.selectByJSESSIONID(bh);
-////            System.out.println("browserHistoryList = " + browserHistoryList);
-//            List<RestrDto> restrDtoList = null;
+            List<RestrDto> browserHis = null;
+            List<BrowserHistoryDto> browserHistoryList = browserHistoryDao.selectByJSESSIONID(bh);
+//////            System.out.println("browserHistoryList = " + browserHistoryList);
 //            for(BrowserHistoryDto browserHistoryDto: browserHistoryList){
-////                System.out.println("browserHistoryDto = " + browserHistoryDto);
-//                if(browserHistoryDto.getRestr_NUM()!=null){
-//                    restrDtoList.add(restrDao.select(browserHistoryDto.getRestr_NUM()));
+//////                System.out.println("browserHistoryDto = " + browserHistoryDto);
+//                if(browserHistoryDto.getRestr_NUM()==null){
+////                    return ;
 //                }
+//                restrDtoList.add(restrDao.select(browserHistoryDto.getRestr_NUM()));
+//
+////                }
+//                m.addAttribute("restrDtoList",restrDtoList);
 //            }
-//            m.addAttribute("restrDtoList",restrDtoList);
-//            // 최근에 본 레스토랑(게시물)에 대한 data
+////            m.addAttribute("restrDtoList",restrDtoList);
+////            // 최근에 본 레스토랑(게시물)에 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();
