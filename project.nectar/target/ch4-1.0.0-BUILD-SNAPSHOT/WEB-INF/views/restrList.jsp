@@ -28,14 +28,14 @@
 
 <section id="navbar">
   <div class="logo">
-    <a href="<c:url value='/'/>">  <img src="<c:url value="/images/nectarLogo.png"/>" alt="" class="logo__img" /></a>
+    <a href="<c:url value='/'/>"> <img src="<c:url value="/images/nectarLogo.png"/>" alt="" class="logo__img"/></a>
   </div>
   <div class="searchBar">
     <form action="" class="search-form" method="get">
       <button type="button" class="searchBtn" value="검색">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
-      <input type="hidden" name="option" value="searchEngine" />
+      <input type="hidden" name="option" value="searchEngine"/>
       <input
               type="text"
               name="keyword"
@@ -58,11 +58,12 @@
     <li class="menu item">
       <a href="<c:url value='/mypage/main'/>">
         <c:choose>
-          <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
-          <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
-          <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
-          <c:otherwise>LOGIN</i></a></c:otherwise>
-        </c:choose>
+        <c:when test="${not empty sessionScope.Admin_email}"><i
+              class="fa-solid fa-user-secret"></i></a></c:when>
+      <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
+      <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
+      <c:otherwise>LOGIN</i></a></c:otherwise>
+      </c:choose>
     </li>
   </ul>
 </section>
@@ -86,7 +87,8 @@
                         class="star">${restrDto.restr_star}</span>
                 </div>
                 <div class="restr__location">
-                    ${restrDto.restr_location} - <span class="foodType">${restrDto.restr_foodType}</span>
+                    ${restrDto.restr_location} - <span
+                        class="foodType">${restrDto.restr_foodType}</span>
                 </div>
                 <div class="restr__reaction">
                   <i class="fa-regular fa-eye"></i> <span>${restrDto.restr_viewCnt}</span>
@@ -104,15 +106,75 @@
           <c:if test="${not empty sessionScope.Admin_email}">
             <button class="delBtn" type="button">삭제</button>
           </c:if>
+
         </li>
       </form>
     </c:forEach>
 
   </ul>
+
+  <div id="sideMenu">
+    <h2 class="googleLocation">${restrDto.get(0).restr_location} 근처 맛집이에요 🏠</h2>
+    <div id="googleMap" style="width:400px;height:400px; float: right;top:initial; margin:20px;">
+    </div>
+    <h2 class="recentClick">최근 클릭한 맛집이에요 🥰</h2>
+
+    <div class="recentRestr">
+      <ul class="recentRestrList">
+        <c:choose>
+          <c:when test="${empty sessionScope.User_email}">
+            <c:forEach var="viewBrowserHistoryList" items="${viewBrowserHistoryList}">
+              <div class="recentRestr">
+                <li class="recentRestr__item">
+                  <div class="recentRestr__imgContainer">
+                    <img
+                            src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c3VzaGl8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
+                            alt=""
+                            class="recentRestr__img"
+                    />
+                  </div>
+                  <div class="recentRestr__info">
+                    <h3>${viewBrowserHistoryList.restr_name} <span>${viewBrowserHistoryList.restr_star}</span></h3>
+                    <p>  음식종류 | <span>${viewBrowserHistoryList.restr_foodType}</span></p>
+                    <p> 위치 | <span>${viewBrowserHistoryList.restr_location}</span></p>
+                    <p> 가격대 | <span>${viewBrowserHistoryList.restr_cost}</span></p>
+                  </div>
+                </li>
+              </div>
+            </c:forEach>
+          </c:when>
+          <c:otherwise>
+            <c:forEach var="viewBrowserHistoryList_User" items="${viewBrowserHistoryList_User}">
+              <div class="recentRestr">
+                <li class="recentRestr__item">
+                  <div class="recentRestr__imgContainer">
+                    <img
+                            src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c3VzaGl8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
+                            alt=""
+                            class="recentRestr__img"
+                    />
+                  </div>
+                  <div class="recentRestr__info">
+                    <h3>${viewBrowserHistoryList_User.restr_name} <span>${viewBrowserHistoryList_User.restr_star}</span></h3>
+                    <p>  음식종류 | <span>${viewBrowserHistoryList_User.restr_foodType}</span></p>
+                    <p> 위치 | <span>${viewBrowserHistoryList_User.restr_location}</span></p>
+                    <p> 가격대 | <span>${viewBrowserHistoryList_User.restr_cost}</span></p>
+                  </div>
+                </li>
+              </div>
+            </c:forEach>
+          </c:otherwise>
+
+        </c:choose>
+
+      </ul>
+    </div>
+  </div>
+
+
 </section>
 
 
-<%--model 에서 list, ph(page, pageSize 포함) 넘겨줘야함--%>
 <div id="pageBar" style="text-align:center">
   <c:if test="${ph.showPrev}">
     <a href="<c:url value="/restr/search${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
@@ -127,51 +189,52 @@
 
 
 
+<%--google MAP part--%>
+<SCRIPT>
+  window.initMap = function () {
+    const map = new google.maps.Map(document.getElementById('googleMap'), {
+      conter: {let: 37.513921, lng: 126.943701},
+      zoom: 10
+    });
+
+    const malls = [
+
+      <c:forEach var="restrDto" items="${restrDto}">
+      {
+        label: "${restrDto.restr_name}",
+        name: "",
+        lat: ${restrDto.restr_latitude},
+        lng: ${restrDto.restr_longitude}
+      },
+      </c:forEach>
 
 
-<div id="googleMap" style="width:350px;height:350px; float: right;top:initial; margin:20px;" >
+    ];
+    const bounds = new google.maps.LatLngBounds();
+    const infoWindow = new google.maps.InfoWindow();
 
-  <%--google MAP part--%>
-  <SCRIPT>
-    window.initMap = function () {
-      const map = new google.maps.Map(document.getElementById('googleMap'), {
-        conter: {let: 37.513921, lng: 126.943701},
-        zoom: 10
+    malls.forEach(({label, name, lat, lng}) => {
+      const marker = new google.maps.Marker({
+        position: {lat, lng},
+        label,
+        map
       });
+      bounds.extend(marker.position);
 
-      const malls = [
-
-        <c:forEach var="restrDto" items="${restrDto}">
-        {label: "${restrDto.restr_name}", name: "", lat: ${restrDto.restr_latitude}, lng: ${restrDto.restr_longitude}},
-        </c:forEach>
-
-
-      ];
-      const bounds = new google.maps.LatLngBounds();
-      const infoWindow = new google.maps.InfoWindow();
-
-      malls.forEach(({label, name, lat, lng}) => {
-        const marker = new google.maps.Marker({
-          position: {lat, lng},
-          label,
+      marker.addListener("click", () => {
+        map.PanTo(marker.position);
+        infowindow.setContent(name);
+        infowindow.open({
+          anchor: marker,
           map
         });
-        bounds.extend(marker.position);
-
-        marker.addListener("click", () => {
-          map.PanTo(marker.position);
-          infowindow.setContent(name);
-          infowindow.open({
-            anchor: marker,
-            map
-          });
-        });
       });
+    });
 
-      map.fitBounds(bounds)
-    };
+    map.fitBounds(bounds)
+  };
 
-  </script>
+</script>
 
 </div>
 
@@ -187,7 +250,7 @@
       console.log(restrNum);
       if (!confirm("정말로 삭제하시겠습니까?")) return;
       let form = $('#restrForm')
-      form.attr("action", "<c:url value='/restr/delete'/>?page=${ph.sc.page}&pageSize=${ph.sc.pageSize}&restr_NUM=" + restrNum );
+      form.attr("action", "<c:url value='/restr/delete'/>?page=${ph.sc.page}&pageSize=${ph.sc.pageSize}&restr_NUM=" + restrNum);
       form.attr("method", "post")
       form.submit();
     })
@@ -196,6 +259,7 @@
 
 <script>
   let msg = "${msg}";
-  if(msg=="DEL_ERR") alert("게시물 삭제에 실패하였습니다. 다시 시도해 주세요.");
+  if (msg == "DEL_ERR") alert("게시물 삭제에 실패하였습니다. 다시 시도해 주세요.");
 </script>
+
 

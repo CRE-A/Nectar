@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.nectar.domain.LikelistDto;
+import project.nectar.domain.RestrDto;
 
 import java.util.List;
 
@@ -26,6 +27,11 @@ public class LikelistDaoImpl implements LikelistDao {
     @Override
     public LikelistDto select(LikelistDto likelistDto) throws Exception{
         return session.selectOne(namespace+"select",likelistDto);
+    }
+
+    @Override
+    public List<RestrDto> selectMyLikeList(String user_email) throws Exception{
+        return session.selectList(namespace+"selectMyLikeList",user_email);
     }
 
     @Override

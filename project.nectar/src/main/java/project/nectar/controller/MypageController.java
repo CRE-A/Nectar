@@ -4,18 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.nectar.domain.*;
-import project.nectar.repository.BizAccountDao;
-import project.nectar.repository.LikelistDao;
-import project.nectar.repository.ReviewDao;
-import project.nectar.repository.UserDao;
+import project.nectar.repository.*;
 import project.nectar.service.HotdealService;
 import project.nectar.service.LikelistService;
 import project.nectar.service.ReviewService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,11 +25,14 @@ public class MypageController {
     @Autowired
     LikelistService likelistService;
     @Autowired
+    LikelistDao likelistDao;
+    @Autowired
     HotdealService hotdealService;
     @Autowired
     UserDao userDao;
     @Autowired
     BizAccountDao bizAccountDao;
+
 
 //    @Autowired
 //    Payment payment;
@@ -57,17 +59,19 @@ public class MypageController {
             m.addAttribute("reviewDto",reviewDto);
             // 사용자(User)가 작성한 모든 리뷰에 데한 data
 
-            List<LikelistDto> likelistDto = likelistService.getMyLikeList(User_email);
-            m.addAttribute("likelistDto", likelistDto);
-            // 사용자(User)가 '좋아요' 눌렀던 모든 like 에 대한 data
+            List<RestrDto> getMyLikeList = likelistDao.selectMyLikeList(User_email);
+            m.addAttribute("getMyLikeList",getMyLikeList);
+            // 사용자(User)가 like 눌렀던 모든 게시물(레스토랑)에 대한 data
+
+            UserDto userDto = userDao.select(User_email);
+            m.addAttribute("userDto",userDto);
+            // 사용자(User)에 대한 data
+
 
 //            List<Payment> payment = paymentService.getMyPayments(User_email);
 //            m.addAttribute("paymentService",paymentService);
             // 사용자(User)가 구매한 모든 구매내역에 대한 data
 
-            UserDto userDto = userDao.select(User_email);
-            m.addAttribute("userDto",userDto);
-            // 사용자(User)에 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,14 +91,13 @@ public class MypageController {
             m.addAttribute("hotdealDto",hotdealDto);
             // 사업자(BizAccount)가 진행한 모든 핫딜에 대한 data
 
-//            List<Payment> payment = paymentService.getMyPayments(User_email);
-//            m.addAttribute("paymentService",paymentService);
-            // 사업자(BizAccount)가 판매한 핫딜의 모든 거래내역(payment)에 대한 data
-
             BizAccountDto bizAccountDto = bizAccountDao.select(Biz_email);
             m.addAttribute("bizAccountDto",bizAccountDto);
             // 사업자(BizAccount)에 대한 data
 
+//            List<Payment> payment = paymentService.getMyPayments(User_email);
+//            m.addAttribute("paymentService",paymentService);
+            // 사업자(BizAccount)가 판매한 핫딜의 모든 거래내역(payment)에 대한 data
 
 
             // ...
@@ -111,10 +114,12 @@ public class MypageController {
 
     @GetMapping("/admin")
     public String AdminMyPage(HttpSession session, Model m){
-        String User_email = (String)session.getAttribute("Admin_email");
 
         try {
-            //  ...
+
+            UserDto userDto = userDao.select((String)session.getAttribute("User_email"));
+            m.addAttribute("userDto",userDto);
+            // 사용자(User)에 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,5 +128,7 @@ public class MypageController {
 
         return "mypage/admin";
     }
+
+//    @PostMapping("/admin/stateCode")
 
 }

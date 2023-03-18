@@ -166,13 +166,13 @@
     >
   </div>
   <div class="tag item">
-    <a href="<c:url value='/restr/search?option=tagFilter&tag='/>">
+    <a href="<c:url value='/restr/search?option=tagFilter&tag=예쁜'/>">
       <img
               src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
               alt=""
       />
       <div class="background">
-        <span class="text">#전체</span>
+        <span class="text">#크레아</span>
       </div>
     </a
     >

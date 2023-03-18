@@ -21,20 +21,14 @@ public class LikelistServiceImpl implements LikelistService {
         return likelistDao.select(likelistDto);
     } // 유저가 로그인 해서 게시물(restr.jsp)에 들어갔을 때, 좋아요 누른 가게인지 확인용
 
-    @Override
-    public List<LikelistDto> getMyLikeList(String user_email) throws Exception{
-        return likelistDao.selectAll(user_email);
-    } // MyPage 에서 selectAll 하면 내가 좋아요 누른 모든 가게가 나옴
-
-
 
     // removeMyLikeList() : 내가 좋아요 눌렀던 '모든' 가게의 like 를 취소
-    // 1. [likelist 테이블]에서 (user_email)에 해당하는 모든 레스토랑(restr_NUM) 을 select
-    // 2. 1에서 select 한 data를 list에 담고, 향상된 for문을 이용해 list를 하나씩 읽으면서 cancelLike()를 실행.
+    // 1. [likelist 테이블]에서 (user_email)에 해당하는 모든 레스토랑을 select
+    // 2. 위에서 select 한 data를 list에 담고, for문을 이용해 list를 하나씩 읽으면서 cancelLike()를 실행.
     // 3. cancelLike() : 내가 좋아요 눌렀던 가게의 like를 취소
     //     3.1. [likelist 테이블]에서 (restr_NUM)번, (user_email)에 해당하는 like를 delete
     //     3.2. [likelist 테이블]에서 (restr_NUM)번에 해당하는 like의 총 개수 count() 를 select
-    //     3.3. [restr 테이블]에 like의 총 개수 count() 를 insert
+    //     3.3. [restr 테이블]에 like의 총 개수를 insert
 
     @Override
     @Transactional(rollbackFor = Exception.class)

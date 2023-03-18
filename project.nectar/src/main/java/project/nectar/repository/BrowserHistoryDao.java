@@ -1,6 +1,7 @@
 package project.nectar.repository;
 
 import project.nectar.domain.BrowserHistoryDto;
+import project.nectar.domain.RestrDto;
 
 import java.util.List;
 
@@ -8,10 +9,10 @@ public interface BrowserHistoryDao {
     List<BrowserHistoryDto> select_TopSearchKeyword() throws Exception   // TOP 검색 키워드 5개 select
     ;
 
-    List<BrowserHistoryDto> selectByJSESSIONID(BrowserHistoryDto browserHistoryDto) throws Exception   // 비 유저가 최근에 본 (레스토랑)게시물 select
+    List<RestrDto> selectByJSESSIONID(BrowserHistoryDto browserHistoryDto) throws Exception   // 비 유저가 최근에 본 (레스토랑)게시물 select
     ;
 
-    List<BrowserHistoryDto> selectByUser_email(BrowserHistoryDto browserHistoryDto) throws Exception   // 유저가 최근에 본 (레스토랑)게시물 select
+    List<RestrDto> selectByUser_email(BrowserHistoryDto browserHistoryDto) throws Exception   // 유저가 최근에 본 (레스토랑)게시물 select
     ;
 
     int insertKeyword(BrowserHistoryDto browserHistoryDto) throws Exception   // 해당 keyword 로 검색했음을 저장

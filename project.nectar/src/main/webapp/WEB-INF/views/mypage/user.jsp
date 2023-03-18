@@ -114,5 +114,60 @@
     </form>
   </div>
 </section>
+
+<div id="MyReviewlist">
+  <h3>Use 가 작성한 모든 리뷰 </h3>
+  <c:forEach var="reviewDto" items="${reviewDto}">
+    ${reviewDto.review_NUM}
+    ${reviewDto.restr_NUM}
+    ${reviewDto.user_email}
+    ${reviewDto.user_name}
+    ${reviewDto.user_picture}
+    ${reviewDto.review_comment}
+    ${reviewDto.review_picture}
+    ${reviewDto.review_star}
+    ${reviewDto.review_regdate}
+    ${reviewDto.review_update}</br>
+    ----------------------------------</br>
+  </c:forEach>
+</div>
+
+<div id="MyLikelist">
+  <h3>User 가 좋아요 누른 모든 가게 </h3>
+  <c:forEach var="getMyLikeList" items="${getMyLikeList}">
+    ${getMyLikeList.restr_NUM} </br>
+    ${getMyLikeList.restr_name}</br>
+    ${getMyLikeList.restr_location}</br>
+    ${getMyLikeList.restr_phone}</br>
+    ${getMyLikeList.restr_time}</br>
+    ${getMyLikeList.restr_star}</br>
+    ${getMyLikeList.restr_foodType}</br>
+    ${getMyLikeList.restr_cost}</br>
+    ${getMyLikeList.restr_parking}</br>
+    ${getMyLikeList.restr_tag}</br>
+    ${getMyLikeList.restr_menu}</br>
+    ${getMyLikeList.restr_cost}</br>
+    ${getMyLikeList.restr_menu}</br>
+    ${getMyLikeList.restr_picture}</br>
+    ${getMyLikeList.restr_viewCnt}</br>
+    ${getMyLikeList.restr_reviewCnt}</br>
+    ${getMyLikeList.restr_likeCnt}</br>
+    ----------------------------------</br>
+  </c:forEach>
+</div>
+
+
+<div id="user_info">
+  <h3>User 에 대한 정보 </h3>
+    ${userDto.user_email}
+    ${userDto.user_pwd}
+    ${userDto.user_name}
+    ${userDto.user_phone}
+    ${userDto.user_picture}
+    ${userDto.user_regdate}
+    ${userDto.user_state_code}</br>
+</div>
+
+
 </body>
 </html>

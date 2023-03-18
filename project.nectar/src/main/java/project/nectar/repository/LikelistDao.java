@@ -1,6 +1,7 @@
 package project.nectar.repository;
 
 import project.nectar.domain.LikelistDto;
+import project.nectar.domain.RestrDto;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ public interface LikelistDao {
     List<LikelistDto> selectAll(String user_email) throws Exception;
 
     LikelistDto select(LikelistDto likelistDto) throws Exception;
+
+    List<RestrDto> selectMyLikeList(String user_email) throws Exception;
 
     int insert(LikelistDto likelistDto) throws Exception;
 

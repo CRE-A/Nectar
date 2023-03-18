@@ -16,25 +16,26 @@
 
 
 
-
-
-
-
-    <select id="selectByJSESSIONID" parameterType="BrowserHistoryDto" resultType="BrowserHistoryDto">
-        select *
-        from browserhistory
-        where JSESSIONID=#{JSESSIONID} AND restr_NUM is NOT NULL
-        order by browserHistory_regdate desc ;
-    </select>
-
-    <select id="selectByUser_email" parameterType="BrowserHistoryDto" resultType="BrowserHistoryDto">
-        select *
-        from browserhistory
-        where user_email=#{user_email} AND restr_NUM is NOT NULL
-        order by browserHistory_regdate desc ;
+    <select id="selectByJSESSIONID" parameterType="BrowserHistoryDto" resultType="RestrDto">
+        select distinct a.*
+        from (select r.*
+              from browserhistory b
+                       inner join restr r on b.restr_NUM = r.restr_NUM
+              where JSESSIONID = #{JSESSIONID} and b.restr_NUM is NOT NULL
+              order by b.browserHistory_regdate desc) a
+        limit 0,5;
     </select>
 
 
+    <select id="selectByUser_email" parameterType="BrowserHistoryDto" resultType="RestrDto">
+        select distinct a.*
+        from (select r.*
+              from browserhistory b
+                       inner join restr r on b.restr_NUM = r.restr_NUM
+              where user_email = #{user_email} and b.restr_NUM is NOT NULL
+              order by b.browserHistory_regdate desc) a
+        limit 0,5;
+    </select>
 
 
 
