@@ -15,21 +15,24 @@ li {
     list-style: none;
 }
 
-section#main {
-    margin-top: 20px;
-    width: 100%;
-}
-
 #hotdeal {
     /* background-color: red; */
     width: 100vw;
     height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 .hotdealList {
-    margin: 0 auto;
-    width: 600px;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     /* background-color: blue; */
+}
+
+.hotdealRestr {
+    margin-top: 100px;
 }
 
 .hotdealRestr_wrap {
