@@ -48,6 +48,13 @@
         where restr_NUM=#{restr_NUM}
     </select>
 
+
+    <select id="selectByBiz_email" parameterType="String" resultType="RestrDto">
+        SELECT * from restr
+        where bizAccount_email=#{bizAccount_email}
+    </select>
+
+
     <delete id="delete" parameterType="int">
         delete from restr
         where restr_NUM=#{restr_NUM}

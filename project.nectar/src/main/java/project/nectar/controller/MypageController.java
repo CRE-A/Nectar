@@ -32,6 +32,8 @@ public class MypageController {
     UserDao userDao;
     @Autowired
     BizAccountDao bizAccountDao;
+    @Autowired
+    RestrDao restrDao;
 
 
 //    @Autowired
@@ -70,7 +72,7 @@ public class MypageController {
 
 //            List<Payment> payment = paymentService.getMyPayments(User_email);
 //            m.addAttribute("paymentService",paymentService);
-            // 사용자(User)가 구매한 모든 구매내역에 대한 data
+            // 사용자(User)가 구매한 모든 구매내역에(핫딜) 대한 data
 
 
         } catch (Exception e) {
@@ -87,6 +89,10 @@ public class MypageController {
         String Biz_email = (String)session.getAttribute("Biz_email");
 
         try {
+            List<RestrDto> restrDto = restrDao.selectByBiz_email(Biz_email);
+            m.addAttribute("restrDto",restrDto);
+            // 사업자(BizAccount)가 운영중인 모든 레스토랑에 대한 data
+
             List<HotdealDto> hotdealDto = hotdealService.selectMyHotdeals(Biz_email);
             m.addAttribute("hotdealDto",hotdealDto);
             // 사업자(BizAccount)가 진행한 모든 핫딜에 대한 data
@@ -100,6 +106,8 @@ public class MypageController {
             // 사업자(BizAccount)가 판매한 핫딜의 모든 거래내역(payment)에 대한 data
 
 
+            //BIZ 는 특정 양식(폼)에 레스토랑을 작성해서 올리면, 관리자가 '심사' 후 등록 또는 반려한다.
+
             // ...
 
         } catch (Exception e) {
@@ -109,7 +117,6 @@ public class MypageController {
 
         return "mypage/biz";
     }
-    // 핫딜 목록, 본인 가게, (핫딜 판매 목록 - payment)
 
 
     @GetMapping("/admin")
@@ -129,6 +136,9 @@ public class MypageController {
         return "mypage/admin";
     }
 
+
+
 //    @PostMapping("/admin/stateCode")
+    // post 방식으로 state code 0 -1 -2 로 변경
 
 }

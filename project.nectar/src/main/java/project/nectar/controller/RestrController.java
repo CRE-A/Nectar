@@ -59,18 +59,13 @@ public class RestrController {
 
             List<RestrDto> viewBrowserHistoryList = browserHistoryDao.selectByJSESSIONID(bh);
             m.addAttribute("viewBrowserHistoryList",viewBrowserHistoryList);
-            // 로그인 안한 이용자가, 최근에 본 게시물(레스토랑) 에 대한 data
-
-            List<RestrDto> viewBrowserHistoryList_User = browserHistoryDao.selectByUser_email(bh);
-            m.addAttribute("viewBrowserHistoryList_User",viewBrowserHistoryList_User);
-            // 로그인 한 User 가, 최근에 본 게시물(레스토랑) 에 대한 data
+            //최근에 본 게시물(레스토랑) 에 대한 data
 
 
         } catch (Exception e) {
             e.printStackTrace();
             return "errorPage/searchERR";
-//          SQL ERROR. 입력값이 없으면 가져오질 못함.
-//          나중에 에러 컨트롤러 만들 예정
+
         }
 
         return "restrList";

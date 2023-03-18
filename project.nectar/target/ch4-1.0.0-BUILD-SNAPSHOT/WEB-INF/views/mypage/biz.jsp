@@ -85,5 +85,75 @@
     </form>
   </div>
 </section>
+
+
+<div id="MyRestrantlist">
+  <h3>BIZ가 운영중인 레스토랑 </h3>
+  <c:forEach var="restrDto" items="${restrDto}">
+    ${restrDto.restr_NUM} </br>
+    ${restrDto.restr_name}</br>
+    ${restrDto.restr_location}</br>
+    ${restrDto.restr_phone}</br>
+    ${restrDto.restr_time}</br>
+    ${restrDto.restr_star}</br>
+    ${restrDto.restr_foodType}</br>
+    ${restrDto.restr_cost}</br>
+    ${restrDto.restr_parking}</br>
+    ${restrDto.restr_tag}</br>
+    ${restrDto.restr_menu}</br>
+    ${restrDto.restr_cost}</br>
+    ${restrDto.restr_menu}</br>
+    ${restrDto.restr_picture}</br>
+    ${restrDto.restr_viewCnt}</br>
+    ${restrDto.restr_reviewCnt}</br>
+    ${restrDto.restr_likeCnt}</br>
+    ----------------------------------</br>
+  </c:forEach>
+</div>
+
+<div id="MyhotdealList">
+  <h3>Biz 가 진행 한 핫딜 </h3>
+  <c:forEach var="hotdealDto" items="${hotdealDto}">
+    ${hotdealDto.hotdeal_NUM} </br>
+    ${hotdealDto.restr_NUM} </br>
+    ${hotdealDto.restr_category_loc} </br>
+    ${hotdealDto.restr_menu_NUM} </br>
+    ${hotdealDto.restr_menu_picture} </br>
+    ${hotdealDto.restr_menu_food} </br>
+    ${hotdealDto.restr_menu_price} </br>
+    ${hotdealDto.hotdeal_price} </br>
+    ${hotdealDto.hotdeal_discountRate} </br>
+    ${hotdealDto.hotdeal_desc} </br>
+    ${hotdealDto.hotdeal_useDate} </br>
+    ${hotdealDto.hotdeal_eventDuration} </br>
+    ${hotdealDto.hotdeal_regdate} </br>
+    ${hotdealDto.hotdeal_update} </br>
+    ${hotdealDto.hotdeal_salesVolume} </br>
+    ${hotdealDto.hotdeal_MaxSalesVolume} </br>
+    ${hotdealDto.bizAccount_email} </br>
+    ----------------------------------</br>
+  </c:forEach>
+</div>
+
+
+<br id="BIZ_info">
+  <h3>BIZ 에 대한 정보 </h3>
+  ${bizAccountDto.bizAccount_email}
+  ${bizAccountDto.bizAccount_pwd}
+  ${bizAccountDto.bizAccount_name}
+  ${bizAccountDto.bizAccount_phone}
+  ${bizAccountDto.bizAccount_picture}
+  ${bizAccountDto.bizAccount_regdate}
+  ${bizAccountDto.bizAccount_state_code} </br>
+</div>
+
+
+
+
+
+
+
+
+
 </body>
 </html>

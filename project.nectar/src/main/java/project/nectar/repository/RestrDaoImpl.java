@@ -30,6 +30,15 @@ public class RestrDaoImpl implements RestrDao {
         return session.selectOne(namespace+"select", restr_NUM);
     }
 
+
+
+    @Override
+    public List<RestrDto> selectByBiz_email(String bizAccount_email) throws Exception{
+        return session.selectList(namespace+"selectByBiz_email", bizAccount_email);
+    }
+
+
+
     @Override
     public int delete(Integer restr_NUM) throws Exception{
         return session.delete(namespace+"delete", restr_NUM);

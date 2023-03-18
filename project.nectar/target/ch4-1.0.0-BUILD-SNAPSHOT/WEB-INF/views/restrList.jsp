@@ -121,52 +121,26 @@
 
     <div class="recentRestr">
       <ul class="recentRestrList">
-        <c:choose>
-          <c:when test="${empty sessionScope.User_email}">
-            <c:forEach var="viewBrowserHistoryList" items="${viewBrowserHistoryList}">
-              <div class="recentRestr">
-                <li class="recentRestr__item">
-                  <div class="recentRestr__imgContainer">
-                    <img
-                            src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c3VzaGl8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
-                            alt=""
-                            class="recentRestr__img"
-                    />
-                  </div>
-                  <div class="recentRestr__info">
-                    <h3>${viewBrowserHistoryList.restr_name} <span>${viewBrowserHistoryList.restr_star}</span></h3>
-                    <p>  음식종류 | <span>${viewBrowserHistoryList.restr_foodType}</span></p>
-                    <p> 위치 | <span>${viewBrowserHistoryList.restr_location}</span></p>
-                    <p> 가격대 | <span>${viewBrowserHistoryList.restr_cost}</span></p>
-                  </div>
-                </li>
+        <c:forEach var="viewBrowserHistoryList" items="${viewBrowserHistoryList}">
+          <div class="recentRestr">
+            <li class="recentRestr__item">
+              <div class="recentRestr__imgContainer">
+                <img
+                        src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c3VzaGl8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
+                        alt=""
+                        class="recentRestr__img"
+                />
               </div>
-            </c:forEach>
-          </c:when>
-          <c:otherwise>
-            <c:forEach var="viewBrowserHistoryList_User" items="${viewBrowserHistoryList_User}">
-              <div class="recentRestr">
-                <li class="recentRestr__item">
-                  <div class="recentRestr__imgContainer">
-                    <img
-                            src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c3VzaGl8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
-                            alt=""
-                            class="recentRestr__img"
-                    />
-                  </div>
-                  <div class="recentRestr__info">
-                    <h3>${viewBrowserHistoryList_User.restr_name} <span>${viewBrowserHistoryList_User.restr_star}</span></h3>
-                    <p>  음식종류 | <span>${viewBrowserHistoryList_User.restr_foodType}</span></p>
-                    <p> 위치 | <span>${viewBrowserHistoryList_User.restr_location}</span></p>
-                    <p> 가격대 | <span>${viewBrowserHistoryList_User.restr_cost}</span></p>
-                  </div>
-                </li>
+              <div class="recentRestr__info">
+                <h3>${viewBrowserHistoryList.restr_name} <span>${viewBrowserHistoryList.restr_star}</span>
+                </h3>
+                <p> 음식종류 | <span>${viewBrowserHistoryList.restr_foodType}</span></p>
+                <p> 위치 | <span>${viewBrowserHistoryList.restr_location}</span></p>
+                <p> 가격대 | <span>${viewBrowserHistoryList.restr_cost}</span></p>
               </div>
-            </c:forEach>
-          </c:otherwise>
-
-        </c:choose>
-
+            </li>
+          </div>
+        </c:forEach>
       </ul>
     </div>
   </div>
