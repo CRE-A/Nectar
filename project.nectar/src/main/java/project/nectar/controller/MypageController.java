@@ -15,6 +15,7 @@ import project.nectar.service.ReviewService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -57,7 +58,7 @@ public class MypageController {
         String User_email = (String)session.getAttribute("User_email");
 
         try {
-            List<ReviewDto> reviewDto = reviewService.getMyReviews(User_email);
+            List<ReviewPlusDto> reviewDto = reviewService.getMyReviews(User_email);
             m.addAttribute("reviewDto",reviewDto);
             // 사용자(User)가 작성한 모든 리뷰에 데한 data
 
@@ -108,7 +109,7 @@ public class MypageController {
 
             //BIZ 는 특정 양식(폼)에 레스토랑을 작성해서 올리면, 관리자가 '심사' 후 등록 또는 반려한다.
 
-            // ...
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,13 +121,24 @@ public class MypageController {
 
 
     @GetMapping("/admin")
-    public String AdminMyPage(HttpSession session, Model m){
+    public String AdminMyPage(Model m, String option, String keyword){
+        HashMap map = new HashMap();
+        map.put("option",option);
+        map.put("keyword",keyword);
 
         try {
-
-            UserDto userDto = userDao.select((String)session.getAttribute("User_email"));
-            m.addAttribute("userDto",userDto);
+            List<UserDto> SearchResultUserList = userDao.SearchResultUser(map);
+            m.addAttribute("SearchResultUserList",SearchResultUserList);
             // 사용자(User)에 대한 data
+
+//            List<BizAccountDto> SearchResultBizAccountList = bizAccountDao.SearchResultBizAccount(map);
+//            m.addAttribute("SearchResultBizAccountList",SearchResultBizAccountList);
+//            // 사업자(bizAccountDao)에 대한 data
+
+
+
+            // 사업자가 등록한 레스토랑 심사.(폼을 읽는것)
+
 
         } catch (Exception e) {
             e.printStackTrace();

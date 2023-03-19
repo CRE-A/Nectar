@@ -3,8 +3,10 @@ package project.nectar.repository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import project.nectar.domain.RestrDto;
 import project.nectar.domain.UserDto;
+
+import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -12,14 +14,20 @@ public class UserDaoImpl implements UserDao {
     private SqlSession session;
     private static String namespace = "project.nectar.repository.UserMapper.";
 
+
     @Override
-    public int insert(UserDto userDto) {
-        return session.insert(namespace + "insert", userDto);
+    public List<UserDto> SearchResultUser(HashMap map) {
+        return session.selectList(namespace + "select", map);
     }
 
     @Override
     public UserDto select(String user_email) {
         return session.selectOne(namespace + "select", user_email);
+    }
+
+    @Override
+    public int insert(UserDto userDto) {
+        return session.insert(namespace + "insert", userDto);
     }
 
     @Override

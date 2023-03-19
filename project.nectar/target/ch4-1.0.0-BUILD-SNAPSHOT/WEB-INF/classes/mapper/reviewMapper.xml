@@ -22,11 +22,11 @@
         WHERE review_NUM = #{review_NUM}
     </select>
 
-    <select id="selectMyReviews" parameterType="String" resultType="ReviewDto">
-        SELECT *
-        FROM review
-        WHERE user_email = #{user_email}
-        ORDER BY review_regdate DESC, review_NUM DESC
+    <select id="selectMyReviews" parameterType="String" resultType="ReviewPlusDto">
+        SELECT r.*, restr.restr_name, restr.restr_location, restr.restr_phone, restr.restr_picture
+        FROM review r inner join restr restr on r.restr_NUM = restr.restr_num
+        WHERE r.user_email = #{user_email}
+        ORDER BY r.review_regdate DESC, r.review_NUM DESC
     </select>
 
     <insert id="insert" parameterType="ReviewDto">

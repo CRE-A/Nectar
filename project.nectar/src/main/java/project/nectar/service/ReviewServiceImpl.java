@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.nectar.domain.ReviewDto;
+import project.nectar.domain.ReviewPlusDto;
 import project.nectar.repository.RestrDao;
 import project.nectar.repository.ReviewDao;
 
@@ -33,7 +34,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewDto> getMyReviews(String user_email) throws Exception{
+    public List<ReviewPlusDto> getMyReviews(String user_email) throws Exception{
          return reviewDao.selectMyReviews(user_email);
     }
 

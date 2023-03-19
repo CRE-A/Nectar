@@ -1,6 +1,7 @@
 package project.nectar.repository;
 
 import project.nectar.domain.ReviewDto;
+import project.nectar.domain.ReviewPlusDto;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface ReviewDao {
 
     ReviewDto select(Integer review_NUM) throws Exception;
 
-    List<ReviewDto> selectMyReviews(String user_email)throws Exception;
+    List<ReviewPlusDto> selectMyReviews(String user_email)throws Exception;
 
     int insert(ReviewDto reviewDto) throws Exception;
 

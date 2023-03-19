@@ -100,7 +100,8 @@ li.restr {
     /*background-color: green;*/
 }
 
-h2.recentClick {
+h2.recentClick,
+h2.location{
     width: 100%;
     margin-top: 30px;
     text-align: left;
@@ -108,7 +109,8 @@ h2.recentClick {
     /* background-color: pink; */
 }
 
-h2.recentClick::before {
+h2.recentClick::before,
+h2.location::before{
     content: "✨";
     position: relative;
     top: -20px;

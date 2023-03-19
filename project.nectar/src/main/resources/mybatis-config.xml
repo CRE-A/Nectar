@@ -11,6 +11,7 @@
         <typeAlias alias="RestrDto" type="project.nectar.domain.RestrDto"/>
         <typeAlias alias="RestrMenuDto" type="project.nectar.domain.RestrMenuDto"/>
         <typeAlias alias="ReviewDto" type="project.nectar.domain.ReviewDto"/>
+        <typeAlias alias="ReviewPlusDto" type="project.nectar.domain.ReviewPlusDto"/>
         <typeAlias alias="LikelistDto" type="project.nectar.domain.LikelistDto"/>
         <typeAlias alias="HotdealDto" type="project.nectar.domain.HotdealDto"/>
 <!--        <typeAlias alias="PaymentDto" type="project.nectar.domain.PaymentDto"/>-->

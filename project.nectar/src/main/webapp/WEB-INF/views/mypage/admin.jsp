@@ -46,43 +46,108 @@
 <h1>MYPAGE FOR ADMINISTRATOR</h1>
 <h1>MYPAGE FOR ADMINISTRATOR</h1>
 
+
+
+
+
+
+
+
+
+
+
 <section id="myPage">
   <div class="sideMenu">
-    <button class="userInfoUpdate">회원정보</button>
-    <button class="userInfoUpdate">회원정보</button>
+    <button class="userInfoUpdate"> 회원 관리</button>
+    <button class="userInfoUpdate">사업 관리</button>
   </div>
   <div class="userInfo">
-    <h1>회원정보수정</h1>
-    <form action="" id="userInfoForm">
-      <div class="userInfo__box">
-        <div class="userInfo__profile">
-          <img src="./img/hani.jpg" alt="" class="user-profile" />
-          <label
-                  for="userPrflUpld"
-                  class="updateUserProfile"
-                  name="user_picture"
-          >사진 업데이트</label
-          >
-          <input type="file" class="userPrflUpld" name="user_picture" />
-        </div>
-        <div class="userInfo__items">
-          <div class="userNameId">
-            <label for="">이름</label>
-            <input type="text" name="name" />
-            <label for="">아이디</label>
-            <input type="text" name="id" />
-          </div>
-          <div class="userEmail">
-            <label for="">이메일</label>
-            <input type="text" name="email" />
-          </div>
-        </div>
-      </div>
-      <div class="userInfo__btnWrap">
-        <button class="modifyBtn">변경사항저장</button>
-      </div>
-    </form>
-  </div>
+    <h1>회원 리스트</h1>
+    <div class="userList">
+      <table >
+        <thead>
+        <tr>
+          <th>no</th>
+          <th class="name">이름</th>
+          <th>이메일</th>
+          <th>휴대폰</th>
+          <th>회원등급</th>
+          <th>상태변경</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <c:forEach var="userDto" items="${list}">
+          <form action="/" method="post" id="adminForm">
+            <tr>
+              <td><input type="hidden" name="user_NUM" value="31">31</td>
+              <td><input type="hidden" name="user_name" value="홍혜빈">홍혜빈</td>
+              <td><input type="hidden" name="user_email" value="">hongbin12345@naver.com</td>
+              <td><input type="hidden" name="user_ph" value="">01080218815</td>
+              <td>
+                <select name="user_state_code">
+                  <option value="0">일반회원</option>
+                  <option value="-1">리뷰작성금지</option>
+                  <option value="-2">핫딜결제금지</option>
+                  <option value="-3">계정삭제</option>
+                </select>
+              </td>
+              <td>
+                <input class="userBtn" type="submit" value="회원등급변경">
+              </td>
+            </tr>
+          </form>
+
+        </c:forEach>
+
+        </tbody>
+      </table>
+    </div>
 </section>
+
+
+<form action=""></form>
+
+<select name="" id="">
+  <option value="">전체</option>
+  <option value="">이메일</option>
+  <option value="">이름</option>
+  <option value="">상태코드</option>
+</select>
+
+<input type="text" >
+<button>검색</button>
+
+
+
+
+
+<%--<div id="user_info">--%>
+<%--  <h3>User 에 대한 정보 </h3>--%>
+<%--  <c:forEach var="SearchResultUserList" items="SearchResultUserList">--%>
+<%--    ${SearchResultUserList.user_email}--%>
+<%--    ${SearchResultUserList.user_pwd}--%>
+<%--    ${SearchResultUserList.user_name}--%>
+<%--    ${SearchResultUserList.user_phone}--%>
+<%--    ${SearchResultUserList.user_picture}--%>
+<%--    ${SearchResultUserList.user_regdate}--%>
+<%--    ${SearchResultUserList.user_state_code}</br>--%>
+<%--  </c:forEach>--%>
+<%--</div>--%>
+
+
+<%--<div id="Biz_info">--%>
+<%--  <h3>User 에 대한 정보 </h3>--%>
+<%--  <c:forEach var="SearchResultUserList" items="SearchResultUserList"--%>
+<%--  ${SearchResultBizAccountList.user_email}--%>
+<%--  ${SearchResultBizAccountList.user_pwd}--%>
+<%--  ${SearchResultBizAccountList.user_name}--%>
+<%--  ${SearchResultBizAccountList.user_phone}--%>
+<%--  ${SearchResultBizAccountList.user_picture}--%>
+<%--  ${SearchResultBizAccountList.user_regdate}--%>
+<%--  ${SearchResultBizAccountList.user_state_code}</br>--%>
+<%--</div>--%>
+
+
 </body>
 </html>

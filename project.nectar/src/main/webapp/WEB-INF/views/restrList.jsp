@@ -114,7 +114,14 @@
   </ul>
 
   <div id="sideMenu">
-    <h2 class="googleLocation">${restrDto.get(0).restr_location} 근처 맛집이에요 🏠</h2>
+    <h2 class="googleLocation">
+      <c:choose>
+        <c:when test="${not empty ph.sc.keyword}">#${ph.sc.keyword} 로 찾아본 맛집이에요 🏠</h2></c:when>
+        <c:when test="${not empty ph.sc.foodType}">#${ph.sc.foodType} 으로 찾아 본 맛집이에요 🏠</h2></c:when>
+        <c:when test="${not empty ph.sc.cost}">#${ph.sc.cost} 로 찾아 본 맛집이에요 🏠</h2></c:when>
+        <c:when test="${not empty ph.sc.location}">#${ph.sc.location} 으로 찾아 본 맛집이에요 🏠</h2></c:when>
+        <c:otherwise>#${ph.sc.tag} 로 찾아 본 맛집이에요 🏠</h2></c:otherwise>
+      </c:choose>
     <div id="googleMap" style="width:400px;height:400px; float: right;top:initial; margin:20px;">
     </div>
     <h2 class="recentClick">최근 클릭한 맛집이에요 🥰</h2>

@@ -21,7 +21,7 @@
         from (select r.*
               from browserhistory b
                        inner join restr r on b.restr_NUM = r.restr_NUM
-              where JSESSIONID = #{JSESSIONID} and b.restr_NUM is NOT NULL
+              where b.JSESSIONID = #{JSESSIONID} and b.restr_NUM is NOT NULL
               order by b.browserHistory_regdate desc) a
         limit 0,5;
     </select>
@@ -32,7 +32,7 @@
         from (select r.*
               from browserhistory b
                        inner join restr r on b.restr_NUM = r.restr_NUM
-              where user_email = #{user_email} and b.restr_NUM is NOT NULL
+              where b.user_email = #{user_email} and b.restr_NUM is NOT NULL
               order by b.browserHistory_regdate desc) a
         limit 0,5;
     </select>

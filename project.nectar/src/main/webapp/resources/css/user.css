@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;900&display=swap");
+
 * {
     margin: 0;
     box-sizing: border-box;
@@ -23,7 +25,8 @@ section#myPage {
     /* background-color: blue; */
 }
 
-button.userInfoUpdate {
+button.sideMenu__mypage,
+button.sideMenu__user {
     width: 80%;
     height: 50px;
     /* background-color: green; */
@@ -34,7 +37,8 @@ button.userInfoUpdate {
     border: 0;
 }
 
-button.userInfoUpdate::before {
+button.sideMenu__mypage::before,
+button.sideMenu__user::before {
     content: "";
     border-left: 3px solid orange;
     padding: 10px;
@@ -54,6 +58,7 @@ button.userInfoUpdate::before {
 }
 
 #userInfoForm {
+    margin-top: 20px;
     padding: 30px 0 0 0;
     -webkit-box-shadow: 0px 2px 12px 0px rgba(110, 110, 110, 0.38);
     -moz-box-shadow: 0px 2px 12px 0px rgba(110, 110, 110, 0.38);
@@ -150,4 +155,20 @@ button.userInfoUpdate::before {
     right: 37px;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.tab.log.active {
+    display: block;
+}
+
+.tab.log {
+    display: none;
+}
+
+.tab.user {
+    display: none;
+}
+
+.tab.user.active {
+    display: block;
 }

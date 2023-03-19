@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.nectar.domain.ReviewDto;
+import project.nectar.domain.ReviewPlusDto;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class ReviewDaoImpl implements ReviewDao {
     }
 
     @Override
-    public List<ReviewDto> selectMyReviews(String user_email)throws Exception{
+    public List<ReviewPlusDto> selectMyReviews(String user_email)throws Exception{
         return session.selectList(namespace+"selectMyReviews",user_email);
     }
 
