@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <c:set var="loginUserEmail" value="${sessionScope.User_email}"/>
 
 
@@ -67,11 +68,14 @@
 
 <!-- Title -->
 
+
 <section id="restr-detail">
     <div class="title-box">
         <h3 class="title">
             ${restrDto.restr_name}
-            <strong class="star">${restrDto.restr_star}</strong>
+            <strong class="star">
+                <fmt:formatNumber value="${restrDto.restr_star}" pattern=".0"></fmt:formatNumber>
+            </strong>
         </h3>
         <ul class="reaction">
             <li class="reaction likeCnt">
@@ -358,7 +362,7 @@
                 <div class="review__content">
                     <div class="review__content__wrap">
           <span class="review__regdate">
-            ${reviewDto.review_update}
+              <fmt:formatDate value="${reviewDto.review_update}" pattern="yyyy-MM-dd" />
 <%--            2023. 03. 06--%>
           </span>
 

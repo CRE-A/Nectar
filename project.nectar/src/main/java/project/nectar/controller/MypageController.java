@@ -131,9 +131,9 @@ public class MypageController {
             m.addAttribute("SearchResultUserList",SearchResultUserList);
             // 사용자(User)에 대한 data
 
-//            List<BizAccountDto> SearchResultBizAccountList = bizAccountDao.SearchResultBizAccount(map);
-//            m.addAttribute("SearchResultBizAccountList",SearchResultBizAccountList);
-//            // 사업자(bizAccountDao)에 대한 data
+            List<BizAccountDto> SearchResultBizAccountList = bizAccountDao.SearchResultBizAccount(map);
+            m.addAttribute("SearchResultBizAccountList",SearchResultBizAccountList);
+            // 사업자(bizAccountDao)에 대한 data
 
 
 
@@ -147,6 +147,34 @@ public class MypageController {
 
         return "mypage/admin";
     }
+
+
+//    @PostMapping("/admin/account")
+//    public String ManageAccount(Model m, String option, String keyword){
+//        HashMap map = new HashMap();
+//        map.put("option",option);
+//        try {
+//            List<UserDto> SearchResultUserList = userDao.SearchResultUser(map);
+//            m.addAttribute("SearchResultUserList",SearchResultUserList);
+//            // 사용자(User)에 대한 data
+
+//            List<BizAccountDto> SearchResultBizAccountList = bizAccountDao.SearchResultBizAccount(map);
+//            m.addAttribute("SearchResultBizAccountList",SearchResultBizAccountList);
+//            // 사업자(bizAccountDao)에 대한 data
+
+
+
+            // 사업자가 등록한 레스토랑 심사.(폼을 읽는것)
+
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return "redirect:/";
+//        }
+//
+//        return "mypage/admin";
+//    }
+//
 
 
 

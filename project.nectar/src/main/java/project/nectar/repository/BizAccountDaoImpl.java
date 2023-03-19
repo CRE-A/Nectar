@@ -5,20 +5,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.nectar.domain.BizAccountDto;
 
+import java.util.HashMap;
+import java.util.List;
+
 @Repository
 public class BizAccountDaoImpl implements BizAccountDao {
     @Autowired
     private SqlSession session;
     private static String namespace = "project.nectar.repository.BizAccountMapper.";
 
+
+
     @Override
-    public int insert(BizAccountDto bizAccountDto) {
-        return session.insert(namespace + "insert", bizAccountDto);
+    public List<BizAccountDto> SearchResultBizAccount(HashMap map) {
+        return session.selectList(namespace + "SearchResultBizAccount", map);
     }
 
     @Override
     public BizAccountDto select(String bizAccount_email) {
         return session.selectOne(namespace + "select", bizAccount_email);
+    }
+
+    @Override
+    public int insert(BizAccountDto bizAccountDto) {
+        return session.insert(namespace + "insert", bizAccountDto);
     }
 
     @Override

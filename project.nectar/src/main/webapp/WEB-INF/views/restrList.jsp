@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -83,8 +84,10 @@
             <div class="restr__head">
               <div class="restr__info">
                 <div class="restr__title">
-                  <a href="">${restrDto.restr_name}</a> <span
-                        class="star">${restrDto.restr_star}</span>
+                  <a href="">${restrDto.restr_name}</a>
+                  <span class="star">
+                    <fmt:formatNumber value="${restrDto.restr_star}" pattern=".0"></fmt:formatNumber>
+                  </span>
                 </div>
                 <div class="restr__location">
                     ${restrDto.restr_location} - <span
@@ -139,7 +142,8 @@
                 />
               </div>
               <div class="recentRestr__info">
-                <h3>${viewBrowserHistoryList.restr_name} <span>${viewBrowserHistoryList.restr_star}</span>
+                <h3>${viewBrowserHistoryList.restr_name}
+                  <span> <fmt:formatNumber value="${viewBrowserHistoryList.restr_star}" pattern=".0"></fmt:formatNumber></span>
                 </h3>
                 <p> 음식종류 | <span>${viewBrowserHistoryList.restr_foodType}</span></p>
                 <p> 위치 | <span>${viewBrowserHistoryList.restr_location}</span></p>

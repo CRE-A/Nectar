@@ -122,31 +122,34 @@
 
 
 
-<%--<div id="user_info">--%>
-<%--  <h3>User 에 대한 정보 </h3>--%>
-<%--  <c:forEach var="SearchResultUserList" items="SearchResultUserList">--%>
-<%--    ${SearchResultUserList.user_email}--%>
-<%--    ${SearchResultUserList.user_pwd}--%>
-<%--    ${SearchResultUserList.user_name}--%>
-<%--    ${SearchResultUserList.user_phone}--%>
-<%--    ${SearchResultUserList.user_picture}--%>
-<%--    ${SearchResultUserList.user_regdate}--%>
-<%--    ${SearchResultUserList.user_state_code}</br>--%>
-<%--  </c:forEach>--%>
-<%--</div>--%>
+<%--select tag 에서 선택하면, option 과 keyword 를 parameter로 넘어가서 일치하는 user정보를 담아준다. --%>
+<div id="user_info">
+  <h3>User 에 대한 정보 </h3>
+  <c:forEach var="SearchResultUserList" items="${SearchResultUserList}">
+    ${SearchResultUserList.user_email}
+    ${SearchResultUserList.user_pwd}
+    ${SearchResultUserList.user_name}
+    ${SearchResultUserList.user_phone}
+    ${SearchResultUserList.user_picture}
+    ${SearchResultUserList.user_regdate}
+    ${SearchResultUserList.user_state_code}</br>
+  </c:forEach>
+</div>
 
 
-<%--<div id="Biz_info">--%>
-<%--  <h3>User 에 대한 정보 </h3>--%>
-<%--  <c:forEach var="SearchResultUserList" items="SearchResultUserList"--%>
-<%--  ${SearchResultBizAccountList.user_email}--%>
-<%--  ${SearchResultBizAccountList.user_pwd}--%>
-<%--  ${SearchResultBizAccountList.user_name}--%>
-<%--  ${SearchResultBizAccountList.user_phone}--%>
-<%--  ${SearchResultBizAccountList.user_picture}--%>
-<%--  ${SearchResultBizAccountList.user_regdate}--%>
-<%--  ${SearchResultBizAccountList.user_state_code}</br>--%>
-<%--</div>--%>
+<div id="Biz_info">
+  <h3>BizAccount 에 대한 정보 </h3>
+  <c:forEach var="SearchResultBizAccountList" items="${SearchResultBizAccountList}">
+    ${SearchResultBizAccountList.bizAccount_email}
+    ${SearchResultBizAccountList.bizAccount_pwd}
+    ${SearchResultBizAccountList.bizAccount_name}
+    ${SearchResultBizAccountList.bizAccount_phone}
+    ${SearchResultBizAccountList.bizAccount_picture}
+    ${SearchResultBizAccountList.bizAccount_regdate}
+    ${SearchResultBizAccountList.bizAccount_state_code}</br>
+    ${SearchResultBizAccountList.bizAccount_regNum}</br>
+  </c:forEach>
+</div>
 
 
 </body>

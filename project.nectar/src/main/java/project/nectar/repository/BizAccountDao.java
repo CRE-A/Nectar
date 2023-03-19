@@ -2,8 +2,13 @@ package project.nectar.repository;
 
 import project.nectar.domain.BizAccountDto;
 
+import java.util.HashMap;
+import java.util.List;
+
 public interface BizAccountDao {
     int insert(BizAccountDto bizAccountDto);
+
+    List<BizAccountDto> SearchResultBizAccount(HashMap map);
 
     BizAccountDto select(String bizAccount_email);
 
