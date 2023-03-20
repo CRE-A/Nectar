@@ -59,12 +59,12 @@ public class HotdealDaoImplTest {
 //        }
 
         for(Integer i=1; i<=3; i++){
-            HotdealDto hotdealDto1 = new HotdealDto(3*i,"맛집"+3*i,"신사/압구정",15*i-2,"pic_url", "제육덮밥", 6500, 4550, 30,"시그니쳐 메뉴, 집밥 감성 제육", "2023-03-15 ~ 2023-04-01","90일", 0, 100,"Biz_"+3*i+"@google.com");
+            HotdealDto hotdealDto1 = new HotdealDto(3*i,"맛집"+3*i,"신사/압구정",15*i-2, "제육덮밥", 6500, 4550, 30,"시그니쳐 메뉴, 집밥 감성 제육", "pic_url","2023-03-15 ~ 2023-04-01","90일", 0, 100,"Biz_"+3*i+"@google.com");
             hotdealDao.insert(hotdealDto1);
         }
 
         for(Integer i=4; i<=6; i++){
-            HotdealDto hotdealDto1 = new HotdealDto(3*i,"맛집"+3*i,"신사/압구정",15*i-4,"pic_url", "김치찌게", 7000, 5250, 25,"어머니 손맛 그대로 얼큰 칼칼하게", "2023-03-24 ~ 2023-04-10","90일", 0, 80,"Biz_"+3*i+"@google.com");
+            HotdealDto hotdealDto1 = new HotdealDto(3*i,"맛집"+3*i,"신사/압구정",15*i-4, "김치찌게", 7000, 5250, 25,"어머니 손맛 그대로 얼큰 칼칼하게", "pic_url","2023-03-24 ~ 2023-04-10","90일", 0, 80,"Biz_"+3*i+"@google.com");
             hotdealDao.insert(hotdealDto1);
 
         }

@@ -9,12 +9,12 @@ public class HotdealDto {
     private String restr_name;
     private String restr_category_loc;
     private Integer restr_menu_NUM;
-    private String restr_menu_picture;
     private String  restr_menu_food;
     private Integer restr_menu_price;
     private Integer hotdeal_price;
     private Integer hotdeal_discountRate;
     private String hotdeal_desc;
+    private String hotdeal_picture;
     private String hotdeal_useDate;
     private String hotdeal_eventDuration;
     private Date hotdeal_regdate;
@@ -23,19 +23,19 @@ public class HotdealDto {
     private Integer hotdeal_MaxSalesVolume;
     private String bizAccount_email;
 
-    public HotdealDto() {this(1,"맛집1","신사/압구정",1,"no pic","김치찌게",6000,3000,50,"파격세일. 빨리사라","90일","2023/03/14 ~ 2023/03/27",0,100,"Biz_1@google.com");}
+    public HotdealDto() {this(1,"맛집1","신사/압구정",1,"김치찌게",6000,3000,50,"파격세일. 빨리사라","no pic","90일","2023/03/14 ~ 2023/03/27",0,100,"Biz_1@google.com");}
 
-    public HotdealDto(Integer restr_NUM, String restr_name, String restr_category_loc, Integer restr_menu_NUM, String restr_menu_picture, String restr_menu_food, Integer restr_menu_price, Integer hotdeal_price, Integer hotdeal_discountRate, String hotdeal_desc, String hotdeal_useDate, String hotdeal_eventDuration, Integer hotdeal_salesVolume, Integer hotdeal_MaxSalesVolume, String bizAccount_email) {
+    public HotdealDto(Integer restr_NUM, String restr_name, String restr_category_loc, Integer restr_menu_NUM,String restr_menu_food, Integer restr_menu_price, Integer hotdeal_price, Integer hotdeal_discountRate, String hotdeal_desc, String hotdeal_picture, String hotdeal_useDate, String hotdeal_eventDuration, Integer hotdeal_salesVolume, Integer hotdeal_MaxSalesVolume, String bizAccount_email) {
         this.restr_NUM = restr_NUM;
         this.restr_name = restr_name;
         this.restr_category_loc = restr_category_loc;
         this.restr_menu_NUM = restr_menu_NUM;
-        this.restr_menu_picture = restr_menu_picture;
         this.restr_menu_food = restr_menu_food;
         this.restr_menu_price = restr_menu_price;
         this.hotdeal_price = hotdeal_price;
         this.hotdeal_discountRate = hotdeal_discountRate;
         this.hotdeal_desc = hotdeal_desc;
+        this.hotdeal_picture = hotdeal_picture;
         this.hotdeal_useDate = hotdeal_useDate;
         this.hotdeal_eventDuration = hotdeal_eventDuration;
         this.hotdeal_salesVolume = hotdeal_salesVolume;
@@ -83,13 +83,6 @@ public class HotdealDto {
         this.restr_menu_NUM = restr_menu_NUM;
     }
 
-    public String getRestr_menu_picture() {
-        return restr_menu_picture;
-    }
-
-    public void setRestr_menu_picture(String restr_menu_picture) {
-        this.restr_menu_picture = restr_menu_picture;
-    }
 
     public String getRestr_menu_food() {
         return restr_menu_food;
@@ -129,6 +122,14 @@ public class HotdealDto {
 
     public void setHotdeal_desc(String hotdeal_desc) {
         this.hotdeal_desc = hotdeal_desc;
+    }
+
+    public String getHotdeal_picture() {
+        return hotdeal_picture;
+    }
+
+    public void setHotdeal_picture(String hotdeal_picture) {
+        this.hotdeal_picture = hotdeal_picture;
     }
 
     public String getHotdeal_useDate() {
@@ -208,16 +209,16 @@ public class HotdealDto {
                 ", restr_name='" + restr_name + '\'' +
                 ", restr_category_loc='" + restr_category_loc + '\'' +
                 ", restr_menu_NUM=" + restr_menu_NUM +
-                ", restr_menu_picture='" + restr_menu_picture + '\'' +
                 ", restr_menu_food='" + restr_menu_food + '\'' +
                 ", restr_menu_price=" + restr_menu_price +
                 ", hotdeal_price=" + hotdeal_price +
-                ", hotdeal_discountRate='" + hotdeal_discountRate + '\'' +
+                ", hotdeal_discountRate=" + hotdeal_discountRate +
                 ", hotdeal_desc='" + hotdeal_desc + '\'' +
+                ", hotdeal_picture='" + hotdeal_picture + '\'' +
                 ", hotdeal_useDate='" + hotdeal_useDate + '\'' +
                 ", hotdeal_eventDuration='" + hotdeal_eventDuration + '\'' +
-                ", hotdeal_regdate='" + hotdeal_regdate + '\'' +
-                ", hotdeal_update='" + hotdeal_update + '\'' +
+                ", hotdeal_regdate=" + hotdeal_regdate +
+                ", hotdeal_update=" + hotdeal_update +
                 ", hotdeal_salesVolume=" + hotdeal_salesVolume +
                 ", hotdeal_MaxSalesVolume=" + hotdeal_MaxSalesVolume +
                 ", bizAccount_email='" + bizAccount_email + '\'' +
