@@ -40,15 +40,20 @@
 
     <update id="update" parameterType="BizAccountDto">
         UPDATE bizAccount
-        SET bizAccount_email   = #{bizAccount_email},
-            bizAccount_pwd     = #{bizAccount_pwd},
+        SET bizAccount_pwd     = #{bizAccount_pwd},
             bizAccount_name    = #{bizAccount_name},
             bizAccount_phone    = #{bizAccount_phone},
             bizAccount_picture = #{bizAccount_picture},
-            bizAccount_state_code =#{bizAccount_state_code},
             bizAccount_regNum = #{bizAccount_regNum}
         WHERE bizAccount_email = #{bizAccount_email};
     </update>
+
+    <update id="updateStateCode" parameterType="BizAccountDto">
+        UPDATE bizAccount
+        SET   bizAccount_state_code =#{user_state_code}
+        WHERE user_email = #{user_email};
+    </update>
+
 
     <delete id="delete" parameterType="String">
         DELETE

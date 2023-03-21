@@ -20,7 +20,7 @@ public class RegisterController {
 
     @GetMapping("/add")
     public String registerForm() {
-        return "registerForm_hb";
+        return "registerForm";
     }
 
     @PostMapping("/add")

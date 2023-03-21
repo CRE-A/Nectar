@@ -15,6 +15,8 @@ public interface UserDao {
 
     int update(UserDto userDto);
 
+    int updateStateCode(UserDto userDto);
+
     int delete(String user_email);
 
     int deleteAll();

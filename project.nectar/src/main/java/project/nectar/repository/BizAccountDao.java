@@ -14,6 +14,8 @@ public interface BizAccountDao {
 
     int update(BizAccountDto bizAccountDto);
 
+    int updateStateCode(BizAccountDto bizAccountDto);
+
     int delete(String bizAccount_email);
 
     int deleteAll();

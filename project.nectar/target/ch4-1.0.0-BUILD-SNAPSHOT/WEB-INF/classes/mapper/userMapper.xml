@@ -41,14 +41,20 @@
 
     <update id="update" parameterType="UserDto">
         UPDATE user
-        SET user_email   = #{user_email},
-            user_pwd     = #{user_pwd},
+        SET user_pwd     = #{user_pwd},
             user_name    = #{user_name},
             user_phone    = #{user_phone},
-            user_picture = #{user_picture},
-            user_state_code =#{user_state_code}
+            user_picture = #{user_picture}
         WHERE user_email = #{user_email};
     </update>
+
+
+    <update id="updateStateCode" parameterType="UserDto">
+        UPDATE user
+        SET   user_state_code =#{user_state_code}
+        WHERE user_email = #{user_email};
+    </update>
+
 
     <delete id="delete" parameterType="String">
         DELETE

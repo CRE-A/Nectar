@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.nectar.repository.QNAMapper">
+
+
+    <select id="selectAll" resultType="QNADto">
+        SELECT *
+        FROM qna
+        ORDER BY qna_regdate DESC;
+    </select>
+
+    <select id="select" parameterType="int" resultType="QNADto">
+        SELECT *
+        FROM qna
+        WHERE qna_NUM = #{qna_NUM}
+    </select>
+
+
+    <insert id="insert" parameterType="QNADto">
+        INSERT INTO qna
+        (qna_title, qna_content, qna_picture, qna_regdate, qna_writer)
+        VALUES
+            (#{qna_title}, #{qna_content}, #{qna_picture}, now(), #{qna_writer})
+    </insert>
+
+</mapper>

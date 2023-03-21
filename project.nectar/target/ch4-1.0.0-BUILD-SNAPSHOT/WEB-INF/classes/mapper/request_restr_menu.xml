@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.nectar.repository.Request_RestrMenuMapper">
+
+
+    <select id="selectAll" parameterType="int" resultType="RestrMenuDto">
+        SELECT *
+        from request_restr_menu
+        where request_restr_NUM = #{request_restr_NUM}
+    </select>
+
+
+    <insert id="insert" parameterType="RestrMenuDto">
+        insert into request_restr_menu
+            (request_restr_NUM, request_restr_menu_food, request_restr_menu_price, request_restr_menu_desc)
+        values
+            (#{request_restr_NUM}, #{request_restr_menu_food}, #{request_restr_menu_price}, #{request_restr_menu_desc} );
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from request_restr_menu
+        WHERE request_restr_menu_NUM = #{request_restr_menu_NUM}
+    </delete>
+
+
+
+</mapper>

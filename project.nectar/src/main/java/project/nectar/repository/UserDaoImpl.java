@@ -36,6 +36,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public int updateStateCode(UserDto userDto) {
+        return session.update(namespace + "updateStateCode", userDto);
+    }
+
+    @Override
     public int delete(String user_email) {
         return session.delete(namespace + "delete", user_email);
     }

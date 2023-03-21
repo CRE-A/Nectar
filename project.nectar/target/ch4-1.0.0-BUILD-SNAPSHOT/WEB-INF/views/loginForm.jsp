@@ -49,17 +49,17 @@
         <li class="menu item">
             <a href="<c:url value='/mypage/main'/>">
                 <c:choose>
-                <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
-            <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
-            <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
-            <c:otherwise>LOGIN</i></a></c:otherwise>
-            </c:choose>
+                    <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
+                    <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
+                    <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
+                    <c:otherwise>LOGIN</i></a></c:otherwise>
+                </c:choose>
         </li>
     </ul>
 </section>
 
 <div id="form_container">
-    <h1 id="title">NAVER</h1>
+    <h1 id="title">SEX</h1>
     <form id="form" action="<c:url value="/login/login"/>" method="post" onsubmit="return loginFormCheck(this);">
         <div id="inputBox">
             <div id="inputBox1">

@@ -27,7 +27,7 @@ public class LikelistServiceImpl implements LikelistService {
     // 2. 위에서 select 한 data를 list에 담고, for문을 이용해 list를 하나씩 읽으면서 cancelLike()를 실행.
     // 3. cancelLike() : 내가 좋아요 눌렀던 가게의 like를 취소
     //     3.1. [likelist 테이블]에서 (restr_NUM)번, (user_email)에 해당하는 like를 delete
-    //     3.2. [likelist 테이블]에서 (restr_NUM)번에 해당하는 like의 총 개수 count() 를 select
+    //     3.2. [likelist 테이블]에서 (restr_NUM)번에 해당하는 레스토랑의 like의 총 개수 count() 를 select
     //     3.3. [restr 테이블]에 like의 총 개수를 insert
 
     @Override

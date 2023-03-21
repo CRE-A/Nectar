@@ -37,6 +37,11 @@ public class BizAccountDaoImpl implements BizAccountDao {
     }
 
     @Override
+    public int updateStateCode(BizAccountDto bizAccountDto) {
+        return session.update(namespace + "updateStateCode", bizAccountDto);
+    }
+
+    @Override
     public int delete(String bizAccount_email) {
         return session.delete(namespace + "delete", bizAccount_email);
     }

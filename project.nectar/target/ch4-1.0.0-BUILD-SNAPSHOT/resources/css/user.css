@@ -5,9 +5,6 @@
     box-sizing: border-box;
 }
 
-li {
-    list-style: none;
-}
 
 section#myPage {
     /* background-color: red; */
@@ -29,23 +26,17 @@ button.sideMenu__mypage,
 button.sideMenu__user {
     width: 80%;
     height: 50px;
-    /* background-color: green; */
-    border: 1px solid;
     font-size: 20px;
     font-weight: bold;
     background-color: transparent;
     border: 0;
+    border-left: 2px solid orange;
+    margin-bottom: 20px;
 }
 
-button.sideMenu__mypage::before,
-button.sideMenu__user::before {
-    content: "";
-    border-left: 3px solid orange;
-    padding: 10px;
-}
 
 .userInfo {
-    flex-basis: 80%;
+    flex-basis: 80% !important;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -55,6 +46,10 @@ button.sideMenu__user::before {
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid;
+}
+
+h1.h1{
+    margin-bottom: 25px;
 }
 
 #userInfoForm {
@@ -172,3 +167,4 @@ button.sideMenu__user::before {
 .tab.user.active {
     display: block;
 }
+

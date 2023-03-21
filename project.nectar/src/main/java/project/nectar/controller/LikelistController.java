@@ -22,7 +22,7 @@ public class LikelistController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/restr/read? restr_NUM=" + likelistDto.getRestr_NUM();
+            return "redirect:/restr/read?restr_NUM=" + likelistDto.getRestr_NUM();
         }
     }
 
@@ -36,7 +36,22 @@ public class LikelistController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/restr/read? restr_NUM=" + likelistDto.getRestr_NUM();
+            return "redirect:/restr/read?restr_NUM=" + likelistDto.getRestr_NUM();
         }
     }
+
+    @PostMapping("/cancelAll")
+    public String removeMyLikeList(String user_email){
+
+        try {
+            likelistService.removeMyLikeList(user_email);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "redirect:/mypage/user/main";
+    }  // 이건 나중에 /mypage/user 로 위치변경 가능
+
+
+
 }
