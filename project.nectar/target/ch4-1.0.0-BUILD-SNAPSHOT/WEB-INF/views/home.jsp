@@ -328,7 +328,7 @@
                 </label>
                 </span>
 
-                <input type="radio" id="pking31" name="parking" value="상관없음">
+                <input type="radio" id="pking31" name="parking" value="주차불가">
                 <label for="pking31">
                     <span> 주차불가 </span>
                 </label>

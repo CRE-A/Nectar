@@ -119,8 +119,10 @@
           </div>
         </div>
         <div class="userInfo__btnWrap">
-          <button class="modifyBtn">변경사항저장</button>
+          <button  type="button" id="modifyBtn">변경사항저장</button>
         </div>
+
+        <button type="button" id="userDelBtn">계정탈퇴</button>
       </form>
     </div>
     <div class="tab log active">
@@ -232,6 +234,11 @@
 </html>
 
 <script>
+
+
+
+  // TAB 기능 //
+
   const mypageTab = document.querySelector(".sideMenu__mypage");
   const mypage = document.querySelector(".tab.log.active");
 
@@ -254,4 +261,43 @@
     info.classList.toggle("active");
     mypage.classList.toggle("active");
   });
+
+  // TAB 기능 //
+
+
+  // 회원 탈퇴
+
+  $("#userDelBtn").on("click", (e) => {
+
+    let form = $("#userDelBtn");
+    form.attr("action", "<c:url value="/mypage/user/profile/delete"/>");
+    form.attr("method", "post");
+    form.submit();
+
+  })
+
+  // 회원 계정 (profile) 수정
+
+  $("#modifyBtn").on("click", (e) => {
+    let form = $("userInfoForm");
+
+    let isReadOnly = $("textarea[name=review_comment]", li).attr("readonly");
+
+    // 읽기상태 -> 수정상태
+    if (isReadOnly == "readonly") {
+      $("textarea[name=review_comment]", li).attr('readonly', false);
+      e.target.innerHTML = "업데이트";
+      return;
+    }
+
+    // 리뷰등록
+
+    form.attr("action", "<c:url value="/mypage/user/profile/update"/>");
+    form.attr("method", "post");
+    form.submit();
+
+
+  });
+
+
 </script>

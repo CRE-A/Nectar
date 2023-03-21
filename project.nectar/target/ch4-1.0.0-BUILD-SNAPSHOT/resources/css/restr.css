@@ -108,10 +108,16 @@ li.reaction {
 
 .section-left {
     flex-basis: 80%;
+
+
 }
 
 .section-right {
     flex-basis: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
 }
 
 .info {
@@ -159,11 +165,19 @@ li.myList {
     border: 0;
     font-size: 3rem;
     color: red;
+    margin-bottom: 20px;
 }
 
-p.likeText{
-    font-size: 1em;
+#likeBtn>i:after{
+    content: "좋아요";
+    color: black;
+    position: relative;
+    top: 31px;
+    font-size: 0.3em;
+    right: 47px;
 }
+
+
 .tag__wrap > h4 {
     margin-bottom: 1.5rem;
 }
@@ -231,6 +245,7 @@ label.reviewPicUploadBtn {
     align-items: center;
     font-size: 30px;
     border: 1px solid gray;
+    margin-left: 10px;
 }
 input[type="file"] {
     display: none;
@@ -363,7 +378,7 @@ li.review {
     text-align: center;
 }
 .review__content {
-    flex-basis: 80%;
+    flex-basis: 72%;
 }
 
 .review__content__wrap {
@@ -400,3 +415,77 @@ li.review {
     border-bottom: 1px solid #d1cdcd;
     margin-bottom: 30px;
 }
+
+
+.rvButtons {
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+}
+
+.rvButtons > button {
+    width: 4.5em;
+    height: 1.25em;
+    background-color: transparent;
+    color: gray;
+    border: 0;
+}
+
+.alignContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+
+/* review rating */
+
+/*  Star */
+
+.reviewRating {
+    border: none;
+    float: left;
+}
+
+.reviewRating > input {
+    display: none;
+}
+.reviewRating > label:before {
+    margin: 3px;
+    font-size: 1em;
+    font-family: "FontAwesome";
+    display: inline-block;
+    content: "\f005";
+}
+
+.reviewRating > .half:before {
+    content: "\f089";
+
+    position: absolute;
+}
+
+/* .rating > label:before {
+  margin: 5px;
+  font-size: 3em;
+  content: "\f005";
+  font-family: "Font Awesome 5 Free";
+  display: inline-block;
+}
+
+.rating > .half:before {
+  content: "\f089";
+  position: absolute;
+} */
+
+.reviewRating > label {
+    color: #ffd700;
+    float: right;
+}
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+/*.reviewRating > input:checked ~ label, !* show gold star when clicked *!*/
+/*.reviewRating:not(:checked) > label:hover, !* hover current star *!*/
+/*.reviewRating:not(:checked) > label:hover ~ label {*/
+/*    color: #ffd700;*/
+/*}*/

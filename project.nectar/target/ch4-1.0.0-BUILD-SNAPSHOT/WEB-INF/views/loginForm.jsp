@@ -59,7 +59,7 @@
 </section>
 
 <div id="form_container">
-    <h1 id="title">SEX</h1>
+    <h1 id="title">NECTAR</h1>
     <form id="form" action="<c:url value="/login/login"/>" method="post" onsubmit="return loginFormCheck(this);">
         <div id="inputBox">
             <div id="inputBox1">
