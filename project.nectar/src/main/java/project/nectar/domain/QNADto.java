@@ -8,6 +8,8 @@ public class QNADto {
     private String qna_content;
     private String qna_picture;
     private String qna_regdate;
+    private String qna_writer;
+    private String qna_name;
 
     public QNADto() {this("title","content","no_pic");}
     public QNADto(String qna_title, String qna_content, String qna_picture) {
@@ -56,6 +58,22 @@ public class QNADto {
         this.qna_regdate = qna_regdate;
     }
 
+    public String getQna_writer() {
+        return qna_writer;
+    }
+
+    public void setQna_writer(String qna_writer) {
+        this.qna_writer = qna_writer;
+    }
+
+    public String getQna_name() {
+        return qna_name;
+    }
+
+    public void setQna_name(String qna_name) {
+        this.qna_name = qna_name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,12 +89,14 @@ public class QNADto {
 
     @Override
     public String toString() {
-        return "QNA{" +
+        return "QNADto{" +
                 "qna_NUM=" + qna_NUM +
                 ", qna_title='" + qna_title + '\'' +
                 ", qna_content='" + qna_content + '\'' +
                 ", qna_picture='" + qna_picture + '\'' +
                 ", qna_regdate='" + qna_regdate + '\'' +
+                ", qna_writer='" + qna_writer + '\'' +
+                ", qna_name='" + qna_name + '\'' +
                 '}';
     }
 }

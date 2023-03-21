@@ -45,6 +45,7 @@ public class BizController {
             List<HotdealDto> hotdealDto = hotdealService.selectMyHotdeals(Biz_email);
             m.addAttribute("hotdealDto",hotdealDto);
             // 사업자(BizAccount)가 진행한 모든 핫딜에 대한 data
+            System.out.println("hotdealDto = " + hotdealDto);
 
             BizAccountDto bizAccountDto = bizAccountDao.select(Biz_email);
             m.addAttribute("bizAccountDto",bizAccountDto);
@@ -76,15 +77,26 @@ public class BizController {
         return "redirect:/";
     }
 
+
+
     @PostMapping("/QNA/write")
-    public String QNA(QNADto qnaDto, RedirectAttributes rattr){
-        qnaDao.insert(qnaDto);
-        rattr.addFlashAttribute("msg", "WRT_OK");
-        return "redirect:/mypage/biz/main";
+    public String QNA(QNADto qnaDto, RedirectAttributes rattr, Model m){
+
+        try {
+            qnaDao.insert(qnaDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            rattr.addFlashAttribute("msg","QNA_WRT_ERR");
+            return "redirect:/mypage/biz/main";
+
+        }
+
+        m.addAttribute("qnaDto",qnaDto);
+        return "mypage/successPage/qnaWrtOk";
     }
 
     @PostMapping("/restr/write")
-    public String registerRestaurant(RestrDto restrDto, RestrMenuDto restrMenuDto ,RedirectAttributes rattr){
+    public String registerRestaurant(RestrDto restrDto, RestrMenuDto restrMenuDto ,RedirectAttributes rattr, Model m){
 
         try {
             request_restrDao.insertAll(restrDto);           // 레스토랑 정보 작성 후 (관리자에게) 심사요청
@@ -96,26 +108,27 @@ public class BizController {
             e.printStackTrace();
             // 에러처리 해야지?
             rattr.addFlashAttribute("msg", "RESTR_WRT_ERR");
-            return "redirect:/";
+            return "redirect:/mypage/biz/main";
         }
 
-        return "redirect:/mypage/biz/main";
+        m.addAttribute("restrDto",restrDto);
+        return "mypage/successPage/restrWrtOk";
     }
 
     @PostMapping("/hotdeal/write")
-    public String registerHotdeal(HotdealDto hotdealDto, RedirectAttributes rattr){
+    public String registerHotdeal(HotdealDto hotdealDto, RedirectAttributes rattr, Model m){
 
 
         try {
             request_hotdealDao.insert(hotdealDto);          // 핫딜 정보 작성 후 (관리자에게) 심사요청
-            rattr.addFlashAttribute("msg","Hotdeal_WRT_OK");
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "Hotdeal_WRT_ERR");
-            return "redirect:/";
+            return "redirect:/mypage/biz/main";
         }
 
-        return "redirect:/mypage/biz/main";
+        m.addAttribute("hotdealDto",hotdealDto);
+        return "mypage/successPage/hotdealWrtOk";
     }
 
 

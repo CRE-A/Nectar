@@ -61,6 +61,7 @@ public class AdminController {
 
             List<QNADto> QNADto = qnaDao.selectAll();
             m.addAttribute("QNADto",QNADto);
+            // 요청/문의사항을 담은 QNA 에 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();

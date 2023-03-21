@@ -77,11 +77,22 @@ public class UserController {
         return "redirect:/";
     }
 
+
     @PostMapping("/QNA/write")
-    public String QNA(QNADto qnaDto, RedirectAttributes rattr){
-        qnaDao.insert(qnaDto);
-        rattr.addFlashAttribute("msg", "WRT_OK");
-        return "redirect:/mypage/user/main";
+    public String QNA(QNADto qnaDto, RedirectAttributes rattr, Model m){
+
+        try {
+            qnaDao.insert(qnaDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            rattr.addFlashAttribute("msg","QNA_WRT_ERR");
+            return "redirect:/mypage/biz/main";
+
+        }
+
+        m.addAttribute("qnaDto",qnaDto);
+        return "mypage/successPage/qnaWrtOk";
     }
+
 
 }

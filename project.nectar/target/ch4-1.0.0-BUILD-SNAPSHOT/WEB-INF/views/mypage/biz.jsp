@@ -108,7 +108,12 @@
 
       <h1>${bizAccountDto.bizAccount_name}님이 진행한 핫딜 ✏️</h1>
       <div class="container item">
-
+        <%--            <c:forEach var="hotdealDto" items="${hotdealDto}">--%>
+        <%--              <tr>--%>
+        <%--                <td class="bno">${hotdealDto.hotdeal_salesVolume}</td>--%>
+        <%--                <td class="writer">${hotdealDto.hotdeal_MaxSalesVolume}</td>--%>
+        <%--              </tr>--%>
+        <%--            </c:forEach>--%>
       </div>
 
       <h1>핫딜 이벤트 거래 내역 ✏️</h1>
@@ -116,8 +121,8 @@
         <div class="recent-order">
           <table>
             <tbody>
-            salesVolume
-            maxSalesVolume
+<%--            salesVolume--%>
+<%--            maxSalesVolume--%>
             <%--            <c:forEach var="hotdealDto" items="${hotdealDto}">--%>
             <%--              <tr>--%>
             <%--                <td class="bno">${hotdealDto.hotdeal_salesVolume}</td>--%>
@@ -409,8 +414,8 @@
   </c:forEach>
 </div>
 
-<div id="MyhotdealList">
-  <h3>Biz 가 진행 한 핫딜 </h3>
+<%--<div id="MyhotdealList">--%>
+<%--  <h3>Biz 가 진행 한 핫딜 </h3>--%>
 <%--  <c:forEach var="hotdealDto" items="${hotdealDto}">--%>
 <%--    ${hotdealDto.hotdeal_NUM} </br>--%>
 <%--    ${hotdealDto.restr_NUM} </br>--%>
@@ -431,7 +436,7 @@
 <%--    ${hotdealDto.bizAccount_email} </br>--%>
 <%--    ----------------------------------</br>--%>
 <%--  </c:forEach>--%>
-</div>
+<%--</div>--%>
 
 
 <br id="BIZ_info">

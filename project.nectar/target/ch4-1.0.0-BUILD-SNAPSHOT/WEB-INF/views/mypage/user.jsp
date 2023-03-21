@@ -105,21 +105,30 @@
             <div class="userNameId">
               <div class="userNameId item">
                 <span class="details">이름</span>
-                <input type="text" name="name" value="${userDto.user_name}" required/>
+                <input type="text" name="user_name" readonly value="${userDto.user_name}" required/>
               </div>
               <div class="userNameId item">
                 <span class="details">휴대폰</span>
-                <input type="text" name="phone" value="${userDto.user_phone}" required/>
+                <input  type="text" name="user_phone" readonly value="${userDto.user_phone}" required/>
               </div>
             </div>
             <div class="userEmail">
-              <span for="">이메일</span>
-              <input type="text" name="email" value="${userDto.user_email}" required/>
+              <span class="details">이메일</span>
+              <input type="text" name="user_email" readonly value="${userDto.user_email}" required/>
             </div>
+            <%--            --%>
+            <%--    userPwd로 고쳐야함        --%>
+            <div class="userEmail">
+              <span class="details">비밀번호</span>
+              <input type="password" name="user_pwd" readonly value="${userDto.user_pwd}" required/>
+            </div>
+            <%--            --%>
+            <%--            --%>
+            <input type="hidden" name="user_picture"  value="${userDto.user_picture}" required/>
           </div>
         </div>
         <div class="userInfo__btnWrap">
-          <button  type="button" id="modifyBtn">변경사항저장</button>
+          <button  type="button" id="modifyBtn">프로필 수정</button>
         </div>
 
         <button type="button" id="userDelBtn">계정탈퇴</button>
@@ -264,40 +273,43 @@
 
   // TAB 기능 //
 
+  $(document).ready(function (){
 
-  // 회원 탈퇴
+    $("#userDelBtn").on("click", (e) => {
 
-  $("#userDelBtn").on("click", (e) => {
+      let form = $("#userInfoForm");
+      form.attr("action", "<c:url value="/mypage/user/profile/delete?email=${userDto.user_email}"/>");
+      form.attr("method", "post");
+      form.submit();
 
-    let form = $("#userDelBtn");
-    form.attr("action", "<c:url value="/mypage/user/profile/delete"/>");
-    form.attr("method", "post");
-    form.submit();
+    }) // 회원 탈퇴
 
-  })
+    $("#modifyBtn").on("click", (e) => {
+      let form = $("#userInfoForm");
+      let name = $("input[name=user_name]");
 
-  // 회원 계정 (profile) 수정
+      let isReadOnly = name.attr("readonly");
 
-  $("#modifyBtn").on("click", (e) => {
-    let form = $("userInfoForm");
+      if (isReadOnly == "readonly") {
 
-    let isReadOnly = $("textarea[name=review_comment]", li).attr("readonly");
+        $("input[name=user_name]").attr('readonly', false);
+        // $("input[name=user_email]").attr('readonly', false);
+        $("input[name=user_phone]").attr('readonly', false);
+        $("input[name=user_pwd]").attr('readonly', false);
+        $("#modifyBtn").html("변경사항저장");
 
-    // 읽기상태 -> 수정상태
-    if (isReadOnly == "readonly") {
-      $("textarea[name=review_comment]", li).attr('readonly', false);
-      e.target.innerHTML = "업데이트";
-      return;
-    }
+        return;
+      }  // 읽기상태 -> 수정상태
 
-    // 리뷰등록
+      form.attr("action", "<c:url value="/mypage/user/profile/modify"/>");
+      form.attr("method", "post");
+      form.submit();
 
-    form.attr("action", "<c:url value="/mypage/user/profile/update"/>");
-    form.attr("method", "post");
-    form.submit();
+    });  // 회원 프로필 수정
 
+  })// ready()
 
-  });
 
 
 </script>
+

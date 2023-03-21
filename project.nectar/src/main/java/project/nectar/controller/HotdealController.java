@@ -37,7 +37,7 @@ public class HotdealController {
             return "redirect:/";
         }
 
-        return "hotdealList";
+        return "hotdealPage/hotdealList";
     }
 
 
@@ -61,7 +61,7 @@ public class HotdealController {
             return "redirect:/hotdeal/list";
         }
 
-        return "hotdeal";
+        return "hotdealPage/hotdeal";
     }
 
 

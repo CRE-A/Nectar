@@ -37,7 +37,7 @@ public class RestrController {
 
     @GetMapping("/list")
     public String list() {
-        return "restrTagList";
+        return "matListPage/restrTagList";
     }
 
 
@@ -64,11 +64,11 @@ public class RestrController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "errorPage/searchERR";
+            return "matListPage/errorPage/searchERR";
 
         }
 
-        return "restrList";
+        return "matListPage/restrList";
     }
 
 
@@ -104,7 +104,7 @@ public class RestrController {
             return "redirect:/restr/search"+sc.getQueryString();
         }
 
-        return "restr";
+        return "matListPage/restr";
     }
 
 
