@@ -214,6 +214,17 @@
 
     </div>
 
+<%-- QNA TEST    --%>
+    <h2>QNA TEST</h2>
+    <form id="form" action="<c:url value="/mypage/user/QNA/write"/>" method="post" >
+      <input class="detail" type="text" name="qna_title"  value="나를 이용하라" autofocus>
+      <input class="detail" type="text" name="qna_content"value="인태 짱" autofocus>
+      <input class="detail" type="text" name="qna_picture"  value="캡 귀여운 인태사진" autofocus>
+      <input class="detail" type="text" name="qna_writer"  value="User_1@google.com" autofocus> <%--qna_writer = ${userDto.user_email}}--%>
+      <input class="detail" type="text" name="qna_name" value="name1" autofocus>                <%--qna_name   = ${userDto.user_name}}--%>
+      <button id="loginBtn">QNA 등록</button>
+    </form>
+<%--    --%>
 
   </div>
 </section>

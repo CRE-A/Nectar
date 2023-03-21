@@ -254,6 +254,17 @@
 <%--    </c:forEach>--%>
 <%--</div>--%>
 
+<h2>QNA 게시판 TEST</h2>
+<c:forEach var="QNADto" items="${QNADto}">
+    ${QNADto.qna_NUM}</br>
+    ${QNADto.qna_title}</br>
+    ${QNADto.qna_content}</br>
+    ${QNADto.qna_picture}</br>
+    ${QNADto.qna_regdate}</br>
+    ${QNADto.qna_writer}</br>
+    ${QNADto.qna_name}</br>
+    -------------------</br>
+</c:forEach>
 
 </body>
 </html>

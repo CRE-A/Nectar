@@ -108,12 +108,28 @@
 
       <h1>${bizAccountDto.bizAccount_name}님이 진행한 핫딜 ✏️</h1>
       <div class="container item">
-        <%--            <c:forEach var="hotdealDto" items="${hotdealDto}">--%>
-        <%--              <tr>--%>
-        <%--                <td class="bno">${hotdealDto.hotdeal_salesVolume}</td>--%>
-        <%--                <td class="writer">${hotdealDto.hotdeal_MaxSalesVolume}</td>--%>
-        <%--              </tr>--%>
-        <%--            </c:forEach>--%>
+                    <c:forEach var="hotdealDto" items="${hotdealDto}">
+                      ${hotdealDto.hotdeal_NUM} </br>
+                      ${hotdealDto.restr_NUM} </br>
+                      ${hotdealDto.restr_category_loc} </br>
+                      ${hotdealDto.restr_menu_NUM} </br>
+                      ${hotdealDto.restr_menu_food} </br>
+                      ${hotdealDto.restr_menu_price} </br>
+                      ${hotdealDto.hotdeal_price} </br>
+                      ${hotdealDto.hotdeal_discountRate} </br>
+                      ${hotdealDto.hotdeal_desc} </br>
+                      ${hotdealDto.hotdeal_useDate} </br>
+                      ${hotdealDto.hotdeal_eventDuration} </br>
+                      ${hotdealDto.hotdeal_regdate} </br>
+                      ${hotdealDto.hotdeal_update} </br>
+                      ${hotdealDto.hotdeal_salesVolume} </br>
+                      ${hotdealDto.hotdeal_MaxSalesVolume} </br>
+                      ${hotdealDto.bizAccount_email} </br>
+<%--                      <tr>--%>
+<%--                        <td class="bno">${hotdealDto.hotdeal_salesVolume}</td>--%>
+<%--                        <td class="writer">${hotdealDto.hotdeal_MaxSalesVolume}</td>--%>
+<%--                      </tr>--%>
+                    </c:forEach>
       </div>
 
       <h1>핫딜 이벤트 거래 내역 ✏️</h1>
@@ -414,30 +430,6 @@
   </c:forEach>
 </div>
 
-<%--<div id="MyhotdealList">--%>
-<%--  <h3>Biz 가 진행 한 핫딜 </h3>--%>
-<%--  <c:forEach var="hotdealDto" items="${hotdealDto}">--%>
-<%--    ${hotdealDto.hotdeal_NUM} </br>--%>
-<%--    ${hotdealDto.restr_NUM} </br>--%>
-<%--    ${hotdealDto.restr_category_loc} </br>--%>
-<%--    ${hotdealDto.restr_menu_NUM} </br>--%>
-<%--    ${hotdealDto.restr_menu_picture} </br>--%>
-<%--    ${hotdealDto.restr_menu_food} </br>--%>
-<%--    ${hotdealDto.restr_menu_price} </br>--%>
-<%--    ${hotdealDto.hotdeal_price} </br>--%>
-<%--    ${hotdealDto.hotdeal_discountRate} </br>--%>
-<%--    ${hotdealDto.hotdeal_desc} </br>--%>
-<%--    ${hotdealDto.hotdeal_useDate} </br>--%>
-<%--    ${hotdealDto.hotdeal_eventDuration} </br>--%>
-<%--    ${hotdealDto.hotdeal_regdate} </br>--%>
-<%--    ${hotdealDto.hotdeal_update} </br>--%>
-<%--    ${hotdealDto.hotdeal_salesVolume} </br>--%>
-<%--    ${hotdealDto.hotdeal_MaxSalesVolume} </br>--%>
-<%--    ${hotdealDto.bizAccount_email} </br>--%>
-<%--    ----------------------------------</br>--%>
-<%--  </c:forEach>--%>
-<%--</div>--%>
-
 
 <br id="BIZ_info">
 <h3>BIZ 에 대한 정보 </h3>
@@ -450,6 +442,20 @@ ${bizAccountDto.bizAccount_regdate}
 ${bizAccountDto.bizAccount_state_code} </br>
 </div>
 
+
+
+
+<%-- QNA TEST    --%>
+<h2>QNA TEST</h2>
+<form id="form" action="<c:url value="/mypage/biz/QNA/write"/>" method="post" >
+  <input class="detail" type="text" name="qna_title"  value="나에게 질문하는 것을 두려워 말라" autofocus>
+  <input class="detail" type="text" name="qna_content"value="인태 최고" autofocus>
+  <input class="detail" type="text" name="qna_picture"  value="핵 깜찍한 인태 사진" autofocus>
+  <input class="detail" type="text" name="qna_writer"  value="Biz_1@google.com" autofocus> <%--qna_writer = ${bizAccountDto.bizAccount_email}}--%>
+  <input class="detail" type="text" name="qna_name" value="name1" autofocus>                <%--qna_name   = ${bizAccountDto.bizAccount_name}}--%>
+  <button id="loginBtn">QNA 등록</button>
+</form>
+<%--    --%>
 
 
 

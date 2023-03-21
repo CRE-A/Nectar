@@ -45,7 +45,6 @@ public class BizController {
             List<HotdealDto> hotdealDto = hotdealService.selectMyHotdeals(Biz_email);
             m.addAttribute("hotdealDto",hotdealDto);
             // 사업자(BizAccount)가 진행한 모든 핫딜에 대한 data
-            System.out.println("hotdealDto = " + hotdealDto);
 
             BizAccountDto bizAccountDto = bizAccountDao.select(Biz_email);
             m.addAttribute("bizAccountDto",bizAccountDto);

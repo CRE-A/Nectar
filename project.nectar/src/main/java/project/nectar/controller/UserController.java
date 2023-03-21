@@ -53,8 +53,7 @@ public class UserController {
 
 //            List<Payment> payment = paymentService.getMyPayments(User_email);
 //            m.addAttribute("paymentService",paymentService);
-            // 사용자(User)가 구매한 모든 구매내역에(핫딜) 대한 data
-
+//             사용자(User)가 구매한 모든 구매내역에(핫딜) 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();

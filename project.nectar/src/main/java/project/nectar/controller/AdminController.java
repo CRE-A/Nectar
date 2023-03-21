@@ -159,12 +159,22 @@ public class AdminController {
     }
 
 
+    // state_code
+    //  0 : 사이트 모든 기본 기능 사용 가능(default)
+    // -1 : 댓글 금지,
+    // -2 : 결제 금지,
 
+    @PostMapping("/account/Management")
+    public String accountManagement(UserDto userDto){
+        userDao.updateStateCode(userDto);
+        return "redirect:/mypage/admin/main";
+    }
 
-//    @GetMapping("/account/management")
-//    public String
-//    // 졸려요 나중에 할게요...                        // 계정 페널티 부여.
-//
+//    @PostMapping("/accountManagement/biz")
+//    public String accountManagement_Biz(BizAccountDto bizAccountDto) {
+//        bizAccountDao.updateStateCode(bizAccountDto);
+//        return "redirect:/mypage/admin/main";
+//    }
 }
 
 
