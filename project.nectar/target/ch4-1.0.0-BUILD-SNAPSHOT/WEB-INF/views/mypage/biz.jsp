@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -60,89 +61,87 @@
       <h1>${bizAccountDto.bizAccount_name}님이 운영중인 레스토랑✏️</h1>
       <div class="container item">
         <ul id="restrList">
-          <c:forEach var="restrDto" items="${restrDto}">
-            <form id="restrForm" action="" method="">
-              <!-- 게시글 번호 data-restrNum 에 저장-->
-              <li class="restr" data-restrNum="${restrDto.restr_NUM}">
-                <a href="<c:url value='/restr/read${ph.sc.queryString}&restr_NUM=${restrDto.restr_NUM}'/>">
-                  <img src="./img/pizza.png" alt="" class="restr__img"/>
-                </a>
-                <div class="restr__content">
-                  <div class="restr__head">
-                    <div class="restr__info">
-                      <div class="restr__title">
-                        <a href="">${restrDto.restr_name}</a>
-                        <span class="star">
+          <form id="restrForm" action="" method="">
+            <!-- 게시글 번호 data-restrNum 에 저장-->
+            <li class="restr" data-restrNum="${restrDto.restr_NUM}">
+              <a href="<c:url value='/restr/read${ph.sc.queryString}&restr_NUM=${restrDto.restr_NUM}'/>">
+                <img src="./img/pizza.png" alt="" class="restr__img"/>
+              </a>
+              <div class="restr__content">
+                <div class="restr__head">
+                  <div class="restr__info">
+                    <div class="restr__title">
+                      <a href="">${restrDto.restr_name}</a>
+                      <span class="star">
                     <fmt:formatNumber value="${restrDto.restr_star}" pattern=".0"></fmt:formatNumber>
                   </span>
-                      </div>
-                      <div class="restr__location">
-                          ${restrDto.restr_location} - <span
-                              class="foodType">${restrDto.restr_foodType}</span>
-                      </div>
-                      <div class="restr__reaction">
-                        <i class="fa-regular fa-eye"></i> <span>${restrDto.restr_viewCnt}</span>
-                        <i class="fa-solid fa-pencil"></i>
-                        <span>${restrDto.restr_reviewCnt}</span>
-                        <i class="fa-regular fa-heart"></i>
-                        <span>${restrDto.restr_likeCnt}</span>
-                      </div>
                     </div>
-                    <div class="restr__hotdeal">
-                      <c:if test="${restrDto.restr_hotdeal_NUM ne '-1'}">
-                        <i class="fa-solid fa-gift"></i>핫딜 진행중</c:if>
+                    <div class="restr__location">
+                      ${restrDto.restr_location} - <span
+                            class="foodType">${restrDto.restr_foodType}</span>
+                    </div>
+                    <div class="restr__reaction">
+                      <i class="fa-regular fa-eye"></i> <span>${restrDto.restr_viewCnt}</span>
+                      <i class="fa-solid fa-pencil"></i>
+                      <span>${restrDto.restr_reviewCnt}</span>
+                      <i class="fa-regular fa-heart"></i>
+                      <span>${restrDto.restr_likeCnt}</span>
                     </div>
                   </div>
+                  <div class="restr__hotdeal">
+                    <c:if test="${restrDto.restr_hotdeal_NUM ne '-1'}">
+                      <i class="fa-solid fa-gift"></i>핫딜 진행중</c:if>
+                  </div>
                 </div>
+              </div>
 
-                <c:if test="${not empty sessionScope.Admin_email}">
-                  <button class="delBtn" type="button">삭제</button>
-                </c:if>
+              <c:if test="${not empty sessionScope.Admin_email}">
+                <button class="delBtn" type="button">삭제</button>
+              </c:if>
 
-              </li>
-            </form>
-          </c:forEach>
+            </li>
+          </form>
 
         </ul>
       </div>
 
       <h1>${bizAccountDto.bizAccount_name}님이 진행한 핫딜 ✏️</h1>
       <div class="container item">
-                    <c:forEach var="hotdealDto" items="${hotdealDto}">
-                      ${hotdealDto.hotdeal_NUM} </br>
-                      ${hotdealDto.restr_NUM} </br>
-                      ${hotdealDto.restr_category_loc} </br>
-                      ${hotdealDto.restr_menu_NUM} </br>
-                      ${hotdealDto.restr_menu_food} </br>
-                      ${hotdealDto.restr_menu_price} </br>
-                      ${hotdealDto.hotdeal_price} </br>
-                      ${hotdealDto.hotdeal_discountRate} </br>
-                      ${hotdealDto.hotdeal_desc} </br>
-                      ${hotdealDto.hotdeal_useDate} </br>
-                      ${hotdealDto.hotdeal_eventDuration} </br>
-                      ${hotdealDto.hotdeal_regdate} </br>
-                      ${hotdealDto.hotdeal_update} </br>
-                      ${hotdealDto.hotdeal_salesVolume} </br>
-                      ${hotdealDto.hotdeal_MaxSalesVolume} </br>
-                      ${hotdealDto.bizAccount_email} </br>
-<%--                      <tr>--%>
-<%--                        <td class="bno">${hotdealDto.hotdeal_salesVolume}</td>--%>
-<%--                        <td class="writer">${hotdealDto.hotdeal_MaxSalesVolume}</td>--%>
-<%--                      </tr>--%>
-                    </c:forEach>
+        <c:forEach var="hotdealDto" items="${hotdealDto}">
+          ${hotdealDto.hotdeal_NUM} </br>
+          ${hotdealDto.restr_NUM} </br>
+          ${hotdealDto.restr_category_loc} </br>
+          ${hotdealDto.restr_menu_NUM} </br>
+          ${hotdealDto.restr_menu_food} </br>
+          ${hotdealDto.restr_menu_price} </br>
+          ${hotdealDto.hotdeal_price} </br>
+          ${hotdealDto.hotdeal_discountRate} </br>
+          ${hotdealDto.hotdeal_desc} </br>
+          ${hotdealDto.hotdeal_useDate} </br>
+          ${hotdealDto.hotdeal_eventDuration} </br>
+          ${hotdealDto.hotdeal_regdate} </br>
+          ${hotdealDto.hotdeal_update} </br>
+          ${hotdealDto.hotdeal_salesVolume} </br>
+          ${hotdealDto.hotdeal_MaxSalesVolume} </br>
+          ${hotdealDto.bizAccount_email} </br>
+          <%--                      <tr>--%>
+          <%--                        <td class="bno">${hotdealDto.hotdeal_salesVolume}</td>--%>
+          <%--                        <td class="writer">${hotdealDto.hotdeal_MaxSalesVolume}</td>--%>
+          <%--                      </tr>--%>
+        </c:forEach>
       </div>
 
-      <h1>핫딜 이벤트 거래 내역 ✏️</h1>
+      <h1>핫딜 판매 내역 ✏️</h1>
       <div class="container item">
         <div class="recent-order">
           <table>
             <tbody>
-<%--            salesVolume--%>
-<%--            maxSalesVolume--%>
-            <%--            <c:forEach var="hotdealDto" items="${hotdealDto}">--%>
+            <%--            salesVolume--%>
+            <%--            maxSalesVolume--%>
+            <%--            <c:forEach var="paymentDto" items="${paymentDto}">--%>
             <%--              <tr>--%>
-            <%--                <td class="bno">${hotdealDto.hotdeal_salesVolume}</td>--%>
-            <%--                <td class="writer">${hotdealDto.hotdeal_MaxSalesVolume}</td>--%>
+            <%--                <td class="bno">${paymentDto.}</td>--%>
+            <%--                <td class="writer">${paymentDto.}</td>--%>
             <%--              </tr>--%>
             <%--            </c:forEach>--%>
             </tbody>
@@ -155,7 +154,7 @@
     <div class="content index">
       <h1>사업자 정보 ✏️</h1>
       <div class="container item">
-        <form id="bizAccountInfoForm" action="<c:url value='/mypage/biz/profile/update'/>" method="post">
+        <form id="bizAccountInfoForm" action="<c:url value='/mypage/biz/profile/modify'/>" method="post">
           <div class="user-details">
             <div class="input-box">
               <span class="details">이름</span>
@@ -163,6 +162,7 @@
                       type="text"
                       name="name"
                       placeholder="이름을 입력하세요"
+                      value="${bizAccountDto.bizAccount_name}"
                       required
               />
             </div>
@@ -172,6 +172,7 @@
                       type="text"
                       name="email"
                       placeholder="이메일을 입력하세요"
+                      value="${bizAccountDto.bizAccount_email}"
                       required
               />
             </div>
@@ -181,6 +182,7 @@
                       type="text"
                       name="phn"
                       placeholder="전화번호를 입력하세요"
+                      value="${bizAccountDto.bizAccount_phone}"
                       required
               />
             </div>
@@ -190,18 +192,21 @@
                       type="password"
                       name="pwd"
                       placeholder="Enter your password"
+                      value="${bizAccountDto.bizAccount_pwd}"
                       required
               />
             </div>
 
 
             <button type="button" id="bizUpdateBtn">프로필수정</button>
-            <button type="button" id="bizDelBtn">사업자 계정 탈퇴</button>
+            <button type="button" id="bizDelBtn">계정 탈퇴</button>
 
           </div>
         </form>
       </div>
     </div>
+
+
     <div class="content index">
       <h1>매장 등록 필수 정보 입력 ✏️</h1>
       <div class="container item">
@@ -358,27 +363,27 @@
           <div class="user-details">
             <div class="gender-details">
               <span class="gender-title">핫딜 등록 메뉴 선택하기</span>
-
-<%--              <input type="hidden" name="bizAccount_email" value=" ${bizAccountDto.bizAccount_email}">--%>
-<%--              <input name="restr_menu_food" value="${restrMenuDto.restr_menu_food}">--%>
-<%--              <input name="restr_NUM" value="${restrMenuDto.restr_NUM}">--%>
-<%--              <input name="restr_menu_price" value="${restrMenuDto.restr_menu_price}">--%>
-<%--              <input name="restr_categroy_loc" value="${restrMenuDto.restr_menu_price}">--%>
-<%--              <input name="hotdeal_picture" value="" type="file">--%>
-<%--              <input name="hotdeal_price" value="" placeholder="핫딜 가격을 입력하세요">--%>
-<%--              <input name="hotdeal_useDate" type="text" value="" placeholder="핫딜 사용기간을 입력하세요">--%>
-<%--              <input name="hotdeal_eventDration" type="text" value="" placeholder="핫딜 기간을 입력하세요">--%>
-<%--              <input name="hotdeal_desc" value="${restrMenuDto.restr_menu_desc}" >--%>
-<%--              <c:forEach var="restrMenuDto" items="restrMenuDto" varStatus="status">--%>
-<%--                <input type="radio" name="restr_menu_food" id="dot-<c:out value='${status.count}'/>"/>--%>
-<%--                <div class="category">--%>
-<%--                  <label for="dot-${status.count}">--%>
-<%--                    <span class="dot one"></span>--%>
-<%--                    <span class="gender">${restrMenuDto.restr_menu_food}</span>--%>
-<%--                  </label>--%>
-<%--                </div>--%>
-<%--              </c:forEach>--%>
-<%--            </div>--%>
+              <c:forEach var="restrMenuDto" items="${restrMenuDto}" varStatus="status">
+              <input type="hidden" name="bizAccount_email" value=" ${bizAccountDto.bizAccount_email}">
+              <input type="hidden" name="restr_menu_NUM" value=" ${bizAccountDto.bizAccount_email}">
+              <input name="restr_menu_food" value="${restrMenuDto.restr_menu_food}">
+              <input name="restr_NUM" value="${restrMenuDto.restr_NUM}">
+              <input name="restr_menu_price" value="${restrMenuDto.restr_menu_price}">
+              <input name="restr_categroy_loc" value="${restrMenuDto.restr_menu_price}">
+              <input name="hotdeal_picture" value="" type="file">
+              <input name="hotdeal_price" value="" placeholder="핫딜 가격을 입력하세요">
+              <input name="hotdeal_useDate" type="text" value="" placeholder="핫딜 사용기간을 입력하세요">
+              <input name="hotdeal_eventDration" type="text" value="" placeholder="핫딜 기간을 입력하세요">
+              <input name="hotdeal_desc" value="${restrMenuDto.restr_menu_desc}" >
+                <input type="radio" name="restr_menu_food" id="dot-<c:out value='${status.count}'/>"/>
+                <div class="category">
+                  <label for="dot-${status.count}">
+                    <span class="dot one"></span>
+                    <span class="gender">${restrMenuDto.restr_menu_food}</span>
+                  </label>
+                </div>
+              </c:forEach>
+            </div>
 
             <input type="submit" value="Register"/>
           </div>
@@ -390,11 +395,12 @@
       <h1>문의 남기기 ✏️</h1>
       <div class="container item">
 
-        <form action="<c:url value='mypage/biz/QNA/write'/>" method="get">
-          <input type="text" name="qna_title" >
-          <textarea name="qna_content" value=""></textarea>
+        <form action="<c:url value='/mypage/biz/QNA/write'/>" method="post">
+          <input type="text" name="qna_title" placeholder="제목 : 인태는 못말려" >
+          <textarea name="qna_content" value="" placeholder="내용을 입력하세요 : 제발 누가 좀 말려요"></textarea>
           <input type="file" name="qna_picture">
           <input type="hidden" name="qna_writer" value="${bizAccountDto.bizAccount_email}">
+          <input type="hidden" name="qna_name" value="${bizAccountDto.bizAccount_name}">
           <button type="submit">문의글 등록</button>
         </form>
 
@@ -402,13 +408,12 @@
     </div>
   </div>
 </section>
->
+
 <%-- / Global Page--%>
 
 
 <div id="MyRestrantlist">
   <h3>BIZ가 운영중인 레스토랑 </h3>
-  <c:forEach var="restrDto" items="${restrDto}">
     ${restrDto.restr_NUM} </br>
     ${restrDto.restr_name}</br>
     ${restrDto.restr_location}</br>
@@ -427,7 +432,6 @@
     ${restrDto.restr_reviewCnt}</br>
     ${restrDto.restr_likeCnt}</br>
     ----------------------------------</br>
-  </c:forEach>
 </div>
 
 
@@ -511,7 +515,7 @@ ${bizAccountDto.bizAccount_state_code} </br>
 
     // 리뷰등록
 
-    form.attr("action", "<c:url value="/mypage/biz/profile/update"/>");
+    form.attr("action", "<c:url value="/mypage/biz/profile/modify"/>");
     form.attr("method", "post");
     form.submit();
 

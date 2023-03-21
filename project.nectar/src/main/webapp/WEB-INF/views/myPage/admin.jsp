@@ -195,15 +195,15 @@
                         </thead>
                         <tbody>
 
-<%--                        <c:forEach var="requestRestrDto" items="${request_hotdealDto}">--%>
+<%--                        <c:forEach var="request_hotdealDto" items="${request_hotdealDto}">--%>
 
 <%--                            <tr>--%>
-<%--                                <td class="no">${request_hotdealDto.request_hotdeal_restr_NUM}</td>--%>
+<%--                                <td class="no">${request_hotdealDto.request_restr_NUM}</td>--%>
 <%--                                <td class="requestRestrName"><a--%>
-<%--                                        href="<c:url value="/mypage/admin/hotdeal/read?request_restr_NUM=${request_hotdealDto.request_hotdeal_restr_NUM}"/>">${request_hotdealDto.request_hotdeal_restr_name}</a>--%>
+<%--                                        href="<c:url value="/mypage/admin/hotdeal/read?request_restr_NUM=${request_hotdealDto.request_restr_NUM}"/>">${request_hotdealDto.request_restr_name}</a>--%>
 <%--                                </td>--%>
-<%--                                <td class="writer">${request_hotdealDto.request_hotdeal_reestr_menu_food}</td>--%>
-<%--                                <td class="writer">${request_hotdealDto.request_hotdeal_reestr_menu_price}</td>--%>
+<%--                                <td class="writer">${request_hotdealDto.request_reestr_menu_food}</td>--%>
+<%--                                <td class="writer">${request_hotdealDto.request_reestr_menu_price}</td>--%>
 
 <%--                            </tr>--%>
 <%--                        </c:forEach>--%>
@@ -217,7 +217,6 @@
         <div class="content index">
             <h1> F&Q✏️</h1>
             <div class="container item">
-                <%--      Board 게시판 같은거 하나 긁어오기--%>
             </div>
         </div>
 

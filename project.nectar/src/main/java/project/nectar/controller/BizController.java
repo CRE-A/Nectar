@@ -31,6 +31,8 @@ public class BizController {
     Request_RestrMenuDao request_restrMenuDao;
     @Autowired
     Request_HotdealDao request_hotdealDao;
+    @Autowired
+    RestrMenuDao restrMenuDao;
 
 
     @GetMapping("/main")
@@ -38,21 +40,25 @@ public class BizController {
         String Biz_email = (String)session.getAttribute("Biz_email");
 
         try {
-            List<RestrDto> restrDto = restrDao.selectByBiz_email(Biz_email);
+            RestrDto restrDto = restrDao.selectByBiz_email(Biz_email);
             m.addAttribute("restrDto",restrDto);
-            // 사업자(BizAccount)가 운영중인 모든 레스토랑에 대한 data
+            // 사업자(BizAccount)가 운영중인 레스토랑에 대한 data
 
             List<HotdealDto> hotdealDto = hotdealService.selectMyHotdeals(Biz_email);
             m.addAttribute("hotdealDto",hotdealDto);
-            // 사업자(BizAccount)가 진행한 모든 핫딜에 대한 data
+            // 사업자가 진행한 모든 핫딜에 대한 data
+
+            List<RestrMenuDto> restrMenuDto = restrMenuDao.selectAllMenu(restrDto.getRestr_NUM());
+            m.addAttribute("restrMenuDto",restrMenuDto);
+            // 사업자가 운영중인 레스토랑 메뉴에 대한 data
 
             BizAccountDto bizAccountDto = bizAccountDao.select(Biz_email);
             m.addAttribute("bizAccountDto",bizAccountDto);
-            // 사업자(BizAccount)에 대한 data
+            // 사업자에 대한 data
 
-//            List<Payment> payment = paymentService.getMyPayments(User_email);
-//            m.addAttribute("paymentService",paymentService);
-            // 사업자(BizAccount)가 판매한 핫딜의 모든 거래내역(payment)에 대한 data
+//            List<Payment> paymentDto = paymentService.getMyPayments(User_email);
+//            m.addAttribute("paymentDto",paymentDto);
+            // 사업자가 진행한 핫딜의 결제정보(payment)에 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,39 +100,35 @@ public class BizController {
         return "mypage/successPage/qnaWrtOk";
     }
 
+
     @PostMapping("/restr/write")
-    public String registerRestaurant(RestrDto restrDto, RestrMenuDto restrMenuDto ,RedirectAttributes rattr, Model m){
+    public String registerRestaurant(Request_RestrDto request_restrDto, RedirectAttributes rattr, Model m){
 
         try {
-            request_restrDao.insertAll(restrDto);           // 레스토랑 정보 작성 후 (관리자에게) 심사요청
-            request_restrMenuDao.insert(restrMenuDto);
-            //request_restr_pic 도 담아야함
-            rattr.addFlashAttribute("msg", "RESTR_WRT_OK");
-
+            request_restrDao.insertAll(request_restrDto);           // 레스토랑 정보 작성 후 (관리자에게) 심사요청
         } catch (Exception e) {
             e.printStackTrace();
-            // 에러처리 해야지?
             rattr.addFlashAttribute("msg", "RESTR_WRT_ERR");
-            return "redirect:/mypage/biz/main";
+            return "redirect:/mypage/biz/main";              // 에러처리 해야지?
         }
 
-        m.addAttribute("restrDto",restrDto);
+        m.addAttribute("restrDto",request_restrDto);
         return "mypage/successPage/restrWrtOk";
     }
 
     @PostMapping("/hotdeal/write")
-    public String registerHotdeal(HotdealDto hotdealDto, RedirectAttributes rattr, Model m){
+    public String registerHotdeal(Request_HotdealDto request_hotdealDto, RedirectAttributes rattr, Model m){
 
 
         try {
-            request_hotdealDao.insert(hotdealDto);          // 핫딜 정보 작성 후 (관리자에게) 심사요청
+            request_hotdealDao.insert(request_hotdealDto);          // 핫딜 정보 작성 후 (관리자에게) 심사요청
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "Hotdeal_WRT_ERR");
             return "redirect:/mypage/biz/main";
         }
 
-        m.addAttribute("hotdealDto",hotdealDto);
+        m.addAttribute("request_hotdealDto",request_hotdealDto);
         return "mypage/successPage/hotdealWrtOk";
     }
 

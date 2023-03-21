@@ -3,6 +3,7 @@ package project.nectar.repository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import project.nectar.domain.Request_RestrDto;
 import project.nectar.domain.RestrDto;
 
 import java.util.List;
@@ -15,18 +16,18 @@ public class Request_RestrDaoImpl implements Request_RestrDao {
 
 
     @Override
-    public List<RestrDto> selectAll(){
+    public List<Request_RestrDto> selectAll(){
         return session.selectList(namespace+"selectAll");
     }
 
     @Override
-    public RestrDto select(Integer request_restr_NUM){
+    public Request_RestrDto select(Integer request_restr_NUM){
         return session.selectOne(namespace+"select",request_restr_NUM);
     }
 
     @Override
-    public int insertAll(RestrDto restrDto){
-        return session.insert(namespace+"insertAll", restrDto);
+    public int insertAll(Request_RestrDto request_restrDto){
+        return session.insert(namespace+"insertAll", request_restrDto);
     }
 
     @Override

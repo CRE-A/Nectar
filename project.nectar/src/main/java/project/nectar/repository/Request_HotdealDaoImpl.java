@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.nectar.domain.HotdealDto;
+import project.nectar.domain.Request_HotdealDto;
 
 import java.util.List;
 
@@ -15,18 +16,18 @@ public class Request_HotdealDaoImpl implements Request_HotdealDao {
 
 
     @Override
-    public List<HotdealDto> selectAll(){
+    public List<Request_HotdealDto> selectAll(){
         return session.selectList(namespace+"selectAll");
     }
 
     @Override
-    public HotdealDto select(Integer request_hotdeal_NUM){
+    public Request_HotdealDto select(Integer request_hotdeal_NUM){
         return session.selectOne(namespace+"select", request_hotdeal_NUM);
     }
 
     @Override
-    public int insert(HotdealDto hotdealDto){
-        return session.insert(namespace+"insert", hotdealDto);
+    public int insert(Request_HotdealDto request_hotdealDto){
+        return session.insert(namespace+"insert", request_hotdealDto);
     }
 
 

@@ -51,11 +51,11 @@ public class AdminController {
             m.addAttribute("SearchResultBizAccountList",SearchResultBizAccountList);
             // 사업자(bizAccountDao)에 대한 data
 
-            List<RestrDto> request_restrDto = request_restrDao.selectAll();
+            List<Request_RestrDto> request_restrDto = request_restrDao.selectAll();
             m.addAttribute("request_restrDto",request_restrDto);
             // 사업자가 등록 요청한 레스토랑에 대한 data
 
-            List<HotdealDto> request_hotdealDto = request_hotdealDao.selectAll();
+            List<Request_HotdealDto> request_hotdealDto = request_hotdealDao.selectAll();
             m.addAttribute("request_hotdealDto",request_hotdealDto);
             // 사업자가 등록 요청한 핫딜에 대한 data
 
@@ -75,7 +75,7 @@ public class AdminController {
     @GetMapping("/restr/read")
     public String ReadRestr(Integer request_restr_NUM, Model m){
 
-        RestrDto request_restrDto = request_restrDao.select(request_restr_NUM);
+        Request_RestrDto request_restrDto = request_restrDao.select(request_restr_NUM);
         m.addAttribute("request_restrDto",request_restrDto);
         // 사업자가 등록 요청한 레스토랑에 대한 data
 
@@ -112,7 +112,7 @@ public class AdminController {
     @GetMapping("/hotdeal/read")
     public  String ReadHotdeal(Integer request_hotdeal_NUM, Model m) {
 
-        HotdealDto request_hotdealDto = request_hotdealDao.select(request_hotdeal_NUM);
+        Request_HotdealDto request_hotdealDto = request_hotdealDao.select(request_hotdeal_NUM);
         m.addAttribute("request_hotdealDto",request_hotdealDto);
         // 사업자가 등록 요청한 핫딜 대한 data
 

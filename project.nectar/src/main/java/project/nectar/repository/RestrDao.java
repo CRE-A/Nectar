@@ -12,7 +12,7 @@ public interface RestrDao {
 
     RestrDto select(Integer restr_NUM) throws Exception;
 
-    List<RestrDto> selectByBiz_email(String bizAccount_email) throws Exception;
+    RestrDto selectByBiz_email(String bizAccount_email) throws Exception;
 
     int delete(Integer restr_NUM) throws Exception;
 

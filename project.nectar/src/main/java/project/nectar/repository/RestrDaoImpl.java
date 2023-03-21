@@ -33,8 +33,8 @@ public class RestrDaoImpl implements RestrDao {
 
 
     @Override
-    public List<RestrDto> selectByBiz_email(String bizAccount_email) throws Exception{
-        return session.selectList(namespace+"selectByBiz_email", bizAccount_email);
+    public RestrDto selectByBiz_email(String bizAccount_email) throws Exception{
+        return session.selectOne(namespace+"selectByBiz_email", bizAccount_email);
     }
 
 

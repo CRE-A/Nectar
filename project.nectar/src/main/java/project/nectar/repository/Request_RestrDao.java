@@ -1,15 +1,16 @@
 package project.nectar.repository;
 
+import project.nectar.domain.Request_RestrDto;
 import project.nectar.domain.RestrDto;
 
 import java.util.List;
 
 public interface Request_RestrDao {
-    List<RestrDto> selectAll();
+    List<Request_RestrDto> selectAll();
 
-    RestrDto select(Integer request_restr_NUM);
+    Request_RestrDto select(Integer request_restr_NUM);
 
-    int insertAll(RestrDto restrDto);
+    int insertAll(Request_RestrDto request_restrDto);
 
     int delete(Integer request_restr_NUM);
 }

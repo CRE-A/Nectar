@@ -4,20 +4,20 @@
 
 <mapper namespace="project.nectar.repository.Request_HotdealMapper">
 
-    <select id="selectAll" resultType="HotdealDto">
+    <select id="selectAll" resultType="Request_HotdealDto">
         SELECT *
         FROM request_hotdeal
         ORDER BY request_hotdeal_regdate DESC
     </select>
 
-    <select id="select" parameterType="int" resultType="HotdealDto">
+    <select id="select" parameterType="int" resultType="Request_HotdealDto">
         SELECT *
         FROM request_hotdeal
         WHERE request_hotdeal_NUM = #{request_hotdeal_NUM}
     </select>
 
 
-    <insert id="insert" parameterType="HotdealDto">
+    <insert id="insert" parameterType="Request_HotdealDto">
         INSERT INTO request_hotdeal
         (request_restr_NUM, request_restr_name, request_restr_category_loc, request_restr_menu_NUM, request_restr_menu_food,
          request_restr_menu_price, request_hotdeal_price, request_hotdeal_discountRate, request_hotdeal_desc, request_hotdeal_picture, request_hotdeal_useDate, request_hotdeal_eventDuration,

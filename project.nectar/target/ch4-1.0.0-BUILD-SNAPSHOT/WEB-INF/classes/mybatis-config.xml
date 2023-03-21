@@ -17,6 +17,8 @@
 <!--        <typeAlias alias="PaymentDto" type="project.nectar.domain.PaymentDto"/>-->
         <typeAlias alias="BrowserHistoryDto" type="project.nectar.domain.BrowserHistoryDto"/>
         <typeAlias alias="QNADto" type="project.nectar.domain.QNADto"/>
+        <typeAlias alias="Request_HotdealDto" type="project.nectar.domain.Request_HotdealDto"/>
+        <typeAlias alias="Request_RestrDto" type="project.nectar.domain.Request_RestrDto"/>
 
     </typeAliases>
 </configuration>
