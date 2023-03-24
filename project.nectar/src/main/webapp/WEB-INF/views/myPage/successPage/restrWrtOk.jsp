@@ -24,7 +24,7 @@
 
 </head>
 
- 
+
 <body>
 <section id="navbar">
   <div class="logo">

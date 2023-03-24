@@ -82,29 +82,29 @@
                         </tr>
                         </thead>
                         <tbody>
-<%--                        <c:forEach var="SearchResultUserList" items="${SearchResultUserList}">--%>
-<%--                            <form action="<c:url value='/mypage/admin/account/management'/>" method="post" id="adminForm">--%>
-<%--                                <tr>--%>
-<%--                                    <td class="no"><input type="hidden" name="user_NUM"--%>
-<%--                                                          value="${SearchResultUserList.user_name}">${SearchResultUserList.user_name}</td>--%>
-<%--                                    <td class="writer"><input type="hidden" name="user_email"--%>
-<%--                                                              value="${SearchResultUserList.user_email}">${SearchResultUserList.user_email}</td>--%>
-<%--                                    <td class="viewCnt"><input type="hidden" name="user_ph"--%>
-<%--                                                               value="${SearchResultUserList.user_phone}">${SearchResultUserList.user_phone}</td>--%>
-<%--                                    <td>--%>
-<%--                                        <select name="user_state_code">--%>
-<%--                                            <option value="0">일반회원</option>--%>
-<%--                                            <option value="-1">리뷰작성금지</option>--%>
-<%--                                            <option value="-2">핫딜결제금지</option>--%>
-<%--                                            <option value="-3">계정삭제</option>--%>
-<%--                                        </select>--%>
-<%--                                    </td>--%>
-<%--                                    <td>--%>
-<%--                                        <input class="userBtn" type="submit" value="회원등급변경">--%>
-<%--                                    </td>--%>
-<%--                                </tr>--%>
-<%--                            </form>--%>
-<%--                        </c:forEach>--%>
+                        <%--                        <c:forEach var="SearchResultUserList" items="${SearchResultUserList}">--%>
+                        <%--                            <form action="<c:url value='/mypage/admin/account/management'/>" method="post" id="adminForm">--%>
+                        <%--                                <tr>--%>
+                        <%--                                    <td class="no"><input type="hidden" name="user_NUM"--%>
+                        <%--                                                          value="${SearchResultUserList.user_name}">${SearchResultUserList.user_name}</td>--%>
+                        <%--                                    <td class="writer"><input type="hidden" name="user_email"--%>
+                        <%--                                                              value="${SearchResultUserList.user_email}">${SearchResultUserList.user_email}</td>--%>
+                        <%--                                    <td class="viewCnt"><input type="hidden" name="user_ph"--%>
+                        <%--                                                               value="${SearchResultUserList.user_phone}">${SearchResultUserList.user_phone}</td>--%>
+                        <%--                                    <td>--%>
+                        <%--                                        <select name="user_state_code">--%>
+                        <%--                                            <option value="0">일반회원</option>--%>
+                        <%--                                            <option value="-1">리뷰작성금지</option>--%>
+                        <%--                                            <option value="-2">핫딜결제금지</option>--%>
+                        <%--                                            <option value="-3">계정삭제</option>--%>
+                        <%--                                        </select>--%>
+                        <%--                                    </td>--%>
+                        <%--                                    <td>--%>
+                        <%--                                        <input class="userBtn" type="submit" value="회원등급변경">--%>
+                        <%--                                    </td>--%>
+                        <%--                                </tr>--%>
+                        <%--                            </form>--%>
+                        <%--                        </c:forEach>--%>
                         </tbody>
                     </table>
                 </div>
@@ -125,17 +125,17 @@
                         </thead>
                         <tbody>
 
-<%--                                                <c:forEach var="SearchResultBizAccountList" items="${SearchResultBizAccountList}">--%>
+                        <%--                                                <c:forEach var="SearchResultBizAccountList" items="${SearchResultBizAccountList}">--%>
 
-<%--                                                    <tr>--%>
-<%--                                                        <td class="no"> ${SearchResultBizAccountList.bizAccount_name}</td>--%>
-<%--                                                        <td class="writer"> ${SearchResultBizAccountList.bizAccount_email}</td>--%>
-<%--                                                        <td class="viewCnt"> ${SearchResultBizAccountList.bizAccount_phone}</td>--%>
-<%--                                                        <td class="date"> ${SearchResultBizAccountList.bizAccount_regdate}</td>--%>
-<%--                                                        <td class="viewCnt"> ${SearchResultBizAccountList.bizAccount_regNum}</td>--%>
-<%--                                                    </tr>--%>
+                        <%--                                                    <tr>--%>
+                        <%--                                                        <td class="no"> ${SearchResultBizAccountList.bizAccount_name}</td>--%>
+                        <%--                                                        <td class="writer"> ${SearchResultBizAccountList.bizAccount_email}</td>--%>
+                        <%--                                                        <td class="viewCnt"> ${SearchResultBizAccountList.bizAccount_phone}</td>--%>
+                        <%--                                                        <td class="date"> ${SearchResultBizAccountList.bizAccount_regdate}</td>--%>
+                        <%--                                                        <td class="viewCnt"> ${SearchResultBizAccountList.bizAccount_regNum}</td>--%>
+                        <%--                                                    </tr>--%>
 
-<%--                                                </c:forEach>--%>
+                        <%--                                                </c:forEach>--%>
 
                         </tbody>
                     </table>
@@ -152,26 +152,25 @@
                         <thead>
                         <tr>
                             <th>no</th>
-                            <th class="title">사업장이름</th>
-                            <th>사업주</th>
+                            <th>매장이름</th>
                             <th>연락처</th>
                         </tr>
                         </thead>
                         <tbody>
 
-<%--                        <c:forEach var="request_restrDto" items="${request_restrDto}">--%>
+                        <c:forEach var="request_restrDto" items="${request_restrDto}">
 
-<%--                            <tr>--%>
-<%--                                <td class="no">${request_restrDto.requestRestr_restr_NUM}</td>--%>
-<%--                                <td class="title"><a--%>
-<%--                                        href="<c:url value="/mypage/admin/restr/read?request_restr_NUM=${request_restrDto.request_restr_NUM}"/>"></a>--%>
-<%--                                </td>--%>
-<%--                                <td class="writer">${request_restrDto.requestRestr_restr_name}</td>--%>
-<%--                                <td class="date">${request_restrDto.requestRestr_restr_name}</td>--%>
-<%--                                <td class="viewCnt">${request_restrDto.requestRestr_restr_phone}</td>--%>
-<%--                            </tr>--%>
+                            <tr>
+                                <td >${request_restrDto.request_restr_NUM}</td>
+                                <td class="title"><a
+                                        href="<c:url value="/mypage/admin/restr/read?request_restr_NUM=${request_restrDto.request_restr_NUM}"/>">
+                                        ${request_restrDto.request_restr_name}
+                                </a>
+                                </td>
+                                <td >${request_restrDto.request_restr_phone}</td>
+                            </tr>
 
-<%--                        </c:forEach>--%>
+                        </c:forEach>
 
                         </tbody>
                     </table>
@@ -195,18 +194,18 @@
                         </thead>
                         <tbody>
 
-<%--                        <c:forEach var="request_hotdealDto" items="${request_hotdealDto}">--%>
+                        <%--                        <c:forEach var="request_hotdealDto" items="${request_hotdealDto}">--%>
 
-<%--                            <tr>--%>
-<%--                                <td class="no">${request_hotdealDto.request_restr_NUM}</td>--%>
-<%--                                <td class="requestRestrName"><a--%>
-<%--                                        href="<c:url value="/mypage/admin/hotdeal/read?request_restr_NUM=${request_hotdealDto.request_restr_NUM}"/>">${request_hotdealDto.request_restr_name}</a>--%>
-<%--                                </td>--%>
-<%--                                <td class="writer">${request_hotdealDto.request_reestr_menu_food}</td>--%>
-<%--                                <td class="writer">${request_hotdealDto.request_reestr_menu_price}</td>--%>
+                        <%--                            <tr>--%>
+                        <%--                                <td class="no">${request_hotdealDto.request_restr_NUM}</td>--%>
+                        <%--                                <td class="requestRestrName"><a--%>
+                        <%--                                        href="<c:url value="/mypage/admin/hotdeal/read?request_restr_NUM=${request_hotdealDto.request_restr_NUM}"/>">${request_hotdealDto.request_restr_name}</a>--%>
+                        <%--                                </td>--%>
+                        <%--                                <td class="writer">${request_hotdealDto.request_reestr_menu_food}</td>--%>
+                        <%--                                <td class="writer">${request_hotdealDto.request_reestr_menu_price}</td>--%>
 
-<%--                            </tr>--%>
-<%--                        </c:forEach>--%>
+                        <%--                            </tr>--%>
+                        <%--                        </c:forEach>--%>
 
                         </tbody>
                     </table>
@@ -217,6 +216,17 @@
         <div class="content index">
             <h1> F&Q✏️</h1>
             <div class="container item">
+
+                <c:forEach var="QNADto" items="${QNADto}">
+                    ${QNADto.qna_NUM}</br>
+                    ${QNADto.qna_title}</br>
+                    ${QNADto.qna_content}</br>
+                    ${QNADto.qna_picture}</br>
+                    ${QNADto.qna_regdate}</br>
+                    ${QNADto.qna_writer}</br>
+                    ${QNADto.qna_name}</br>
+                    -------------------</br>
+                </c:forEach>
             </div>
         </div>
 
@@ -253,17 +263,39 @@
 <%--    </c:forEach>--%>
 <%--</div>--%>
 
-<h2>QNA 게시판 TEST</h2>
-<c:forEach var="QNADto" items="${QNADto}">
-    ${QNADto.qna_NUM}</br>
-    ${QNADto.qna_title}</br>
-    ${QNADto.qna_content}</br>
-    ${QNADto.qna_picture}</br>
-    ${QNADto.qna_regdate}</br>
-    ${QNADto.qna_writer}</br>
-    ${QNADto.qna_name}</br>
-    -------------------</br>
-</c:forEach>
+
+<script>
+    $(document).ready(() => {
+
+        // TAB 기능 //
+
+        const tabs = document.querySelectorAll("button.tab");
+        const contents = document.querySelectorAll(".content");
+
+        tabs.forEach((tab, idx) => {
+            tab.addEventListener("click", (e) => {
+
+                contents.forEach((content) => {
+                    content.classList.remove('active')
+                })
+
+                tabs.forEach((tab) => {
+                    tab.classList.remove('active')
+                })
+
+                tabs[idx].classList.add('active')
+                contents[idx].classList.add('active')
+            });
+        });
+
+        // TAB 기능 //
+
+
+    }) // ready()
+
+</script>
+
 
 </body>
 </html>
+

@@ -18,6 +18,15 @@
     <%--    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>--%>
     <%--    <link rel="stylesheet" href="<c:url value='/css/globalPage.css'/>"/>--%>
 
+
+    <style>
+        #form {
+            display: flex;
+            flex-direction: column;
+
+
+        }
+    </style>
 </head>
 
 
@@ -42,9 +51,11 @@
 
 <h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 
-<form id="form" action="<c:url value=''/>" method="post">
+<form id="form" >
+
     <label><input name="restr_NUM" type="hidden" value="${request_restrDto.request_restr_NUM}"/></label>
-    <label><input name="bizAccount_email" type="text" value="${request_restrDto.request_bizAccount_email}" readonly/> 사업주
+    <label><input name="bizAccount_email" type="text" value="${request_restrDto.request_bizAccount_email}" readonly/>
+        사업주
         : ${request_restrDto.request_bizAccount_email} </label>
     <label><input name="restr_name" type="text" value="${request_restrDto.request_restr_name}"/> 사업장명
         : ${request_restrDto.request_restr_name}</label>
@@ -52,6 +63,10 @@
         : ${request_restrDto.request_restr_phone}</label>
     <label><input name="restr_location" type="text" value="${request_restrDto.request_restr_location}"/> 위치
         : ${request_restrDto.request_restr_location}</label>
+    <label><input name="restr_time" type="text" value="${request_restrDto.request_restr_time}"/> 매장 운영 시간
+        : ${request_restrDto.request_restr_time}</label>
+    <label><input name="restr_tag" type="text" value="${request_restrDto.request_restr_tag}"/> 매장 관련 태그
+        : ${request_restrDto.request_restr_tag}</label>
     <label><input name="restr_location_tag" type="text" value="${request_restrDto.request_restr_location_tag}"/> 위치태그
         : ${request_restrDto.request_restr_location_tag}</label>
     <label><input name="restr_foodType" type="text" value="${request_restrDto.request_restr_foodType}"/> 음식종류
@@ -62,12 +77,15 @@
         : ${request_restrDto.request_restr_parking}</label>
     <label><input name="restr_menu" type="text" value="${request_restrDto.request_restr_menu}"/> 메뉴
         : ${request_restrDto.request_restr_menu}</label>
+    <label><input name="biz_reg_num" type="text" value="${request_restrDto.request_biz_reg_num}"/> 사업자 등록증 번호
+        : ${request_restrDto.request_biz_reg_num}</label>
     <label><input name="restr_desc" type="text" value="${request_restrDto.request_restr_desc}"/> 레스토랑 정보 / 설명
         : ${request_restrDto.request_restr_desc}</label>
-    <label><input name="category_loc" type="text" value="${request_restrDto.request_category_loc}"/> 위치 카테고리
-        : ${request_restrDto.request_category_loc}</label>
-    <label><input name="restr_picture" type="text" value="${request_restrDto.request_restr_picture}"/>
-                <img src="${request_restrDto.request_restr_picture}">
+    <%--    <label><input name="category_loc" type="text" value="${request_restrDto.request_category_loc}"/> 위치 카테고리--%>
+    <%--        : ${request_restrDto.request_category_loc}</label>--%>
+    <label><input name="restr_picture" type="text" value="${request_restrDto.request_restr_picture}"
+                  placeholder="나중에 input[type=file] 로 변경"/> 레스토랑 이미지파일
+        <img src="${request_restrDto.request_restr_picture}">
     </label>
     <button type="button" id="registerBtn">심사완료</button>
     <button type="button" id="denyBtn">심사반려</button>
@@ -94,19 +112,14 @@
 
         $("#listBtn").on("click", function () {
             location.href = "<c:url value='/mypage/admin/main'/>";
-        });
+        }); // 목록으로 이동
 
         $("#registerBtn").on("click", function () {
             let form = $("#form");
-            form.attr("action", "<c:url value='/mypage/admin/restr/register'/>");
+            form.attr("action", "<c:url value='/mypage/admin/restr/register?request_restr_NUM=${request_restrDto.request_restr_NUM}'/>");
             form.attr("method", "post");
-            if (formCheck())
-                form.submit();
-        });
-
-        $("#listBtn").on("click", function () {
-            location.href = "<c:url value='/mypage/admin/main'/>";
-        });
+            form.submit();
+        }); // 심사완료
 
         $("#denyBtn").on("click", function () {
             if (!confirm("사업장 등록 요청을 반려하시겠습니까?")) return;

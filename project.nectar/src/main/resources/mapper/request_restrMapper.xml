@@ -27,7 +27,7 @@
     </insert>
 
     <delete id="delete" parameterType="int">
-        insert into request_restr
+        delete from request_restr
         where request_restr_NUM=#{request_restr_NUM}
     </delete>
 

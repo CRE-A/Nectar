@@ -184,7 +184,6 @@
                             <%--                            likelistDto.user_email : ${likelistDto.user_email}--%>
                             <%--                            loginUserEmail : ${loginUserEmail}--%>
                         </button>
-                        <p class="likeText">좋아요</p>
                     </form>
 
                 </li>
@@ -509,7 +508,7 @@
                 if (!confirm("로그인을 해야 리뷰를 남길 수 있습니다. 로그인 하시겠습니까?")) return;
                 location.href = "<c:url value='/login/beforeReview?restr_NUM=${restrDto.restr_NUM}'/> ";
             }
-        });
+        }); // review-edtior
 
 
         $("#submitBtn").on("click", () => {
@@ -520,7 +519,7 @@
             form.submit();
 
 
-        });
+        }); // submit
 
 
         $(".review").on("click", "#reviewModifyBtn", (e) => {
@@ -555,7 +554,7 @@
             form.attr("method", "post");
             form.submit();
 
-        })
+        }); // review 수정
 
 
         // 20230312 여기 하는 중 !
@@ -606,6 +605,6 @@
 
         })
 
-    });
+    }); // ready()
 </script>
 

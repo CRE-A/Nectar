@@ -75,12 +75,15 @@ public class AdminController {
     @GetMapping("/restr/read")
     public String ReadRestr(Integer request_restr_NUM, Model m){
 
+        System.out.println("request_restr_NUM = " + request_restr_NUM);
+
+
         Request_RestrDto request_restrDto = request_restrDao.select(request_restr_NUM);
         m.addAttribute("request_restrDto",request_restrDto);
         // 사업자가 등록 요청한 레스토랑에 대한 data
 
-        List<RestrMenuDto> request_restrMenuDto = request_restrMenuDao.selectAll(request_restr_NUM);
-        m.addAttribute("request_restrMenuDto",request_restrMenuDto);
+//        List<RestrMenuDto> request_restrMenuDto = request_restrMenuDao.selectAll(request_restr_NUM);
+//        m.addAttribute("request_restrMenuDto",request_restrMenuDto);
         // 사업자가 등록 요청한 레스토랑 메뉴에 대한 data
 
         return "mypage/restrReqForm";
@@ -88,11 +91,13 @@ public class AdminController {
 
 
     @PostMapping("/restr/register")
-    public String register(RestrDto restrDto, RestrMenuDto restrMenuDto){
+    public String register(Integer request_restr_NUM, RestrDto restrDto, RestrMenuDto restrMenuDto){
 
         try {
             restrDao.insertAll(restrDto);
-            restrMenuDao.insert(restrMenuDto);
+            request_restrDao.delete(request_restr_NUM);
+
+//            restrMenuDao.insert(restrMenuDto);
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/";
