@@ -14,7 +14,6 @@ import project.nectar.domain.UserDto;
 import project.nectar.repository.LikelistDao;
 import project.nectar.repository.QNADao;
 import project.nectar.repository.UserDao;
-import project.nectar.service.LikelistService;
 import project.nectar.service.ReviewService;
 
 import javax.servlet.http.HttpSession;
@@ -60,7 +59,7 @@ public class UserController {
             return "redirect:/";
         }
 
-        return "mypage/user";
+        return "myPage/user";
     }
 
     @PostMapping("/profile/modify")
@@ -85,12 +84,12 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg","QNA_WRT_ERR");
-            return "redirect:/mypage/biz/main";
+            return "redirect:/mypage/user/main";
 
         }
 
         m.addAttribute("qnaDto",qnaDto);
-        return "mypage/successPage/qnaWrtOk";
+        return "successPage/qnaWrtOk";
     }
 
 

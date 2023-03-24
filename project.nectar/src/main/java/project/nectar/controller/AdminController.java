@@ -68,7 +68,7 @@ public class AdminController {
             return "redirect:/";
         }
 
-        return "mypage/admin";
+        return "myPage/admin";
     }
 
 
@@ -86,7 +86,7 @@ public class AdminController {
 //        m.addAttribute("request_restrMenuDto",request_restrMenuDto);
         // 사업자가 등록 요청한 레스토랑 메뉴에 대한 data
 
-        return "mypage/restrReqForm";
+        return "myPage/restrReqForm";
     }
 
 
@@ -121,7 +121,7 @@ public class AdminController {
         m.addAttribute("request_hotdealDto",request_hotdealDto);
         // 사업자가 등록 요청한 핫딜 대한 data
 
-        return "mypage/hotdealReqForm";
+        return "myPage/hotdealReqForm";
 
     }
 
@@ -153,7 +153,7 @@ public class AdminController {
         m.addAttribute("qnaDto",qnaDto);
         // User, BizAccount 가 문의 한 Q&A 에 대한 data
 
-        return "mypage/qnaForm";
+        return "myPage/qnaForm";
 
     }
 

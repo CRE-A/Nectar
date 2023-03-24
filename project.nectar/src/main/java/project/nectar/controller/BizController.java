@@ -65,7 +65,7 @@ public class BizController {
             return "redirect:/";
         }
 
-        return "mypage/biz";
+        return "myPage/biz";
     }
 
 
@@ -97,7 +97,7 @@ public class BizController {
         }
 
         m.addAttribute("qnaDto",qnaDto);
-        return "mypage/successPage/qnaWrtOk";
+        return "successPage/qnaWrtOk";
     }
 
 
@@ -113,7 +113,7 @@ public class BizController {
         }
 
         m.addAttribute("restrDto",request_restrDto);
-        return "mypage/successPage/restrWrtOk";
+        return "successPage/restrWrtOk";
     }
 
     @PostMapping("/hotdeal/write")
@@ -129,7 +129,7 @@ public class BizController {
         }
 
         m.addAttribute("request_hotdealDto",request_hotdealDto);
-        return "mypage/successPage/hotdealWrtOk";
+        return "successPage/hotdealWrtOk";
     }
 
 
