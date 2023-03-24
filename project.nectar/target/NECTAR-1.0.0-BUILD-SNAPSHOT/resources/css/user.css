@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;900&display=swap");
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+section#myPage {
+    /* background-color: red; */
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.sideMenu {
+    padding-top: 20px;
+    display: flex;
+    flex-basis: 20%;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: blue; */
+}
+
+button.sideMenu__mypage,
+button.sideMenu__user {
+    width: 80%;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: transparent;
+    border: 0;
+    border-left: 2px solid orange;
+    margin-bottom: 20px;
+}
+
+
+.userInfo {
+    flex-basis: 80% !important;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.userInfo > h1 {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid;
+}
+
+h1.h1{
+    margin-bottom: 25px;
+}
+
+#userInfoForm {
+    margin-top: 20px;
+    padding: 30px 0 0 0;
+    -webkit-box-shadow: 0px 2px 12px 0px rgba(110, 110, 110, 0.38);
+    -moz-box-shadow: 0px 2px 12px 0px rgba(110, 110, 110, 0.38);
+    box-shadow: 0px 2px 12px 0px rgba(110, 110, 110, 0.38);
+}
+
+.userInfo__box {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.userInfo__profile {
+    /* background-color: blueviolet; */
+    width: 200px;
+    height: 200px;
+}
+
+.user-profile {
+    width: 100%;
+    height: 100%;
+}
+.updateUserProfile {
+    /* background-color: aqua; */
+    position: relative;
+    left: 3em;
+}
+.user-profile {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userPrflUpld {
+    display: none;
+}
+
+.userInfo__btnWrap {
+    display: flex;
+    justify-content: end;
+}
+
+.userInfo__items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: green; */
+    width: 38em;
+}
+
+.userNameId {
+    display: flex;
+    justify-content: space-between;
+}
+.userNameId.item {
+    width: 50%;
+    margin-bottom: 40px;
+}
+
+.userNameId.item > input,
+.userEmail > input {
+    height: 40px;
+    margin-right: 8px;
+}
+.userNameId.item > span,
+.userEmail > span {
+    margin-bottom: 15px;
+}
+
+.userNameId.item,
+.userEmail {
+    display: flex;
+    flex-direction: column;
+}
+
+.userInfo__btnWrap {
+    height: 80px;
+    background-color: rgb(245, 241, 239);
+    margin-top: 50px;
+}
+
+.modifyBtn {
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: orange;
+    border: 0;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    width: 120px;
+    height: 40px;
+    position: relative;
+    right: 37px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.tab.log.active {
+    display: block;
+}
+
+.tab.log {
+    display: none;
+}
+
+.tab.user {
+    display: none;
+}
+
+.tab.user.active {
+    display: block;
+}
+

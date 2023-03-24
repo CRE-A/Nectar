@@ -53,7 +53,7 @@
             <a href="<c:url value='/restr/list'/>">맛집리스트</a>
         </li>
         <li class="menu item">
-            <a href="<c:url value='/mypage/main'/>">
+            <a href="<c:url value='/mypage/logincheck'/>">
                 <c:choose>
                 <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
             <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>

@@ -59,7 +59,7 @@ public class UserController {
             return "redirect:/";
         }
 
-        return "myPage/user";
+        return "mypage/user";
     }
 
     @PostMapping("/profile/modify")
@@ -89,7 +89,7 @@ public class UserController {
         }
 
         m.addAttribute("qnaDto",qnaDto);
-        return "successPage/qnaWrtOk";
+        return "mypage/successPage/qnaWrtOk";
     }
 
 
