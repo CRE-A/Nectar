@@ -64,7 +64,7 @@ public class RestrController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "matListPage/errorPage/searchERR";
+            return "errorPage/searchERR";
 
         }
 
