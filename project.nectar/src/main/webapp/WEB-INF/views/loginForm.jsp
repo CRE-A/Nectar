@@ -70,12 +70,11 @@
         <div id="inputBox">
             <div id="inputBox1">
                 <i class="fa-solid fa-id-badge"></i>
-                <input class="detail" type="text" name="email" placeholder="이메일" value="${cookie.email.value}" autofocus>
+                <input class="detail" type="text" name="user_email" placeholder="이메일" value="${cookie.email.value}" autofocus>
             </div>
-
             <div id="inputBox2">
                 <i class="fa-sharp fa-solid fa-key"></i>
-                <input class="detail" type="password" name="pwd" placeholder="비밀번호">
+                <input class="detail" type="password" name="user_pwd" placeholder="비밀번호">
             </div>
         </div>
         <input type="hidden" name="toURL" value="${param.toURL}">
@@ -110,11 +109,11 @@
 
 <script>
     function loginFormCheck(frm) {
-        if (frm.email.value.length == 0) {
+        if (frm.user_email.value.length == 0) {
             setMessage("이메일을 입력해 주세요")
             return false;
         }
-        if (frm.pwd.value.length == 0) {
+        if (frm.user_pwd.value.length == 0) {
             setMessage("비밀번호를 입력해 주세요.")
             return false;
         }

@@ -1,6 +1,7 @@
 package project.nectar.repository;
 
 import project.nectar.domain.RestrDto;
+import project.nectar.domain.UserDetailsDto;
 import project.nectar.domain.UserDto;
 
 import java.util.HashMap;
@@ -23,4 +24,5 @@ public interface UserDao {
 
     int count();
 
+    UserDetailsDto selectByUserEmail(String user_email);
 }

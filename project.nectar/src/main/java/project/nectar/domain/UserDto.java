@@ -11,7 +11,7 @@ public class UserDto {
     private String user_picture;
     private Date user_regdate;
     private String user_state_code;
-    private String auth;
+    private String authority;
     private Integer enabled;
 
     public UserDto(){};
@@ -79,12 +79,12 @@ public class UserDto {
         this.user_state_code = user_state_code;
     }
 
-    public String getAuth() {
-        return auth;
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setAuth(String auth) {
-        this.auth = auth;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 
     public Integer getEnabled() {
@@ -118,7 +118,7 @@ public class UserDto {
                 ", user_picture='" + user_picture + '\'' +
                 ", user_regdate=" + user_regdate +
                 ", user_state_code='" + user_state_code + '\'' +
-                ", auth='" + auth + '\'' +
+                ", authority='" + authority + '\'' +
                 ", enabled=" + enabled +
                 '}';
     }

@@ -91,9 +91,7 @@ public class RestrController {
             System.out.println("===================================================================");
 
         BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), user_email,restr_NUM);
-//        likeDto.setUser_email(user_email);
         likeDto.setUser_email(user_email);
-        System.out.println("likeDto = " + likeDto);
 
         try {
             RestrDto restrDto = restrService.read(restr_NUM, bh);
@@ -111,9 +109,7 @@ public class RestrController {
             LikelistDto likelistDto = likelistService.select(likeDto);
             m.addAttribute("likelistDto",likelistDto);
             // 로그인 했다면, 로그인 계정(유저)가 누른 좋아요에 대한 data
-            System.out.println("likelistDto = " + likelistDto);
-            System.out.println("===================================================================");
-            
+
             UserDto userDto = userDao.select(user_email);
             m.addAttribute("userDto",userDto);
             // 로그인 했다면, 로그인 계정(유저)에 대한 data

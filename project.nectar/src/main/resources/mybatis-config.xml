@@ -19,6 +19,7 @@
         <typeAlias alias="QNADto" type="project.nectar.domain.QNADto"/>
         <typeAlias alias="Request_HotdealDto" type="project.nectar.domain.Request_HotdealDto"/>
         <typeAlias alias="Request_RestrDto" type="project.nectar.domain.Request_RestrDto"/>
+        <typeAlias alias="UserDetailsDto" type="project.nectar.domain.UserDetailsDto"/>
 
     </typeAliases>
 </configuration>

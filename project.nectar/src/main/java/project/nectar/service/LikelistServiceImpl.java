@@ -18,7 +18,6 @@ public class LikelistServiceImpl implements LikelistService {
 
     @Override
     public LikelistDto select(LikelistDto likelistDto) throws Exception{
-        System.out.println("likelistDto = " + likelistDto);
         return likelistDao.select(likelistDto);
     } // 유저가 로그인 해서 게시물(restr.jsp)에 들어갔을 때, 좋아요 누른 가게인지 확인용
 
