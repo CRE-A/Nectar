@@ -11,7 +11,7 @@ public class BizAccountDto {
     private String bizAccount_regdate;
     private String bizAccount_state_code;
     private String bizAccount_regNum;
-    private String auth;
+    private String authority;
     private Integer enabled;
 
     public BizAccountDto(){}
@@ -88,12 +88,12 @@ public class BizAccountDto {
         this.bizAccount_regNum = bizAccount_regNum;
     }
 
-    public String getAuth() {
-        return auth;
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setAuth(String auth) {
-        this.auth = auth;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 
     public Integer getEnabled() {
@@ -128,7 +128,7 @@ public class BizAccountDto {
                 ", bizAccount_regdate='" + bizAccount_regdate + '\'' +
                 ", bizAccount_state_code='" + bizAccount_state_code + '\'' +
                 ", bizAccount_regNum='" + bizAccount_regNum + '\'' +
-                ", auth='" + auth + '\'' +
+                ", authority='" + authority + '\'' +
                 ", enabled=" + enabled +
                 '}';
     }

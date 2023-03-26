@@ -71,4 +71,12 @@
         FROM bizaccount
     </select>
 
+
+    <select id="selectByUserEmail" parameterType="String" resultType="BizAccountDetailsDto">
+        SELECT *
+        FROM bizaccount
+        WHERE bizAccount_email = #{bizAccount_email};
+    </select>
+
+
 </mapper>

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import project.nectar.domain.BizAccountDto;
 import project.nectar.domain.UserDto;
 import project.nectar.repository.UserDao;
 import project.nectar.service.UserService;
@@ -19,12 +20,12 @@ public class RegisterController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/add")
+    @GetMapping("/addUser")
     public String registerForm() {
         return "registerForm";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addUser")
 
     public String register(String id, String pwd, UserDto userDto, Model m) throws Exception {
 
@@ -71,6 +72,31 @@ public class RegisterController {
 //        return user == null || user.equals("");
 //
 //    }
+
+
+
+    @GetMapping("/addBiz")
+    public String registerForm_Biz() {
+        return "registerFormBiz";
+    }
+
+    @PostMapping("/addBiz")
+
+    public String register_Biz(String id, String pwd, BizAccountDto bizAccountDto, Model m) throws Exception {
+
+
+        System.out.println("RegisterController, 방금 여기 지나감");
+//        userDto.setAuthority("ROLE_USER");
+//        userDto.setAuthority("ROLE_USER, ROLE_BIZ, ROLE_ADMIN");
+        System.out.println("userDto = " + bizAccountDto);
+        userService.RegisterBiz(bizAccountDto);
+        return "redirect:/";
+
+
+    }
+
+
+
 
 
 }

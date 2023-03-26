@@ -1,5 +1,6 @@
 package project.nectar.repository;
 
+import project.nectar.domain.BizAccountDetailsDto;
 import project.nectar.domain.BizAccountDto;
 
 import java.util.HashMap;
@@ -21,4 +22,6 @@ public interface BizAccountDao {
     int deleteAll();
 
     int count();
+
+    BizAccountDetailsDto selectByUserEmail(String bizAccount_email);
 }

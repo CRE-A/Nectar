@@ -28,7 +28,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         System.out.println("session.getAttribute(\"prevPage\") = " + session.getAttribute("prevPage"));
 //        System.out.println("session.getAttribute(\"loginCheck\") = " + session.getAttribute("loginCheck"));
-        System.out.println("authentication.getPrincipal() = " + authentication.getPrincipal());
+//        System.out.println("authentication.getPrincipal() = " + authentication.getPrincipal());
         System.out.println("authentication.getPrincipal().toString() = " + authentication.getPrincipal().toString());
         System.out.println("=======================================================================");
         //경우1 : 로그인 인증을 위해 Spring Security가 요청을 가로챈 경우

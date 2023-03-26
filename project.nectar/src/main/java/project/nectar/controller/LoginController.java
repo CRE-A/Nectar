@@ -106,90 +106,6 @@ public class LoginController {
     }
 
 //
-//
-//    @PostMapping("/loginProcess")
-//    public String login(@RequestParam(value="_csrf") String _csrf ,@RequestParam(value="email")String email,@RequestParam(value = "pwd") String pwd, boolean rememberEmailPwd, String toURL, HttpSession session, HttpServletResponse response) throws UnsupportedEncodingException {
-//
-//        System.out.println(" post 까지 잘 도착함 ");
-//        System.out.println("_csrf = " + _csrf);
-//        session.setAttribute("loginCheck",true);
-//        session.setAttribute("email",email);
-//
-//        String result = loginCheck(email, pwd);                                            //    loginCheck() 실행결과  "Admin","Biz","User","LoginFail" 중 하나 반환
-//        if (result.equals("LoginFail")){                                                   // 1. loginCheck() 실패 시, 회원가입 시킨 후 메인페이지로 이동시킨다.
-//            String msg = URLEncoder.encode("email 또는 pwd를 잘못 입력했습니다.", "utf-8");
-//            return "redirect:/login/login?msg=" + msg;
-//        }
-//        session.setAttribute(result + "_email", email);                                 // 2. loginCheck() 성공 시, 세션에 ("Admin_email",email)  ("Biz_email",email)  ("User_email",email) 중 하나 추가
-//
-//
-//        if (rememberEmailPwd) {
-//            Cookie cookieEmail = new Cookie("email", email);
-//            Cookie cookiePwd = new Cookie("pwd", pwd);
-//            response.addCookie(cookieEmail);
-//            response.addCookie(cookiePwd);
-//        } else {
-//            Cookie cookieEmail = new Cookie("email", email);
-//            Cookie cookiePwd = new Cookie("pwd", pwd);
-//            cookieEmail.setMaxAge(0);
-//            cookiePwd.setMaxAge(0);
-//            response.addCookie(cookieEmail);
-//            response.addCookie(cookiePwd);
-//        }
-//        toURL = toURL == null || toURL.equals("") ? "/" : toURL;
-//        return "redirect:" + toURL;
-//    }
-//
-
-
-
-//
-//
-//    // LoginController.java
-//
-//    @Controller
-//    public class LoginController.java {
-//
-//        @Autowired
-//        LoginService loginService;
-//
-//        @RequestMapping(value="/loginProcess")
-//        public String loginProcess(HttpSession session,
-//                @RequestParam(value="id") String id,
-//                @RequestParam(value="pw") String pw) {
-//
-//            if(loginService.loginCheck(id, pw)){ // id,pw검사를 통해 True,false를 return
-//                session.setAttribute("loginCheck",true);
-//                session.setAttribute("id",id);
-//                return "index";
-//            }else{
-//                return "login";
-//            }
-//        }
-//
-//        @RequestMapping(value="/logoutProcess")
-//        public String logoutProcess(HttpSession session) {
-//
-//            session.setAttribute("loginCheck",null);
-//            session.setAttribute("id",null);
-//
-//            return "index";
-//        }
-//
-//        @RequestMapping(value="/needLogin")
-//        public String needLoginPage(HttpSession session) {
-//
-//            //세션 검사를 통해 Access control
-//            if(session.getAttribute("loginCheck")!=null){
-//                return "needLogin";
-//            }else{
-//                return "login";
-//            }
-//        }
-//
-//    }
-
-
 
 
 
@@ -198,15 +114,15 @@ public class LoginController {
 
         SnsLogin snsLogin = new SnsLogin(googleSns);                                       // google 소셜 로그인
         UserDto snsUser = snsLogin.getUserProfile(code);                                   // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
-
-        String result = loginCheck(snsUser.getUser_email(), snsUser.getUser_pwd());        //    loginCheck() 실행결과  "Admin","Biz","User","LoginFail" 중 하나 반환
-        if (result.equals("LoginFail")){                                                   // 1. loginCheck() 실패 시, 회원가입 시킨 후 메인페이지로 이동시킨다.
-            userDao.insert(snsUser);
-            return "redirect:/";
-        }
-        session.setAttribute(result + "_email", snsUser.getUser_email());               // 2. loginCheck() 성공 시, 세션에 ("Admin_email",email)  ("Biz_email",email)  ("User_email",email) 중 하나 추가
-        System.out.println("session check = " + result+"계정으로 로그인");
-        System.out.println("session id = " + session.getAttribute(result+"_email"));
+//
+//        String result = loginCheck(snsUser.getUser_email(), snsUser.getUser_pwd());        //    loginCheck() 실행결과  "Admin","Biz","User","LoginFail" 중 하나 반환
+//        if (result.equals("LoginFail")){                                                   // 1. loginCheck() 실패 시, 회원가입 시킨 후 메인페이지로 이동시킨다.
+//            userDao.insert(snsUser);
+//            return "redirect:/";
+//        }
+//        session.setAttribute(result + "_email", snsUser.getUser_email());               // 2. loginCheck() 성공 시, 세션에 ("Admin_email",email)  ("Biz_email",email)  ("User_email",email) 중 하나 추가
+//        System.out.println("session check = " + result+"계정으로 로그인");
+//        System.out.println("session id = " + session.getAttribute(result+"_email"));
 
         toURL = toURL == null || toURL.equals("") ? "/" : toURL;
         return "redirect:" + toURL;
@@ -218,61 +134,6 @@ public class LoginController {
         session.invalidate();
         System.out.println("logout complete");
         return "redirect:/";
-    }
-
-
-//
-//    @GetMapping("/beforeReview")
-//    private String LoginBeforeReview(Integer restr_NUM){
-//        String toURL = "/restr/read?restr_NUM="+restr_NUM;
-//        return "redirect:/login/login?toURL="+toURL;
-//    }
-//    // restr.jsp에서 리뷰를 작성하기 전 로그인이 되어있지 않으면, 로그인 할 지를 물어보고 동의하면 /login/beforeReview 로 보낸다.
-//    // toURL에 /restr/read 를 담고, 로그인 성공 후 toURL로 이동한다.
-//
-
-
-    private String loginCheck(String email, String pwd) {
-        if(loginCheck_Admin(email, pwd)){return "Admin" ;}       // 입력한 정보가 관리자(Admin) 계정인지 check
-        if(loginCheck_BizAccount(email, pwd)){return "Biz" ;}    // 입력한 정보가 사업자(BizAccount) 계정인지 check
-        if(loginCheck_User(email, pwd)){return "User" ;}         // 입력한 정보가 사용자(User) 계정인지 check
-        return "LoginFail";                                      // 해당 사항이 없을 시, "LoginFail"
-    }
-
-
-    private boolean loginCheck_Admin(String email, String pwd) {
-        AdminDto admin = null;
-        try {
-            admin = adminDao.select(email);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return admin != null && admin.getAdmin_pwd().equals(pwd);
-    }
-
-
-    private boolean loginCheck_BizAccount(String email, String pwd) {
-        BizAccountDto biz = null;
-        try {
-            biz = bizAccountDao.select(email);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return biz != null && biz.getBizAccount_pwd().equals(pwd);
-    }
-
-
-    private boolean loginCheck_User(String email, String pwd) {
-        UserDto user = null;
-        try {
-            user = userDao.select(email);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return user != null && user.getUser_pwd().equals(pwd);
     }
 
 }

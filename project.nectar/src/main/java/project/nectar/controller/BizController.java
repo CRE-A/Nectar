@@ -52,9 +52,9 @@ public class BizController {
             m.addAttribute("hotdealDto",hotdealDto);
             // 사업자가 진행한 모든 핫딜에 대한 data
 
-            List<RestrMenuDto> restrMenuDto = restrMenuDao.selectAllMenu(restrDto.getRestr_NUM());
-            m.addAttribute("restrMenuDto",restrMenuDto);
-            // 사업자가 운영중인 레스토랑 메뉴에 대한 data
+//            List<RestrMenuDto> restrMenuDto = restrMenuDao.selectAllMenu(restrDto.getRestr_NUM());
+//            m.addAttribute("restrMenuDto",restrMenuDto);
+//            // 사업자가 운영중인 레스토랑 메뉴에 대한 data
 
             BizAccountDto bizAccountDto = bizAccountDao.select(Biz_email);
             m.addAttribute("bizAccountDto",bizAccountDto);

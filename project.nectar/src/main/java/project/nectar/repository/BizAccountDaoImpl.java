@@ -3,6 +3,7 @@ package project.nectar.repository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import project.nectar.domain.BizAccountDetailsDto;
 import project.nectar.domain.BizAccountDto;
 
 import java.util.HashMap;
@@ -54,6 +55,12 @@ public class BizAccountDaoImpl implements BizAccountDao {
     @Override
     public int count() {
         return session.selectOne(namespace + "count");
+    }
+
+
+    @Override
+    public BizAccountDetailsDto selectByUserEmail(String bizAccount_email) {
+        return session.selectOne(namespace + "selectByUserEmail", bizAccount_email);
     }
 
 
