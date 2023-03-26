@@ -11,6 +11,8 @@ public class BizAccountDto {
     private String bizAccount_regdate;
     private String bizAccount_state_code;
     private String bizAccount_regNum;
+    private String auth;
+    private Integer enabled;
 
     public BizAccountDto(){}
     public BizAccountDto(String bizAccount_email, String bizAccount_pwd, String bizAccount_name, String bizAccount_phone, String bizAccount_picture, String bizAccount_regNum) {
@@ -86,6 +88,22 @@ public class BizAccountDto {
         this.bizAccount_regNum = bizAccount_regNum;
     }
 
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+
+    public Integer getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,6 +128,8 @@ public class BizAccountDto {
                 ", bizAccount_regdate='" + bizAccount_regdate + '\'' +
                 ", bizAccount_state_code='" + bizAccount_state_code + '\'' +
                 ", bizAccount_regNum='" + bizAccount_regNum + '\'' +
+                ", auth='" + auth + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
 }

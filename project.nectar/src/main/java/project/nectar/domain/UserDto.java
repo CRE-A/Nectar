@@ -11,6 +11,8 @@ public class UserDto {
     private String user_picture;
     private Date user_regdate;
     private String user_state_code;
+    private String auth;
+    private Integer enabled;
 
     public UserDto(){};
     public UserDto(String user_email, String user_pwd, String user_name, String user_phone, String user_picture) {
@@ -77,6 +79,21 @@ public class UserDto {
         this.user_state_code = user_state_code;
     }
 
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+
+    public Integer getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -99,8 +116,10 @@ public class UserDto {
                 ", user_name='" + user_name + '\'' +
                 ", user_phone='" + user_phone + '\'' +
                 ", user_picture='" + user_picture + '\'' +
-                ", user_regdate='" + user_regdate + '\'' +
+                ", user_regdate=" + user_regdate +
                 ", user_state_code='" + user_state_code + '\'' +
+                ", auth='" + auth + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
 }

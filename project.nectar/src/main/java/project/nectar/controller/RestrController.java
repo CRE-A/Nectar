@@ -1,6 +1,10 @@
 package project.nectar.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,10 +77,23 @@ public class RestrController {
 
 
     @GetMapping("/read")
-    public String read(LikelistDto likeDto, Integer restr_NUM, SearchCondition sc, Model m, HttpSession session){
+    public String read(LikelistDto likeDto, Integer restr_NUM, SearchCondition sc, Model m, HttpSession session, Authentication authentication){
 
-        BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), (String)session.getAttribute("User_email"),restr_NUM);
-        likeDto.setUser_email(bh.getUser_email());
+        System.out.println("===================================================================");
+        System.out.println("resrt/read 방금 지나갔음");
+
+        String user_email= "";
+        if(isAuthenticated()){       // 로그인이(인증)이 된 경우
+            UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+            user_email = userDetails.getUsername();
+            System.out.println("user_email = " + user_email);
+        }
+            System.out.println("===================================================================");
+
+        BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), user_email,restr_NUM);
+//        likeDto.setUser_email(user_email);
+        likeDto.setUser_email(user_email);
+        System.out.println("likeDto = " + likeDto);
 
         try {
             RestrDto restrDto = restrService.read(restr_NUM, bh);
@@ -94,8 +111,10 @@ public class RestrController {
             LikelistDto likelistDto = likelistService.select(likeDto);
             m.addAttribute("likelistDto",likelistDto);
             // 로그인 했다면, 로그인 계정(유저)가 누른 좋아요에 대한 data
+            System.out.println("likelistDto = " + likelistDto);
+            System.out.println("===================================================================");
             
-            UserDto userDto = userDao.select(bh.getUser_email());
+            UserDto userDto = userDao.select(user_email);
             m.addAttribute("userDto",userDto);
             // 로그인 했다면, 로그인 계정(유저)에 대한 data
 
@@ -128,56 +147,14 @@ public class RestrController {
 
 
 
-    //
-
-//    @PostMapping("/write")
-//    public String write(BoardDto boardDto, HttpSession session, RedirectAttributes rattr, Model m){
-//
-//        try {
-//            String writer = (String) session.getAttribute("id");
-//            boardDto.setWriter(writer);
-//            boardService.insert(boardDto);
-//            rattr.addFlashAttribute("msg","WRT_OK");
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            rattr.addFlashAttribute("msg","WRT_ERR");
-//            m.addAttribute("BoardDto", boardDto);
-////            return "redirect:/board/read";
-//            return "board";
-//        }
-//
-//        return "redirect:/board/list";
-////        return "boardList_JH";
-//    }
-//
-//    @PostMapping("/modify")
-//    public String modify(Integer page, Integer pageSize, BoardDto boardDto, RedirectAttributes rattr,Model m, HttpSession session){
-//
-//        try {
-//            String writer = (String)session.getAttribute("id");
-//            boardDto.setWriter(writer);
-//            int rowCnt=boardService.update(boardDto);
-//            System.out.println("rowCnt = " + rowCnt);
-//            rattr.addFlashAttribute("msg","MOD_OK");
-//            m.addAttribute("page",page);
-//            m.addAttribute("pageSize",pageSize);
-//
-//            if(rowCnt!=1){
-//                throw new Exception("modify failed");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            rattr.addFlashAttribute("msg","MOD_ERR");
-//            m.addAttribute("BoardDto", boardDto);
-//            return "board";
-//        }
-//        System.out.println("boardDto = " + boardDto);
-//        System.out.println("ALL GOOD ");
-//        return "redirect:/board/list";
-//    }
-
-
+    private boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || AnonymousAuthenticationToken.class.
+                isAssignableFrom(authentication.getClass())) {
+            return false;
+        }
+        return authentication.isAuthenticated();
+    }
 
 
 }

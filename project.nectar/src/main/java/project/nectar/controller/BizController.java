@@ -1,6 +1,8 @@
 package project.nectar.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +38,10 @@ public class BizController {
 
 
     @GetMapping("/main")
-    public String BizMyPage(HttpSession session, Model m){
-        String Biz_email = (String)session.getAttribute("Biz_email");
+    public String BizMyPage(Model m, Authentication authentication){
+            UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+            String Biz_email = userDetails.getUsername();
+            System.out.println("Biz_email = " + Biz_email);
 
         try {
             RestrDto restrDto = restrDao.selectByBiz_email(Biz_email);

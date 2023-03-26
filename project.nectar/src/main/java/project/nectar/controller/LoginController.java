@@ -1,5 +1,10 @@
 package project.nectar.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
@@ -24,6 +29,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -45,43 +51,146 @@ public class LoginController {
     @Autowired(required = false)
     OAuth2Parameters googleOAuth2Parameters;
 
+
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
     @GetMapping("/login")
-    public String loginForm(Model m) {
+    public String loginForm(Model m, HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        System.out.println(" ======================================================================================");
+        System.out.println(" GET방식 login/login 지나감 ");
+
+        // 인증 페이지로 이동하기 전 URL 기억, (로그인 이후 URL로 이동하기 위해)
+        String referrer = request.getHeader("Referer"); // 이전 경로
+        request.getSession().setAttribute("prevPage",referrer);
+
+
+        // 만약 로그인이 되어 있으면, 돌아가
+        if (isAuthenticated()) {
+            System.out.println("로그인 되 있으니까 원래 있던 page로 돌아가");
+            response.sendRedirect(referrer);
+        }
+
+        System.out.println(" ======================================================================================");
+
+
+
         // Google Code 발행을 위한 URL 생성
         OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
         String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
         m.addAttribute("google_url", url);
 
+
+
         return "loginForm";
     }
 
-    @PostMapping("/login")
-    public String login(String email, String pwd, boolean rememberEmailPwd, String toURL, HttpSession session, HttpServletResponse response) throws UnsupportedEncodingException {
 
-        String result = loginCheck(email, pwd);                                            //    loginCheck() 실행결과  "Admin","Biz","User","LoginFail" 중 하나 반환
-        if (result.equals("LoginFail")){                                                   // 1. loginCheck() 실패 시, 회원가입 시킨 후 메인페이지로 이동시킨다.
-            String msg = URLEncoder.encode("email 또는 pwd를 잘못 입력했습니다.", "utf-8");
-            return "redirect:/login/login?msg=" + msg;
+    private boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || AnonymousAuthenticationToken.class.
+                isAssignableFrom(authentication.getClass())) {
+            return false;
         }
-        session.setAttribute(result + "_email", email);                                 // 2. loginCheck() 성공 시, 세션에 ("Admin_email",email)  ("Biz_email",email)  ("User_email",email) 중 하나 추가
-
-
-        if (rememberEmailPwd) {
-            Cookie cookieEmail = new Cookie("email", email);
-            Cookie cookiePwd = new Cookie("pwd", pwd);
-            response.addCookie(cookieEmail);
-            response.addCookie(cookiePwd);
-        } else {
-            Cookie cookieEmail = new Cookie("email", email);
-            Cookie cookiePwd = new Cookie("pwd", pwd);
-            cookieEmail.setMaxAge(0);
-            cookiePwd.setMaxAge(0);
-            response.addCookie(cookieEmail);
-            response.addCookie(cookiePwd);
-        }
-        toURL = toURL == null || toURL.equals("") ? "/" : toURL;
-        return "redirect:" + toURL;
+        return authentication.isAuthenticated();
     }
+
+
+
+    @PostMapping("/processing")
+    public void login(String _csrf, String error) {
+
+        logger.info("login-processing!");
+        logger.info("err : "+ error);
+        logger.info("_csrf : "+ _csrf);
+    }
+
+//
+//
+//    @PostMapping("/loginProcess")
+//    public String login(@RequestParam(value="_csrf") String _csrf ,@RequestParam(value="email")String email,@RequestParam(value = "pwd") String pwd, boolean rememberEmailPwd, String toURL, HttpSession session, HttpServletResponse response) throws UnsupportedEncodingException {
+//
+//        System.out.println(" post 까지 잘 도착함 ");
+//        System.out.println("_csrf = " + _csrf);
+//        session.setAttribute("loginCheck",true);
+//        session.setAttribute("email",email);
+//
+//        String result = loginCheck(email, pwd);                                            //    loginCheck() 실행결과  "Admin","Biz","User","LoginFail" 중 하나 반환
+//        if (result.equals("LoginFail")){                                                   // 1. loginCheck() 실패 시, 회원가입 시킨 후 메인페이지로 이동시킨다.
+//            String msg = URLEncoder.encode("email 또는 pwd를 잘못 입력했습니다.", "utf-8");
+//            return "redirect:/login/login?msg=" + msg;
+//        }
+//        session.setAttribute(result + "_email", email);                                 // 2. loginCheck() 성공 시, 세션에 ("Admin_email",email)  ("Biz_email",email)  ("User_email",email) 중 하나 추가
+//
+//
+//        if (rememberEmailPwd) {
+//            Cookie cookieEmail = new Cookie("email", email);
+//            Cookie cookiePwd = new Cookie("pwd", pwd);
+//            response.addCookie(cookieEmail);
+//            response.addCookie(cookiePwd);
+//        } else {
+//            Cookie cookieEmail = new Cookie("email", email);
+//            Cookie cookiePwd = new Cookie("pwd", pwd);
+//            cookieEmail.setMaxAge(0);
+//            cookiePwd.setMaxAge(0);
+//            response.addCookie(cookieEmail);
+//            response.addCookie(cookiePwd);
+//        }
+//        toURL = toURL == null || toURL.equals("") ? "/" : toURL;
+//        return "redirect:" + toURL;
+//    }
+//
+
+
+
+//
+//
+//    // LoginController.java
+//
+//    @Controller
+//    public class LoginController.java {
+//
+//        @Autowired
+//        LoginService loginService;
+//
+//        @RequestMapping(value="/loginProcess")
+//        public String loginProcess(HttpSession session,
+//                @RequestParam(value="id") String id,
+//                @RequestParam(value="pw") String pw) {
+//
+//            if(loginService.loginCheck(id, pw)){ // id,pw검사를 통해 True,false를 return
+//                session.setAttribute("loginCheck",true);
+//                session.setAttribute("id",id);
+//                return "index";
+//            }else{
+//                return "login";
+//            }
+//        }
+//
+//        @RequestMapping(value="/logoutProcess")
+//        public String logoutProcess(HttpSession session) {
+//
+//            session.setAttribute("loginCheck",null);
+//            session.setAttribute("id",null);
+//
+//            return "index";
+//        }
+//
+//        @RequestMapping(value="/needLogin")
+//        public String needLoginPage(HttpSession session) {
+//
+//            //세션 검사를 통해 Access control
+//            if(session.getAttribute("loginCheck")!=null){
+//                return "needLogin";
+//            }else{
+//                return "login";
+//            }
+//        }
+//
+//    }
+
+
+
 
 
     @GetMapping("/auth/google/callback")
@@ -112,14 +221,15 @@ public class LoginController {
     }
 
 
-    @GetMapping("/beforeReview")
-    private String LoginBeforeReview(Integer restr_NUM){
-        String toURL = "/restr/read?restr_NUM="+restr_NUM;
-        return "redirect:/login/login?toURL="+toURL;
-    }
-    // restr.jsp에서 리뷰를 작성하기 전 로그인이 되어있지 않으면, 로그인 할 지를 물어보고 동의하면 /login/beforeReview 로 보낸다.
-    // toURL에 /restr/read 를 담고, 로그인 성공 후 toURL로 이동한다.
-
+//
+//    @GetMapping("/beforeReview")
+//    private String LoginBeforeReview(Integer restr_NUM){
+//        String toURL = "/restr/read?restr_NUM="+restr_NUM;
+//        return "redirect:/login/login?toURL="+toURL;
+//    }
+//    // restr.jsp에서 리뷰를 작성하기 전 로그인이 되어있지 않으면, 로그인 할 지를 물어보고 동의하면 /login/beforeReview 로 보낸다.
+//    // toURL에 /restr/read 를 담고, 로그인 성공 후 toURL로 이동한다.
+//
 
 
     private String loginCheck(String email, String pwd) {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 
 <!DOCTYPE html>
@@ -47,20 +48,25 @@
             <a href="<c:url value='/restr/list'/>">맛집리스트</a>
         </li>
         <li class="menu item">
-            <a href="<c:url value='/mypage/main'/>">
-                <c:choose>
-                    <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
-                    <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
-                    <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
-                    <c:otherwise>LOGIN</i></a></c:otherwise>
-                </c:choose>
+            <security:authorize access="isAnonymous()">
+                <a href="<c:url value='/login/login'/>">LOGIN</a>
+            </security:authorize>
+            <security:authorize access="hasRole('USER')">
+                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+            </security:authorize>
+            <security:authorize access="hasRole('BIZ')">
+                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+            </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
+                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+            </security:authorize>
         </li>
     </ul>
 </section>
 
 <div id="form_container">
     <h1 id="title">NECTAR</h1>
-    <form id="form" action="<c:url value="/login/login"/>" method="post" onsubmit="return loginFormCheck(this);">
+    <form id="form" action="<c:url value="/login/loginProcess"/>" method="post" onsubmit="return loginFormCheck(this);">
         <div id="inputBox">
             <div id="inputBox1">
                 <i class="fa-solid fa-id-badge"></i>
@@ -69,15 +75,26 @@
 
             <div id="inputBox2">
                 <i class="fa-sharp fa-solid fa-key"></i>
-                <input class="detail" type="password" name="pwd" placeholder="비밀번호" value="${cookie.pwd.value}">
+                <input class="detail" type="password" name="pwd" placeholder="비밀번호">
             </div>
         </div>
         <input type="hidden" name="toURL" value="${param.toURL}">
-        <label><input type="checkbox" name="rememberEmailPwd" ${not empty cookie.email.value? "checked":""}>로그인 상태
+        <%--        --%><%--        --%>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <%--        --%><%--        --%>
+        <label><input type="checkbox" name="rememberEmail" ${not empty cookie.email.value? "checked":""}>로그인 상태
             유지</label>
+<%--        <div id="msg">--%>
+<%--            ${param.msg}--%>
+<%--        </div>--%>
+        <%--        --%><%--        --%>
         <div id="msg">
-            ${param.msg}
+            <c:if test="${LoginFailMessage!=null}">
+                <p> Error : <c:out value="${LoginFailMessage}"/> </p><br/>
+            </c:if>
         </div>
+        <%--        --%><%--        --%>
+
         <button id="loginBtn">로그인</button>
         <div class="googleLogin">
             <a href="<c:url value="${google_url}"/>">

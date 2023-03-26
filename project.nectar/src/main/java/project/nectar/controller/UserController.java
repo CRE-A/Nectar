@@ -1,6 +1,10 @@
 package project.nectar.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,19 +37,31 @@ public class UserController {
 
 
     @GetMapping("/main")
-    public String UserMyPage(HttpSession session, Model m){
-        String User_email = (String)session.getAttribute("User_email");
+    public String UserMyPage(HttpSession session, Model m, Authentication authentication){
+//        String user_email= "";
+//        if(isAuthenticated()){       // 로그인이(인증)이 된 경우
+//            UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+//            user_email = userDetails.getUsername();
+//            System.out.println("user_email = " + user_email);
+//        }
+
+        System.out.println("============================================================");
+        System.out.println("mypage/user/maim 지나감");
+            UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+            String user_email = userDetails.getUsername();
+            System.out.println("user_email = " + user_email);
+        System.out.println("============================================================");
 
         try {
-            List<ReviewPlusDto> reviewDto = reviewService.getMyReviews(User_email);
+            List<ReviewPlusDto> reviewDto = reviewService.getMyReviews(user_email);
             m.addAttribute("reviewDto",reviewDto);
             // 사용자(User)가 작성한 모든 리뷰에 데한 data
 
-            List<RestrDto> getMyLikeList = likelistDao.selectMyLikeList(User_email);
+            List<RestrDto> getMyLikeList = likelistDao.selectMyLikeList(user_email);
             m.addAttribute("getMyLikeList",getMyLikeList);
             // 사용자(User)가 like 눌렀던 모든 게시물(레스토랑)에 대한 data
 
-            UserDto userDto = userDao.select(User_email);
+            UserDto userDto = userDao.select(user_email);
             m.addAttribute("userDto",userDto);
             // 사용자(User)에 대한 data
 
@@ -90,6 +106,21 @@ public class UserController {
 
         m.addAttribute("qnaDto",qnaDto);
         return "mypage/successPage/qnaWrtOk";
+    }
+
+
+    private boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || AnonymousAuthenticationToken.class.
+                isAssignableFrom(authentication.getClass())) {
+            return false;
+        }
+        return authentication.isAuthenticated();
+    }
+
+    @GetMapping("/home")
+    public String home(){
+        return "redirect:/";
     }
 
 

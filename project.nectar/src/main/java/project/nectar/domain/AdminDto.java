@@ -9,6 +9,8 @@ public class AdminDto {
     private String admin_phone;
     private String admin_picture;
     private String admin_regdate;
+    private String auth;
+    private Integer enabled;
 
     public AdminDto(){}
     public AdminDto(String admin_email, String admin_pwd, String admin_name, String admin_phone, String admin_picture) {
@@ -67,6 +69,22 @@ public class AdminDto {
         this.admin_regdate = admin_regdate;
     }
 
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+
+    public Integer getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,6 +107,8 @@ public class AdminDto {
                 ", admin_phone='" + admin_phone + '\'' +
                 ", admin_picture='" + admin_picture + '\'' +
                 ", admin_regdate='" + admin_regdate + '\'' +
+                ", auth='" + auth + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
 }

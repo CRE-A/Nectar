@@ -7,7 +7,7 @@
     <select id="select" parameterType="LikelistDto" resultType="LikelistDto">
         SELECT *
         from likelist
-        where restr_NUM=#{restr_NUM} And user_email=#{user_email}
+        where restr_NUM = #{restr_NUM} And user_email = #{user_email}
     </select>
 
     <select id="selectAll" parameterType="String" resultType="LikelistDto">

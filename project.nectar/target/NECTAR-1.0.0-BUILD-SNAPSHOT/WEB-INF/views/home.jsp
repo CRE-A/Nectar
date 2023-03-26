@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/security/tags" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -32,18 +36,31 @@
             <a href="<c:url value='/restr/list'/>">맛집리스트</a>
         </li>
         <li class="menu item">
-            <a href="<c:url value='/mypage/logincheck'/>">
-                <c:choose>
-                    <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
-                    <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
-                    <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
-                    <c:otherwise>LOGIN</a></c:otherwise>
-                </c:choose>
+            <security:authorize access="isAnonymous()">
+                <a href="<c:url value='/login/login'/>">LOGIN</a>
+            </security:authorize>
+            <security:authorize access="hasRole('USER')">
+                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+            </security:authorize>
+            <security:authorize access="hasRole('BIZ')">
+                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+            </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
+                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+            </security:authorize>
         </li>
     </ul>
 </section>
 
 <!-- Home -->
+
+
+<div id="msg">
+    <c:if test="${LoginFailMessage!=null}">
+        <p> Error : <c:out value="${LoginFailMessage}"/> </p><br/>
+    </c:if>
+</div>
+
 
 <section id="home" style='background-image: url("<c:url value='/images/steak.jpg'/>")'>
     <div class="title">

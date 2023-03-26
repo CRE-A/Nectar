@@ -15,7 +15,10 @@ public class LikelistController {
 
     @PostMapping("/add")
     public String addLike(LikelistDto likelistDto) {
-
+        System.out.println("==========================================================");
+        System.out.println("likelist/add 까지 옴");
+        System.out.println("likelistDto = " + likelistDto);
+        System.out.println("==========================================================");
         try {
             likelistService.addLike(likelistDto);
             return "redirect:/restr/read?restr_NUM=" + likelistDto.getRestr_NUM();

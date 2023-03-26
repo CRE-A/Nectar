@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 
 <!DOCTYPE html>
@@ -57,14 +58,18 @@
       <a href="<c:url value='/restr/list'/>">맛집리스트</a>
     </li>
     <li class="menu item">
-      <a href="<c:url value='/mypage/logincheck'/>">
-        <c:choose>
-        <c:when test="${not empty sessionScope.Admin_email}"><i
-              class="fa-solid fa-user-secret"></i></a></c:when>
-      <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
-      <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
-      <c:otherwise>LOGIN</i></a></c:otherwise>
-      </c:choose>
+      <security:authorize access="isAnonymous()">
+        <a href="<c:url value='/login/login'/>">LOGIN</a>
+      </security:authorize>
+      <security:authorize access="hasRole('USER')">
+        <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+      </security:authorize>
+      <security:authorize access="hasRole('BIZ')">
+        <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+      </security:authorize>
+      <security:authorize access="hasRole('ADMIN')">
+        <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+      </security:authorize>
     </li>
   </ul>
 </section>
@@ -128,6 +133,9 @@
             <input type="hidden" name="user_picture"  value="${userDto.user_picture}" required/>
           </div>
         </div>
+        <%--            --%>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <%--            --%>
         <div class="userInfo__btnWrap">
           <button  type="button" id="modifyBtn">프로필 수정</button>
         </div>
@@ -223,6 +231,9 @@
       <input class="detail" type="text" name="qna_picture"  value="캡 귀여운 인태사진" autofocus>
       <input class="detail" type="text" name="qna_writer"  value="User_1@google.com" autofocus> <%--qna_writer = ${userDto.user_email}}--%>
       <input class="detail" type="text" name="qna_name" value="name1" autofocus>                <%--qna_name   = ${userDto.user_name}}--%>
+      <%--            --%>
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+      <%--            --%>
       <button id="loginBtn">QNA 등록</button>
     </form>
 <%--    --%>

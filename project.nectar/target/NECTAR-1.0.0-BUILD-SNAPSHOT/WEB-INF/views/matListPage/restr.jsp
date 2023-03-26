@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
-<c:set var="loginUserEmail" value="${sessionScope.User_email}"/>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 
 
@@ -52,13 +52,18 @@
             <a href="<c:url value='/restr/list'/>">맛집리스트</a>
         </li>
         <li class="menu item">
-            <a href="<c:url value='/mypage/logincheck'/>">
-                <c:choose>
-                <c:when test="${not empty sessionScope.Admin_email}"><i class="fa-solid fa-user-secret"></i></a></c:when>
-            <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
-            <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
-            <c:otherwise>LOGIN</i></a></c:otherwise>
-            </c:choose>
+            <security:authorize access="isAnonymous()">
+                <a href="<c:url value='/login/login'/>">LOGIN</a>
+            </security:authorize>
+            <security:authorize access="hasRole('USER')">
+                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+            </security:authorize>
+            <security:authorize access="hasRole('BIZ')">
+                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+            </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
+                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+            </security:authorize>
         </li>
     </ul>
 </section>
@@ -157,6 +162,7 @@
                             <span class="food">${restrMenuDto.restr_menu_food}</span>
                             <span class="price">${restrMenuDto.restr_menu_price}원 </span>
                                 <%--핫딜 이벤트 진행 메뉴에는 "핫딜 진행중" 이라는 링크가 나타나고, 링크를 누르면 해당 핫딜 페이지로 넘어갑니다.--%>
+                                <%--     hotdeal_NUM의 default value = -1, 진행중인 핫딜 없음을 의미       --%>
                             <c:if test="${restrMenuDto.restr_menu_hotdeal_NUM ne '-1'}">
                             <span class="hotdeal">
                                 <a href="<c:url value='/hotdeal/read?hotdeal_NUM=${restrMenuDto.restr_menu_hotdeal_NUM}'/>">
@@ -176,13 +182,21 @@
                     <form id="likeForm" action="" method="">
                         <button type="button" id="likeBtn">
                             <input type="hidden" name="restr_NUM"  value="${restrDto.restr_NUM}">
-                            <input type="hidden" name="user_email"  value="${loginUserEmail}">
+                            <input type="hidden" name="user_email"  value="${userDto.user_email}">
 
-                            <!--로그인 했니? && 로그인한 이메일이랑 likelistDto에 있는 email이랑 같니 ? ❤️ : 빈하트 -->
-                            <i class="fa-${not empty loginUserEmail && (likelistDto.user_email eq loginUserEmail) ? "solid" : "regular"} fa-heart"></i>
-                            <%--                            likelistDto.restr_NUM : ${likelistDto.restr_NUM}--%>
-                            <%--                            likelistDto.user_email : ${likelistDto.user_email}--%>
-                            <%--                            loginUserEmail : ${loginUserEmail}--%>
+
+                            <%--            --%>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                            <%--            --%>
+
+                            <%--  user가 이곳 레스토랑에 like를 눌렀던 기록이 있니--%>
+                            <i class="fa-${not empty likelistDto.restr_NUM ? "solid" : "regular"} fa-heart"></i>
+
+<%--                            <!--로그인 했니? && 로그인한 이메일이랑 likelistDto에 있는 email이랑 같니 ? ❤️ : 빈하트 -->--%>
+<%--                            <i class="fa-${not empty userDto.user_email && (likelistDto.user_email eq userDto.user_email) ? "solid" : "regular"} fa-heart"></i>--%>
+<%--                                                        likelistDto.restr_NUM : ${likelistDto.restr_NUM}--%>
+<%--                                                        likelistDto.user_email : ${likelistDto.user_email}--%>
+<%--                                                        loginUserEmail : ${loginUserEmail}--%>
                         </button>
                     </form>
 
@@ -209,6 +223,12 @@
             <input type="hidden" name="user_email" value="${userDto.user_email}">
             <input type="hidden" name="user_name" value="${userDto.user_name}">
             <input type="hidden" name="user_picture" value="${userDto.user_picture}">
+
+
+            <%--            --%>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <%--            --%>
+
             <div class="review__header">${restrDto.restr_name}</div>
             <span class="text">에 대한 솔직한 리뷰를 써주세요.</span>
 
@@ -321,15 +341,11 @@
                         />
                     </div>
 
-                    <%--                <c:if test="${mode eq 'User'}">--%>
                     <div class="buttons">
-                        <%--                    <button type="submit" class="uploadBtn">리뷰작성</button>--%>
-                        <%--type=submit으로 하면 작동을 안해요. 일단 type=button으로 바꾸고 jquery로 작동시킬게요.  --%>
 
                         <button type="button" id="submitBtn" class="uploadBtn">리뷰작성</button>
                         <button type="button" class="delBtn">취소</button>
                     </div>
-                    <%--                </c:if>--%>
                 </div>
 
 
@@ -470,7 +486,7 @@
                     </div>
                     <div class="rvButtons">
                         <!--🍎로그인 되어있을 때만 리뷰 수정 삭제 loginUserEmail 로 체크했는데..확인바라요🍎-->
-                        <c:if test="${reviewDto.user_email == loginUserEmail}">
+                        <c:if test="${reviewDto.user_email == userDto.user_email}">
                             <button id="reviewModifyBtn">수정</button>
                             <button id="reviewDelBtn">삭제</button>
                         </c:if>
@@ -499,15 +515,15 @@
 <script>
     $(document).ready(() => {
         $("#review-editor").on("click", () => {
-            if (${not empty sessionScope.User_email}) {      // 사용자(User) 계정으로 로그인 했니?
+
+            <security:authorize access="isAnonymous()">            // 로그인 안했니?
+                if (!confirm("로그인을 해야 좋아요를 남길 수 있습니다.. 로그인 하시겠습니까?")) return;
+                location.href = "<c:url value='/login/login'/> ";
+            </security:authorize>
+            <security:authorize access="hasRole('ROLE_USER')">     // 로그인 했니?
                 return;
-            }else if (${not empty sessionScope.Biz_email}) { // 사업자(Biz) 계정으로 로그인 했니?
-                if (!confirm("사용자 계정으로 로그인을 해야 리뷰를 남길 수 있습니다. 사용자 계정으로 로그인 하시겠습니까?")) return;
-                location.href = "<c:url value='/login/beforeReview?restr_NUM=${restrDto.restr_NUM}'/> ";
-            }else{
-                if (!confirm("로그인을 해야 리뷰를 남길 수 있습니다. 로그인 하시겠습니까?")) return;
-                location.href = "<c:url value='/login/beforeReview?restr_NUM=${restrDto.restr_NUM}'/> ";
-            }
+            </security:authorize>
+
         }); // review-edtior
 
 
@@ -557,35 +573,18 @@
         }); // review 수정
 
 
-        // 20230312 여기 하는 중 !
-
-        // 혜빈 좋아요 버튼 이거 로직 틀렸어요. 사업자로 로그인해서 좋아요 누르면 로그인 하라는 알림 계속 떠요.
-        // 오빠가 만든 리뷰작성 버튼의 로직 보고 비슷하게 만들어 보세요.
-        //  아래를 참고해요.
-
-        <%--$(document).ready(() => {--%>
-        <%--    $("#review-editor").on("click", () => {--%>
-        <%--        if (${not empty sessionScope.User_email}) {      // 사용자(User) 계정으로 로그인 했니?--%>
-        <%--            return;--%>
-        <%--        }else if (${not empty sessionScope.Biz_email}) { // 사업자(Biz) 계정으로 로그인 했니?--%>
-        <%--            if (!confirm("사용자 계정으로 로그인을 해야 리뷰를 남길 수 있습니다. 사용자 계정으로 로그인 하시겠습니까?")) return;--%>
-        <%--            location.href = "<c:url value='/login/beforeReview?restr_NUM=${restrDto.restr_NUM}'/> ";--%>
-        <%--        }else{--%>
-        <%--            if (!confirm("로그인을 해야 리뷰를 남길 수 있습니다. 로그인 하시겠습니까?")) return;--%>
-        <%--            location.href = "<c:url value='/login/beforeReview?restr_NUM=${restrDto.restr_NUM}'/> ";--%>
-        <%--        }--%>
-        <%--    });--%>
 
         $("#likeBtn").on("click", function (e) {
 
+            <security:authorize access="isAnonymous()">     // 로그인 안했니?
+                if (!confirm("로그인을 해야 좋아요를 남길 수 있습니다.. 로그인 하시겠습니까?")) return;
+                location.href = "<c:url value='/login/login'/> ";
+                return;
+            </security:authorize>
+
+
             let form = $("#likeForm");
             let heartState = $("i", $(this)).attr("class");  // "fa-regular fa-heart"
-
-            if (${empty loginUserEmail}) {
-                if (!confirm("로그인을 해야 좋아요를 남길 수 있습니다.. 로그인 하시겠습니까?")) return;
-                location.href = "<c:url value='/login/beforeReview?restr_NUM=${restrDto.restr_NUM}'/> ";
-                return;
-            }
 
             //  하트가 비워져 있는 상태 (fa-regular fa-heart) 면 ❤️ 상태로 바꾸기
 

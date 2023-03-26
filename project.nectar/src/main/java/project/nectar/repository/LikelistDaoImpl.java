@@ -26,8 +26,10 @@ public class LikelistDaoImpl implements LikelistDao {
 
     @Override
     public LikelistDto select(LikelistDto likelistDto) throws Exception{
+        System.out.println("likelistDto = " + likelistDto);
         return session.selectOne(namespace+"select",likelistDto);
     }
+    
 
     @Override
     public List<RestrDto> selectMyLikeList(String user_email) throws Exception{
