@@ -1,9 +1,9 @@
 package project.nectar.repository;
 
 import org.apache.ibatis.session.SqlSession;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import project.nectar.domain.AdminDetailsDto;
 import project.nectar.domain.AdminDto;
 
 @Repository
@@ -40,6 +40,11 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public int count() {
         return session.selectOne(namespace + "count");
+    }
+
+    @Override
+    public AdminDetailsDto selectByUserEmail(String admin_email) {
+        return session.selectOne(namespace + "selectByUserEmail", admin_email);
     }
 
 

@@ -1,5 +1,6 @@
 package project.nectar.repository;
 
+import project.nectar.domain.AdminDetailsDto;
 import project.nectar.domain.AdminDto;
 
 public interface AdminDao {
@@ -14,4 +15,6 @@ public interface AdminDao {
     int deleteAll();
 
     int count();
+
+    AdminDetailsDto selectByUserEmail(String admin_email);
 }

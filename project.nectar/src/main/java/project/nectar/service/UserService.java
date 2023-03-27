@@ -1,5 +1,6 @@
 package project.nectar.service;
 
+import project.nectar.domain.AdminDto;
 import project.nectar.domain.BizAccountDto;
 import project.nectar.domain.UserDto;
 
@@ -8,4 +9,6 @@ public interface UserService {
     int RegisterUser(UserDto userDto) throws Exception;
 
     int RegisterBiz(BizAccountDto bizAccountDto) throws Exception;
+
+    int RegisterAdmin(AdminDto adminDto) throws Exception;
 }

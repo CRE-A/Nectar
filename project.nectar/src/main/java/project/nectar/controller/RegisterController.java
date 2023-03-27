@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import project.nectar.domain.AdminDto;
 import project.nectar.domain.BizAccountDto;
 import project.nectar.domain.UserDto;
 import project.nectar.repository.UserDao;
@@ -45,11 +46,8 @@ public class RegisterController {
 //        }
 
         System.out.println("RegisterController, 방금 여기 지나감");
-//        userDto.setAuthority("ROLE_USER");
-//        userDto.setAuthority("ROLE_USER, ROLE_BIZ, ROLE_ADMIN");
         System.out.println("userDto = " + userDto);
         userService.RegisterUser(userDto);
-
 
 
 //        // 가입된 아이디가 없다면 가입 진행하기
@@ -86,14 +84,28 @@ public class RegisterController {
 
 
         System.out.println("RegisterController, 방금 여기 지나감");
-//        userDto.setAuthority("ROLE_USER");
-//        userDto.setAuthority("ROLE_USER, ROLE_BIZ, ROLE_ADMIN");
         System.out.println("userDto = " + bizAccountDto);
         userService.RegisterBiz(bizAccountDto);
         return "redirect:/";
 
 
     }
+
+
+//    @PostMapping("/addBiz")
+//
+//    public String register_Admin(String id, String pwd, AdminDto adminDto, Model m) throws Exception {
+//
+//
+//        System.out.println("RegisterController, 방금 여기 지나감");
+////        userDto.setAuthority("ROLE_USER");
+////        userDto.setAuthority("ROLE_USER, ROLE_BIZ, ROLE_ADMIN");
+//        System.out.println("adminDto = " + adminDto);
+//        userService.RegisterAdmin(adminDto);
+//        return "redirect:/";
+//
+//
+//    }
 
 
 

@@ -9,7 +9,7 @@ public class AdminDto {
     private String admin_phone;
     private String admin_picture;
     private String admin_regdate;
-    private String auth;
+    private String authority;
     private Integer enabled;
 
     public AdminDto(){}
@@ -69,12 +69,12 @@ public class AdminDto {
         this.admin_regdate = admin_regdate;
     }
 
-    public String getAuth() {
-        return auth;
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setAuth(String auth) {
-        this.auth = auth;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 
     public Integer getEnabled() {
@@ -107,7 +107,7 @@ public class AdminDto {
                 ", admin_phone='" + admin_phone + '\'' +
                 ", admin_picture='" + admin_picture + '\'' +
                 ", admin_regdate='" + admin_regdate + '\'' +
-                ", auth='" + auth + '\'' +
+                ", authority='" + authority + '\'' +
                 ", enabled=" + enabled +
                 '}';
     }

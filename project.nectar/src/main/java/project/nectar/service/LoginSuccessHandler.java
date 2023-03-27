@@ -31,6 +31,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //        System.out.println("authentication.getPrincipal() = " + authentication.getPrincipal());
         System.out.println("authentication.getPrincipal().toString() = " + authentication.getPrincipal().toString());
         System.out.println("=======================================================================");
+
+
+
         //경우1 : 로그인 인증을 위해 Spring Security가 요청을 가로챈 경우
         RequestCache requestCache = new HttpSessionRequestCache();
         SavedRequest savedRequest = requestCache.getRequest(request, response);

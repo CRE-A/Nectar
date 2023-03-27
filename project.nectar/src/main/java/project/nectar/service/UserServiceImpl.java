@@ -3,8 +3,10 @@ package project.nectar.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import project.nectar.domain.AdminDto;
 import project.nectar.domain.BizAccountDto;
 import project.nectar.domain.UserDto;
+import project.nectar.repository.AdminDao;
 import project.nectar.repository.BizAccountDao;
 import project.nectar.repository.UserDao;
 
@@ -14,6 +16,8 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
     @Autowired
     BizAccountDao bizAccountDao;
+    @Autowired
+    AdminDao adminDao;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -30,11 +34,18 @@ public class UserServiceImpl implements UserService {
     public int RegisterBiz(BizAccountDto bizAccountDto) throws Exception{
         String encodedPassword = bCryptPasswordEncoder.encode(bizAccountDto.getBizAccount_pwd());
         bizAccountDto.setBizAccount_pwd(encodedPassword);
-        System.out.println("userDto = " + bizAccountDto);
+        System.out.println("bizAccountDto = " + bizAccountDto);
         return bizAccountDao.insert(bizAccountDto);
     }
 
 
+    @Override
+    public int RegisterAdmin(AdminDto adminDto) throws Exception{
+        String encodedPassword = bCryptPasswordEncoder.encode(adminDto.getAdmin_pwd());
+        adminDto.setAdmin_pwd(encodedPassword);
+        System.out.println("adminDto = " + adminDto);
+        return adminDao.insert(adminDto);
+    }
 
 
 }

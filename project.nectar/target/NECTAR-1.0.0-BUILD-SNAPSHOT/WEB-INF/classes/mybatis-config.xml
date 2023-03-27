@@ -20,6 +20,7 @@
         <typeAlias alias="Request_RestrDto" type="project.nectar.domain.Request_RestrDto"/>
         <typeAlias alias="UserDetailsDto" type="project.nectar.domain.UserDetailsDto"/>
         <typeAlias alias="BizAccountDetailsDto" type="project.nectar.domain.BizAccountDetailsDto"/>
+        <typeAlias alias="AdminDetailsDto" type="project.nectar.domain.AdminDetailsDto"/>
 <!--        <typeAlias alias="PaymentDto" type="project.nectar.domain.PaymentDto"/>-->
 
     </typeAliases>
