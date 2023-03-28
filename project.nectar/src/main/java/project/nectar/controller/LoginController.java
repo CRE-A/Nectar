@@ -23,10 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import project.nectar.repository.BizAccountDao;
 import project.nectar.repository.UserDao;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 @Controller
 @RequestMapping("/login")
@@ -56,17 +59,16 @@ public class LoginController {
         System.out.println(" GET방식 login/login 지나감 ");
 
 
-        // 로그인 페이지로 이동하기 전 URL 기억, (로그인 이후 원래 있던 페이지로 이동하기 위해)
+        // 만약 로그인이 되어 있으면, 돌아가
         String referrer = request.getHeader("Referer"); // 이전 경로
-        if(session.getAttribute("prevPage")==null){
-            session.setAttribute("prevPage",referrer);
+        if (isAuthenticated()) {
+            response.sendRedirect(referrer);
+            System.out.println("로그인 되어 있으니까 원래 있던 페이지로 돌아가");
         }
 
-
-        // 만약 로그인이 되어 있으면, 돌아가
-        if (isAuthenticated()) {
-            System.out.println("로그인 되어 있으니까 원래 있던 페이지로 돌아가");
-            response.sendRedirect(referrer);
+        // loginForm 으로 이동하기 전에 머물러 있던 경로 기억 (로그인 이후 원래 있던 페이지로 이동하기 위해)
+        if(session.getAttribute("prevPage")==null){
+            session.setAttribute("prevPage",referrer);
         }
 
         System.out.println(" ======================================================================================");
@@ -103,22 +105,23 @@ public class LoginController {
 
 
     @GetMapping("/auth/google/callback")
-    public String snsLoginCallback(Model m, @RequestParam String code, HttpSession session, String toURL) throws Exception{
+    public String snsLoginCallback(Model m, @RequestParam String code, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
 
         SnsLogin snsLogin = new SnsLogin(googleSns);                                       // google 소셜 로그인
         UserDto snsUser = snsLogin.getUserProfile(code);                                   // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
 
         String email = snsUser.getUser_email();
         session.setAttribute("sns_email",email);
+        session.setAttribute("sns_pwd",snsUser.getUser_pwd());
 
         if (!isValidEmail(email)) {                                                        // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
-            UserDto userDto = new UserDto(email, email, snsUser.getUser_name(), snsUser.getUser_phone(), snsUser.getUser_picture());
+            UserDto userDto = new UserDto(email, snsUser.getUser_pwd(), snsUser.getUser_name(), snsUser.getUser_phone(), snsUser.getUser_picture());
             m.addAttribute("userDto", userDto);
             return "registerFormSNS";
         }
 
         return "redirect:/login/login";
-    }
+    };
 
     private boolean isValidEmail(String email) {
         return userDao.select(email)!=null;

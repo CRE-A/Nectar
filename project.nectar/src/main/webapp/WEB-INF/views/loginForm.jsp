@@ -70,29 +70,25 @@
         <div id="inputBox">
             <div id="inputBox1">
                 <i class="fa-solid fa-id-badge"></i>
-                <input class="detail" type="text" name="user_email" placeholder="이메일" value="${sns_email}" autofocus>
+                <input class="detail" type="text" name="user_email" placeholder="이메일" value="${sessionScope.sns_email}" autofocus>
             </div>
             <div id="inputBox2">
                 <i class="fa-sharp fa-solid fa-key"></i>
-                <input class="detail" type="password" name="user_pwd" placeholder="비밀번호" value="${sns_email}">
+                <input class="detail" type="password" name="user_pwd" placeholder="비밀번호" value="${sessionScope.sns_pwd}">
             </div>
         </div>
-        <input type="hidden" name="toURL" value="${param.toURL}">
         <%--        --%><%--        --%>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <%--        --%><%--        --%>
-        <label><input type="checkbox" name="rememberEmail" ${not empty cookie.email.value? "checked":""}>로그인 상태
-            유지</label>
+<%--        <label><input type="checkbox" name="remember-me" >로그인 상태 유지</label>--%>
 <%--        <div id="msg">--%>
 <%--            ${param.msg}--%>
 <%--        </div>--%>
-        <%--        --%><%--        --%>
         <div id="msg">
             <c:if test="${LoginFailMessage!=null}">
                 <p> Error : <c:out value="${LoginFailMessage}"/> </p><br/>
             </c:if>
         </div>
-        <%--        --%><%--        --%>
 
         <button id="loginBtn">통합 로그인</button>
         <div class="googleLogin">
@@ -125,13 +121,14 @@
         document.getElementById("msg").innerHTML = `${'${msg}'}`;
     }
 
+    if(${not empty sns_email}){
+        clickSubmitBtn()
+    }
+
     function clickSubmitBtn(){
         document.getElementById("loginBtn").click();
     }
 
-    if(${not empty sns_email}){
-        clickSubmitBtn()
-    }
 
 
 

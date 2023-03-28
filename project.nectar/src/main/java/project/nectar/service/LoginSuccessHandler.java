@@ -30,7 +30,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         System.out.println("session.getAttribute(\"prevPage\") = " + session.getAttribute("prevPage"));
         System.out.println("=======================================================================");
 
-
+        session.removeAttribute("sns_pwd");
 
 
         //경우1 : 사용자가 직접 로그인 버튼을 누른 경우 (혹은 로그인에 동의한 경우)

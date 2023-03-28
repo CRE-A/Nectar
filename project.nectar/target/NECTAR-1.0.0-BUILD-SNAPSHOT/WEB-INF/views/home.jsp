@@ -55,12 +55,6 @@
 <!-- Home -->
 
 
-<div id="msg">
-    <c:if test="${LoginFailMessage!=null}">
-        <p> Error : <c:out value="${LoginFailMessage}"/> </p><br/>
-    </c:if>
-</div>
-
 
 <!-- Home -->
 

@@ -38,6 +38,10 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping("/pageAccessDenied")
+    public String pageAccessDenied(){
+        return "pageAccessDenied";
+    }
 
 
 }
