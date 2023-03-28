@@ -18,35 +18,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
-    <link rel="stylesheet" href="<c:url value='/css/user.css'/>"/>
-    <link rel="stylesheet" href="<c:url value='/css/userLiking.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/navbarHome.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/successPage.css'/>"/>
 
 </head>
 
+<style>
+    section#navbar.success {
+        z-index: 2;
+        width: 100vw;
+        background-color: #e9bea2;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+    }
+</style>
+
 
 <body>
+<%--NAVBAR--%>
+
 <section id="navbar">
     <div class="logo">
-        <a href="<c:url value='/'/>"> <img src="<c:url value="/images/nectarLogo.png"/>" alt="" class="logo__img"/></a>
-    </div>
-    <div class="searchBar">
-        <form action="" class="search-form" method="get">
-            <button type="button" class="searchBtn" value="검색">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <input type="hidden" name="option" value="searchEngine"/>
-            <input
-                    type="text"
-                    name="keyword"
-                    class="search-input"
-                    value="${ph.sc.keyword}"
-                    placeholder="지역, 식당 또는 음식"
-            />
-            <button type="submit" class="search-button" value="검색">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </form>
+        <a href="<c:url value='/'/>"> <img src="<c:url value='/images/nectarLogo.png'/>" alt="" class="logo__img"/></a>
     </div>
     <ul class="menu">
         <li class="menu item">
@@ -56,20 +50,35 @@
             <a href="<c:url value='/restr/list'/>">맛집리스트</a>
         </li>
         <li class="menu item">
-            <a href="<c:url value='/mypage/main'/>">
-                <c:choose>
-                <c:when test="${not empty sessionScope.Admin_email}"><i
-                    class="fa-solid fa-user-secret"></i></a></c:when>
-            <c:when test="${not empty sessionScope.Biz_email}"><i class="fa-solid fa-user-tie"></i></a></c:when>
-            <c:when test="${not empty sessionScope.User_email}"><i class="fa-solid fa-user"></i></a></c:when>
-            <c:otherwise>LOGIN</i></a></c:otherwise>
-            </c:choose>
+            <security:authorize access="isAnonymous()">
+                <a href="<c:url value='/login/login'/>">LOGIN</a>
+            </security:authorize>
+            <security:authorize access="hasRole('USER')">
+                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+            </security:authorize>
+            <security:authorize access="hasRole('BIZ')">
+                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+            </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
+                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+            </security:authorize>
         </li>
     </ul>
 </section>
 
 <h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 
+<section id="info">
+    <div class="box">
+        <div class="box_item">
+            <!-- <i class="fa-solid fa-circle-check"></i> -->
+            <div class="emoji">✔️</div>
+        </div>
+        <h1>성공적으로 등록되었습니다!</h1>
+        <p>
+            문의를 처리하는 데 며칠 소요되며,  ${qnaDto.qna_name} 님의  이메일( ${qnaDto.qna_writer} )로 답변 드리겠습니다. Nectar를 이용해 주셔서 감사합니다.
+        </p>
+    </div>
+</section>
 
-
-<h2> "성공적으로 등록되었습니다. "문의를 처리하는 데 며칠 소요되며,  ${qnaDto.qna_name} 님의  이메일( ${qnaDto.qna_writer} )로 답변 드리겠습니다. Nectar를 이용해 주셔서 감사합니다."</h2>
+</body>

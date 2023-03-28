@@ -35,6 +35,9 @@
   <div class="title">Registration</div>
   <div class="content">
     <form action="<c:url value="/register/addBiz"/>" method="post" onsubmit="return registerFormCheck(this)">
+      <%--            --%>
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+      <%--            --%>
       <div class="user-details">
         <div class="input-box"> <%--   ID 가 email 로 변경   --%>
           <span class="details ${not empty param.msg ? 'email' : ''}">email</span>

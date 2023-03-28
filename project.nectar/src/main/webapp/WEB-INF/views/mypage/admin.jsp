@@ -18,6 +18,18 @@
     <!-- CSS -->
     <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/globalPage.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/admin.css'/>"/>
+
+    <style>
+        section#navbar.admin {
+            z-index: 2;
+            width: 100vw;
+            background-color: #e9bea2;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+    </style>
 
 </head>
 
@@ -51,7 +63,8 @@
 <section id="globalPage">
     <!-- Left Side -->
     <div class="sideMenu">
-        <button class="tab index">회원정보</button>
+        <button class="tab index active">일반회원</button>
+        <button class="tab index ">사업자회원</button>
         <button class="tab index">매장심사</button>
         <button class="tab index">핫딜심사</button>
         <button class="tab index">F&Q</button>
@@ -61,98 +74,132 @@
     <div class="main">
 
         <div class="content index active">
-            <h1> 회원 정보 ✏️</h1>
+            <h1> 회원 정보 ️</h1>
             <div class="container item">
-                <form id="userInfoForm" action="<c:url value='/admin/read'/>"></form>
-                <select class="user-search-option" name="option">
-                    <option value="all">전체</option>
-                    <option value="email">이메일</option>
-                    <option value="name">이름</option>
-                    <option value="stateCode">상태코드</option>
-                </select>
-                <input type="text">
-                <button type="submit">검색</button>
-            </div>
-            <h1> 회원 검색 결과 ✏️</h1>
-            <div class="container item">
-                <%-- 회원 검색 리스트--%>
-                <div class="recent-order">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th class="title">이름</th>
-                            <th>이메일</th>
-                            <th>연락처</th>
-                            <th>상태코드</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%--                        <c:forEach var="SearchResultUserList" items="${SearchResultUserList}">--%>
-                        <%--                            <form action="<c:url value='/mypage/admin/account/management'/>" method="post" id="adminForm">--%>
-                        <%--                                <tr>--%>
-                        <%--                                    <td class="no"><input type="hidden" name="user_NUM"--%>
-                        <%--                                                          value="${SearchResultUserList.user_name}">${SearchResultUserList.user_name}</td>--%>
-                        <%--                                    <td class="writer"><input type="hidden" name="user_email"--%>
-                        <%--                                                              value="${SearchResultUserList.user_email}">${SearchResultUserList.user_email}</td>--%>
-                        <%--                                    <td class="viewCnt"><input type="hidden" name="user_ph"--%>
-                        <%--                                                               value="${SearchResultUserList.user_phone}">${SearchResultUserList.user_phone}</td>--%>
-                        <%--                                    <td>--%>
-                        <%--                                        <select name="user_state_code">--%>
-                        <%--                                            <option value="0">일반회원</option>--%>
-                        <%--                                            <option value="-1">리뷰작성금지</option>--%>
-                        <%--                                            <option value="-2">핫딜결제금지</option>--%>
-                        <%--                                            <option value="-3">계정삭제</option>--%>
-                        <%--                                        </select>--%>
-                        <%--                                    </td>--%>
-                        <%--                                    <td>--%>
-                        <%--                                        <input class="userBtn" type="submit" value="회원등급변경">--%>
-                        <%--                                    </td>--%>
-                        <%--                                </tr>--%>
-                        <%--                            </form>--%>
-                        <%--                        </c:forEach>--%>
-                        </tbody>
-                    </table>
+                <form id="userInfoForm" action="<c:url value='/mypage/admin/main?option=${option}&keyword=${keyword}'/>">
+                    <select class="user-search-option" name="option">
+                        <option value="all">전체</option>
+                        <option value="email">이메일</option>
+                        <option value="name">이름</option>
+                        <option value="stateCode">상태코드</option>
+                    </select>
+                    <input type="text" name="keyword" placeholder="검색" >
+                    <button type="button" class="searchBtn_user">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>                       <!--일반 회원 검색-->
+            <c:if test="${empty SearchResultUserList}">           <!--초기 화면 이거나 검색 결과가 없는 경우 띄우는 창-->
+                <div class="msg__wrap">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <h3>검색 결과가 없습니다.</h3>
                 </div>
-            </div>
-            <h1> 사업자 검색 결과 ✏️</h1>
+            </c:if>
             <div class="container item">
-                <%-- 사업자 검색 리스트--%>
-                <div class="recent-order">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>사업주</th>
-                            <th>이메일</th>
-                            <th>연락처</th>
-                            <th>등록날짜</th>
-                            <th>사업자등록번호</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                <div class="userList">
+                    <c:if test="${not empty SearchResultUserList}">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="title">이름</th>
+                                <th>이메일</th>
+                                <th>연락처</th>
+                                <th>상태코드</th>
+                                <th>회원관리</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="SearchResultUserList" items="${SearchResultUserList}">
+                                <form action="<c:url value='/mypage/admin/account/management'/>" method="post" id="adminForm">
+                                        <%--            --%>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                        <%--            --%>
+                                    <tr>
+                                        <td class="no"><input type="hidden" name="user_NUM"
+                                                              value="${SearchResultUserList.user_name}">${SearchResultUserList.user_name}</td>
+                                        <td class="writer"><input type="hidden" name="user_email"
+                                                                  value="${SearchResultUserList.user_email}">${SearchResultUserList.user_email}</td>
+                                        <td class="viewCnt"><input type="hidden" name="user_ph"
+                                                                   value="${SearchResultUserList.user_phone}">${SearchResultUserList.user_phone}</td>
+                                        <td>
+                                            <select name="user_state_code">
+                                                <option value="0">일반회원</option>
+                                                <option value="-1">리뷰작성금지</option>
+                                                <option value="-2">핫딜결제금지</option>
+                                                <option value="-3">계정삭제</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input class="userBtn" type="submit" value="회원등급변경">
+                                        </td>
+                                    </tr>
+                                </form>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
 
-                        <%--                                                <c:forEach var="SearchResultBizAccountList" items="${SearchResultBizAccountList}">--%>
-
-                        <%--                                                    <tr>--%>
-                        <%--                                                        <td class="no"> ${SearchResultBizAccountList.bizAccount_name}</td>--%>
-                        <%--                                                        <td class="writer"> ${SearchResultBizAccountList.bizAccount_email}</td>--%>
-                        <%--                                                        <td class="viewCnt"> ${SearchResultBizAccountList.bizAccount_phone}</td>--%>
-                        <%--                                                        <td class="date"> ${SearchResultBizAccountList.bizAccount_regdate}</td>--%>
-                        <%--                                                        <td class="viewCnt"> ${SearchResultBizAccountList.bizAccount_regNum}</td>--%>
-                        <%--                                                    </tr>--%>
-
-                        <%--                                                </c:forEach>--%>
-
-                        </tbody>
-                    </table>
                 </div>
-            </div>
-        </div>
+            </div>                       <!--회원 검색 리스트-->
+        </div>      <!--일반회원-->
+        <div class="content index">
+            <h1> 사업자 회원 정보 </h1>
+            <div class="container item">
+                <form id="bizInfoForm" action="<c:url value='/mypage/admin/main?option=${option}&keyword=${keyword}'/>">
+                    <select class="user-search-option" name="option">
+                        <option value="all">전체</option>
+                        <option value="email">이메일</option>
+                        <option value="name">이름</option>
+                        <option value="stateCode">상태코드</option>
+                    </select>
+                    <input type="text" name="keyword" placeholder="검색" >
+                    <button type="button" class="searchBtn_biz">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>                       <!--사업자 회원 검색-->
+            <c:if test="${empty SearchResultBizAccountList}">           <!--초기 화면 이거나 검색 결과가 없는 경우 띄우는 창-->
+                <div class="msg__wrap">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <h3>검색 결과가 없습니다.</h3>
+                </div>
+            </c:if>
+            <div class="container item">                          <!--사업자 회원 검색 리스트-->
+                <div class="userList">
+                    <c:if test="${not empty SearchResultBizAccountList}">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>사업주</th>
+                                <th>이메일</th>
+                                <th>연락처</th>
+                                <th>등록날짜</th>
+                                <th>사업자등록번호</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="SearchResultBizAccountList" items="${SearchResultBizAccountList}">
+                                <tr>
+                                    <td class="no"> ${SearchResultBizAccountList.bizAccount_name}</td>
+                                    <td class="writer"> ${SearchResultBizAccountList.bizAccount_email}</td>
+                                    <td class="viewCnt"> ${SearchResultBizAccountList.bizAccount_phone}</td>
+                                    <td class="date"> ${SearchResultBizAccountList.bizAccount_regdate}</td>
+                                    <td class="viewCnt"> ${SearchResultBizAccountList.bizAccount_regNum}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
 
+                </div>
+            </div>                       <!--사업자 회원 검색 리스트-->
+
+        </div>             <!--사업자회원-->
         <div class="content index">
             <h1> 매장심사 ✏️</h1>
             <div class="container item">
                 <%-- 심사 요청 매장 리스트--%>
-                <div class="recent-order">
+                <div class="userList">
                     <table>
                         <thead>
                         <tr>
@@ -181,13 +228,12 @@
                     </table>
                 </div>
             </div>
-        </div>
-
-        <div class="content index">
+        </div>             <!--매장심사-->
+        <div class="content index">           <!--핫딜심사-->
             <h1> 핫딜심사 ✏️</h1>
             <div class="container item">
                 <%-- 핫딜 요청 매장 리스트--%>
-                <div class="recent-order">
+                <div class="userList">
                     <table>
                         <thead>
                         <tr>
@@ -199,41 +245,58 @@
                         </thead>
                         <tbody>
 
-                        <%--                        <c:forEach var="request_hotdealDto" items="${request_hotdealDto}">--%>
+                        <c:forEach var="request_hotdealDto" items="${request_hotdealDto}">
 
-                        <%--                            <tr>--%>
-                        <%--                                <td class="no">${request_hotdealDto.request_restr_NUM}</td>--%>
-                        <%--                                <td class="requestRestrName"><a--%>
-                        <%--                                        href="<c:url value="/mypage/admin/hotdeal/read?request_restr_NUM=${request_hotdealDto.request_restr_NUM}"/>">${request_hotdealDto.request_restr_name}</a>--%>
-                        <%--                                </td>--%>
-                        <%--                                <td class="writer">${request_hotdealDto.request_reestr_menu_food}</td>--%>
-                        <%--                                <td class="writer">${request_hotdealDto.request_reestr_menu_price}</td>--%>
+                            <tr>
+                                <td class="no">${request_hotdealDto.request_restr_NUM}</td>
+                                <td class="requestRestrName"><a
+                                        href="<c:url value="/mypage/admin/hotdeal/read?request_hotdeal_NUM=${request_hotdealDto.request_hotdeal_NUM}"/>">${request_hotdealDto.request_restr_name}</a>
+                                </td>
+                                <td class="writer">${request_hotdealDto.request_restr_menu_food}</td>
+                                <td class="writer">${request_hotdealDto.request_restr_menu_price}</td>
 
-                        <%--                            </tr>--%>
-                        <%--                        </c:forEach>--%>
+                            </tr>
+                        </c:forEach>
 
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-
+        </div>             <!--핫딜심사-->
         <div class="content index">
             <h1> F&Q✏️</h1>
             <div class="container item">
 
-                <c:forEach var="QNADto" items="${QNADto}">
-                    ${QNADto.qna_NUM}</br>
-                    ${QNADto.qna_title}</br>
-                    ${QNADto.qna_content}</br>
-                    ${QNADto.qna_picture}</br>
-                    ${QNADto.qna_regdate}</br>
-                    ${QNADto.qna_writer}</br>
-                    ${QNADto.qna_name}</br>
-                    -------------------</br>
-                </c:forEach>
+                <div class="userList">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>no</th>
+                            <th>제목</th>
+                            <th>이름</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <c:forEach var="QNADto" items="${QNADto}">
+
+                            <tr>
+                                <td class="no"> ${QNADto.qna_NUM}</td>
+                                <td class="qnaTitle"><a
+                                        href="<c:url value="/mypage/admin/QNA/read?qna_NUM= ${QNADto.qna_NUM}"/>">  ${QNADto.qna_title}</a>
+                                </td>
+                                <td class="writer">${QNADto.qna_name}</td>
+
+                            </tr>
+                        </c:forEach>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
             </div>
-        </div>
+        </div>             <!--F&Q-->
 
     </div>
 </section>
@@ -296,7 +359,11 @@
         // TAB 기능 //
 
 
+
+
     }) // ready()
+
+
 
 </script>
 

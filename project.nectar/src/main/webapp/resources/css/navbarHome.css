@@ -11,7 +11,7 @@ a {
 /* NAVBAR */
 
 section#navbar {
-    z-index: 2;
+    /*z-index: 2;*/
     width: 100vw;
     /*background-color: #e9bea2;*/
     display: flex;
@@ -19,6 +19,8 @@ section#navbar {
     position: absolute;
     top: 0;
 }
+
+
 
 .menu {
     width: 500px;

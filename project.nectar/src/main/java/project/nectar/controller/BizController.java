@@ -52,8 +52,8 @@ public class BizController {
             m.addAttribute("hotdealDto",hotdealDto);
             // 사업자가 진행한 모든 핫딜에 대한 data
 
-//            List<RestrMenuDto> restrMenuDto = restrMenuDao.selectAllMenu(restrDto.getRestr_NUM());
-//            m.addAttribute("restrMenuDto",restrMenuDto);
+            List<RestrMenuDto> restrMenuDto = restrMenuDao.selectAllMenu(restrDto.getRestr_NUM());
+            m.addAttribute("restrMenuDto",restrMenuDto);
 //            // 사업자가 운영중인 레스토랑 메뉴에 대한 data
 
             BizAccountDto bizAccountDto = bizAccountDao.select(Biz_email);
@@ -134,6 +134,41 @@ public class BizController {
 
         m.addAttribute("request_hotdealDto",request_hotdealDto);
         return "mypage/successPage/hotdealWrtOk";
+    }
+
+    @PostMapping("/restrMenu/write")
+    public String registerRestrMenu(RestrMenuDto restrMenuDto, Model m, String tab){
+
+        System.out.println("tab = " + tab);
+        try {
+            restrMenuDao.insert(restrMenuDto);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        m.addAttribute("tab", tab);
+        return "redirect:/mypage/biz/main";
+    } // 레스토랑 메뉴 등록
+
+    @PostMapping("/restrMenu/modify")
+    public String modifyRestrMenu(RestrMenuDto restrMenuDto, Model m, String tab){
+        try {
+            restrMenuDao.update(restrMenuDto);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return "redirect:/mypage/biz/main";
+    }
+
+    @PostMapping("/restrMenu/delete")
+    public String deleteRestrMenu(Integer restr_menu_NUM, Model m, String tab){
+        try {
+            System.out.println("restr_menu_NUM = " + restr_menu_NUM);
+            restrMenuDao.delete(restr_menu_NUM);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return "redirect:/mypage/biz/main";
     }
 
 

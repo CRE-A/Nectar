@@ -21,8 +21,12 @@ button.tab {
     font-weight: bold;
     background-color: transparent;
     border: 0;
-    border-left: 2px solid orange;
+    border-left: 2px solid transparent;
     margin-bottom: 20px;
+}
+
+button.tab.index.active{
+    border-left: 2px solid orange;
 }
 
 .main {
@@ -30,7 +34,7 @@ button.tab {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    background-color: #f08585;
+    /*background-color: #f08585;*/
 }
 
 .content.index.active {
@@ -40,4 +44,28 @@ button.tab {
 .content.index {
     display: none;
 }
+
+.content.index h1{
+    margin-bottom: 30px;
+}
+
+
+/* MSG */
+
+/* 진행한 핫딜이 없는 경우 */
+
+
+.msg__wrap {
+    background-color: #cdf2ff;
+    width: 100%;
+    padding: 30px 20px 30px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.msg__wrap i{
+    margin-right: 10px;
+}
+
 

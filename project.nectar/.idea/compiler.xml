@@ -7,8 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="2023-03-12" />
         <module name="nectar" />
+        <module name="2023-03-27 noon" />
+        <module name="2023-03-12" />
         <module name="NECTAR" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="2023-03-12" options="-Xlint:all" />
+      <module name="2023-03-27 noon" options="-Xlint:all" />
       <module name="NECTAR" options="-Xlint:all" />
       <module name="nectar" options="-Xlint:all" />
     </option>

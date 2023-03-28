@@ -29,7 +29,10 @@
 
     <update id="update" parameterType="RestrMenuDto">
         UPDATE restr_menu
-        SET (restr_NUM = #{restr_NUM}, restr_menu_food = #{restr_menu_food}, restr_menu_price = #{restr_menu_price}, restr_menu_desc = {restr_menu_desc})
+        SET restr_NUM = #{restr_NUM},
+            restr_menu_food = #{restr_menu_food},
+            restr_menu_price = #{restr_menu_price},
+            restr_menu_desc = #{restr_menu_desc}
         WHERE restr_menu_NUM = #{restr_menu_NUM}
     </update>
 

@@ -17,10 +17,23 @@
     ></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
-    <%--  <link rel="stylesheet" href="<c:url value='/css/biz.css'/>"/>--%>
+    <link rel="stylesheet" href="<c:url value='/css/navbarHome.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/biz.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/qna.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/globalPage.css'/>"/>
 
+
+    <style>
+        section#navbar.biz {
+            z-index: 2;
+            width: 100vw;
+            background-color: #e9bea2;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+    </style>
 </head>
 
 
@@ -54,7 +67,7 @@
 <section id="globalPage">
     <!-- Left Side -->
     <div class="sideMenu">
-        <button class="tab index">사업정보</button>
+        <button class="tab index active">사업정보</button>
         <button class="tab index">사업자정보</button>
         <button class="tab index">매장등록</button>
         <button class="tab index">메뉴등록</button>
@@ -65,80 +78,101 @@
     <!-- Right Side -->
     <div class="main">
         <div class="content index active">
-            <h1>${bizAccountDto.bizAccount_name}님이 운영중인 레스토랑✏️</h1>
+
+            <h1>${bizAccountDto.bizAccount_name}님이 운영중인 레스토랑 🧑‍🍳</h1>
+            <!--운영 중인 매장이 없는 경우-->
+            <c:if test="${empty restrDto}">
+                <div class="msg__wrap">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <h3>현재 운영중인 매장이 없습니다.</h3>
+                </div>
+            </c:if>
+
             <div class="container item">
                 <ul id="restrList">
                     <form id="restrForm" action="" method="">
+                        <%--            --%>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <%--            --%>
                         <!-- 게시글 번호 data-restrNum 에 저장-->
                         <li class="restr" data-restrNum="${restrDto.restr_NUM}">
-                            <a href="<c:url value='/restr/read${ph.sc.queryString}&restr_NUM=${restrDto.restr_NUM}'/>">
-                                <img src="./img/pizza.png" alt="" class="restr__img"/>
-                            </a>
-                            <div class="restr__content">
-                                <div class="restr__head">
-                                    <div class="restr__info">
-                                        <div class="restr__title">
-                                            <a href="">${restrDto.restr_name}</a>
-                                            <span class="star">
-                    <fmt:formatNumber value="${restrDto.restr_star}" pattern=".0"></fmt:formatNumber>
-                  </span>
-                                        </div>
-                                        <div class="restr__location">
-                                            ${restrDto.restr_location} - <span
-                                                class="foodType">${restrDto.restr_foodType}</span>
-                                        </div>
-                                        <div class="restr__reaction">
-                                            <i class="fa-regular fa-eye"></i> <span>${restrDto.restr_viewCnt}</span>
-                                            <i class="fa-solid fa-pencil"></i>
-                                            <span>${restrDto.restr_reviewCnt}</span>
-                                            <i class="fa-regular fa-heart"></i>
-                                            <span>${restrDto.restr_likeCnt}</span>
-                                        </div>
-                                    </div>
-                                    <div class="restr__hotdeal">
-                                        <c:if test="${restrDto.restr_hotdeal_NUM ne '-1'}">
-                                            <i class="fa-solid fa-gift"></i>핫딜 진행중</c:if>
-                                    </div>
-                                </div>
+                            <div class="img_wrap">
+                                <img class="img"
+                                     src="https://images.unsplash.com/photo-1677523875173-e1f7f5138b40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDM2fHhqUFI0aGxrQkdBfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60">
+                                <!--img class="img" src="$restrDto.restr_picture"-->
                             </div>
+                            <div class="content_wrap">
+                                <div>
+                                    <h1 class="content__title">${restrDto.restr_name}</h1>
 
-                            <c:if test="${not empty sessionScope.Admin_email}">
-                                <button class="delBtn" type="button">삭제</button>
-                            </c:if>
-
+                                </div>
+                                <p class="content__location">${restrDto.restr_location}</p>
+                                <h1 class="content__restrTime">${restrDto.restr_time}</h1>
+                            </div>
                         </li>
                     </form>
 
                 </ul>
             </div>
 
-            <h1>${bizAccountDto.bizAccount_name}님이 진행한 핫딜 ✏️</h1>
+            <h1>${bizAccountDto.bizAccount_name}님이 진행한 핫딜 🔥</h1>
+
+            <!--진행한 핫딜이 없는 경우-->
+            <c:if test="${empty hotdealDto}">
+                <div class="msg__wrap">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <h3>현재 진행중인 핫딜이 없습니다.</h3>
+                </div>
+            </c:if>
+
             <div class="container item">
                 <c:forEach var="hotdealDto" items="${hotdealDto}">
-                    ${hotdealDto.hotdeal_NUM} </br>
-                    ${hotdealDto.restr_NUM} </br>
-                    ${hotdealDto.restr_category_loc} </br>
-                    ${hotdealDto.restr_menu_NUM} </br>
-                    ${hotdealDto.restr_menu_food} </br>
-                    ${hotdealDto.restr_menu_price} </br>
-                    ${hotdealDto.hotdeal_price} </br>
-                    ${hotdealDto.hotdeal_discountRate} </br>
-                    ${hotdealDto.hotdeal_desc} </br>
-                    ${hotdealDto.hotdeal_useDate} </br>
-                    ${hotdealDto.hotdeal_eventDuration} </br>
-                    ${hotdealDto.hotdeal_regdate} </br>
-                    ${hotdealDto.hotdeal_update} </br>
-                    ${hotdealDto.hotdeal_salesVolume} </br>
-                    ${hotdealDto.hotdeal_MaxSalesVolume} </br>
-                    ${hotdealDto.bizAccount_email} </br>
-                    <%--                      <tr>--%>
-                    <%--                        <td class="bno">${hotdealDto.hotdeal_salesVolume}</td>--%>
-                    <%--                        <td class="writer">${hotdealDto.hotdeal_MaxSalesVolume}</td>--%>
-                    <%--                      </tr>--%>
+                    <li class="restr" data-restrNum="${restrDto.restr_NUM}">
+                        <div class="img_wrap">
+                            <img class="img"
+                                 src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60">
+                            <!--img class="img" src="$restrDto.restr_picture"-->
+                        </div>
+                        <div class="content_wrap">
+                            <div>
+                                <h1 class="content__title">${hotdealDto.restr_menu_food}</h1>
+                            </div>
+                            <p class="content__hotdealPrice"> ${hotdealDto.restr_menu_price} &#8361;</p>
+                            <h1 class="content__menuPrice">  ${hotdealDto.hotdeal_price} &#8361;</h1>
+                        </div>
+                    </li>
                 </c:forEach>
+                <%--                <c:forEach var="hotdealDto" items="${hotdealDto}">--%>
+                <%--                    ${hotdealDto.hotdeal_NUM} </br>--%>
+                <%--                    ${hotdealDto.restr_NUM} </br>--%>
+                <%--                    ${hotdealDto.restr_category_loc} </br>--%>
+                <%--                    ${hotdealDto.restr_menu_NUM} </br>--%>
+                <%--                    ${hotdealDto.restr_menu_food} </br>--%>
+                <%--                    ${hotdealDto.restr_menu_price} </br>--%>
+                <%--                    ${hotdealDto.hotdeal_price} </br>--%>
+                <%--                    ${hotdealDto.hotdeal_discountRate} </br>--%>
+                <%--                    ${hotdealDto.hotdeal_desc} </br>--%>
+                <%--                    ${hotdealDto.hotdeal_useDate} </br>--%>
+                <%--                    ${hotdealDto.hotdeal_eventDuration} </br>--%>
+                <%--                    ${hotdealDto.hotdeal_regdate} </br>--%>
+                <%--                    ${hotdealDto.hotdeal_update} </br>--%>
+                <%--                    ${hotdealDto.hotdeal_salesVolume} </br>--%>
+                <%--                    ${hotdealDto.hotdeal_MaxSalesVolume} </br>--%>
+                <%--                    ${hotdealDto.bizAccount_email} </br>--%>
+                <%--                    &lt;%&ndash;                      <tr>&ndash;%&gt;--%>
+                <%--                    &lt;%&ndash;                        <td class="bno">${hotdealDto.hotdeal_salesVolume}</td>&ndash;%&gt;--%>
+                <%--                    &lt;%&ndash;                        <td class="writer">${hotdealDto.hotdeal_MaxSalesVolume}</td>&ndash;%&gt;--%>
+                <%--                    &lt;%&ndash;                      </tr>&ndash;%&gt;--%>
+                <%--                </c:forEach>--%>
             </div>
-
-            <h1>핫딜 판매 내역 ✏️</h1>
+            <h1>핫딜 판매 내역 💸️</h1>
+            <!--핫딜 판매 내역이 없는 경우-->
+            <!--c:if test="$empty hotdealDto}"-->  <!--이거 수정해야함!-->
+            <div class="msg__wrap">
+                <i class="fa-solid fa-circle-info"></i>
+                <h3> 아직 판매된 핫딜 제품이 없습니다. </h3>
+            </div>
+            <!--/c:if-->
             <div class="container item">
                 <div class="recent-order">
                     <table>
@@ -155,15 +189,17 @@
                     </table>
                 </div>
 
-
             </div>
-        </div>     <!-- 사업자가 운영중인 레스토랑-->
+        </div>     <!-- 사업정보-->
         <div class="content index">
-            <h1>사업자 정보 ✏️</h1>
+            <h1>사업자 정보 </h1>
             <div class="container item">
                 <form id="bizAccountInfoForm" action="<c:url value='/mypage/biz/profile/modify'/>" method="post">
                     <div class="user-details">
                         <div class="input-box">
+                            <%--            --%>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                            <%--            --%>
                             <span class="details">이름</span>
                             <input
                                     type="text"
@@ -204,321 +240,394 @@
                                     name="bizAccount_pwd"
                                     placeholder="Enter your password"
                                     value="${bizAccountDto.bizAccount_pwd}"
+                                    required
 
                             />
                         </div>
 
+                        <div class="buttons">
+                            <button type="button" id="bizUpdateBtn">프로필수정</button>
+                            <button type="button" id="bizDelBtn">계정 탈퇴</button>
+                        </div>
 
-                        <button type="button" id="bizUpdateBtn">프로필수정</button>
-                        <button type="button" id="bizDelBtn">계정 탈퇴</button>
 
                     </div>
                 </form>
             </div>
-        </div>            <!-- 사업자 정보-->
+        </div>            <!-- 사업자정보-->
         <div class="content index">
             <h1>매장 등록 필수 정보 입력 ✏️</h1>
             <div class="container item">
                 <form id="" action="<c:url value='/mypage/biz/restr/write'/>" method="post">
+                    <%--            --%>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <%--            --%>
                     <input name="request_bizAccount_email" type="hidden" value="${bizAccountDto.bizAccount_email}">
-                    <div class="user-details">
-                        <input name="bizAccount_email" value="${bizAccountDto.bizAccount_email}">
-                        <%--                        <input name="biz_reg_num" value="${bizAccountDto.biz_reg_num}" >--%>
-                        <div class="input-box">
-                            <span class="details">매장 이름</span>
-                            <input
-                                    type="text"
-                                    name="request_restr_name"
-                                    placeholder="매장 이름을 입력하세요"
-                                    required
-                            />
-                        </div>
-                        <div class="input-box">
-                            <span class="details">매장 위치</span>
-                            <input
-                                    type="text"
-                                    name="request_restr_location"
-                                    placeholder="매장 위치를 입력하세요"
-                                    required
-                            />
-                        </div>
-                        <div class="input-box">
-                            <span class="details">매장 전화 번호</span>
-                            <input
-                                    type="text"
-                                    name="request_restr_phone"
-                                    placeholder="매장 전화번호를 입력하세요"
-                                    required
-                            />
-                        </div>
-                        <div class="input-box">
-                            <span class="details">매장 소개 하기</span>
-                            <textarea name="request_restr_desc" placeholder="매장 소개를 입력하세요. 입력글자제한 200자">
+                    <div class="user-details index">
+                        <div class="wrap index">
+                            <input name="bizAccount_email" value="${bizAccountDto.bizAccount_email}" type="hidden">
+                            <!--input name="biz_reg_num" value="$bizAccountDto.biz_reg_num"-->
+                            <div class="input-box">
+                                <span class="details">매장 이름</span>
+                                <input
+                                        type="text"
+                                        name="request_restr_name"
+                                        placeholder="매장 이름을 입력하세요"
+                                        required
+                                />
+                            </div>
+                            <div class="input-box">
+                                <span class="details">매장 위치</span>
+                                <input
+                                        type="text"
+                                        name="request_restr_location"
+                                        placeholder="매장 위치를 입력하세요"
+                                        required
+                                />
+                            </div>
+                            <div class="input-box">
+                                <span class="details">매장 전화 번호</span>
+                                <input
+                                        type="text"
+                                        name="request_restr_phone"
+                                        placeholder="매장 전화번호를 입력하세요"
+                                        required
+                                />
+                            </div>
+                            <div class="input-box">
+                                <span class="details">매장 소개 하기</span>
+                                <textarea name="request_restr_desc" placeholder="매장 소개를 입력하세요. 입력글자제한 200자">
 
                             </textarea>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">매장 운영 시간</span>
-                            <input
-                                    type="text"
-                                    name="request_restr_time"
-                                    placeholder="OPEN"
-                                    required
-                            />
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">매장 사진 등록</span>
-                            <input
-                                    type="text"
-                                    name="request_restr_picture"
-                                    required
-                            />
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">사업자 등록증 입력</span>
-                            <input
-                                    type="text"
-                                    name="request_biz_reg_num"
-                                    required
-                            />
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">태그 입력</span>
-                            <input
-                                    type="text"
-                                    name="request_restr_tag"
-                                    placeholder="노출을 원하는 태그를 입력하세요."
-                                    required
-                            />
-                        </div>
-
-                        <div class="gender-details">
-                            <input type="radio" name="request_restr_cost" id="cost-1" value="만원미만"/>
-                            <input type="radio" name="request_restr_cost" id="cost-2" value="1만원대"/>
-                            <input type="radio" name="request_restr_cost" id="cost-3" value="2만원대"/>
-                            <input type="radio" name="request_restr_cost" id="cost-4" value="3만원대"/>
-                            <span class="gender-title">메뉴 평균 가격대 조사</span>
-                            <div class="category">
-                                <label for="cost-1">
-                                    <span class="dot one"></span>
-                                    <span class="gender" class="cost">만원미만</span>
-                                </label>
-                                <label for="cost-2">
-                                    <span class="dot two"></span>
-                                    <span class="gender" class="cost">1만원대</span>
-                                </label>
-                                <label for="cost-3">
-                                    <span class="dot three"></span>
-                                    <span class="gender" class="cost">2만원대</span>
-                                </label>
-                                <label for="cost-4">
-                                    <span class="dot three"></span>
-                                    <span class="gender" class="cost">3만원대</span>
-                                </label>
                             </div>
-                        </div>
-                        <div class="gender-details">
-                            <input type="radio" name="request_restr_parking" id="parking-1" value="주차가능"/>
-                            <input type="radio" name="request_restr_parking" id="parking-2" value="주차불가"/>
-                            <span class="gender-title">주차 가능 여부</span>
-                            <div class="category">
-                                <label for="parking-1">
-                                    <span class="dot three"></span>
-                                    <span class="gender">주차가능</span>
-                                </label>
-                                <label for="parking-2">
-                                    <span class="dot four"></span>
-                                    <span class="gender">주차불가</span>=
-                                </label>
+                            <div class="input-box">
+                                <span class="details">매장 운영 시간</span>
+                                <input
+                                        type="text"
+                                        name="request_restr_time"
+                                        placeholder="OPEN"
+                                        required
+                                />
                             </div>
-                        </div>
-                        <div class="gender-details">
-                            <input type="radio" name="request_restr_foodType" id="food-1" value="한식"/>
-                            <input type="radio" name="request_restr_foodType" id="food-2" value="중식"/>
-                            <input type="radio" name="request_restr_foodType" id="food-4" value="양식"/>
-                            <input type="radio" name="request_restr_foodType" id="food-5" value="세계음식"/>
-                            <input type="radio" name="request_restr_foodType" id="food-6" value="뷔페"/>
-                            <input type="radio" name="request_restr_foodType" id="food-3" value="일식"/>
-                            <input type="radio" name="request_restr_foodType" id="food-7" value="카페"/>
-                            <input type="radio" name="request_restr_foodType" id="food-8" value="주점"/>
-                            <span class="gender-title">매장 음식 종류 선택</span>
-                            <div class="category">
-                                <label for="food-1">
-                                    <span class="dot five"></span>
-                                    <span class="gender">한식</span>
-                                </label>
-                                <label for="food-2">
-                                    <span class="dot six"></span>
-                                    <span class="gender">중식</span>
-                                </label>
-                                <label for="food-3">
-                                    <span class="dot seven"></span>
-                                    <span class="gender">일식</span>
-                                </label>
-                                <label for="food-4">
-                                    <span class="dot seven"></span>
-                                    <span class="gender">양식</span>
-                                </label>
-                                <label for="food-5">
-                                    <span class="dot seven"></span>
-                                    <span class="gender">세계음식</span>
-                                </label>
-                                <label for="food-6">
-                                    <span class="dot seven"></span>
-                                    <span class="gender">뷔페</span>
-                                </label>
-                                <label for="food-7">
-                                    <span class="dot seven"></span>
-                                    <span class="gender">카페</span>
-                                </label>
-                                <label for="food-8">
-                                    <span class="dot seven"></span>
-                                    <span class="gender">주점</span>
-                                </label>
+                            <div class="input-box">
+                                <span class="details">매장 사진 등록</span>
+                                <input
+                                        type="text"
+                                        name="request_restr_picture"
+                                        required
+                                />
+                            </div>
+                            <div class="input-box">
+                                <span class="details">사업자 등록증 입력</span>
+                                <input
+                                        type="text"
+                                        name="request_biz_reg_num"
+                                        required
+                                />
+                            </div>
+                            <div class="input-box">
+                                <span class="details">태그 입력</span>
+                                <input
+                                        type="text"
+                                        name="request_restr_tag"
+                                        placeholder="노출을 원하는 태그를 입력하세요."
+                                        required
+                                />
                             </div>
                         </div>
 
-                        <input type="submit" value="등록"/>
+                        <div class="wrap">
+                            <div class="column-details">
+                                <input type="radio" name="restr_cost" id="cost-1" value="만원미만"/>
+                                <input type="radio" name="restr_cost" id="cost-2" value="1만원대"/>
+                                <input type="radio" name="restr_cost" id="cost-3" value="2만원대"/>
+                                <input type="radio" name="restr_cost" id="cost-4" value="3만원대"/>
+                                <span class="menu-title">메뉴 평균 가격대 조사</span>
+                                <div class="category">
+                                    <label for="cost-1">
+                                        <span class="dot one"></span>
+                                        <span class="column" class="cost">만원미만</span>
+                                    </label>
+                                    <label for="cost-2">
+                                        <span class="dot two"></span>
+                                        <span class="column" class="cost">1만원대</span>
+                                    </label>
+                                    <label for="cost-3">
+                                        <span class="dot three"></span>
+                                        <span class="column" class="cost">2만원대</span>
+                                    </label>
+                                    <label for="cost-4">
+                                        <span class="dot four"></span>
+                                        <span class="column" class="cost">3만원대</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="column-details">
+                                <input type="radio" name="restr_parking" id="parking-1" value="주차가능"/>
+                                <input type="radio" name="restr_parking" id="parking-2" value="주차불가"/>
+                                <span class="menu-title">주차 가능 여부</span>
+                                <div class="category">
+                                    <label for="parking-1">
+                                        <span class="dot one"></span>
+                                        <span class="column">주차가능</span>
+                                    </label>
+                                    <label for="parking-2">
+                                        <span class="dot two"></span>
+                                        <span class="column">주차불가</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="column-details">
+                                <input type="radio" name="restr_foodType" id="food-1" value="한식"/>
+                                <input type="radio" name="restr_foodType" id="food-2" value="중식"/>
+                                <input type="radio" name="restr_foodType" id="food-3" value="일식"/>
+                                <input type="radio" name="restr_foodType" id="food-4" value="양식"/>
+                                <input type="radio" name="restr_foodType" id="food-5" value="세계음식"/>
+                                <input type="radio" name="restr_foodType" id="food-6" value="뷔페"/>
+                                <input type="radio" name="restr_foodType" id="food-7" value="카페"/>
+                                <input type="radio" name="restr_foodType" id="food-8" value="주점"/>
+                                <span class="menu-title">매장 음식 종류 선택</span>
+                                <div class="category">
+                                    <label for="food-1">
+                                        <span class="dot a"></span>
+                                        <span class="column">한식</span>
+                                    </label>
+                                    <label for="food-2">
+                                        <span class="dot b"></span>
+                                        <span class="column">중식</span>
+                                    </label>
+                                    <label for="food-3">
+                                        <span class="dot c"></span>
+                                        <span class="column">일식</span>
+                                    </label>
+                                    <label for="food-4">
+                                        <span class="dot d"></span>
+                                        <span class="column">양식</span>
+                                    </label>
+                                    <label for="food-5">
+                                        <span class="dot e"></span>
+                                        <span class="column">세계음식</span>
+                                    </label>
+                                    <label for="food-6">
+                                        <span class="dot f"></span>
+                                        <span class="column">뷔페</span>
+                                    </label>
+                                    <label for="food-7">
+                                        <span class="dot g"></span>
+                                        <span class="column">카페</span>
+                                    </label>
+                                    <label for="food-8">
+                                        <span class="dot h"></span>
+                                        <span class="column">주점</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="regBtn"> 등록</button>
                     </div>
                 </form>
             </div>
         </div>            <!-- 매장등록-->
-        <c:if test=""> <!-- 메뉴등록 (레스토랑 심사에 통과한 경우에만 나타나게 한다.)-->
-            <div class="content index">
-                <h2 class="h2">메뉴 등록</h2>
-                <form id="menuForm">
-                    <label>메뉴이름</label>
-                    <input name="restr_menu_food" type="text" placeholder="메뉴이름을 입력하세요.">
-                    <label>메뉴가격</label>
-                    <input name="restr_menu_price" type="text" placeholder="메뉴가격을 입력하세요.">
-                    <label>메뉴사진</label>
-                    <button type="submit">메뉴추가</button>
+        <div class="content index">
+            <h2 class="h2" style="margin-bottom: 20px">메뉴 등록</h2>
+            <div class="container item">
+                <form id="menuForm" action="<c:url value='/mypage/biz/restrMenu/write?tab=regMenu'/>" method="post">
+                    <%--            --%>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <%--            --%>
+                    <input name="restr_NUM" value="${restrDto.restr_NUM}" type="hidden">
+                    <div class="input-box">
+                        <label>메뉴이름</label>
+                        <input name="restr_menu_food" type="text" placeholder="메뉴이름을 입력하세요.">
+                    </div>
+                    <div class="input-box">
+                        <label>메뉴가격</label>
+                        <input name="restr_menu_price" type="text" placeholder="메뉴가격을 입력하세요.">
+                    </div>
+                    <div class="input-box">
+                        <label>메뉴설명</label>
+                        <input name="restr_menu_desc" type="text" placeholder="메뉴에 대한 간단한 설명을 입력하세요.">
+                    </div>
+                    <button type="submit" class="restrMenuRegBtn">메뉴추가</button>
                 </form>
+            </div>
 
-                <h2 class="h2">메뉴 리스트</h2>
-                <span>메뉴이름</span>
-                <span>메뉴가격</span>
-                <ul>
-                    <c:if test="${not empty restrMenuDto}">
-                        <li>
-                            <span>파스타</span>
-                            <span>12,000원</span>
+            <h2 class="h2" style="margin-bottom: 20px" >메뉴 리스트</h2>
+            <div class="container item">
+                <ul class="menuList">
+                    <c:forEach var="restrMenuDto" items="${restrMenuDto}">
+                        <li class="menu">
+                            <form>
+                                    <%--            --%>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    <%--            --%>
+                                <input name="restr_NUM" type="hidden" value="${restrMenuDto.restr_NUM}">
+                                <input name="restr_menu_NUM" type="hidden" value="${restrMenuDto.restr_menu_NUM}">
+                                <input name="restr_menu_food" type="text" required readonly value=" ${restrMenuDto.restr_menu_food}">
+                                <input name="restr_menu_price" type="text" required readonly value="${restrMenuDto.restr_menu_price}">
+                                <input name="restr_menu_desc" type="text" required readonly value=" ${restrMenuDto.restr_menu_desc}">
+                                <button type="button" id="menuModifyBtn"> 수정 </button>
+                                <button type="button" id="menuDeleteBtn"> 삭제 </button>
+                            </form>
+
                         </li>
-                    </c:if>
-
+                    </c:forEach>
                 </ul>
 
             </div>
-        </c:if>
+
+        </div>            <!-- 메뉴등록 (레스토랑 심사에 통과한 경우에만 나타나게 한다.)-->
         <div class="content index">
             <h1>핫딜 이벤트 메뉴 등록 ✏️</h1>
             <div class="container item">
-                <form action="<c:url value='/mypage/biz/hotdeal/write'/>" method="post">
-                    <div class="user-details">
-                        <div class="gender-details">
-                            <span class="gender-title">핫딜 등록 메뉴 선택하기</span>
-                            <c:forEach var="restrMenuDto" items="${restrMenuDto}" varStatus="status">
-                                <input type="hidden" name="bizAccount_email" value=" ${bizAccountDto.bizAccount_email}">
-                                <input type="hidden" name="restr_menu_NUM" value=" ${bizAccountDto.bizAccount_email}">
-                                <input name="restr_menu_food" value="${restrMenuDto.restr_menu_food}">
-                                <input name="restr_NUM" value="${restrMenuDto.restr_NUM}">
-                                <input name="restr_menu_price" value="${restrMenuDto.restr_menu_price}">
-                                <input name="restr_categroy_loc" value="${restrMenuDto.restr_menu_price}">
-                                <input name="hotdeal_picture" value="" type="file">
-                                <input name="hotdeal_price" value="" placeholder="핫딜 가격을 입력하세요">
-                                <input name="hotdeal_useDate" type="text" value="" placeholder="핫딜 사용기간을 입력하세요">
-                                <input name="hotdeal_eventDration" type="text" value="" placeholder="핫딜 기간을 입력하세요">
-                                <input name="hotdeal_desc" value="${restrMenuDto.restr_menu_desc}">
-                                <input type="radio" name="restr_menu_food" id="dot-<c:out value='${status.count}'/>"/>
+                <div class="user-details">
+
+                    <div class="column-details">
+                        <c:forEach var="restrMenuDto" items="${restrMenuDto}" varStatus="status">
+                            <form id="hotdealRegForm" method="post">
+                                    <%--            --%>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    <%--            --%>
+                                <input class="restr_menu_food" type="radio" name="request_restr_menu_food"
+                                       value="${restrMenuDto.restr_menu_food}"
+                                       id="dot-<c:out value='${status.count}'/>"/>
                                 <div class="category">
                                     <label for="dot-${status.count}">
-                                        <span class="dot one"></span>
-                                        <span class="gender">${restrMenuDto.restr_menu_food}</span>
+                                        <span class="dot data-${status.count}"></span>
+                                        <span class="column">${restrMenuDto.restr_menu_food}</span>
                                     </label>
                                 </div>
-                            </c:forEach>
-                        </div>
+                                <input type="hidden" name="request_restr_NUM" value="${restrDto.restr_NUM}">
+                                <input type="hidden" name="request_restr_name" value="${restrDto.restr_name}">
+                                <input type="hidden" name="request_restr_menu_NUM"
+                                       value="${restrMenuDto.restr_menu_NUM}">
+                                <input type="hidden" name="request_restr_category_loc"
+                                       value=" ${restrDto.restr_category_loc}">
+                                <input type="hidden" name="request_hotdeal_desc"
+                                       value="${restrMenuDto.restr_menu_desc}">
+                                <input type="hidden" name="request_hotdeal_picture"
+                                       value="https://images.unsplash.com/photo-1676912819036-b9024f1e74ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDk0fHhqUFI0aGxrQkdBfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=600&q=60">
+                                <input type="hidden" name="request_bizAccount_email"
+                                       value=" ${bizAccountDto.bizAccount_email}">
+                                <input type="hidden" name="request_hotdeal_discountRate" value="10">
+                                <input type="hidden" name="request_hotdeal_salesVolume" value="0">
 
-                        <input type="submit" value="Register"/>
+                                <div class="wrap hotdeal">
+                                    <div class="input-box">
+                                        <span class="details">정상가</span>
+                                        <input name="request_restr_menu_price" value="${restrMenuDto.restr_menu_price}"
+                                               readonly>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">할인가</span>
+                                        <input name="request_hotdeal_price" placeholder="핫딜 가격을 입력하세요" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">핫딜 사용 기간</span>
+                                        <input name="request_hotdeal_useDate" type="text"
+                                               placeholder="ex. 2023-03-15 ~ 2023-04-01"
+                                               required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">핫딜 유지 기간</span>
+                                        <input name="request_hotdeal_eventDuration" type="text"
+                                               placeholder="ex. 30일"
+                                               required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">한정 판매 개수</span>
+                                        <input name="request_hotdeal_MaxSalesVolume"
+                                               type="text"
+                                               placeholder="ex. 100(개) 단, 숫자만 입력"
+                                               required>
+                                    </div>
+                                </div>
+                            </form>
+                        </c:forEach>
+
+                        <button type="submit" id="hotdealRegBtn"> 등록 </button>
+
                     </div>
-                </form>
 
+                </div>
             </div>
-        </div>            <!-- 핫딜 이벤트 메뉴 등록-->
+        </div>            <!-- 핫딜등록-->
         <div class="content index">
             <h1>문의 남기기 ✏️</h1>
             <div class="container item">
 
-                <form action="<c:url value='/mypage/biz/QNA/write'/>" method="post">
+                <form id="qnaForm" action="<c:url value='/mypage/biz/QNA/write'/>" method="post">
+                    <%--            --%>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <%--            --%>
                     <input type="text" name="qna_title" placeholder="제목 : 인태는 못말려">
                     <textarea name="qna_content" value="" placeholder="내용을 입력하세요 : 제발 누가 좀 말려요"></textarea>
-                    <input type="file" name="qna_picture">
+                    <label for="qna_picutre" class="qna_picutre">
+                        ➕
+                    </label>
+                    <input id="qna_picutre" type="hidden" name="qna_picture"
+                           value="https://images.unsplash.com/photo-1534211698458-e2be12c1a94c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGZsb3dlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60">
                     <input type="hidden" name="qna_writer" value="${bizAccountDto.bizAccount_email}">
                     <input type="hidden" name="qna_name" value="${bizAccountDto.bizAccount_name}">
-                    <button type="submit">문의글 등록</button>
+                    <button type="submit" class="qnaRegBtn">등록</button>
                 </form>
 
             </div>
-        </div>            <!-- 문의 남기기-->
+        </div>            <!-- 문의남기기-->
     </div>
 </section>
 
 <%-- / Global Page--%>
 
 
-<div id="MyRestrantlist">
-    <h3>BIZ가 운영중인 레스토랑 </h3>
-    ${restrDto.restr_NUM} </br>
-    ${restrDto.restr_name}</br>
-    ${restrDto.restr_location}</br>
-    ${restrDto.restr_phone}</br>
-    ${restrDto.restr_time}</br>
-    ${restrDto.restr_star}</br>
-    ${restrDto.restr_foodType}</br>
-    ${restrDto.restr_cost}</br>
-    ${restrDto.restr_parking}</br>
-    ${restrDto.restr_tag}</br>
-    ${restrDto.restr_menu}</br>
-    ${restrDto.restr_cost}</br>
-    ${restrDto.restr_menu}</br>
-    ${restrDto.restr_picture}</br>
-    ${restrDto.restr_viewCnt}</br>
-    ${restrDto.restr_reviewCnt}</br>
-    ${restrDto.restr_likeCnt}</br>
-    ----------------------------------</br>
-</div>
+<%--<div id="MyRestrantlist">--%>
+<%--    <h3>BIZ가 운영중인 레스토랑 </h3>--%>
+<%--    ${restrDto.restr_NUM} </br>--%>
+<%--    ${restrDto.restr_name}</br>--%>
+<%--    ${restrDto.restr_location}</br>--%>
+<%--    ${restrDto.restr_phone}</br>--%>
+<%--    ${restrDto.restr_time}</br>--%>
+<%--    ${restrDto.restr_star}</br>--%>
+<%--    ${restrDto.restr_foodType}</br>--%>
+<%--    ${restrDto.restr_cost}</br>--%>
+<%--    ${restrDto.restr_parking}</br>--%>
+<%--    ${restrDto.restr_tag}</br>--%>
+<%--    ${restrDto.restr_menu}</br>--%>
+<%--    ${restrDto.restr_cost}</br>--%>
+<%--    ${restrDto.restr_menu}</br>--%>
+<%--    ${restrDto.restr_picture}</br>--%>
+<%--    ${restrDto.restr_viewCnt}</br>--%>
+<%--    ${restrDto.restr_reviewCnt}</br>--%>
+<%--    ${restrDto.restr_likeCnt}</br>--%>
+<%--    ----------------------------------</br>--%>
+<%--</div>--%>
 
 
-<br id="BIZ_info">
-<h3>BIZ 에 대한 정보 </h3>
-${bizAccountDto.bizAccount_email}
-${bizAccountDto.bizAccount_pwd}
-${bizAccountDto.bizAccount_name}
-${bizAccountDto.bizAccount_phone}
-${bizAccountDto.bizAccount_picture}
-${bizAccountDto.bizAccount_regdate}
-${bizAccountDto.bizAccount_state_code} </br>
-</div>
+<%--<br id="BIZ_info">--%>
+<%--<h3>BIZ 에 대한 정보 </h3>--%>
+<%--${bizAccountDto.bizAccount_email}--%>
+<%--${bizAccountDto.bizAccount_pwd}--%>
+<%--${bizAccountDto.bizAccount_name}--%>
+<%--${bizAccountDto.bizAccount_phone}--%>
+<%--${bizAccountDto.bizAccount_picture}--%>
+<%--${bizAccountDto.bizAccount_regdate}--%>
+<%--${bizAccountDto.bizAccount_state_code} </br>--%>
+<%--</div>--%>
 
 
 <%-- QNA TEST    --%>
-<h2>QNA TEST</h2>
-<form id="form" action="<c:url value="/mypage/biz/QNA/write"/>" method="post">
-    <input class="detail" type="text" name="qna_title" value="나에게 질문하는 것을 두려워 말라" autofocus>
-    <input class="detail" type="text" name="qna_content" value="인태 최고" autofocus>
-    <input class="detail" type="text" name="qna_picture" value="핵 깜찍한 인태 사진" autofocus>
-    <input class="detail" type="text" name="qna_writer" value="Biz_1@google.com"
-           autofocus> <%--qna_writer = ${bizAccountDto.bizAccount_email}}--%>
-    <input class="detail" type="text" name="qna_name" value="name1"
-           autofocus> <%--qna_name   = ${bizAccountDto.bizAccount_name}}--%>
-    <%--            --%>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-    <%--            --%>
-    <button id="loginBtn">QNA 등록</button>
-</form>
+<%--<h2>QNA TEST</h2>--%>
+<%--<form id="form" action="<c:url value="/mypage/biz/QNA/write"/>" method="post">--%>
+<%--    <input class="detail" type="text" name="qna_title" value="나에게 질문하는 것을 두려워 말라" autofocus>--%>
+<%--    <input class="detail" type="text" name="qna_content" value="인태 최고" autofocus>--%>
+<%--    <input class="detail" type="text" name="qna_picture" value="핵 깜찍한 인태 사진" autofocus>--%>
+<%--    <input class="detail" type="text" name="qna_writer" value="Biz_1@google.com"--%>
+<%--           autofocus> &lt;%&ndash;qna_writer = ${bizAccountDto.bizAccount_email}}&ndash;%&gt;--%>
+<%--    <input class="detail" type="text" name="qna_name" value="name1"--%>
+<%--           autofocus> &lt;%&ndash;qna_name   = ${bizAccountDto.bizAccount_name}}&ndash;%&gt;--%>
+<%--    <button id="loginBtn">QNA 등록</button>--%>
+<%--</form>--%>
 <%--    --%>
 
 
@@ -550,7 +659,7 @@ ${bizAccountDto.bizAccount_state_code} </br>
         // TAB 기능 //
 
 
-        $("#bizDelBtn").on("click", (e) => {
+        $("#bizDelBtn").on("click", $(".buttons"), (e) => {
 
             let form = $("#bizAccountInfoForm");
             form.attr("action", "<c:url value="/mypage/biz/profile/delete"/>");
@@ -559,11 +668,9 @@ ${bizAccountDto.bizAccount_state_code} </br>
 
         }); // 사업자 계정 탈퇴
 
-
-        $("#bizUpdateBtn").on("click", (e) => {
+        $("#bizUpdateBtn").on("click", $(".buttons"), (e) => {
             let form = $("#bizAccountInfoForm");
             let isReadOnly = $("input[name=bizAccount_name]").attr("readonly");
-
 
             // 읽기상태 -> 수정상태
             if (isReadOnly == "readonly") {
@@ -581,6 +688,46 @@ ${bizAccountDto.bizAccount_state_code} </br>
 
 
         }); // 사업자 계정 수정
+
+        $("#hotdealRegBtn").on("click", (e) => {
+
+            // 선택된 라디오 태그의 폼 태그를 포스트요청으로 보낸다.
+            let radio = $("input[type=radio][name=request_restr_menu_food]:checked");
+            let form = radio[0].form;
+
+            form.action = "<c:url value='/mypage/biz/hotdeal/write'/>"
+            form.method = "post"
+            form.submit();
+
+        }); // 핫딜 등록
+
+        $("#menuModifyBtn",  "li.menu").on("click", function(e) {
+            let form = $(this).parent();
+            let isReadOnly = $("input[name=restr_menu_food]", "li.menu").attr("readonly");
+            console.log(e.target)
+            if(isReadOnly == "readonly"){
+                $("input[name=restr_menu_food]").attr('readonly', false);
+                $("input[name=restr_menu_price]").attr('readonly', false);
+                $("input[name=restr_menu_desc]").attr('readonly', false);
+                e.target.innerHTML = "등록";
+                return;
+            }
+
+            form.attr("action", "<c:url value='/mypage/biz/restrMenu/modify'/>");
+            form.attr("method", "post");
+            form.submit();
+
+        }) // 레스토랑 메뉴 수정
+
+
+        $("#menuDeleteBtn", "li.menu").on("click", function (){
+            let form = $(this).parent();
+
+            form.attr("action", "<c:url value='/mypage/biz/restrMenu/delete'/>");
+            form.attr("method", "post");
+            form.submit();
+
+        }) // 레스토랑 메뉴 삭제
 
 
     }) // ready()

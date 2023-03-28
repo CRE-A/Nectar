@@ -34,7 +34,10 @@
 <div class="container">
     <div class="title">Registration</div>
     <div class="content">
-        <form action="<c:url value="/register/add"/>" method="post" onsubmit="return registerFormCheck(this)">
+        <form action="<c:url value="/register/addUser"/>" method="post" onsubmit="return registerFormCheck(this)">
+            <%--            --%>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <%--            --%>
             <div class="user-details">
                 <div class="input-box"> <%--   ID 가 email 로 변경   --%>
                     <span class="details ${not empty param.msg ? 'email' : ''}">email</span>
@@ -57,35 +60,7 @@
                     <input type="text" name="user_phone" placeholder="Enter your phoneNumber" required />
                 </div>
 
-<%--                <div class="input-box"> &lt;%&ndash;   email 이 date of birth로 변경   &ndash;%&gt;--%>
-<%--                    <span class="details">date of birth</span>--%>
-<%--                    <input type="text" name="date of birth" placeholder="Enter your date of birth" required />--%>
-<%--                </div>--%>
-<%--                <div class="input-box">--%>
-<%--                    <span class="details">Phone Number</span>--%>
-<%--                    <input type="text" name="phn" placeholder="Enter your number" required />--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="gender-details">--%>
-<%--                <input type="radio" name="gender" id="dot-1" />--%>
-<%--                <input type="radio" name="gender" id="dot-2" />--%>
-<%--                <input type="radio" name="gender" id="dot-3" />--%>
-<%--                <span class="gender-title">Gender</span>--%>
-<%--                <div class="category">--%>
-<%--                    <label for="dot-1">--%>
-<%--                        <span class="dot one"></span>--%>
-<%--                        <span class="gender">Male</span>--%>
-<%--                    </label>--%>
-<%--                    <label for="dot-2">--%>
-<%--                        <span class="dot two"></span>--%>
-<%--                        <span class="gender">Female</span>--%>
-<%--                    </label>--%>
-<%--                    <label for="dot-3">--%>
-<%--                        <span class="dot three"></span>--%>
-<%--                        <span class="gender">Prefer not to say</span>--%>
-<%--                    </label>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <div id="msg">
                     ${param.msg}

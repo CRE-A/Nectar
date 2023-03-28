@@ -70,11 +70,11 @@
         <div id="inputBox">
             <div id="inputBox1">
                 <i class="fa-solid fa-id-badge"></i>
-                <input class="detail" type="text" name="user_email" placeholder="이메일" value="${cookie.email.value}" autofocus>
+                <input class="detail" type="text" name="user_email" placeholder="이메일" value="${sns_email}" autofocus>
             </div>
             <div id="inputBox2">
                 <i class="fa-sharp fa-solid fa-key"></i>
-                <input class="detail" type="password" name="user_pwd" placeholder="비밀번호">
+                <input class="detail" type="password" name="user_pwd" placeholder="비밀번호" value="${sns_email}">
             </div>
         </div>
         <input type="hidden" name="toURL" value="${param.toURL}">
@@ -124,6 +124,17 @@
     function setMessage(msg) {
         document.getElementById("msg").innerHTML = `${'${msg}'}`;
     }
+
+    function clickSubmitBtn(){
+        document.getElementById("loginBtn").click();
+    }
+
+    if(${not empty sns_email}){
+        clickSubmitBtn()
+    }
+
+
+
 </script>
 
 </body>

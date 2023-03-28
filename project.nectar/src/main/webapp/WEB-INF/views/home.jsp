@@ -62,9 +62,11 @@
 </div>
 
 
+<!-- Home -->
+
 <section id="home" style='background-image: url("<c:url value='/images/steak.jpg'/>")'>
     <div class="title">
-        <h1 class="title slogan">솔직한 리뷰, 믿을 수 있는 평점! <br/> NECTAR </h1>
+        <h1 class="title slogan">솔직한 리뷰, 믿을 수 있는 평점!</h1>
     </div>
     <div class="searchBar">
         <button class="filterBtn">
@@ -215,7 +217,7 @@
 
 <section class="filter__modal">
     <div style="text-align:center" id="filter__container">
-        <form action="<c:url value="/restr/search"/>" class="search-form">
+        <form action="<c:url value="/restr/search"/>" class="filter-form">
             <input type="hidden" name="option" value="homeFilter"/>
             <div class="filter-item">
                 <label>음식종류</label><br>
@@ -373,22 +375,45 @@
 
     const filterBtn = document.querySelector(".filterBtn");
     filterBtn.addEventListener("click", () => {
+
         const filterModal = document.querySelector(".filter__modal");
         filterModal.classList.toggle("active");
+
+        const body = document.querySelector("body");
+        body.style.position = "fixed";
+        body.style.width = "100%";
+        body.style.height = "100%";
+        body.style.overflow = "hidden";
+
 
     })
 
     const filterModal = document.querySelector(".filter__modal");
     filterModal.addEventListener("click", (e) => {
 
+        // 이벤트 버블링 방지
+        if(e.target != e.currentTarget){
+            return;
+        }
+
         // 여백 누르면 모달창 꺼지게 만들기
         e.target === filterModal ? filterModal.classList.toggle('active') : false
+
+        // 부모 노드 스크롤 방지
+        const body = document.querySelector("body");
+        body.removeAttribute("style");
+
 
     })
 
     const cancelBtn = document.querySelector(".cancelBtn");
     cancelBtn.addEventListener("click", (e) => {
         filterModal.classList.toggle("active");
+
+        // 부모 노드 스크롤 방지
+        const body = document.querySelector("body");
+        body.removeAttribute("style");
+
     })
 
 

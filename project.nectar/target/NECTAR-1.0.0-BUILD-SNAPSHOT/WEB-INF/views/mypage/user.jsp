@@ -22,7 +22,9 @@
   <!-- CSS -->
   <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
   <link rel="stylesheet" href="<c:url value='/css/user.css'/>"/>
+  <link rel="stylesheet" href="<c:url value='/css/qna.css'/>"/>
   <link rel="stylesheet" href="<c:url value='/css/userLiking.css'/>"/>
+  <link rel="stylesheet" href="<c:url value='/css/globalPage.css'/>"/>
 
 </head>
 
@@ -81,69 +83,18 @@
 <section id="myPage">
   <!-- Left Side -->
   <div class="sideMenu">
-    <button class="sideMenu__mypage">My Page</button>
-    <button class="sideMenu__user">회원정보</button>
+    <%--    <button class="sideMenu__mypage">My Page</button>--%>
+    <%--    <button class="sideMenu__user">회원정보</button>--%>
+
+    <button class="tab index active">My Page</button>
+    <button class="tab index">회원정보</button>
+    <button class="tab index">FAQ</button>
   </div>
 
   <!-- Right Side -->
   <div class="userInfo">
-
-    <div class="tab user">
-      <!-- 회원정보수정 -->
-      <h1>회원정보수정</h1>
-      <form action="" id="userInfoForm">
-        <div class="userInfo__box">
-          <div class="userInfo__profile">
-            <img
-                    src="https://i.pinimg.com/564x/da/f8/77/daf8770e27db98bad904b66d48168a39.jpg"
-                    alt=""
-                    class="user-profile"
-            />
-            <label
-                    for="userPrflUpld"
-                    class="updateUserProfile"
-                    name="user_picture"
-            >사진 업데이트</label
-            >
-            <input type="file" class="userPrflUpld" name="user_picture"/>
-          </div>
-          <div class="userInfo__items">
-            <div class="userNameId">
-              <div class="userNameId item">
-                <span class="details">이름</span>
-                <input type="text" name="user_name" readonly value="${userDto.user_name}" required/>
-              </div>
-              <div class="userNameId item">
-                <span class="details">휴대폰</span>
-                <input  type="text" name="user_phone" readonly value="${userDto.user_phone}" required/>
-              </div>
-            </div>
-            <div class="userEmail">
-              <span class="details">이메일</span>
-              <input type="text" name="user_email" readonly value="${userDto.user_email}" required/>
-            </div>
-            <%--            --%>
-            <%--    userPwd로 고쳐야함        --%>
-            <div class="userEmail">
-              <span class="details">비밀번호</span>
-              <input type="password" name="user_pwd" readonly value="${userDto.user_pwd}" required/>
-            </div>
-            <%--            --%>
-            <%--            --%>
-            <input type="hidden" name="user_picture"  value="${userDto.user_picture}" required/>
-          </div>
-        </div>
-        <%--            --%>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <%--            --%>
-        <div class="userInfo__btnWrap">
-          <button  type="button" id="modifyBtn">프로필 수정</button>
-        </div>
-
-        <button type="button" id="userDelBtn">계정탈퇴</button>
-      </form>
-    </div>
-    <div class="tab log active">
+    <!--tab user tab log-->
+    <div class="content index active">
       <!-- 회원이 누른 좋아요 -->
       <h1 class="h1">${userDto.user_name}님이 좋아요 누른 맛집이에요 ❤️</h1>
       <div class="swiper mySwiper">
@@ -221,22 +172,98 @@
 
 
 
-    </div>
+    </div>        <!--My Page-->
+    <div class="content index">
+      <!-- 회원정보수정 -->
+      <h1>회원정보수정</h1>
+      <form action="" id="userInfoForm">
+        <%--            --%>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <%--            --%>
+        <div class="userInfo__box">
+          <div class="userInfo__profile">
+            <img
+                    src="https://i.pinimg.com/564x/da/f8/77/daf8770e27db98bad904b66d48168a39.jpg"
+                    alt=""
+                    class="user-profile"
+            />
+            <label
+                    for="userPrflUpld"
+                    class="updateUserProfile"
+                    name="user_picture"
+            >사진 업데이트</label
+            >
+            <input type="file" class="userPrflUpld" name="user_picture"/>
+          </div>
+          <div class="userInfo__items">
+            <div class="userNameId">
+              <div class="userNameId item">
+                <span class="details">이름</span>
+                <input type="text" name="user_name" readonly value="${userDto.user_name}" required/>
+              </div>
+              <div class="userNameId item">
+                <span class="details">휴대폰</span>
+                <input  type="text" name="user_phone" readonly value="${userDto.user_phone}" required/>
+              </div>
+            </div>
+            <div class="userEmail">
+              <span class="details">이메일</span>
+              <input type="text" name="user_email" readonly value="${userDto.user_email}" required/>
+            </div>
+            <%--            --%>
+            <%--    userPwd로 고쳐야함        --%>
+            <div class="userEmail">
+              <span class="details">비밀번호</span>
+              <input type="password" name="user_pwd" readonly value="${userDto.user_pwd}" required/>
+            </div>
+            <%--            --%>
+            <%--            --%>
+            <input type="hidden" name="user_picture"  value="${userDto.user_picture}" required/>
+          </div>
+        </div>
+        <div class="userInfo__btnWrap">
+          <button  type="button" id="modifyBtn">프로필 수정</button>
+        </div>
+      </form>
 
-<%-- QNA TEST    --%>
-    <h2>QNA TEST</h2>
-    <form id="form" action="<c:url value="/mypage/user/QNA/write"/>" method="post" >
-      <input class="detail" type="text" name="qna_title"  value="나를 이용하라" autofocus>
-      <input class="detail" type="text" name="qna_content"value="인태 짱" autofocus>
-      <input class="detail" type="text" name="qna_picture"  value="캡 귀여운 인태사진" autofocus>
-      <input class="detail" type="text" name="qna_writer"  value="User_1@google.com" autofocus> <%--qna_writer = ${userDto.user_email}}--%>
-      <input class="detail" type="text" name="qna_name" value="name1" autofocus>                <%--qna_name   = ${userDto.user_name}}--%>
-      <%--            --%>
-      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-      <%--            --%>
-      <button id="loginBtn">QNA 등록</button>
-    </form>
-<%--    --%>
+      <h1 style="margin-top: 30px">계정탈퇴</h1>
+      <div class="container item">
+        <h3>회원 탈퇴 신청 시 아래 사항을 반드시 확인해주세요.</h3>
+        <p> 1. 탈퇴 시 탈퇴 대기기간 없이 즉시 탈퇴가 완료되며, 계정 정보 및 개인 정보(이름, 생년월일 등)가 즉시 파기되어 복구할 수 없습니다.  </p>
+        <p> 2. 탈퇴 시에는 즉시 계정 정보 및 개인 정보(이름, 생년월일 등)가 파기되기 때문에 탈퇴 취소 신청이 불가능합니다.  </p>
+
+        <form id="userDelForm">
+          <button type="button" id="userDelBtn"> 탈퇴하기 </button>
+        </form>
+
+
+      </div>
+
+    </div>               <!--회원정보-->
+    <div class="content index">
+      <h1>문의 남기기 ✏️</h1>
+      <div class="container item">
+
+        <form id="qnaForm" action="<c:url value='/mypage/user/QNA/write'/>" method="post">
+          <%--            --%>
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+          <%--            --%>
+          <input type="text" name="qna_title" placeholder="제목 : 인태는 못말려">
+          <textarea name="qna_content" value="" placeholder="내용을 입력하세요 : 제발 누가 좀 말려요"></textarea>
+          <label for="qna_picutre" class="qna_picutre">
+            ➕
+          </label>
+          <input id="qna_picutre" type="hidden" name="qna_picture"
+                 value="https://images.unsplash.com/photo-1534211698458-e2be12c1a94c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGZsb3dlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60">
+          <input type="hidden" name="qna_writer" value="${userDto.user_email}">
+          <input type="hidden" name="qna_name" value="${userDto.user_name}">
+          <button type="submit" class="regBtn">등록</button>
+        </form>
+
+      </div>
+    </div>               <!--FAQ-->
+
+
 
   </div>
 </section>
@@ -268,30 +295,25 @@
 <script>
 
 
-
   // TAB 기능 //
 
-  const mypageTab = document.querySelector(".sideMenu__mypage");
-  const mypage = document.querySelector(".tab.log.active");
+  const tabs = document.querySelectorAll("button.tab");
+  const contents = document.querySelectorAll(".content");
 
-  const userTab = document.querySelector(".sideMenu__user");
-  const info = document.querySelector(".tab.user");
+  tabs.forEach((tab, idx) => {
+    tab.addEventListener("click", (e) => {
 
-  mypageTab.addEventListener("click", (e) => {
-    if (mypage.className === "tab log active") {
-      return;
-    }
-    info.classList.toggle("active");
-    mypage.classList.toggle("active");
-  });
+      contents.forEach((content) => {
+        content.classList.remove('active')
+      })
 
-  userTab.addEventListener("click", (e) => {
-    if (info.className === "tab user active") {
-      return;
-    }
+      tabs.forEach((tab) => {
+        tab.classList.remove('active')
+      })
 
-    info.classList.toggle("active");
-    mypage.classList.toggle("active");
+      tabs[idx].classList.add('active')
+      contents[idx].classList.add('active')
+    });
   });
 
   // TAB 기능 //
@@ -300,7 +322,7 @@
 
     $("#userDelBtn").on("click", (e) => {
 
-      let form = $("#userInfoForm");
+      let form = $("#userDelForm");
       form.attr("action", "<c:url value="/mypage/user/profile/delete?email=${userDto.user_email}"/>");
       form.attr("method", "post");
       form.submit();
@@ -335,4 +357,6 @@
 
 
 </script>
+
+
 

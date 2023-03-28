@@ -10,8 +10,8 @@ public class UserDto {
     private String user_phone;
     private String user_picture;
     private Date user_regdate;
-    private String user_state_code;
-    private String authority;
+    private String user_state_code;  // 상태코드;  0 (default):모든 기능 허용,  1:댓글금지,  2:핫딜구매 금지
+    private String authority;       // 페이지 접근 권한; ROLE_USER
     private Integer enabled;
 
     public UserDto(){};

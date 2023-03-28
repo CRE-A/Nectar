@@ -1,0 +1,65 @@
+section#board {
+    width: 90rem;
+    margin: 0 auto;
+    /* background-color: pink; */
+}
+
+header,
+section#title ,
+section#content,
+footer {
+    padding: 0 5rem 0 5rem;
+}
+header {
+    margin: 5rem 0 1rem 0;
+    /* background-color: red; */
+    border-bottom: 3px solid black;
+    display: flex;
+    height: 5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section#title {
+    /* background-color: green; */
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-bottom: 1px solid gray;
+}
+
+.user_info {
+    display: flex;
+    justify-content: space-between;
+}
+section#content {
+    /* background-color: blue; */
+    min-height: 40rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 3px solid black;
+    margin-bottom: 2rem;
+}
+footer {
+    display: flex;
+    justify-content: center;
+    /* background-color: yellow; */
+    height: 4rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+button.listBtn,
+button.completeBtn,
+button.denyBtn {
+    color: white;
+    border: 0;
+    background-color: orange;
+    width: 5rem;
+    height: 2.5rem;
+    border-radius: 0.625rem;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}

@@ -1,17 +1,20 @@
 
 .container {
-    max-width: 700px;
+    max-width: 1000px;
     width: 100%;
     background-color: #fff;
     padding: 25px 30px;
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
 }
+
 .container .title {
     font-size: 25px;
     font-weight: 500;
     position: relative;
 }
+
 .container .title::before {
     content: "";
     position: absolute;
@@ -26,40 +29,35 @@
             rgba(255, 229, 234, 1) 100%
     );
 }
+
 .content form .user-details {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px 0 12px 0;
 }
+
+.content form .user-details.index {
+    display: flex;
+    flex-direction: column;
+}
+
+.content form .user-details.index .wrap.index {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
 form .user-details .input-box {
     margin-bottom: 15px;
     width: calc(100% / 2 - 20px);
 }
+
 form .input-box span.details {
     display: block;
     font-weight: 500;
     margin-bottom: 5px;
-}
-
-span.details.id::after {
-    content: "중복된 아이디입니다.";
-    font-size: 7px;
-    color: #ff4873;
-    position: relative;
-    top : -2px;
-    left: 10px
-
-}
-
-span.details.pwd::after {
-    content: "비밀번호가 일치하지 않습니다.";
-    font-size: 7px;
-    color: #ff4873;
-    position: relative;
-    top : -2px;
-    left: 10px
-
 }
 
 .user-details .input-box input {
@@ -73,25 +71,59 @@ span.details.pwd::after {
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 }
+
+
 .user-details .input-box input:focus,
 .user-details .input-box input:valid {
     border-color: #ecc3cc;
 }
-form .gender-details .gender-title {
-    font-size: 20px;
-    font-weight: 500;
+
+
+.buttons {
+    margin-top: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
+
+#bizUpdateBtn,#bizDelBtn {
+    border-radius: 15px;
+    width: 200px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    border: 1px solid transparent;
+}
+
+#bizUpdateBtn:hover,
+#bizDelBtn:hover{
+    cursor: pointer;
+    background-color: orange;
+    color: white;
+}
+
+
+/* radio tag CSS */
+
+form .column-details .menu-title {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
 form .category {
     display: flex;
     width: 80%;
     margin: 14px 0;
     justify-content: space-between;
 }
+
 form .category label {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
+
 form .category label .dot {
     height: 18px;
     width: 18px;
@@ -101,57 +133,279 @@ form .category label .dot {
     border: 5px solid transparent;
     transition: all 0.3s ease;
 }
-#dot-1:checked ~ .category label .one,
-#dot-2:checked ~ .category label .two,
-#dot-3:checked ~ .category label .three {
+
+#cost-1:checked ~ .category label .one,
+#cost-2:checked ~ .category label .two,
+#cost-3:checked ~ .category label .three,
+#cost-4:checked ~ .category label .four {
     background: #ecc3cc;
     border-color: #d9d9d9;
 }
+
+#parking-1:checked ~ .category label .one,
+#parking-2:checked ~ .category label .two {
+    background: #ecc3cc;
+    border-color: #d9d9d9;
+}
+
+#food-1:checked ~ .category label .a,
+#food-2:checked ~ .category label .b,
+#food-3:checked ~ .category label .c,
+#food-4:checked ~ .category label .d,
+#food-5:checked ~ .category label .e,
+#food-6:checked ~ .category label .f,
+#food-7:checked ~ .category label .g,
+#food-8:checked ~ .category label .h
+{
+    background: #ecc3cc;
+    border-color: #d9d9d9;
+}
+
+#dot-1:checked ~ .category label .data-1,
+#dot-2:checked ~ .category label .data-2,
+#dot-3:checked ~ .category label .data-3,
+#dot-4:checked ~ .category label .data-4,
+#dot-5:checked ~ .category label .data-5,
+#dot-6:checked ~ .category label .data-6,
+#dot-7:checked ~ .category label .data-7,
+#dot-8:checked ~ .category label .data-8,
+#dot-9:checked ~ .category label .data-9
+{
+    background: #ecc3cc;
+    border-color: #d9d9d9;
+}
+
+
 form input[type="radio"] {
     display: none;
 }
+
 form .button {
     height: 45px;
     margin: 35px 0;
 }
-form .button input {
-    height: 100%;
-    width: 100%;
+
+form button#regBtn,
+form button.qnaRegBtn,
+button#hotdealRegBtn
+{
+    padding: 6px 60px 6px 60px;
     border-radius: 5px;
     border: none;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 1px;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: linear-gradient(135deg, #d6f5e5, #ecc3cc);
+    margin-top: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
-form .button input:hover {
+
+form button#regBtn:hover,
+form button.qnaRegBtn:hover,
+button#hotdealRegBtn:hover{
     /* transform: scale(0.99); */
-    background: linear-gradient(-135deg, #d6f5e5, #ecc3cc);
+    background-color: orange;
+    color: white;
+
 }
+
+
+
 @media (max-width: 584px) {
     .container {
         max-width: 100%;
     }
+
     form .user-details .input-box {
         margin-bottom: 15px;
         width: 100%;
     }
+
     form .category {
         width: 100%;
     }
+
     .content form .user-details {
         max-height: 300px;
         overflow-y: scroll;
     }
+
     .user-details::-webkit-scrollbar {
         width: 5px;
     }
 }
+
 @media (max-width: 459px) {
     .container .content .category {
         flex-direction: column;
     }
 }
+
+
+
+/*사업자가 운영중인 레스토랑*/
+
+
+.restr {
+    width: 520px;
+    /*background-color: red;*/
+    display: flex;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    padding: 19px;
+
+
+}
+
+#restrList{
+    padding: 0;
+}
+
+.img_wrap{
+    width: 200px;
+    height: 200px;
+
+}
+
+img.img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 13px;
+}
+
+.content_wrap .content__title{
+    font-size: 40px;
+}
+
+.content_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    padding-left: 30px
+}
+
+.content_wrap div p{
+    padding-left: 3px;
+}
+
+.wrap.hotdeal{
+    display: flex;
+}
+
+.wrap.hotdeal .input-box{
+    margin: 20px;
+}
+
+.content__hotdealPrice{
+    color: gray;
+    text-decoration: line-through;
+}
+.content__location:before{
+    content: "위치";
+    text-decoration: none;
+    background-color: #e4e4e4;
+    padding: 1px 4px 1px 4px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 5px;
+    color: black;
+}
+
+.content__restrTime:before{
+    content: "영업시간";
+    text-decoration: none;
+    font-size: 16px;
+    background-color: #cdf2ff;
+    padding: 1px 4px 1px 4px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 5px;
+    color: black;
+}
+.content__hotdealPrice:before{
+    content: "정상가";
+    text-decoration: none;
+    background-color: #e4e4e4;
+    padding: 1px 4px 1px 4px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 5px;
+    color: black;
+}
+
+.content__menuPrice:before{
+    font-size: 20px;
+    content: "HOT🔥";
+    background-color: #ffdbb8;
+    text-decoration: none;
+    padding: 1px 2px 1px 4px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 5px;
+    color: black;
+}
+.content:nth-child(1) .container{
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+}
+
+
+/* QNA */
+
+label#qna_picutre{
+    display: none;
+}
+.qna_picutre {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+
+}
+
+input[name=qna_title],textarea[name=qna_content]{
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+input[name=qna_title]{
+    height: 50px;
+
+}
+
+input[name=qna_title]:focus,
+textarea[name=qna_content]:focus{
+    outline: none;
+}
+
+
+textarea[name=qna_content] {
+    min-height: 500px;
+    padding: 10px 0 0 10px;
+    background-color: transparent;
+    resize: none;
+    border: 1px solid black;
+}
+
+#menuForm {
+    display: flex;
+    flex-direction: column;
+}
+
+li.menu{
+    width: 100%;
+}
+
+

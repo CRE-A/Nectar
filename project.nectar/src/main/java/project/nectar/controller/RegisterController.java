@@ -12,6 +12,7 @@ import project.nectar.domain.UserDto;
 import project.nectar.repository.UserDao;
 import project.nectar.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.net.URLEncoder;
 
 @Controller
@@ -22,13 +23,12 @@ public class RegisterController {
     UserService userService;
 
     @GetMapping("/addUser")
-    public String registerForm() {
-        return "registerForm";
+    public String registerForm() {return "registerForm";
     }
 
     @PostMapping("/addUser")
 
-    public String register(String id, String pwd, UserDto userDto, Model m) throws Exception {
+    public String register(UserDto userDto, HttpSession session) throws Exception {
 
 //        // 아이디 중복 체크 하기
 //        if (!duplicateCheck(id)) {
@@ -50,14 +50,11 @@ public class RegisterController {
         userService.RegisterUser(userDto);
 
 
-//        // 가입된 아이디가 없다면 가입 진행하기
-//        int rowCnt = userDao.insert(userDto);
-//        System.out.println("userDto = " + userDto);  // db에는 등록날짜가 저장되어 있는데 registerController 에는 null값이 들어옴 -> 별로 상관 없는 것 같기도함
+        if(session.getAttribute("sns_email")!=null){        // 소셜 로그인 유저의 회원가입이면, 가입 후 자동 로그인
+            return "redirect:/login/login";
+        }
 
-        // 로그인 페이지로 넘겨주기
-        // 혹은 회원가입을 축하하는 jsp, 그리고 로그인 링크 남겨주기. 도 나쁘진 않고
-        return "redirect:/";
-
+        return "registerComplete";
     }
 
 
@@ -79,7 +76,6 @@ public class RegisterController {
     }
 
     @PostMapping("/addBiz")
-
     public String register_Biz(String id, String pwd, BizAccountDto bizAccountDto, Model m) throws Exception {
 
 

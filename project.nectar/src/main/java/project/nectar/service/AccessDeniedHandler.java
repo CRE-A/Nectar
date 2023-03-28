@@ -1,7 +1,6 @@
 package project.nectar.service;
 
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Service("accessFailHandler")
-public class AccessFailHandler implements AccessDeniedHandler {
+public class AccessDeniedHandler implements org.springframework.security.web.access.AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
 

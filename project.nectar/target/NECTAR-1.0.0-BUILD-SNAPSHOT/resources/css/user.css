@@ -136,7 +136,7 @@ h1.h1{
     margin-top: 50px;
 }
 
-.modifyBtn {
+#modifyBtn {
     border-radius: 15px;
     cursor: pointer;
     background-color: orange;
@@ -152,19 +152,29 @@ h1.h1{
     transform: translateY(-50%);
 }
 
-.tab.log.active {
-    display: block;
+
+.regBtn, #userDelBtn{
+    color: white;
+    border: 0;
+    background-color: orange;
+    width: 5rem;
+    height: 2.5rem;
+    border-radius: 0.625rem;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 30px;
 }
 
-.tab.log {
-    display: none;
+
+.container.item h3 {
+    margin-bottom: 30px;
 }
 
-.tab.user {
-    display: none;
+.container.item p {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
 }
-
-.tab.user.active {
-    display: block;
-}
-
