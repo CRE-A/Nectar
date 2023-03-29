@@ -48,7 +48,7 @@ public class RegisterController {
         System.out.println("RegisterController, 방금 여기 지나감");
         System.out.println("userDto = " + userDto);
         userService.RegisterUser(userDto);
-
+        System.out.println("Register complete");
 
         if(session.getAttribute("sns_email")!=null){        // 소셜 로그인 유저의 회원가입이면, 가입 후 자동 로그인
             return "redirect:/login/login";
@@ -82,7 +82,7 @@ public class RegisterController {
         System.out.println("RegisterController, 방금 여기 지나감");
         System.out.println("userDto = " + bizAccountDto);
         userService.RegisterBiz(bizAccountDto);
-        return "redirect:/";
+        return "registerComplete";
 
 
     }

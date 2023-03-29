@@ -57,7 +57,6 @@ public class LoginController {
         System.out.println(" ======================================================================================");
         System.out.println(" GET방식 login/login 지나감 ");
 
-
         // 만약 로그인이 되어 있으면, 돌아가
         String referrer = request.getHeader("Referer"); // 이전 경로
         if (isAuthenticated()) {
@@ -69,15 +68,14 @@ public class LoginController {
         if(session.getAttribute("prevPage")==null){
             session.setAttribute("prevPage",referrer);
         }
-
         System.out.println(" ======================================================================================");
 
 
 
         // Google Code 발행을 위한 URL 생성
         OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
-        String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
-        m.addAttribute("google_url", url);
+        String googleUrl = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
+        m.addAttribute("google_url", googleUrl);
 
         // Kakao Code 발행을 위한 URL 생성
         String kakaoUrl = KakaoService.getAuthorizationUrl();
@@ -89,54 +87,37 @@ public class LoginController {
 
 
     @PostMapping("/processing")
-    public void login(String _csrf, String error) {
-
-        logger.info("login-processing!");
-        logger.info("err : "+ error);
-        logger.info("_csrf : "+ _csrf);
-    }
+    public void login() {}
 
 
 
-    @GetMapping("/auth/google/callback")
-    public String snsLoginCallback(@RequestParam(value = "code", required = false) String code, HttpSession session, Model m) throws Exception{
+    @GetMapping("/auth/google/callback")   // ("/auth/social/callback")
+    public String snsLoginCallback(@RequestParam(value = "code", required = false) String code, HttpSession sn, Model m) throws Exception{
+
 
         SnsLogin snsLogin = new SnsLogin(googleSns);                                       // google 소셜 로그인
         UserDto snsUser = snsLogin.getUserProfile(code);                                   // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
-//        checkSnsUser(snsUser,sn,m);
+        setSession(sn, snsUser);
 
-        String email = snsUser.getUser_email();
-        session.setAttribute("sns_email",email);
-        session.setAttribute("sns_pwd",snsUser.getUser_pwd());
-
-        if (!isValidEmail(email)) {                                                        // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
+        if (!isValidEmail(snsUser.getUser_email())) {                                      // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
             m.addAttribute("userDto", snsUser);
-            System.out.println("snsUser = " + snsUser);
             return "registerFormSNS";
         }
-
         return "redirect:/login/login";
     };
 
 
     @GetMapping("/auth/kakao/callback")
-    public String kakaoCallback(@RequestParam(value = "code", required = false) String code, HttpSession session, Model m) throws Exception {
+    public String kakaoCallback(@RequestParam(value = "code", required = false) String code, HttpSession sn, Model m) throws Exception {
 
-        System.out.println("카카오 로그인 코드 : " + code);
         String access_Token = KakaoService.getReturnAccessToken(code);                      // Kakao 소셜 로그인
         UserDto snsUser = KakaoService.getUserInfo(access_Token);                           // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
-//        checkSnsUser(snsUser,sn,m);
+        setSession(sn, snsUser);
 
-        String email = snsUser.getUser_email();
-        session.setAttribute("sns_email",email);
-        session.setAttribute("sns_pwd",snsUser.getUser_pwd());
-
-        if (!isValidEmail(email)) {                                                        // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
+        if (!isValidEmail(snsUser.getUser_email())) {                                       // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
             m.addAttribute("userDto", snsUser);
-            System.out.println("snsUser = " + snsUser);
             return "registerFormSNS";
         }
-
         return "redirect:/login/login";
     }
 
@@ -151,9 +132,6 @@ public class LoginController {
 
 
 
-
-
-
     private boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || AnonymousAuthenticationToken.class.
@@ -164,20 +142,9 @@ public class LoginController {
     }
 
 
-    private String checkSnsUser(UserDto snsUser, HttpSession session, Model m) {
-
-        String email = snsUser.getUser_email();
-        session.setAttribute("sns_email",email);
-        session.setAttribute("sns_pwd",snsUser.getUser_pwd());
-
-        if (!isValidEmail(email)) {                                                        // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
-            m.addAttribute("userDto", snsUser);
-            System.out.println("snsUser = " + snsUser);
-            return "registerFormSNS";
-        }
-
-        return "";
-    }
+    private void setSession(HttpSession session, UserDto snsUser){
+        session.setAttribute("sns_email",snsUser.getUser_email());
+        session.setAttribute("sns_pwd",snsUser.getUser_pwd());    }
 
 
     private boolean isValidEmail(String email) {
@@ -187,3 +154,22 @@ public class LoginController {
 
 }
 
+
+
+
+
+//
+//    private String checkBeforeLogin(UserDto snsUser, HttpSession session, Model m) {
+//
+//        String email = snsUser.getUser_email();
+//        session.setAttribute("sns_email",email);
+//        session.setAttribute("sns_pwd",snsUser.getUser_pwd());
+//
+//        if (!isValidEmail(email)) {                                                        // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
+//            m.addAttribute("userDto", snsUser);
+//            System.out.println("snsUser = " + snsUser);
+//            return "registerFormSNS";
+//        }
+//        return "";
+//    }
+//

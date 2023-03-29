@@ -127,16 +127,14 @@
         document.getElementById("msg").innerHTML = `${'${msg}'}`;
     }
 
-    if(${not empty sns_email}){
-        clickSubmitBtn()
-    }
 
-    function clickSubmitBtn(){
+    if(${not empty sns_email}){
         document.getElementById("loginBtn").click();
     }
 
-
-
+    // function clickSubmitBtn(){
+    //     document.getElementById("loginBtn").click();
+    // }
 
 
 </script>

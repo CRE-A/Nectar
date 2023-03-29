@@ -30,6 +30,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         System.out.println("session.getAttribute(\"prevPage\") = " + session.getAttribute("prevPage"));
         System.out.println("=======================================================================");
 
+        // 소셜 로그인, 로그인 후 세션 삭제
+        session.removeAttribute("sns_email");
         session.removeAttribute("sns_pwd");
 
 
