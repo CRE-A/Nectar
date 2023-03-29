@@ -15,9 +15,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import project.nectar.domain.UserDto;
 
-
-
+import javax.servlet.http.HttpSession;
 
 
 public class KakaoService {
@@ -38,12 +38,15 @@ public class KakaoService {
             // buffer 스트림 객체 값 셋팅 후 요청
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
+
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=622955c00fc83ff8fc04d04b49c4c83a");  //앱 KEY VALUE
-            sb.append("&redirect_uri=http://localhost:8080/nectar/login/auth/kakao/callback"); // 앱 CALLBACK 경로
+            sb.append("&client_id="+CLIENT_ID);  //앱 KEY VALUE
+            sb.append("&redirect_uri="+REDIRECT_URI); // 앱 CALLBACK 경로
             sb.append("&code=" + code);
+
             bw.write(sb.toString());
             bw.flush();
+
 
             //  RETURN 값 result 변수에 저장
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -69,11 +72,15 @@ public class KakaoService {
             e.printStackTrace();
         }
 
-        return access_token + refresh_token;
+//        return access_token + refresh_token;
+        return access_token;
     }
 
-    public static Map<String, Object> getUserInfo(String access_token) {
-        Map<String, Object> resultMap = new HashMap<>();
+
+
+    public static UserDto getUserInfo(String access_token) {
+//        HashMap<String, Object> resultMap = new HashMap<>();
+        UserDto userInfo = new UserDto();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
         try {
             URL url = new URL(reqURL);
@@ -100,24 +107,53 @@ public class KakaoService {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
             System.out.println("element:: " + element);
+
+            // Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-            String user_picture = kakao_account.getAsJsonObject().get("profile_image").getAsString();
-            String user_name = properties.getAsJsonObject().get("nickname").getAsString();
+
             String user_email = kakao_account.getAsJsonObject().get("email").getAsString();
-            System.out.println("email:: " + user_email);
-            resultMap.put("nickname", user_name);
-            resultMap.put("profile_image", user_picture);
-            resultMap.put("user_email", user_picture);
+            String user_pwd = element.getAsJsonObject().get("id").getAsString();
+            String user_name = properties.getAsJsonObject().get("nickname").getAsString();
+//            String user_picture = kakao_account.getAsJsonObject().get("profile_image").getAsString();
+
+            System.out.println("user_email:: " + user_email);
+            System.out.println("user_pwd:: " + user_pwd);
+            System.out.println("user_name:: " + user_name);
+//            System.out.println("user_picture:: " + user_picture);
+
+            userInfo.setUser_email(user_email);
+            userInfo.setUser_pwd(user_pwd);
+            userInfo.setUser_name(user_name);
+//            userInfo.setUser_picture(user_picture);
+
+//            return user;
+
+//            resultMap.put("user_email", user_email);
+//            resultMap.put("user_pwd", user_pwd);
+//            resultMap.put("user_name", user_name);
+//            resultMap.put("user_picture", user_picture);
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
+        return userInfo;
+    }
 
-        return resultMap;
+
+
+
+
+    private final static String CLIENT_ID = "795e0accee261f79ea3ba9064a0c8cda";
+    //이런식으로 REDIRECT_URI를 써넣는다.                                                                                                  //                                                //
+    private final static String REDIRECT_URI = "http://localhost:8080/nectar/login/auth/kakao/callback";
+
+    public static String getAuthorizationUrl() {
+        String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?" + "client_id=" + CLIENT_ID + "&redirect_uri="
+                + REDIRECT_URI + "&response_type=code";
+        return kakaoUrl;
     }
 
 

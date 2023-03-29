@@ -73,24 +73,19 @@ public class LoginController {
         System.out.println(" ======================================================================================");
 
 
+
         // Google Code 발행을 위한 URL 생성
         OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
         String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
         m.addAttribute("google_url", url);
 
+        // Kakao Code 발행을 위한 URL 생성
+        String kakaoUrl = KakaoService.getAuthorizationUrl();
+        m.addAttribute("kakao_url", kakaoUrl);
 
         return "loginForm";
     }
 
-
-    private boolean isAuthenticated() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || AnonymousAuthenticationToken.class.
-                isAssignableFrom(authentication.getClass())) {
-            return false;
-        }
-        return authentication.isAuthenticated();
-    }
 
 
     @PostMapping("/processing")
@@ -104,66 +99,46 @@ public class LoginController {
 
 
     @GetMapping("/auth/google/callback")
-    public String snsLoginCallback(Model m, @RequestParam String code, HttpSession session) throws Exception{
+    public String snsLoginCallback(@RequestParam(value = "code", required = false) String code, HttpSession session, Model m) throws Exception{
 
         SnsLogin snsLogin = new SnsLogin(googleSns);                                       // google 소셜 로그인
         UserDto snsUser = snsLogin.getUserProfile(code);                                   // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
+//        checkSnsUser(snsUser,sn,m);
 
         String email = snsUser.getUser_email();
         session.setAttribute("sns_email",email);
         session.setAttribute("sns_pwd",snsUser.getUser_pwd());
 
         if (!isValidEmail(email)) {                                                        // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
-            UserDto userDto = new UserDto(email, snsUser.getUser_pwd(), snsUser.getUser_name(), snsUser.getUser_phone(), snsUser.getUser_picture());
-            m.addAttribute("userDto", userDto);
+            m.addAttribute("userDto", snsUser);
+            System.out.println("snsUser = " + snsUser);
             return "registerFormSNS";
         }
 
         return "redirect:/login/login";
     };
 
-    private boolean isValidEmail(String email) {
-        return userDao.select(email)!=null;
-    }
-
-
 
     @GetMapping("/auth/kakao/callback")
-    public String kakaoCallback(@RequestParam String code, HttpSession session)  {
+    public String kakaoCallback(@RequestParam(value = "code", required = false) String code, HttpSession session, Model m) throws Exception {
 
         System.out.println("카카오 로그인 코드 : " + code);
-        String kakaoToken = KakaoService.getReturnAccessToken(code);
-        Map<String, Object> result = KakaoService.getUserInfo(kakaoToken);
+        String access_Token = KakaoService.getReturnAccessToken(code);                      // Kakao 소셜 로그인
+        UserDto snsUser = KakaoService.getUserInfo(access_Token);                           // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
+//        checkSnsUser(snsUser,sn,m);
 
-        System.out.println("result:: " + result);
-        System.out.println("###access_Token#### : " + kakaoToken);
-        System.out.println("###name#### : " +KakaoService.getUserInfo("user_name"));
-//        System.out.println("###nickname#### : " +KakaoService.getUserInfo("user_name"));
-        System.out.println("###email#### : " +KakaoService.getUserInfo("user_email"));
-//        System.out.println("###nickname#### : " +KakaoService.getUserInfo("user_email"));
-        System.out.println("###picture#### : " + KakaoService.getUserInfo("user_picture"));
-//        System.out.println("###email#### : " + KakaoService.getUserInfo("user_picture"));
+        String email = snsUser.getUser_email();
+        session.setAttribute("sns_email",email);
+        session.setAttribute("sns_pwd",snsUser.getUser_pwd());
 
-        String kakaoid = KakaoService.getUserInfo("email").toString();
+        if (!isValidEmail(email)) {                                                        // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
+            m.addAttribute("userDto", snsUser);
+            System.out.println("snsUser = " + snsUser);
+            return "registerFormSNS";
+        }
 
-
-        UserDto kakaoUser = (UserDto) session.getAttribute(code);
-
-
-//        String kakao = loginCheck(kakaoUser.getUser_email(), kakaoUser.getUser_pwd());        //    loginCheck() 실행결과  "Admin","Biz","User","LoginFail" 중 하나 반환
-//        if (result.equals("LoginFail")) {                                                   // 1. loginCheck() 실패 시, 회원가입 시킨 후 메인페이지로 이동시킨다.
-//            userDao.insert(kakaoUser);
-//            return "redirect:/";
-//        }
-        session.setAttribute(result + "_email", kakaoUser.getUser_email());               // 2. loginCheck() 성공 시, 세션에 ("Admin_email",email)  ("Biz_email",email)  ("User_email",email) 중 하나 추가
-        System.out.println("session check = " + result + "계정으로 로그인");
-        System.out.println("session id = " + session.getAttribute(result + "_email"));
-
-
-        return "redirect:/";
+        return "redirect:/login/login";
     }
-
-
 
 
 
@@ -174,6 +149,40 @@ public class LoginController {
         return "redirect:/";
     }
 
+
+
+
+
+
+    private boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || AnonymousAuthenticationToken.class.
+                isAssignableFrom(authentication.getClass())) {
+            return false;
+        }
+        return authentication.isAuthenticated();
+    }
+
+
+    private String checkSnsUser(UserDto snsUser, HttpSession session, Model m) {
+
+        String email = snsUser.getUser_email();
+        session.setAttribute("sns_email",email);
+        session.setAttribute("sns_pwd",snsUser.getUser_pwd());
+
+        if (!isValidEmail(email)) {                                                        // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
+            m.addAttribute("userDto", snsUser);
+            System.out.println("snsUser = " + snsUser);
+            return "registerFormSNS";
+        }
+
+        return "";
+    }
+
+
+    private boolean isValidEmail(String email) {
+        return userDao.select(email)!=null;
+    }
 
 
 }

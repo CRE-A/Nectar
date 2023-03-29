@@ -99,7 +99,8 @@
             </a>
         </div>
         <div class="kakaologin">
-            <a href="javascript:kakaologin();"><img src="https://m.stco.co.kr/Content/images/login/kakao_login.png" width="280" /></a>
+            <a href="<c:url value="${kakao_url}"/>">
+            <img src="https://m.stco.co.kr/Content/images/login/kakao_login.png" width="280" /></a>
         </div>
     </form>
     <div id="below_form">
@@ -136,29 +137,6 @@
 
 
 
-    window.Kakao.init("bf72c8b452ef8318b14cc508fe7f4d8d");
-    function kakaologin(){
-
-        window.Kakao.Auth.login({
-            scope:'profile_nickname,profile_image,account_email',
-            success: function (authObj){
-                console.log(authObj)
-                window.Kakao.API.request({
-                    url:'/v2/user/me',
-                    succss: res => {
-                        kakaologin();
-                        const kakao_token = res.access_token;
-
-                        console.log(kakao_token);
-                        system.out.print(kakao_token);
-
-                    }
-
-                });
-            }
-        });
-
-    }
 
 
 </script>
