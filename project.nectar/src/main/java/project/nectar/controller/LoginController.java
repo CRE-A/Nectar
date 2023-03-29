@@ -22,14 +22,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.nectar.repository.BizAccountDao;
 import project.nectar.repository.UserDao;
+import project.nectar.auth.KakaoService;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/login")
@@ -105,7 +104,7 @@ public class LoginController {
 
 
     @GetMapping("/auth/google/callback")
-    public String snsLoginCallback(Model m, @RequestParam String code, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public String snsLoginCallback(Model m, @RequestParam String code, HttpSession session) throws Exception{
 
         SnsLogin snsLogin = new SnsLogin(googleSns);                                       // google 소셜 로그인
         UserDto snsUser = snsLogin.getUserProfile(code);                                   // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
@@ -126,6 +125,46 @@ public class LoginController {
     private boolean isValidEmail(String email) {
         return userDao.select(email)!=null;
     }
+
+
+
+    @GetMapping("/auth/kakao/callback")
+    public String kakaoCallback(@RequestParam String code, HttpSession session)  {
+
+        System.out.println("카카오 로그인 코드 : " + code);
+        String kakaoToken = KakaoService.getReturnAccessToken(code);
+        Map<String, Object> result = KakaoService.getUserInfo(kakaoToken);
+
+        System.out.println("result:: " + result);
+        System.out.println("###access_Token#### : " + kakaoToken);
+        System.out.println("###name#### : " +KakaoService.getUserInfo("user_name"));
+//        System.out.println("###nickname#### : " +KakaoService.getUserInfo("user_name"));
+        System.out.println("###email#### : " +KakaoService.getUserInfo("user_email"));
+//        System.out.println("###nickname#### : " +KakaoService.getUserInfo("user_email"));
+        System.out.println("###picture#### : " + KakaoService.getUserInfo("user_picture"));
+//        System.out.println("###email#### : " + KakaoService.getUserInfo("user_picture"));
+
+        String kakaoid = KakaoService.getUserInfo("email").toString();
+
+
+        UserDto kakaoUser = (UserDto) session.getAttribute(code);
+
+
+//        String kakao = loginCheck(kakaoUser.getUser_email(), kakaoUser.getUser_pwd());        //    loginCheck() 실행결과  "Admin","Biz","User","LoginFail" 중 하나 반환
+//        if (result.equals("LoginFail")) {                                                   // 1. loginCheck() 실패 시, 회원가입 시킨 후 메인페이지로 이동시킨다.
+//            userDao.insert(kakaoUser);
+//            return "redirect:/";
+//        }
+        session.setAttribute(result + "_email", kakaoUser.getUser_email());               // 2. loginCheck() 성공 시, 세션에 ("Admin_email",email)  ("Biz_email",email)  ("User_email",email) 중 하나 추가
+        System.out.println("session check = " + result + "계정으로 로그인");
+        System.out.println("session id = " + session.getAttribute(result + "_email"));
+
+
+        return "redirect:/";
+    }
+
+
+
 
 
     @GetMapping("/logout")
