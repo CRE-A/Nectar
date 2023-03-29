@@ -40,7 +40,8 @@
       <%--            --%>
       <div class="user-details">
         <div class="input-box"> <%--   ID 가 email 로 변경   --%>
-          <span class="details ${not empty param.msg ? 'email' : ''}">email</span>
+          <span class="details}">email</span>
+          <span class="warning" style="color: darkred ; font-weight: bold">${param.msg eq "중복이메일" ? "이미 가입된 이메일입니다." : ""} </span>
           <input type="text" name="bizAccount_email"  placeholder="Enter your email" required/>
         </div>
         <div class="input-box">
@@ -52,7 +53,7 @@
           <input type="text" name="bizAccount_pwd" placeholder="Enter your password" required />
         </div>
         <div class="input-box">
-          <span class="details  ${not empty param.pmsg ? 'pwd' : ''}">Confirm Password</span>
+          <span class="details">Confirm Password</span>
           <input type="text" name="confirmPwd" placeholder="Confirm your password" required />
         </div>
         <div class="input-box">
@@ -91,7 +92,7 @@
         <%--            </div>--%>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <div id="msg">
-          ${param.msg}
+
         </div>
         <div class="button">
           <input type="submit" value="Register" />
@@ -125,7 +126,7 @@
   }
 
   function setMessage(msg) {
-    document.getElementById("msg").innerHTML = `${'${msg}'}`;
+    document.getElementById("msg").innerHTML = msg;
   }
 </script>
 

@@ -68,12 +68,11 @@
 <section id="board">
     <header id="header">
         <h1>FAQ</h1>
-        <button class="listBtn">목록</button>
     </header>
     <section id="title">
         <h1 class="title">${qnaDto.qna_title}</h1>
         <div class="user_info">
-            <span class="name">${qnaDto.qna_name}</span> <span class="date">${qnaDto.qna_regdate}</span>
+            <span class="name">${qnaDto.qna_name}(${qnaDto.qna_writer})</span> <span class="date">${qnaDto.qna_regdate}</span>
         </div>
     </section>
     <section id="content">
@@ -81,7 +80,7 @@
     </section>
     <footer>
         <div class="judge">
-            <button class="completeBtn">답글달기</button>
+            <a href="<c:url value='/mypage/admin/main'/>"><button class="listBtn">목록</button></a>
         </div>
     </footer>
 </section>
@@ -90,6 +89,7 @@
 <script>
 
     $(document).ready(() => {
+
 
 
 

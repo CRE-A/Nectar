@@ -38,11 +38,17 @@
 
 
 <body>
-<div id="menu">
-    <ul>
-        <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
-        <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
-        <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
+<section id="navbar" class="biz">
+    <div class="logo">
+        <a href="<c:url value='/'/>"> <img src="<c:url value='/images/nectarLogo.png'/>" alt="" class="logo__img"/></a>
+    </div>
+    <ul class="menu">
+        <li class="menu item">
+            <a href="<c:url value='/hotdeal/list'/>">HOTDEAL</a>
+        </li>
+        <li class="menu item">
+            <a href="<c:url value='/restr/list'/>">맛집리스트</a>
+        </li>
         <li class="menu item">
             <security:authorize access="isAnonymous()">
                 <a href="<c:url value='/login/login'/>">LOGIN</a>
@@ -58,7 +64,7 @@
             </security:authorize>
         </li>
     </ul>
-</div>
+</section>
 
 <h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 
@@ -92,7 +98,7 @@
                 <ul id="restrList">
                     <form id="restrForm" action="" method="">
                         <%--            --%>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <%--            --%>
                         <!-- 게시글 번호 data-restrNum 에 저장-->
                         <li class="restr" data-restrNum="${restrDto.restr_NUM}">
@@ -198,7 +204,7 @@
                     <div class="user-details">
                         <div class="input-box">
                             <%--            --%>
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <%--            --%>
                             <span class="details">이름</span>
                             <input
@@ -239,7 +245,7 @@
                                     type="password"
                                     name="bizAccount_pwd"
                                     placeholder="Enter your password"
-                                    value="${bizAccountDto.bizAccount_pwd}"
+                                    value=""
                                     required
 
                             />
@@ -260,7 +266,7 @@
             <div class="container item">
                 <form id="" action="<c:url value='/mypage/biz/restr/write'/>" method="post">
                     <%--            --%>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <%--            --%>
                     <input name="request_bizAccount_email" type="hidden" value="${bizAccountDto.bizAccount_email}">
                     <div class="user-details index">
@@ -432,48 +438,82 @@
         <div class="content index">
             <h2 class="h2" style="margin-bottom: 20px">메뉴 등록</h2>
             <div class="container item">
-                <form id="menuForm" action="<c:url value='/mypage/biz/restrMenu/write?tab=regMenu'/>" method="post">
-                    <%--            --%>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <%--            --%>
-                    <input name="restr_NUM" value="${restrDto.restr_NUM}" type="hidden">
-                    <div class="input-box">
-                        <label>메뉴이름</label>
-                        <input name="restr_menu_food" type="text" placeholder="메뉴이름을 입력하세요.">
-                    </div>
-                    <div class="input-box">
-                        <label>메뉴가격</label>
-                        <input name="restr_menu_price" type="text" placeholder="메뉴가격을 입력하세요.">
-                    </div>
-                    <div class="input-box">
-                        <label>메뉴설명</label>
-                        <input name="restr_menu_desc" type="text" placeholder="메뉴에 대한 간단한 설명을 입력하세요.">
-                    </div>
-                    <button type="submit" class="restrMenuRegBtn">메뉴추가</button>
-                </form>
+                <div class="menuWrap">
+                    <form id="menuForm" action="<c:url value='/mypage/biz/restrMenu/write?tab=regMenu'/>" method="post">
+                        <%--            --%>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <%--            --%>
+                        <input name="restr_NUM" value="${restrDto.restr_NUM}" type="hidden">
+                        <div class="input-box">
+                            <label>메뉴이름</label>
+                            <input name="restr_menu_food" type="text" placeholder="메뉴이름을 입력하세요.">
+                        </div>
+                        <div class="input-box">
+                            <label>메뉴가격</label>
+                            <input name="restr_menu_price" type="text" placeholder="메뉴가격을 입력하세요.">
+                        </div>
+                        <div class="input-box">
+                            <label>메뉴설명</label>
+                            <input name="restr_menu_desc" type="text" placeholder="메뉴에 대한 간단한 설명을 입력하세요.">
+                        </div>
+                        <button type="submit" class="restrMenuRegBtn">메뉴추가</button>
+                    </form>
+                </div>
             </div>
 
-            <h2 class="h2" style="margin-bottom: 20px" >메뉴 리스트</h2>
+            <h2 class="h2" style="margin-bottom: 20px">메뉴 리스트</h2>
             <div class="container item">
-                <ul class="menuList">
-                    <c:forEach var="restrMenuDto" items="${restrMenuDto}">
-                        <li class="menu">
-                            <form>
-                                    <%--            --%>
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                    <%--            --%>
-                                <input name="restr_NUM" type="hidden" value="${restrMenuDto.restr_NUM}">
-                                <input name="restr_menu_NUM" type="hidden" value="${restrMenuDto.restr_menu_NUM}">
-                                <input name="restr_menu_food" type="text" required readonly value=" ${restrMenuDto.restr_menu_food}">
-                                <input name="restr_menu_price" type="text" required readonly value="${restrMenuDto.restr_menu_price}">
-                                <input name="restr_menu_desc" type="text" required readonly value=" ${restrMenuDto.restr_menu_desc}">
-                                <button type="button" id="menuModifyBtn"> 수정 </button>
-                                <button type="button" id="menuDeleteBtn"> 삭제 </button>
-                            </form>
+                <div class="swiper mySwiper">
+                    <ul class="swiper-wrapper menuList">
+                        <c:forEach var="restrMenuDto" items="${restrMenuDto}">
+                            <div class="swiper-slide">
+                                <form id="menuListForm"
+                                      action="<c:url value='/mypage/biz/restrMenu/write?tab=regMenu'/>" method="post">
+                                        <%--            --%>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        <%--            --%>
+                                    <input name="restr_NUM" value="${restrDto.restr_NUM}" type="hidden">
+                                    <input name="restr_menu_NUM" type="hidden" value="${restrMenuDto.restr_menu_NUM}">
 
-                        </li>
-                    </c:forEach>
-                </ul>
+                                    <div class="input-box">
+                                        <label>메뉴이름</label>
+                                        <input name="restr_menu_food" type="text" placeholder="메뉴이름을 입력하세요." readonly
+                                               value=" ${restrMenuDto.restr_menu_food}">
+                                    </div>
+                                    <div class="input-box">
+                                        <label>메뉴가격</label>
+                                        <input name="restr_menu_price" type="text" placeholder="메뉴가격을 입력하세요." readonly
+                                               value="${restrMenuDto.restr_menu_price}">
+                                    </div>
+                                    <div class="input-box">
+                                        <label>메뉴설명</label>
+                                        <input name="restr_menu_desc" type="text" placeholder="메뉴에 대한 간단한 설명을 입력하세요."
+                                               readonly value=" ${restrMenuDto.restr_menu_desc}">
+                                    </div>
+
+                                    <div class="buttons">
+                                        <button type="button" id="menuModifyBtn"> 수정</button>
+                                        <button type="button" id="menuDeleteBtn"> 삭제</button>
+                                    </div>
+
+                                </form>
+
+
+                                    <%--                                            &lt;%&ndash;            &ndash;%&gt;--%>
+                                    <%--                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
+                                    <%--                                            &lt;%&ndash;            &ndash;%&gt;--%>
+                                    <%--                                        <input name="restr_NUM" type="hidden" value="${restrMenuDto.restr_NUM}">--%>
+                                    <%--                                        <input name="restr_menu_NUM" type="hidden" value="${restrMenuDto.restr_menu_NUM}">--%>
+                                    <%--                                        <input name="restr_menu_food" type="text" required readonly value=" ${restrMenuDto.restr_menu_food}">--%>
+                                    <%--                                        <input name="restr_menu_price" type="text" required readonly value="${restrMenuDto.restr_menu_price}">--%>
+                                    <%--                                        <input name="restr_menu_desc" type="text" required readonly value=" ${restrMenuDto.restr_menu_desc}">--%>
+                                    <%--                                 --%>
+                            </div>
+
+                        </c:forEach>
+                    </ul>
+                </div>
+
 
             </div>
 
@@ -487,7 +527,7 @@
                         <c:forEach var="restrMenuDto" items="${restrMenuDto}" varStatus="status">
                             <form id="hotdealRegForm" method="post">
                                     <%--            --%>
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <%--            --%>
                                 <input class="restr_menu_food" type="radio" name="request_restr_menu_food"
                                        value="${restrMenuDto.restr_menu_food}"
@@ -546,7 +586,7 @@
                             </form>
                         </c:forEach>
 
-                        <button type="submit" id="hotdealRegBtn"> 등록 </button>
+                        <button type="submit" id="hotdealRegBtn"> 등록</button>
 
                     </div>
 
@@ -559,7 +599,7 @@
 
                 <form id="qnaForm" action="<c:url value='/mypage/biz/QNA/write'/>" method="post">
                     <%--            --%>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <%--            --%>
                     <input type="text" name="qna_title" placeholder="제목 : 인태는 못말려">
                     <textarea name="qna_content" value="" placeholder="내용을 입력하세요 : 제발 누가 좀 말려요"></textarea>
@@ -675,7 +715,7 @@
             // 읽기상태 -> 수정상태
             if (isReadOnly == "readonly") {
                 $("input[name=bizAccount_name]").attr('readonly', false);
-                $("input[name=bizAccount_pwd]").attr('readonly', false);
+                // $("input[name=bizAccount_pwd]").attr('readonly', false);
                 $("input[name=bizAccount_phone]").attr('readonly', false);
                 e.target.innerHTML = "수정완료";
                 return;
@@ -701,18 +741,22 @@
 
         }); // 핫딜 등록
 
-        $("#menuModifyBtn",  "li.menu").on("click", function(e) {
-            let form = $(this).parent();
-            let isReadOnly = $("input[name=restr_menu_food]", "li.menu").attr("readonly");
-            console.log(e.target)
-            if(isReadOnly == "readonly"){
+        $("#menuModifyBtn", ".swiper-slide").on("click", function (e) {
+            let buttons = $(this).parent();
+            let form = buttons.parent();
+
+            let isReadOnly = $("input[name=restr_menu_food]", ".swiper-slide").attr("readonly");
+
+
+            if (isReadOnly == "readonly") {
                 $("input[name=restr_menu_food]").attr('readonly', false);
                 $("input[name=restr_menu_price]").attr('readonly', false);
                 $("input[name=restr_menu_desc]").attr('readonly', false);
-                e.target.innerHTML = "등록";
+                $(this)[0].innerText = "등록";
                 return;
             }
 
+            console.log(form)
             form.attr("action", "<c:url value='/mypage/biz/restrMenu/modify'/>");
             form.attr("method", "post");
             form.submit();
@@ -720,7 +764,7 @@
         }) // 레스토랑 메뉴 수정
 
 
-        $("#menuDeleteBtn", "li.menu").on("click", function (){
+        $("#menuDeleteBtn", "li.menu").on("click", function () {
             let form = $(this).parent();
 
             form.attr("action", "<c:url value='/mypage/biz/restrMenu/delete'/>");
@@ -737,4 +781,23 @@
 
 
 </body>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        width: 330,
+        slidesPerView: "auto",
+        centeredSlides: false,
+        spaceBetween: 30,
+        grabCursor: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+        },
+
+    });
+</script>
 </html>

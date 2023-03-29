@@ -49,7 +49,6 @@ public class LoginController {
     OAuth2Parameters googleOAuth2Parameters;
 
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @GetMapping("/login")
     public String loginForm(Model m, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
@@ -91,7 +90,7 @@ public class LoginController {
 
 
 
-    @GetMapping("/auth/google/callback")   // ("/auth/social/callback")
+    @GetMapping("/auth/google/callback")
     public String snsLoginCallback(@RequestParam(value = "code", required = false) String code, HttpSession sn, Model m) throws Exception{
 
 

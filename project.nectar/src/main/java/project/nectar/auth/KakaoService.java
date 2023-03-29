@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,8 +117,8 @@ public class KakaoService {
 
             String user_email = kakao_account.getAsJsonObject().get("email").getAsString();
             String user_pwd = element.getAsJsonObject().get("id").getAsString();
-            String user_name = URLDecoder.decode(properties.getAsJsonObject().get("nickname").getAsString());
-//            String user_picture = properties.getAsJsonObject().get("profile_image").getAsString();
+            String user_name = URLEncoder.encode(properties.getAsJsonObject().get("nickname").getAsString(),"utf-8");
+//            String user_picture = properties.getAsJsonObject().get("profile_image_url").getAsString();
 
             System.out.println("user_email:: " + user_email);
             System.out.println("user_pwd:: " + user_pwd);

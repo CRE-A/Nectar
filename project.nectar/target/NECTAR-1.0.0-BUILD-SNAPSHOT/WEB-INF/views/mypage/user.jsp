@@ -100,7 +100,6 @@
       <div class="swiper mySwiper">
         <ul class="swiper-wrapper likeRestrList">
           <c:forEach var="getMyLikeList" items="${getMyLikeList}">
-
             <div class="swiper-slide">
               <li class="likeRestr">
                 <div class="likeRestr__imgWrap">
@@ -214,7 +213,7 @@
             <%--    userPwd로 고쳐야함        --%>
             <div class="userEmail">
               <span class="details">비밀번호</span>
-              <input type="password" name="user_pwd" readonly value="${userDto.user_pwd}" required/>
+              <input type="password" name="user_pwd" readonly value="" required/>
             </div>
             <%--            --%>
             <%--            --%>
@@ -340,7 +339,7 @@
         $("input[name=user_name]").attr('readonly', false);
         // $("input[name=user_email]").attr('readonly', false);
         $("input[name=user_phone]").attr('readonly', false);
-        $("input[name=user_pwd]").attr('readonly', false);
+        // $("input[name=user_pwd]").attr('readonly', false);
         $("#modifyBtn").html("변경사항저장");
 
         return;

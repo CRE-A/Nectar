@@ -35,11 +35,17 @@
 
 
 <body>
-<div id="menu">
-    <ul>
-        <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
-        <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
-        <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
+<section id="navbar" class="admin">
+    <div class="logo">
+        <a href="<c:url value='/'/>"> <img src="<c:url value='/images/nectarLogo.png'/>" alt="" class="logo__img"/></a>
+    </div>
+    <ul class="menu">
+        <li class="menu item">
+            <a href="<c:url value='/hotdeal/list'/>">HOTDEAL</a>
+        </li>
+        <li class="menu item">
+            <a href="<c:url value='/restr/list'/>">맛집리스트</a>
+        </li>
         <li class="menu item">
             <security:authorize access="isAnonymous()">
                 <a href="<c:url value='/login/login'/>">LOGIN</a>
@@ -55,7 +61,7 @@
             </security:authorize>
         </li>
     </ul>
-</div>
+</section>
 
 <h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 

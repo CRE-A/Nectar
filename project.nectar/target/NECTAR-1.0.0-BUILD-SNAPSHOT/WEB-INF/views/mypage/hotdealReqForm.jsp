@@ -16,18 +16,36 @@
     ></script>
 
     <!-- CSS -->
-    <%--    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>--%>
+    <link rel="stylesheet" href="<c:url value='/css/navbarHome.css'/>"/>
     <%--    <link rel="stylesheet" href="<c:url value='/css/globalPage.css'/>"/>--%>
+    <link rel="stylesheet" href="<c:url value='/css/reqForm.css'/>"/>
+    <style>
+        section#navbar.req {
+            z-index: 2;
+            width: 100vw;
+            background-color: #e9bea2;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            color: black;
+        }
 
+    </style>
 </head>
 
 
 <body>
-<div id="menu">
-    <ul>
-        <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
-        <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
-        <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
+<section id="navbar" class="req">
+    <div class="logo">
+        <a href="<c:url value='/'/>"> <img src="<c:url value='/images/nectarLogo.png'/>" alt="" class="logo__img"/></a>
+    </div>
+    <ul class="menu">
+        <li class="menu item">
+            <a href="<c:url value='/hotdeal/list'/>">HOTDEAL</a>
+        </li>
+        <li class="menu item">
+            <a href="<c:url value='/restr/list'/>">맛집리스트</a>
+        </li>
         <li class="menu item">
             <security:authorize access="isAnonymous()">
                 <a href="<c:url value='/login/login'/>">LOGIN</a>
@@ -43,38 +61,101 @@
             </security:authorize>
         </li>
     </ul>
-</div>
+</section>
 
 <h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 
-<form id="form" action="<c:url value=''/>" method="">
+<%--<form action="<c:url value=''/>" method="">--%>
+<%--    <label><input name="restr_name" type="text" value="${request_hotdealDto.request_restr_name}"/> 사업장명--%>
+<%--        : ${request_hotdealDto.request_restr_name}</label>--%>
+<%--    <label><input name="bizAccount_email" type="text" value="${request_hotdealDto.request_bizAccount_email}"/> 사업자 이메일--%>
+<%--        : ${request_hotdealDto.request_bizAccount_email}</label>--%>
+<%--    <label><input name="restr_menu_food" type="text" value="${request_hotdealDto.request_restr_menu_food}"/> 핫딜 메뉴 이름--%>
+<%--        : ${request_hotdealDto.request_restr_menu_food}</label>--%>
+<%--    <label><input name="restr_menu_price" type="text" value="${request_hotdealDto.request_restr_menu_price}"/> 기존 메뉴--%>
+<%--        가격--%>
+<%--        : ${request_hotdealDto.request_restr_menu_price}</label>--%>
+<%--    <label><input name="hotdeal_price" type="text" value="${request_hotdealDto.request_hotdeal_price}"/> 핫딜 메뉴 가격--%>
+<%--        : ${request_hotdealDto.request_hotdeal_price}</label>--%>
+<%--    <label><input name="hotdeal_discountRate" type="text" value="${request_hotdealDto.request_hotdeal_discountRate}"/>--%>
+<%--        핫딜 할인률--%>
+<%--        : ${request_hotdealDto.request_hotdeal_discountRate}</label>--%>
+<%--    <label><input name="hotdeal_desc" type="text" value="${request_hotdealDto.request_hotdeal_desc}"/> 핫딜 메뉴 설명--%>
+<%--        : ${request_hotdealDto.request_hotdeal_desc}</label>--%>
+<%--    <label><input name="hotdeal_useDate" type="text" value="${request_hotdealDto.request_hotdeal_useDate}"/> 사용기간--%>
+<%--        : ${request_hotdealDto.request_hotdeal_useDate}</label>--%>
+<%--    <label><input name="hotdeal_eventDuratio" type="text" value="${request_hotdealDto.request_hotdeal_eventDuration}"/>--%>
+<%--        이벤트 기간--%>
+<%--        : ${request_hotdealDto.request_hotdeal_eventDuration}</label>--%>
+<%--    <label><input name="hotdeal_picture" type="text" value="${request_hotdealDto.request_hotdeal_picture}"/>--%>
+<%--        <img src="${request_hotdealDto.request_hotdeal_picture}">--%>
+<%--    </label>--%>
+<%--</form>--%>
 
-    <label><input name="restr_name" type="text" value="${request_hotdealDto.request_hotdeal_restr_name}"/> 사업장명
-        : ${request_hotdealDto.request_hotdeal_restr_name}</label>
-    <label><input name="bizAccount_email" type="text" value="${request_hotdealDto.request_bizAccount_email}"/> 사업자 이메일
-        : ${request_hotdealDto.request_bizAccount_email}</label>
-    <label><input name="restr_menu_food" type="text" value="${request_hotdealDto.request_restr_menu_food}"/> 핫딜 메뉴 이름
-        : ${request_hotdealDto.request_hotdeal_restr_menu_food}</label>
-    <label><input name="restr_menu_pricele" type="text" value="${request_hotdealDto.request_restr_menu_price}"/> 기존 메뉴 가격
-        : ${request_hotdealDto.request_restr_menu_price}</label>
-    <label><input name="hotdeal_price" type="text" value="${request_hotdealDto.request_hotdeal_price}"/> 핫딜 메뉴 가격
-        : ${request_hotdealDto.request_hotdeal_price}</label>
-    <label><input name="hotdeal_discountRate" type="text" value="${request_hotdealDto.request_hotdeal_discountRate}"/> 핫딜 할인률
-        : ${request_hotdealDto.request_hotdeal_discountRate}</label>
-    <label><input name="hotdeal_desc" type="text" value="${request_hotdealDto.request_hotdeal_desc}"/> 핫딜 메뉴 설명
-        : ${request_hotdealDto.request_hotdeal_desc}</label>
-    <label><input name="hotdeal_useDate" type="text" value="${request_hotdealDto.request_hotdeal_useDate}"/> 사용기간
-        : ${request_hotdealDto.request_hotdeal_useDate}</label>
-    <label><input name="hotdeal_eventDuratio" type="text" value="${request_hotdealDto.request_hotdeal_eventDuration}"/> 이벤트 기간
-        : ${request_hotdealDto.request_hotdeal_eventDuration}</label>
-    <label><input name="hotdeal_picture" type="text" value="${request_hotdealDto.request_hotdeal_picture}"/>
-        <img src="${request_hotdealDto.request_hotdeal_picture}">
-    </label>
-    <button type="button" id="registerBtn">심사완료</button>
-    <button type="button" id="denyBtn">심사반려</button>
-    <button type="button" id="listBtn">목록</button>
+<section id="req">
+    <div class="container">
+        <h1 class="title">핫딜심사</h1>
+        <form action="" id="form">
+            <div class="boxes">
+                <%--            --%>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <%--            --%>
+                    <input type="hidden" name="request_hotdeal_NUM" value="${request_hotdealDto.request_hotdeal_NUM}">
+                <div class="inputBox">
+                    <span class="item name">매장명</span>
+                    <input readonly name="restr_name" type="text" class="item input"
+                           value="${request_hotdealDto.request_restr_name}">
+                </div>
+                <div class="inputBox">
+                    <span class="item name">이메일</span>
+                    <input readonly name="bizAccount_email" type="text" class="item input"
+                           value="${request_hotdealDto.request_bizAccount_email}">
+                </div>
+                <div class="inputBox">
+                    <span class="item name">핫딜메뉴</span>
+                    <input readonly name="restr_menu_food" type="text" class="item input"
+                           value="${request_hotdealDto.request_restr_menu_food}"/></div>
 
-</form>
+                <div class="inputBox">
+                    <span class="item name">기존메뉴</span>
+                    <input readonly name="restr_menu_price" type="text" class="item input"
+                           value="${request_hotdealDto.request_restr_menu_price}"/></div>
+                <div class="inputBox">
+                    <span class="item name">핫딜가격</span>
+                    <input readonly name="hotdeal_price" type="text" class="item input"
+                           value="${request_hotdealDto.request_hotdeal_price}"/></div>
+                <div class="inputBox">
+                    <span class="item name">할인률</span>
+                    <input readonly name="hotdeal_discountRate" type="text" class="item input"
+                           value="${request_hotdealDto.request_hotdeal_discountRate}"/></div>
+                <div class="inputBox">
+                    <span class="item name">메뉴설명</span>
+                    <input readonly name="hotdeal_desc" type="text" class="item input"
+                           value="${request_hotdealDto.request_hotdeal_desc}"/></div>
+                <div class="inputBox">
+                    <span class="item name">사용기간</span>
+                    <input readonly name="hotdeal_useDate" type="text" class="item input"
+                           value="${request_hotdealDto.request_hotdeal_useDate}"/></div>
+                <div class="inputBox">
+                    <span class="item name">이벤트기간</span>
+                    <input readonly name="hotdeal_eventDuration" type="text" class="item input"
+                           value=" ${request_hotdealDto.request_hotdeal_eventDuration}"/></div>
+            </div>
+
+            <div class="imgContainer">
+                <input type="hidden" value="${request_hotdealDto.request_hotdeal_picture}">
+                <img src="${request_hotdealDto.request_hotdeal_picture}"
+                     alt="">
+            </div>
+        </form>
+        <div class="buttons">
+            <button type="button" id="denyBtn">심사반려</button>
+            <button type="button" id="registerBtn">심사완료</button>
+            <button type="button" id="listBtn">목록</button>
+        </div>
+    </div>
+</section>
+
 
 <script>
     $(document).ready(function () {
@@ -97,12 +178,14 @@
             location.href = "<c:url value='/mypage/admin/main'/>";
         });
 
+
+
         $("#registerBtn").on("click", function () {
+            if (!confirm("핫딜 등록 요청을 완료 하시겠습니까?")) return;
             let form = $("#form");
             form.attr("action", "<c:url value='/mypage/admin/hotdeal/register'/>");
             form.attr("method", "post");
-            if (formCheck())
-                form.submit();
+            form.submit();
         });
 
         $("#listBtn").on("click", function () {

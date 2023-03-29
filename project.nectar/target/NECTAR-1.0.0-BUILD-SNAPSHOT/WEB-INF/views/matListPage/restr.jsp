@@ -384,6 +384,9 @@
                         <!--🍎리뷰 수정🍎-->
                         <div class="review__text">
                             <form id="reviewModifyForm" action="" method="post">
+                                    <%--            --%>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    <%--            --%>
                                 <input name="review_NUM" type="hidden" value="${reviewDto.review_NUM}"/>
                                 <input name="review_star" type="hidden" value="${reviewDto.review_star}"/>
                                 <input name="restr_NUM" type="hidden" value="${restrDto.restr_NUM}"/>
@@ -538,17 +541,43 @@
         }); // submit
 
 
-        $(".review").on("click", "#reviewModifyBtn", (e) => {
-            let li = e.target.parentNode;
+        // $(".review").on("click", "#reviewModifyBtn", (e) => {
+
+            // let li = e.target.parentNode;
+            // let form = $("#reviewModifyForm", li);
+            <%--console.log(form)--%>
+            <%--let isReadOnly = $("textarea[name=review_comment]", li).attr("readonly");--%>
+
+
+            <%--// 읽기상태 -> 수정상태--%>
+            <%--if (isReadOnly == "readonly") {--%>
+            <%--    $("textarea[name=review_comment]", li).attr('readonly', false);--%>
+            <%--    e.target.innerHTML = "리뷰등록";--%>
+            <%--    return;--%>
+            <%--}--%>
+
+            <%--// 리뷰등록--%>
+
+            <%--form.attr("action", "<c:url value="/review/modify"/>");--%>
+            <%--form.attr("method", "post");--%>
+            <%--form.submit();--%>
+
+
+        // });
+
+        $("#reviewModifyBtn", ".review").on("click", function (){
+            let buttons = $(this).parent();
+            let alignContainer = buttons.parent();
+            let li = alignContainer.parent();
             let form = $("#reviewModifyForm", li);
-            console.log(form)
             let isReadOnly = $("textarea[name=review_comment]", li).attr("readonly");
 
 
             // 읽기상태 -> 수정상태
             if (isReadOnly == "readonly") {
                 $("textarea[name=review_comment]", li).attr('readonly', false);
-                e.target.innerHTML = "리뷰등록";
+                console.log($(this));
+                $(this)[0].innerText = "리뷰등록";
                 return;
             }
 
@@ -559,18 +588,20 @@
             form.submit();
 
 
-        });
+        }) //리뷰(review) 수정
 
 
-        $(".review").on("click", "#reviewDelBtn", (e) => {
+        $("#reviewDelBtn", ".review").on("click", function (){
 
-            let li = e.target.parentNode;
+            let buttons = $(this).parent();
+            let alignContainer = buttons.parent();
+            let li = alignContainer.parent();
             let form = $("#reviewModifyForm", li);
             form.attr("action", "<c:url value="/review/delete"/>");
             form.attr("method", "post");
             form.submit();
 
-        }); // review 수정
+        }); // 리뷰(review) 삭제
 
 
 

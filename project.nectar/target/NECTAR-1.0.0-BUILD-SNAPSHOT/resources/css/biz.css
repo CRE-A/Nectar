@@ -399,13 +399,131 @@ textarea[name=qna_content] {
     border: 1px solid black;
 }
 
-#menuForm {
+/* 메뉴m(menu) 등록 */
+
+.menuWrap{
+    display: flex;
+    justify-content: center;
+}
+
+#menuForm, #menuListForm {
     display: flex;
     flex-direction: column;
+    background-color: #f4f4f4;
+    width: 330px;
+    align-items: center;
+    padding: 30px 0;
 }
 
 li.menu{
     width: 100%;
 }
 
+
+.menuWrap #menuForm .input-box,
+#menuListForm .input-box{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.menuWrap .input-box label,
+#menuListForm .input-box label{
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+.menuWrap .input-box input,
+#menuListForm .input-box input{
+    text-align: center;
+    width: 250px;
+    height: 40px;
+    border: 2px solid black;
+    margin-bottom: 20px;
+}
+
+.menuWrap .input-box input:focus,
+#menuListForm .input-box input:focus{
+    outline: none;
+}
+
+.menuWrap .input-box input::placeholder
+#menuListForm .input-box input::placeholder{
+    padding-left: 10px;
+    font-size: 11px;
+    text-align: center;
+}
+
+.menuWrap .input-box input::-moz-placeholder
+#menuListForm .input-box input::-moz-placeholder{
+    padding-left: 10px;
+    opacity:  1;
+    text-align: center;
+}
+
+.restrMenuRegBtn {
+    margin-top: 20px;
+    width: 130px;
+    height: 50px;
+    background-color: orange;
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+    border: 0;
+    font-weight: bold;
+}
+
+
+/* Image Slider */
+
+
+
+.swiper.mySwiper{
+    max-width: 900px;
+}
+
+.swiper-wrapper{
+    /*width: auto !important;*/
+    display: flex;
+    padding: 0;
+}
+.swiper-slide{
+    width: 330px !important;
+    /*background-color: red;*/
+}
+
+.swiper, swiper-container{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    display: block;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.buttons{
+    width: 100%;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background-color: #8edc88;*/
+}
+
+.buttons button{
+    margin: 0 10px 0 10px;
+    background-color: orange;
+    width: 100px;
+    height: 40px;
+    border: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
 

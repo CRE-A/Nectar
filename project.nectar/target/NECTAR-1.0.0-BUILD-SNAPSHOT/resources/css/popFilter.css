@@ -19,20 +19,40 @@ section.filter__modal.active {
     margin: 0 auto;
     background-color: white;
     height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 .filter-form{
-    flex-basis: 90%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
-    align-content: space-around;
+    align-content: center;
     height: 100%;
     padding: 40px;
 }
 
-div {
-    display: block;
+.filter-form:nth-child(4){
+    display: inline;
+}
+
+div.filter-item {
+    width: 568px;
+    margin-bottom: 20px;
+
+}
+
+.submit-container button {
+
+    margin-top: 30px;
+    background-color: orange;
+    width: 120px;
+    height: 50px;
+    border: 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
 }
 nav {
     position: relative;
@@ -47,6 +67,11 @@ nav a {
     color: #333;
     text-decoration: none;
     text-align: center;
+}
+
+div.filter-item label {
+    font-size: 20px;
+    margin-bottom: 20px;
 }
 
 .nav-underline {
@@ -124,8 +149,8 @@ nav a:nth-child(5):hover ~ .nav-underline {
 
 }
 .filter-item input[type=radio]:checked+label {
-    color: #ff2ac3;
-    border-color: green;
+    color: orangered;
+    border-color: orangered;
 }
 input[type="radio" i] {
     background-color: initial;
@@ -169,7 +194,7 @@ p {
     text-align: center;
 }
 .submit-container .btn.submit {
-    background-color: violet;
+    background-color: orangered;
 }
 
 .submit-container .btn.cancel {

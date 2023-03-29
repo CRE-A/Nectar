@@ -17,18 +17,11 @@
     ></script>
 
     <!-- CSS -->
-    <%--    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>--%>
+    <link rel="stylesheet" href="<c:url value='/css/navbarHome.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/reqForm.css'/>"/>
     <%--    <link rel="stylesheet" href="<c:url value='/css/globalPage.css'/>"/>--%>
 
 
-    <style>
-        #form {
-            display: flex;
-            flex-direction: column;
-
-
-        }
-    </style>
 </head>
 
 
@@ -57,47 +50,78 @@
 </div>
 <h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 
-<form id="form" >
 
-    <label><input name="restr_NUM" type="hidden" value="${request_restrDto.request_restr_NUM}"/></label>
-    <label><input name="bizAccount_email" type="text" value="${request_restrDto.request_bizAccount_email}" readonly/>
-        사업주
-        : ${request_restrDto.request_bizAccount_email} </label>
-    <label><input name="restr_name" type="text" value="${request_restrDto.request_restr_name}"/> 사업장명
-        : ${request_restrDto.request_restr_name}</label>
-    <label><input name="restr_phone" type="text" value="${request_restrDto.request_restr_phone}"/> 연락처
-        : ${request_restrDto.request_restr_phone}</label>
-    <label><input name="restr_location" type="text" value="${request_restrDto.request_restr_location}"/> 위치
-        : ${request_restrDto.request_restr_location}</label>
-    <label><input name="restr_time" type="text" value="${request_restrDto.request_restr_time}"/> 매장 운영 시간
-        : ${request_restrDto.request_restr_time}</label>
-    <label><input name="restr_tag" type="text" value="${request_restrDto.request_restr_tag}"/> 매장 관련 태그
-        : ${request_restrDto.request_restr_tag}</label>
-    <label><input name="restr_location_tag" type="text" value="${request_restrDto.request_restr_location_tag}"/> 위치태그
-        : ${request_restrDto.request_restr_location_tag}</label>
-    <label><input name="restr_foodType" type="text" value="${request_restrDto.request_restr_foodType}"/> 음식종류
-        : ${request_restrDto.request_restr_foodType}</label>
-    <label><input name="restr_cost" type="text" value="${request_restrDto.request_restr_cost}"/> 가격대
-        : ${request_restrDto.request_restr_cost}</label>
-    <label><input name="restr_parking" type="text" value="${request_restrDto.request_restr_parking}"/> 주차가능여부
-        : ${request_restrDto.request_restr_parking}</label>
-    <label><input name="restr_menu" type="text" value="${request_restrDto.request_restr_menu}"/> 메뉴
-        : ${request_restrDto.request_restr_menu}</label>
-    <label><input name="biz_reg_num" type="text" value="${request_restrDto.request_biz_reg_num}"/> 사업자 등록증 번호
-        : ${request_restrDto.request_biz_reg_num}</label>
-    <label><input name="restr_desc" type="text" value="${request_restrDto.request_restr_desc}"/> 레스토랑 정보 / 설명
-        : ${request_restrDto.request_restr_desc}</label>
-    <%--    <label><input name="category_loc" type="text" value="${request_restrDto.request_category_loc}"/> 위치 카테고리--%>
-    <%--        : ${request_restrDto.request_category_loc}</label>--%>
-    <label><input name="restr_picture" type="text" value="${request_restrDto.request_restr_picture}"
-                  placeholder="나중에 input[type=file] 로 변경"/> 레스토랑 이미지파일
-        <img src="${request_restrDto.request_restr_picture}">
-    </label>
-    <button type="button" id="registerBtn">심사완료</button>
-    <button type="button" id="denyBtn">심사반려</button>
-    <button type="button" id="listBtn">목록</button>
+<section id="req">
+    <div class="container">
+        <h1 class="title">매장심사</h1>
+        <form action="" id="form">
+            <div class="boxes">
+                <input name="restr_NUM" type="hidden" value="${request_restrDto.request_restr_NUM}"/>
+                <div class="inputBox">
+                    <span class="item name">이메일</span>
+                    <input type="text" readonly name="bizAccount_email" class="item input"
+                           value="${request_restrDto.request_bizAccount_email}">
+                </div>
+                <div class="inputBox">
+                    <span class="item name">매장이름</span>
+                    <input readonly name="restr_name" type="text" class="item input"
+                           value="${request_restrDto.request_restr_name}"/></div>
+                <div class="inputBox">
+                    <span class="item name">연락처</span>
+                    <input readonly name="restr_phone" type="text" class="item input"
+                           value="${request_restrDto.request_restr_phone}"/></div>
+                <div class="inputBox">
+                    <span class="item name">위치</span>
+                    <input readonly name="restr_location" type="text" class="item input"
+                           value="${request_restrDto.request_restr_location}"/></div>
+                <div class="inputBox">
+                    <span class="item name">운영시간</span>
+                    <input readonly name="restr_time" type="text" class="item input"
+                           value="${request_restrDto.request_restr_time}"/></div>
+                <div class="inputBox">
+                    <span class="item name">연관태그</span>
+                    <input readonly name="restr_tag" type="text" class="item input"
+                           value="${request_restrDto.request_restr_tag}"/></div>
+                <div class="inputBox">
+                    <span class="item name">위치태그</span>
+                    <input readonly name="restr_location_tag" type="text" class="item input"
+                           value="${request_restrDto.request_restr_location_tag}"/></div>
+                <div class="inputBox">
+                    <span class="item name">음식종류</span>
+                    <input readonly name="restr_foodType" type="text" class="item input"
+                           value="${request_restrDto.request_restr_foodType}"/></div>
+                <div class="inputBox">
+                    <span class="item name">가격대</span>
+                    <input readonly name="restr_cost" type="text" class="item input"
+                           value="${request_restrDto.request_restr_cost}"/></div>
+                <div class="inputBox">
+                    <span class="item name">주차여부</span>
+                    <input readonly name="restr_parking" type="text" class="item input"
+                           value="${request_restrDto.request_restr_parking}"/></div>
+                <div class="inputBox">
+                    <span class="item name">등록증</span>
+                    <input readonly name="biz_reg_num" type="text" class="item input"
+                           value="${request_restrDto.request_biz_reg_num}"/></div>
+                <div class="inputBox">
+                    <span class="item name">설명</span>
+                    <input readonly name="restr_desc" type="text" class="item input"
+                           value="${request_restrDto.request_restr_desc}"/></div>
+            </div>
 
-</form>
+            <div class="imgContainer">
+                <input type="hidden" value="${request_restrDto.request_restr_picture}">
+                <img src="${request_restrDto.request_restr_picture}"
+                     alt="">
+            </div>
+        </form>
+        <div class="buttons">
+            <button type="button"  id="denyBtn">심사반려</button>
+            <button type="button"  id="registerBtn">심사완료</button>
+            <button type="button" id="listBtn">목록</button>
+        </div>
+    </div>
+</section>
+
 
 <script>
     $(document).ready(function () {
@@ -121,6 +145,8 @@
         }); // 목록으로 이동
 
         $("#registerBtn").on("click", function () {
+
+            console.log($(this));
             let form = $("#form");
             form.attr("action", "<c:url value='/mypage/admin/restr/register?request_restr_NUM=${request_restrDto.request_restr_NUM}'/>");
             form.attr("method", "post");

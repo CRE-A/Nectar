@@ -259,7 +259,7 @@
                     </label>
                 </p>
             </div>
-            <hr>
+
             <div class="filter-item">
                 <label>가격/1인당</label><br>
                 <p class="price_wrep">
@@ -277,16 +277,16 @@
                         <span> 3만원대 </span></label>
                 </p>
             </div>
-            <hr>
+
             <div class="filter-item">
                 <label>지역</label><br>
-                <nav>
-                    <a href="#" class="is-current">서울</a>
-                    <a href="#">인천</a>
-                    <a href="#">경기</a>
-                    <a href="#">더보기</a>
-                    <div class="nav-underline"></div>
-                </nav>
+<%--                <nav>--%>
+<%--                    <a href="#" class="is-current">서울</a>--%>
+<%--                    <a href="#">인천</a>--%>
+<%--                    <a href="#">경기</a>--%>
+<%--                    <a href="#">더보기</a>--%>
+<%--                    <div class="nav-underline"></div>--%>
+<%--                </nav>--%>
 
                 <p id="rocalseoul">
 
@@ -314,15 +314,25 @@
                     </label>
                     </span>
 
-                    <input type="radio" id="rocal05" name="location" value="서처구">
+                    <input type="radio" id="rocal05" name="location" value="서초구">
                     <label for="rocal05">
-                        <span> 서처구 </span>
+                        <span> 서초구 </span>
                     </label>
                     </span>
 
                     <input type="radio" id="rocal06" name="location" value="송파구">
                     <label for="rocal06">
                         <span> 송파구 </span>
+                    </label>
+
+                    <input type="radio" id="rocal07" name="location" value="은평구">
+                    <label for="rocal07">
+                        <span> 은평구 </span>
+                    </label>
+
+                    <input type="radio" id="rocal08" name="location" value="종로구">
+                    <label for="rocal08">
+                        <span> 종로구 </span>
                     </label>
                     </span>
                 </p>
@@ -331,9 +341,11 @@
                 <div class="btn-region-cancel_wrap visible">
                 </div>
             </div>
-            <hr>
+
             <div class="filter-item">
-                <label>주차</label><br>
+                <label>주차</label>
+                <br/>
+                <br/>
 
                 <input type="radio" id="pking30" name="parking" value="주차가능">
                 <label for="pking30">
@@ -346,10 +358,10 @@
                     <span> 주차불가 </span>
                 </label>
                 </span>
-                <hr>
+
                 <div class="submit-container" style="top: initial; bottom: 0px;">
                     <button class="cancelBtn" type="button">취소</button>
-                    <button type="submit">적용</button>
+                    <button class="submitBtn" type="submit">적용</button>
                 </div>
             </div>
 

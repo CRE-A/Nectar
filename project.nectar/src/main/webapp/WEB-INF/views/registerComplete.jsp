@@ -10,34 +10,31 @@
   <title>Nectar</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
   <!-- CSS -->
-  <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
+  <link rel="stylesheet" href="<c:url value='/css/navbarHome.css'/>"/>
+  <link rel="stylesheet" href="<c:url value='/css/successPage.css'/>"/>
   <%--  script --%>
   <script src="https://kit.fontawesome.com/43ede2213f.js" crossorigin="anonymous"></script>
+
+
+  <style>
+    section#navbar.success {
+      z-index: 2;
+      width: 100vw;
+      background-color: #e9bea2;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+  </style>
 
 </head>
 <body>
 
-<section id="navbar">
+<%--NAVBAR--%>
+
+<section id="navbar" class="success">
   <div class="logo">
-    <a href="<c:url value='/'/>">  <img src="<c:url value="/images/nectarLogo.png"/>" alt="" class="logo__img" /></a>
-  </div>
-  <div class="searchBar">
-    <form action="" class="search-form" method="get">
-      <button type="button" class="searchBtn" value="검색">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-      <input type="hidden" name="option" value="searchEngine" />
-      <input
-              type="text"
-              name="keyword"
-              class="search-input"
-              value="${ph.sc.keyword}"
-              placeholder="지역, 식당 또는 음식"
-      />
-      <button type="submit" class="search-button" value="검색">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-    </form>
+    <a href="<c:url value='/'/>"> <img src="<c:url value='/images/nectarLogo.png'/>" alt="" class="logo__img"/></a>
   </div>
   <ul class="menu">
     <li class="menu item">
@@ -64,9 +61,21 @@
 </section>
 
 
-</br>
+<section id="info">
+  <div class="box">
+    <div class="box_item">
+      <!-- <i class="fa-solid fa-circle-check"></i> -->
+      <div class="emoji">✔️</div>
+    </div>
+    <h1>회원가입이 완료되었습니다!</h1>
+    <p>
+      NECTAR 의 멤버가 되신 것을 축하드립니다.
+    </p>
+  <br/>
+    <button style="background-color: transparent; border: 0 ; font-weight: bold ; font-size: 16px" > <a href="<c:url value='/login/login'/>"> 로그인 페이지로 이동하기</a></button>
 
-<h2>회원가입이 완료되었습니다.❤️❤️❤️ </h2>
-<button> <a href="<c:url value='/login/login'/>"> 로그인 페이지로 이동하기</a></button>
+  </div>
+</section>
+
 </body>
 </html>
