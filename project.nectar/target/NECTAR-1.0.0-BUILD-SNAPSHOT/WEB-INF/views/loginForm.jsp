@@ -94,18 +94,18 @@
 
             </div>
             <div class="socialLogin">
-                <div class="google">
+                <button type="button" class="google">
                     <a href="<c:url value='${google_url}'/>">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu1PJmT_THldF0n5APcmt9p10utgu6KSw4cH2fQ5Xhpw&s"
                              alt="">
                     </a>
-                </div>
-                <div class="kakao">
+                </button>
+                <button type="button" class="kakao">
                     <a href="<c:url value="${kakao_url}"/>">
                     <img src="https://i0.wp.com/forhappywomen.com/wp-content/uploads/2018/11/%EC%82%B0%EB%B6%80%EC%9D%B8%EA%B3%BC-%ED%8F%AC%ED%95%B4%ED%94%BC%EC%9A%B0%EB%A8%BC-%EB%AC%B8%EC%9D%98-%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%94%8C%EB%9F%AC%EC%8A%A4%EC%B9%9C%EA%B5%AC-%EB%B2%84%ED%8A%BC.png?resize=586%2C586&ssl=1"
                          alt="">
                     </a>
-                </div>
+                </button>
             </div>
         </form>
     </div>

@@ -117,7 +117,7 @@ public class KakaoService {
 
             String user_email = kakao_account.getAsJsonObject().get("email").getAsString();
             String user_pwd = element.getAsJsonObject().get("id").getAsString();
-            String user_name = URLEncoder.encode(properties.getAsJsonObject().get("nickname").getAsString(),"utf-8");
+            String user_name = properties.getAsJsonObject().get("nickname").getAsString();
 //            String user_picture = properties.getAsJsonObject().get("profile_image_url").getAsString();
 
             System.out.println("user_email:: " + user_email);

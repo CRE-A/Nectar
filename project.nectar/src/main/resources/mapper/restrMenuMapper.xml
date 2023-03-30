@@ -10,6 +10,7 @@
         where restr_NUM = #{restr_NUM}
     </select>
 
+
     <insert id="insert" parameterType="RestrMenuDto">
         insert into restr_menu
             (restr_NUM, restr_menu_food, restr_menu_price, restr_menu_desc)

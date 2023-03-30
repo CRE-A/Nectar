@@ -47,14 +47,15 @@ public class BizController {
             RestrDto restrDto = restrDao.selectByBiz_email(Biz_email);
             m.addAttribute("restrDto",restrDto);
             // 사업자(BizAccount)가 운영중인 레스토랑에 대한 data
+            System.out.println("restrDto = " + restrDto);
 
             List<HotdealDto> hotdealDto = hotdealService.selectMyHotdeals(Biz_email);
             m.addAttribute("hotdealDto",hotdealDto);
             // 사업자가 진행한 모든 핫딜에 대한 data
 
-            List<RestrMenuDto> restrMenuDto = restrMenuDao.selectAllMenu(restrDto.getRestr_NUM());
+            List<RestrMenuDto> restrMenuDto = restrMenuDao.selectAllMenu(restrNum(Biz_email));
             m.addAttribute("restrMenuDto",restrMenuDto);
-//            // 사업자가 운영중인 레스토랑 메뉴에 대한 data
+//          // 사업자가 운영중인 레스토랑 메뉴에 대한 data
 
             BizAccountDto bizAccountDto = bizAccountDao.select(Biz_email);
             m.addAttribute("bizAccountDto",bizAccountDto);
@@ -71,6 +72,8 @@ public class BizController {
 
         return "mypage/biz";
     }
+
+
 
 
     @PostMapping("/profile/modify")
@@ -171,5 +174,10 @@ public class BizController {
         return "redirect:/mypage/biz/main";
     }
 
+
+    private Integer restrNum(String bizEmail) throws Exception {
+        RestrDto restrDto = restrDao.selectByBiz_email(bizEmail);
+        return restrDto !=null? restrDto.getRestr_NUM() : -1;
+    }
 
 }
