@@ -18,6 +18,10 @@
             src="https://kit.fontawesome.com/43ede2213f.js"
             crossorigin="anonymous"
     ></script>
+    <!-- 제이쿼리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" type="text/javascript"></script>
+    <!-- 아임포트 -->
+    <script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 
 </head>
 
@@ -172,13 +176,92 @@
                 </div>
             </div>
         </div>
-        <button class="buyBtn">
+        <button type="button" id="buy" class="buyBtn">
             <span>구입하기</span>
         </button>
     </div>
 
 
 </section>
+<script>
+    $(document).ready(function(){
+        <%--var pay = <%=bvo.getPay_coupon() %>;--%>
+        // console.log(pay);
+
+        $("#buy").click(function(e){
+
+            <security:authorize access="isAnonymous()">     // 로그인 안했니?
+                if (!confirm("결재를 진행하기 위해서 로그인이 필요합니다. 로그인 하시겠습니까?")) return;
+                location.href = "<c:url value='/login/login'/> ";
+                return;
+            </security:authorize>
+
+
+
+            var IMP = window.IMP;
+            var code = "imp12875231"; //가맹점 식별코드
+            IMP.init(code);
+
+            //결제요청
+            IMP.request_pay({
+                pg : 'kakaopay',
+                pay_method: 'card',
+                merchant_uid : 'merchant_' + new Date().getTime(),
+                name : '결제테스트', // 상품명
+                amount : 100,       // 가격
+                buyer_email : '${UserDto.user_email}',
+                buyer_name : '${UserDto.user_name}',
+                buyer_tel : '${UserDto.user_phone}',  //필수항목
+                //결제완료후 이동할 페이지 kko나 kkopay는 생략 가능
+                // m_redirect_url : 'https://localhost:8080/nectar/pay/success'
+            }, function(rsp){
+                if(rsp.success){//결제 성공시
+                    var msg = '결제가 완료되었습니다';
+                    var result = {
+                        "imp_uid" : rsp.imp_uid,
+                        "merchant_uid" : rsp.merchant_uid,
+                        "biz_email" : '${hotdealDto.bizAccount_email}',
+                        "pay_date" : new Date().getTime(),
+                        "amount" : rsp.paid_amount,
+                        "card_no" : rsp.apply_num,
+                        "refund" : 'payed'
+                    }
+                    console.log("결제성공 " + msg);
+                    console.log("result " + result);
+
+                    $.ajax({
+                        url : '/pay/proceed',
+                        type :'POST',
+                        data : JSON.stringify(result,
+                            ['imp_uid', 'merchant_uid', 'biz_email',
+                                'pay_date', 'amount', 'card_no', 'refund']),
+                        contentType:'application/json;charset=utf-8',
+                        dataType: 'json', //서버에서 보내줄 데이터 타입
+                        success: function(res){
+
+                            // if(res == 1){
+                            //     console.log("추가성공");
+                            //     pay += 5;
+                            //     $('#pay_coupon').html(pay);
+                            // }else{
+                            //     console.log("Insert Fail!!!");
+                            // }
+                        },
+                        error:function(){
+                            console.log("Insert ajax 통신 실패!!!");
+                        }
+                    }) //ajax
+
+                }
+                else{//결제 실패시
+                    var msg = '결제에 실패했습니다';
+                    msg += '에러 : ' + rsp.error_msg
+                }
+                console.log(msg);
+            });//pay
+        }); //check1 클릭 이벤트
+    }); //doc.ready
+</script>
 
 </body>
 </html>

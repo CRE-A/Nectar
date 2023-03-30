@@ -29,12 +29,12 @@ public class RegisterController {
 
 
     @GetMapping("/addUser")
-    public String registerForm() {return "registerForm";
+    public String registerForm_User() {return "registerForm";
     }
 
     @PostMapping("/addUser")
 
-    public String register(UserDto userDto, HttpSession session) throws Exception {
+    public String register_User(UserDto userDto, HttpSession session) throws Exception {
 
 //        // 아이디 중복 체크 하기
         if (!duplicateCheck(userDto)) {

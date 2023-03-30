@@ -148,7 +148,7 @@ public class KakaoService {
 
 
     private final static String CLIENT_ID = "795e0accee261f79ea3ba9064a0c8cda";
-    //이런식으로 REDIRECT_URI를 써넣는다.                                                                                                  //                                                //
+
     private final static String REDIRECT_URI = "http://localhost:8080/nectar/login/auth/kakao/callback";
 
     public static String getAuthorizationUrl() {

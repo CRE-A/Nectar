@@ -75,7 +75,6 @@ public class BizController {
 
 
 
-
     @PostMapping("/profile/modify")
     public String modifyProfile(BizAccountDto bizAccountDto){
         bizAccountDao.update(bizAccountDto);
