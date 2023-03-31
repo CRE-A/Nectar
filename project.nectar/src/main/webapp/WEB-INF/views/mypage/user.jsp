@@ -99,7 +99,7 @@
             <h1 class="h1">${userDto.user_name}님이 좋아요 누른 맛집이에요 ❤️</h1>
             <div class="swiper mySwiper">
                 <ul class="swiper-wrapper likeRestrList">
-                    <c:forEach var="getMyLikeList" items="${getMyLikeList}">
+                    <c:forEach var="getMyLikeList" items="${MyLikeList}">
                         <div class="swiper-slide">
                             <li class="likeRestr">
                                 <div class="likeRestr__imgWrap">
@@ -266,6 +266,23 @@
 
     </div>
 </section>
+
+
+
+
+
+
+<%--//             사용자(User)가 구매한 모든 구매내역에(핫딜) 대한 data   --%>
+<section>
+    <div>
+        <c:forEach var="MyPaymentList" items="${MyPaymentList}">
+
+        </c:forEach>
+    </div>
+</section>
+
+
+
 
 
 

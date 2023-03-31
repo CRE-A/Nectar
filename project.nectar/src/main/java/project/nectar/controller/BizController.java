@@ -35,6 +35,8 @@ public class BizController {
     Request_HotdealDao request_hotdealDao;
     @Autowired
     RestrMenuDao restrMenuDao;
+    @Autowired
+    PaymentDao paymentDao;
 
 
     @GetMapping("/main")
@@ -61,8 +63,8 @@ public class BizController {
             m.addAttribute("bizAccountDto",bizAccountDto);
             // 사업자에 대한 data
 
-//            List<Payment> paymentDto = paymentService.getMyPayments(User_email);
-//            m.addAttribute("paymentDto",paymentDto);
+            List<HotdealPlusDto> PaymentList = paymentDao.PaymentAndHotdeal_byBiz(Biz_email);
+            m.addAttribute("PaymentList",PaymentList);
             // 사업자가 진행한 핫딜의 결제정보(payment)에 대한 data
 
         } catch (Exception e) {

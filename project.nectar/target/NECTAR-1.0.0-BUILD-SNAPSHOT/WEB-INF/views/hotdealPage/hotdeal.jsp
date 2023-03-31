@@ -176,9 +176,18 @@
                 </div>
             </div>
         </div>
-        <button type="button" id="buy" class="buyBtn">
-            <span>구입하기</span>
-        </button>
+        <c:choose>
+            <c:when test="${hotdealDto.hotdeal_salesVolume == hotdealDto.hotdeal_MaxSalesVolume}">
+                <button type="button" id="soldOut" class="buyBtn">
+                    <span>매진</span>
+                </button>
+            </c:when>
+            <c:otherwise>
+                <button type="button" id="buy" class="buyBtn">
+                    <span>구입하기</span>
+                </button>
+            </c:otherwise>
+        </c:choose>
     </div>
 
 
@@ -212,9 +221,10 @@
                 buyer_email : '${UserDto.user_email}',
                 buyer_name : '${UserDto.user_name}',
                 buyer_tel : '${UserDto.user_phone}',  //필수항목
-                // m_redirect_url : 'https://localhost:8080/nectar/pay/process' // 카카오페이는 콜백 방식만 가능하네. 이거안됨
+                // m_redirect_url : 'https://localhost:8080/nectar/pay/process' //
             }, function(rsp){
                 if(rsp.success){//결제 성공시
+                    console.log(rsp)
                     var msg = '결제가 완료되었습니다';
                     var result = {
                         "imp_uid" : rsp.imp_uid,
@@ -228,9 +238,6 @@
                     console.log("결제성공 콘솔 : " + msg);
                     console.log("result " + result);
 
-
-
-
                     $.ajax({
                         type :'POST',
                         contentType:'application/json;charset=utf-8',
@@ -239,22 +246,24 @@
                         data : JSON.stringify(result),
                         dataType: 'json', //서버에서 보내줄 데이터 타입
 
-
-
-                        success: function(res){
-
-                            if(res == 1){
-                                console.log("추가성공");
-                                // pay += 5;
-                                // $('#pay_coupon').html(pay);
-                            }else{
-                                console.log("Insert Fail!!!");
-                            }
-                        },
-                        error:function(){
-                            console.log("Insert ajax 통신 실패!!!");
-                        }
+                        //
+                        // success: function(res){
+                        //
+                        //     if(res == 1){
+                        //         console.log("추가성공");
+                        //         // pay += 5;
+                        //         // $('#pay_coupon').html(pay);
+                        //     }else{
+                        //         console.log("Insert Fail!!!");
+                        //     }
+                        // },
+                        // error:function(){
+                        //     console.log("Insert ajax 통신 실패!!!");
+                        // }
                     }) //ajax
+
+
+
 
                     <%--$.ajax({--%>
                     <%--    type :'POST',--%>

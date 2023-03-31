@@ -22,6 +22,7 @@
         <typeAlias alias="BizAccountDetailsDto" type="project.nectar.domain.BizAccountDetailsDto"/>
         <typeAlias alias="AdminDetailsDto" type="project.nectar.domain.AdminDetailsDto"/>
         <typeAlias alias="PaymentDto" type="project.nectar.domain.PaymentDto"/>
+        <typeAlias alias="HotdealPlusDto" type="project.nectar.domain.HotdealPlusDto"/>
 
     </typeAliases>
 </configuration>

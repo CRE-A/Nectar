@@ -3,6 +3,7 @@ package project.nectar.repository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import project.nectar.domain.HotdealPlusDto;
 import project.nectar.domain.PaymentDto;
 
 import java.util.List;
@@ -21,19 +22,15 @@ public class PaymentDaoImpl implements PaymentDao {
     }
 
     @Override
-    public List<PaymentDto> selectByUserEmail(String user_email) throws Exception{
-        return session.selectList(namespace+"selectByUserEmail", user_email);
+    public List<HotdealPlusDto> PaymentAndHotdeal_byUser(String user_email) throws Exception{
+        return session.selectList(namespace+"select_PaymentAndHotdeal_byUser", user_email);
     }
 
     @Override
-    public List<PaymentDto> selectByBizEmail(String bizAccount_email) throws Exception{
-        return session.selectList(namespace+"selectByBizEmail", bizAccount_email);
+    public List<HotdealPlusDto> PaymentAndHotdeal_byBiz(String bizAccount_email) throws Exception{
+        return session.selectList(namespace+"select_PaymentAndHotdeal_byBiz", bizAccount_email);
     }
 
-    @Override
-    public List<PaymentDto> selectByHotdeal(String hotdeal_NUM) throws Exception{
-        return session.selectList(namespace+"selectByHotdeal", hotdeal_NUM);
-    }
 
     @Override
     public Integer insert(PaymentDto paymentDto) throws Exception{

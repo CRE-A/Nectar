@@ -21,7 +21,7 @@
 
     <script src="https://kit.fontawesome.com/43ede2213f.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<br>
 <%--NAVBAR--%>
 
 <section id="navbar">
@@ -368,6 +368,78 @@
         </form>
     </div>
 </section>
+
+
+
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+<%--핫딜 리스트 뿌려주기--%>
+<!-- Main -->
+
+<section id="hotdeal">
+    <ul class="hotdealList">
+        <c:forEach var="hotdealDto" items="${hotdealDto}">
+            <li class="hotdealRestr">
+                <a href="<c:url value="/hotdeal/read?hotdeal_NUM=${hotdealDto.hotdeal_NUM}"/>" class="hotdealRestr_wrap">
+                    <div class="hotdealRest__imgDesc">
+                        <div class="hotdealRestr__imgContainer">
+                            <img
+                                    src="https://i.pinimg.com/564x/6b/0b/ea/6b0bea27a1799ba9167d844f337be5e2.jpg"
+                                    alt=""
+                                    class="hotdealRestr__img"
+                            />
+                        </div>
+                        <div class="hotdealRestr__imgDeem">
+                            <div class="left">
+                                <div class="left__item-new">
+                                    <span>new</span>
+                                </div>
+                                <div class="left__item-discountRate">
+                                    <p>${hotdealDto.hotdeal_discountRate}%</p>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="right__item-menuPrice">${hotdealDto.restr_menu_price}</div>
+                                <div class="right__item-hotdealPrice">${hotdealDto.hotdeal_price}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hotdealRestr__info">
+                        <div class="info__head">
+                            <h1>[${hotdealDto.restr_category_loc}] ${hotdealDto.restr_name}</h1>
+
+                    <%--/////////////////////////////////////////////////////////////////////////////////////--%>
+                            <c:if test="${hotdealDto.hotdeal_salesVolume == hotdealDto.hotdeal_MaxSalesVolume}">
+                                <h2 style="color:red"> 준비한 쿠폰이 모두 소진되어 판매가 종료되었습니다. </h2>
+                            </c:if>
+                    <%--/////////////////////////////////////////////////////////////////////////////////////--%>
+
+
+                        </div>
+                        <div class="info__hotdealMenu">
+                            <p>${hotdealDto.restr_menu_food}</p>
+                        </div>
+                        <div class="info__hotdealDesc">
+                            <div class="hotdealDesc__wrap">
+                                <p>${hotdealDto.hotdeal_desc}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </c:forEach>
+
+    </ul>
+</section>
+
+
+
 
 
 

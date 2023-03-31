@@ -12,23 +12,19 @@
     </select>
 
 
-    <select id="selectByUserEmail" parameterType="String" resultType="PaymentDto">
-        SELECT *
-        from payment
-        where user_email = #{user_email}
+
+    <select id="select_PaymentAndHotdeal_byUser" parameterType="String" resultType="HotdealPlusDto">
+        SELECT h.*, p.user_email, p.pay_date, p.amout
+        from payment p inner join hotdeal h on p.hotdeal_NUM = h.hotdeal_NUM
+        where user_email = #{user_email};
     </select>
 
-    <select id="selectByBizEmail" parameterType="String" resultType="PaymentDto">
-        SELECT *
-        from payment
-        where bizAccount_email = #{bizAccount_email}
+    <select id="select_PaymentAndHotdeal_byBiz" parameterType="String" resultType="HotdealPlusDto">
+        SELECT h.*, p.user_email, p.pay_date, p.amout,
+        from payment p inner join hotdeal h on p.hotdeal_NUM = h.hotdeal_NUM
+        where bizAccount_email = #{bizAccount_email};
     </select>
 
-    <select id="selectByHotdeal" parameterType="String" resultType="PaymentDto">
-        SELECT *
-        from payment
-        where hotdeal_NUM = #{hotdeal_NUM}
-    </select>
 
 
     <insert id="insert" parameterType="PaymentDto">
@@ -43,6 +39,8 @@
         delete from payment
         where merchant_uid = #{merchant_uid} AND user_email = #{user_email} AND pay_date = #{pay_date}
     </delete>
+
+
 
 
 </mapper>

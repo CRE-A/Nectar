@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import project.nectar.domain.QNADto;
-import project.nectar.domain.RestrDto;
-import project.nectar.domain.ReviewPlusDto;
-import project.nectar.domain.UserDto;
+import project.nectar.domain.*;
 import project.nectar.repository.LikelistDao;
+import project.nectar.repository.PaymentDao;
 import project.nectar.repository.QNADao;
 import project.nectar.repository.UserDao;
 import project.nectar.service.ReviewService;
@@ -35,6 +33,8 @@ public class UserController {
     UserDao userDao;
     @Autowired
     QNADao qnaDao;
+    @Autowired
+    PaymentDao paymentDao;
 
 
     @GetMapping("/main")
@@ -52,8 +52,8 @@ public class UserController {
             m.addAttribute("reviewDto",reviewDto);
             // 사용자(User)가 작성한 모든 리뷰에 데한 data
 
-            List<RestrDto> getMyLikeList = likelistDao.selectMyLikeList(user_email);
-            m.addAttribute("getMyLikeList",getMyLikeList);
+            List<RestrDto> MyLikeList = likelistDao.selectMyLikeList(user_email);
+            m.addAttribute("MyLikeList",MyLikeList);
             // 사용자(User)가 like 눌렀던 모든 게시물(레스토랑)에 대한 data
 
             UserDto userDto = userDao.select(user_email);
@@ -61,8 +61,8 @@ public class UserController {
             // 사용자(User)에 대한 data
 
 
-//            List<Payment> payment = paymentService.getMyPayments(User_email);
-//            m.addAttribute("paymentService",paymentService);
+            List<HotdealPlusDto> MyPaymentList = paymentDao.PaymentAndHotdeal_byUser(user_email);
+            m.addAttribute("MyPaymentList",MyPaymentList);
 //             사용자(User)가 구매한 모든 구매내역에(핫딜) 대한 data
 
         } catch (Exception e) {
