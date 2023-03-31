@@ -102,8 +102,6 @@
     </update>
 
 
-
-
     <update id="sync_ReviewCnt" parameterType="RestrDto">
         update restr
         set restr_reviewCnt = #{restr_reviewCnt}

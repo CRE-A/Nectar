@@ -65,33 +65,6 @@
 
 <h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 
-<%--<form action="<c:url value=''/>" method="">--%>
-<%--    <label><input name="restr_name" type="text" value="${request_hotdealDto.request_restr_name}"/> 사업장명--%>
-<%--        : ${request_hotdealDto.request_restr_name}</label>--%>
-<%--    <label><input name="bizAccount_email" type="text" value="${request_hotdealDto.request_bizAccount_email}"/> 사업자 이메일--%>
-<%--        : ${request_hotdealDto.request_bizAccount_email}</label>--%>
-<%--    <label><input name="restr_menu_food" type="text" value="${request_hotdealDto.request_restr_menu_food}"/> 핫딜 메뉴 이름--%>
-<%--        : ${request_hotdealDto.request_restr_menu_food}</label>--%>
-<%--    <label><input name="restr_menu_price" type="text" value="${request_hotdealDto.request_restr_menu_price}"/> 기존 메뉴--%>
-<%--        가격--%>
-<%--        : ${request_hotdealDto.request_restr_menu_price}</label>--%>
-<%--    <label><input name="hotdeal_price" type="text" value="${request_hotdealDto.request_hotdeal_price}"/> 핫딜 메뉴 가격--%>
-<%--        : ${request_hotdealDto.request_hotdeal_price}</label>--%>
-<%--    <label><input name="hotdeal_discountRate" type="text" value="${request_hotdealDto.request_hotdeal_discountRate}"/>--%>
-<%--        핫딜 할인률--%>
-<%--        : ${request_hotdealDto.request_hotdeal_discountRate}</label>--%>
-<%--    <label><input name="hotdeal_desc" type="text" value="${request_hotdealDto.request_hotdeal_desc}"/> 핫딜 메뉴 설명--%>
-<%--        : ${request_hotdealDto.request_hotdeal_desc}</label>--%>
-<%--    <label><input name="hotdeal_useDate" type="text" value="${request_hotdealDto.request_hotdeal_useDate}"/> 사용기간--%>
-<%--        : ${request_hotdealDto.request_hotdeal_useDate}</label>--%>
-<%--    <label><input name="hotdeal_eventDuratio" type="text" value="${request_hotdealDto.request_hotdeal_eventDuration}"/>--%>
-<%--        이벤트 기간--%>
-<%--        : ${request_hotdealDto.request_hotdeal_eventDuration}</label>--%>
-<%--    <label><input name="hotdeal_picture" type="text" value="${request_hotdealDto.request_hotdeal_picture}"/>--%>
-<%--        <img src="${request_hotdealDto.request_hotdeal_picture}">--%>
-<%--    </label>--%>
-<%--</form>--%>
-
 <section id="req">
     <div class="container">
         <h1 class="title">핫딜심사</h1>

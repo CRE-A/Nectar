@@ -12,18 +12,18 @@
 
     <select id="selectAll" parameterType="String" resultType="LikelistDto">
         SELECT * from likelist
-        where user_email=#{user_email}
+        where user_email = #{user_email}
     </select>
 
     <select id="selectMyLikeList" parameterType="String" resultType="RestrDto">
         SELECT r.*
         from likelist l inner join restr r on l.restr_NUM = r.restr_NUM
-        where user_email=#{user_email};
+        where user_email = #{user_email};
     </select>
 
     <select id="count" parameterType="int" resultType="int">
         select count(*) from likelist
-        where restr_NUM=${restr_NUM}
+        where restr_NUM = #{restr_NUM}
     </select>
 
     <insert id="insert" parameterType="LikelistDto">

@@ -66,7 +66,7 @@
         <button class="filterBtn">
             <i class="fa-solid fa-sliders"></i>
         </button>
-        <form action="<c:url value="/restr/search?"/>" class="search-form" method="get" onsubmit="return keywordFormCheck(this)">
+        <form action="<c:url value="/restr/search"/>" class="search-form" method="get" onsubmit="return keywordFormCheck(this)">
             <input type="hidden" name="option" value="searchEngine"/>
             <input
                     type="text"

@@ -15,7 +15,7 @@ import project.nectar.service.HotdealService;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+// 이하 MYPAGE 의 BIZ 에 관한 모든 내용
 @Controller
 @RequestMapping("/mypage/biz")
 public class BizController {

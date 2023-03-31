@@ -23,9 +23,9 @@ public class RestrDto {
     private String bizAccount_email;   // 점주의 사업자 계정
     private String biz_reg_num;        // 점주의 사업자 등록번호
     private Integer restr_hotdeal_NUM; // 평상시 : -1 ,  핫딜 이벤트 진행시 : hotdeal_NUM
-    private Integer restr_viewCnt;
-    private Integer restr_reviewCnt;
-    private Integer restr_likeCnt;
+    private Integer restr_viewCnt;     // 조회수
+    private Integer restr_reviewCnt;   // 총 댓글수
+    private Integer restr_likeCnt;     // 총 좋아요 수
 
 
     public RestrDto() {
@@ -51,6 +51,11 @@ public class RestrDto {
         this.restr_category_loc = restr_category_loc;
         this.bizAccount_email = bizAccount_email;
         this.biz_reg_num = biz_reg_num;
+    }
+
+    public RestrDto(Integer restr_NUM, Integer restr_hotdeal_NUM) {
+        this.restr_NUM = restr_NUM;
+        this.restr_hotdeal_NUM = restr_hotdeal_NUM;
     }
 
     public Integer getRestr_NUM() {

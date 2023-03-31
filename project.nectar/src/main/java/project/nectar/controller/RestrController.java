@@ -22,6 +22,7 @@ import project.nectar.service.ReviewService;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+// 이하 맛집리스트 에 관한 모든 내용
 @Controller
 @RequestMapping("/restr")
 public class RestrController {

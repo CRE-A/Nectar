@@ -15,7 +15,7 @@ import project.nectar.service.HotdealService;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+// 이하 Hotdeal page 에 대한 모든 내용
 @Controller
 @RequestMapping("/hotdeal")
 public class HotdealController {

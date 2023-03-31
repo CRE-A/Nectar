@@ -38,6 +38,14 @@ public class HotdealDaoImpl implements HotdealDao {
     }
 
     @Override
+    public int updateSalesVolume(Integer hotdeal_NUM, Integer hotdeal_salesVolume) throws Exception{
+        HotdealDto hotdealDto = new HotdealDto();
+        hotdealDto.setHotdeal_NUM(hotdeal_NUM);
+        hotdealDto.setHotdeal_salesVolume(hotdeal_salesVolume);
+        return session.update(namespace+"updateSalesVolume", hotdealDto);
+    }
+
+    @Override
     public int insert(HotdealDto hotdealDto) throws Exception{
         return session.insert(namespace+"insert", hotdealDto);
     }

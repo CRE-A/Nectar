@@ -131,11 +131,6 @@ public class KakaoService {
 //            userInfo.setUser_picture(user_picture);
 
 
-//            resultMap.put("user_email", user_email);
-//            resultMap.put("user_pwd", user_pwd);
-//            resultMap.put("user_name", user_name);
-//            resultMap.put("user_picture", user_picture);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

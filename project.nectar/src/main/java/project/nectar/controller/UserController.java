@@ -23,6 +23,7 @@ import project.nectar.service.ReviewService;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+// 이하 MYPAGE 의 USER 에 관한 모든 내용
 @Controller
 @RequestMapping("/mypage/user")
 public class UserController {
@@ -38,12 +39,6 @@ public class UserController {
 
     @GetMapping("/main")
     public String UserMyPage(HttpSession session, Model m, Authentication authentication){
-//        String user_email= "";
-//        if(isAuthenticated()){       // 로그인이(인증)이 된 경우
-//            UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-//            user_email = userDetails.getUsername();
-//            System.out.println("user_email = " + user_email);
-//        }
 
         System.out.println("============================================================");
         System.out.println("mypage/user/maim 지나감");

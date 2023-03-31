@@ -12,7 +12,7 @@ import project.nectar.service.HotdealService;
 
 import java.util.HashMap;
 import java.util.List;
-
+// 이하 MYPAGE 의 ADMIN 에 관한 모든 내용
 @Controller
 @RequestMapping("/mypage/admin")
 public class AdminController {

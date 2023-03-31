@@ -1,13 +1,23 @@
 package project.nectar.domain;
 
+
+import java.util.Date;
+
 public class PaymentDto {
     private String imp_uid;
     private String merchant_uid;
-    private String biz_email;
+    private String user_email;       // 구매자
     private String pay_date;
-    private String amount;
+    private String amount;           // 가격
     private String card_no;
     private String refund;
+    private String bizAccount_email; // 판매자
+    private Integer hotdeal_NUM;
+    private Date payment_regdate;
+
+
+    public PaymentDto() {};
+
 
 
     public String getImp_uid() {
@@ -26,12 +36,12 @@ public class PaymentDto {
         this.merchant_uid = merchant_uid;
     }
 
-    public String getBiz_email() {
-        return biz_email;
+    public String getUser_email() {
+        return user_email;
     }
 
-    public void setBiz_email(String biz_email) {
-        this.biz_email = biz_email;
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
     }
 
     public String getPay_date() {
@@ -66,16 +76,43 @@ public class PaymentDto {
         this.refund = refund;
     }
 
+    public String getBizAccount_email() {
+        return bizAccount_email;
+    }
+
+    public void setBizAccount_email(String bizAccount_email) {
+        this.bizAccount_email = bizAccount_email;
+    }
+
+    public Integer getHotdeal_NUM() {
+        return hotdeal_NUM;
+    }
+
+    public void setHotdeal_NUM(Integer hotdeal_NUM) {
+        this.hotdeal_NUM = hotdeal_NUM;
+    }
+
+    public Date getPayment_regdate() {
+        return payment_regdate;
+    }
+
+    public void setPayment_regdate(Date payment_regdate) {
+        this.payment_regdate = payment_regdate;
+    }
+
     @Override
     public String toString() {
         return "PaymentDto{" +
                 "imp_uid='" + imp_uid + '\'' +
                 ", merchant_uid='" + merchant_uid + '\'' +
-                ", biz_email='" + biz_email + '\'' +
+                ", user_email='" + user_email + '\'' +
                 ", pay_date='" + pay_date + '\'' +
                 ", amount='" + amount + '\'' +
                 ", card_no='" + card_no + '\'' +
                 ", refund='" + refund + '\'' +
+                ", bizAccount_email='" + bizAccount_email + '\'' +
+                ", hotdeal_NUM=" + hotdeal_NUM +
+                ", payment_regdate=" + payment_regdate +
                 '}';
     }
 }

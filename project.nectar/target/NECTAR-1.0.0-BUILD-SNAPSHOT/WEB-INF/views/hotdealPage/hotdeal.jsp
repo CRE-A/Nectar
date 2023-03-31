@@ -33,7 +33,7 @@
         <a href="<c:url value='/'/>">  <img src="<c:url value="/images/nectarLogo.png"/>" alt="" class="logo__img" /></a>
     </div>
     <div class="searchBar">
-        <form action="<c:url value="/restr/search?"/>"  class="search-form" method="get">
+        <form action="<c:url value="/restr/search"/>" class="search-form" method="get">
             <button type="button" class="searchBtn" value="검색">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -183,18 +183,18 @@
 
 
 </section>
-<script>
+<script type="text/javascript">
     $(document).ready(function(){
         <%--var pay = <%=bvo.getPay_coupon() %>;--%>
         // console.log(pay);
 
         $("#buy").click(function(e){
 
-            <security:authorize access="isAnonymous()">     // 로그인 안했니?
-                if (!confirm("결재를 진행하기 위해서 로그인이 필요합니다. 로그인 하시겠습니까?")) return;
-                location.href = "<c:url value='/login/login'/> ";
-                return;
-            </security:authorize>
+<%--            <security:authorize access="isAnonymous()">     // 로그인 안했니?--%>
+<%--                if (!confirm("결재를 진행하기 위해서 로그인이 필요합니다. 로그인 하시겠습니까?")) return;--%>
+<%--                location.href = "<c:url value='/login/login'/> ";--%>
+<%--                return;--%>
+<%--            </security:authorize>--%>
 
 
 
@@ -204,54 +204,79 @@
 
             //결제요청
             IMP.request_pay({
-                //name과 amout만있어도 결제 진행가능
-                pg : 'kakaopay', //pg사 선택 (kakao, kakaopay 둘다 가능)
+                pg : 'kakaopay',
                 pay_method: 'card',
                 merchant_uid : 'merchant_' + new Date().getTime(),
-                name : '결제테스트', // 상품명
-                amount : 100,       // 가격
+                name : '${hotdealDto.restr_menu_food}', // 상품명
+                amount : ${hotdealDto.hotdeal_price},       // 가격
                 buyer_email : '${UserDto.user_email}',
                 buyer_name : '${UserDto.user_name}',
                 buyer_tel : '${UserDto.user_phone}',  //필수항목
-                //결제완료후 이동할 페이지 kko나 kkopay는 생략 가능
-                m_redirect_url : 'https://localhost:8080/nectar/pay/success'
+                // m_redirect_url : 'https://localhost:8080/nectar/pay/process' // 카카오페이는 콜백 방식만 가능하네. 이거안됨
             }, function(rsp){
                 if(rsp.success){//결제 성공시
                     var msg = '결제가 완료되었습니다';
                     var result = {
                         "imp_uid" : rsp.imp_uid,
                         "merchant_uid" : rsp.merchant_uid,
-                        "biz_email" : '${hotdealDto.bizAccount_email}',
+                        "user_email" : '${UserDto.user_email}',
                         "pay_date" : new Date().getTime(),
                         "amount" : rsp.paid_amount,
                         "card_no" : rsp.apply_num,
                         "refund" : 'payed'
                     }
-                    console.log("결제성공 " + msg);
+                    console.log("결제성공 콘솔 : " + msg);
                     console.log("result " + result);
 
+
+
+
                     $.ajax({
-                        url : '/pay/proceed',
                         type :'POST',
-                        data : JSON.stringify(result,
-                            ['imp_uid', 'merchant_uid', 'biz_email',
-                                'pay_date', 'amount', 'card_no', 'refund']),
                         contentType:'application/json;charset=utf-8',
+                        url : '/nectar/pay/test',
+                        <%--url : '<c:url value= '/pay/process'/>',--%>
+                        data : JSON.stringify(result),
                         dataType: 'json', //서버에서 보내줄 데이터 타입
+
+
+
                         success: function(res){
 
-                            // if(res == 1){
-                            //     console.log("추가성공");
-                            //     pay += 5;
-                            //     $('#pay_coupon').html(pay);
-                            // }else{
-                            //     console.log("Insert Fail!!!");
-                            // }
+                            if(res == 1){
+                                console.log("추가성공");
+                                // pay += 5;
+                                // $('#pay_coupon').html(pay);
+                            }else{
+                                console.log("Insert Fail!!!");
+                            }
                         },
                         error:function(){
                             console.log("Insert ajax 통신 실패!!!");
                         }
                     }) //ajax
+
+                    <%--$.ajax({--%>
+                    <%--    type :'POST',--%>
+                    <%--    contentType:'application/json;charset=utf-8',--%>
+                    <%--    &lt;%&ndash;url : '<c:url value= '/pay/process'/>',&ndash;%&gt;--%>
+                    <%--    url : '/nectar/insertPayCoupon.do',--%>
+                    <%--    data : JSON.stringify(result),--%>
+                    <%--    dataType: 'json', //서버에서 보내줄 데이터 타입--%>
+                    <%--    success: function(res){--%>
+
+                    <%--        if(res == 1){--%>
+                    <%--            console.log("추가성공");--%>
+                    <%--            // pay += 5;--%>
+                    <%--            // $('#pay_coupon').html(pay);--%>
+                    <%--        }else{--%>
+                    <%--            console.log("Insert Fail!!!");--%>
+                    <%--        }--%>
+                    <%--    },--%>
+                    <%--    error:function(){--%>
+                    <%--        console.log("Insert ajax 통신 실패!!!");--%>
+                    <%--    }--%>
+                    <%--}) //ajax--%>
 
                 }
                 else{//결제 실패시

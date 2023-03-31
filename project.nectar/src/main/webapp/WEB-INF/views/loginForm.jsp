@@ -23,7 +23,7 @@
         <a href="<c:url value='/'/>"> <img src="<c:url value="/images/nectarLogo.png"/>" alt="" class="logo__img"/></a>
     </div>
     <div class="searchBar">
-        <form action="" class="search-form" method="get">
+        <form action="<c:url value="/restr/search"/>" class="search-form" method="get">
             <button type="button" class="searchBtn" value="검색">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -88,7 +88,7 @@
 <%--                    <a href="<c:url value=""/>">이메일찾기 </a>--%>
 <%--                </button>--%>
                 <button>
-                    <a href="<c:url value=""/>">비밀번호찾기 </a>
+                    <a href="<c:url value="/register/findPwd"/>">비밀번호찾기 </a>
                 </button>
 
 

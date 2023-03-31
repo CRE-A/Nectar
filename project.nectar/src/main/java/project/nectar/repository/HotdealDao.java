@@ -15,5 +15,7 @@ public interface HotdealDao {
 
     int update(HotdealDto hotdealDto) throws Exception;
 
+    int updateSalesVolume(Integer hotdeal_NUM, Integer hotdeal_salesVolume) throws Exception;
+
     int insert(HotdealDto hotdealDto) throws Exception;
 }

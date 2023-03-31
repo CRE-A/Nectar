@@ -39,6 +39,15 @@
         WHERE hotdeal_NUM = #{hotdeal_NUM}
     </update>
 
+
+    <update id="updateSalesVolume" parameterType="HotdealDto">
+        UPDATE hotdeal
+        SET hotdeal_salesVolume   = #{hotdeal_salesVolume},
+            hotdeal_update   = now()
+        WHERE hotdeal_NUM = #{hotdeal_NUM}
+    </update>
+
+
     <insert id="insert" parameterType="HotdealDto">
         INSERT INTO hotdeal
         (restr_NUM, restr_name, restr_category_loc, restr_menu_NUM, restr_menu_food,

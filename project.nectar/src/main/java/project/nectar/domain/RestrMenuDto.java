@@ -22,6 +22,11 @@ public class RestrMenuDto {
         this.restr_menu_desc = restr_menu_desc;
     }
 
+    public RestrMenuDto(Integer restr_menu_NUM, Integer restr_menu_hotdeal_NUM) {
+        this.restr_menu_NUM = restr_menu_NUM;
+        this.restr_menu_hotdeal_NUM = restr_menu_hotdeal_NUM;
+    }
+
     public Integer getRestr_menu_NUM() {
         return restr_menu_NUM;
     }
