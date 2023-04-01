@@ -499,15 +499,6 @@
                                 </form>
 
 
-                                    <%--                                            &lt;%&ndash;            &ndash;%&gt;--%>
-                                    <%--                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
-                                    <%--                                            &lt;%&ndash;            &ndash;%&gt;--%>
-                                    <%--                                        <input name="restr_NUM" type="hidden" value="${restrMenuDto.restr_NUM}">--%>
-                                    <%--                                        <input name="restr_menu_NUM" type="hidden" value="${restrMenuDto.restr_menu_NUM}">--%>
-                                    <%--                                        <input name="restr_menu_food" type="text" required readonly value=" ${restrMenuDto.restr_menu_food}">--%>
-                                    <%--                                        <input name="restr_menu_price" type="text" required readonly value="${restrMenuDto.restr_menu_price}">--%>
-                                    <%--                                        <input name="restr_menu_desc" type="text" required readonly value=" ${restrMenuDto.restr_menu_desc}">--%>
-                                    <%--                                 --%>
                             </div>
 
                         </c:forEach>
@@ -621,54 +612,22 @@
 <%-- / Global Page--%>
 
 
-<%--<div id="MyRestrantlist">--%>
-<%--    <h3>BIZ가 운영중인 레스토랑 </h3>--%>
-<%--    ${restrDto.restr_NUM} </br>--%>
-<%--    ${restrDto.restr_name}</br>--%>
-<%--    ${restrDto.restr_location}</br>--%>
-<%--    ${restrDto.restr_phone}</br>--%>
-<%--    ${restrDto.restr_time}</br>--%>
-<%--    ${restrDto.restr_star}</br>--%>
-<%--    ${restrDto.restr_foodType}</br>--%>
-<%--    ${restrDto.restr_cost}</br>--%>
-<%--    ${restrDto.restr_parking}</br>--%>
-<%--    ${restrDto.restr_tag}</br>--%>
-<%--    ${restrDto.restr_menu}</br>--%>
-<%--    ${restrDto.restr_cost}</br>--%>
-<%--    ${restrDto.restr_menu}</br>--%>
-<%--    ${restrDto.restr_picture}</br>--%>
-<%--    ${restrDto.restr_viewCnt}</br>--%>
-<%--    ${restrDto.restr_reviewCnt}</br>--%>
-<%--    ${restrDto.restr_likeCnt}</br>--%>
-<%--    ----------------------------------</br>--%>
-<%--</div>--%>
 
 
-<%--<br id="BIZ_info">--%>
-<%--<h3>BIZ 에 대한 정보 </h3>--%>
-<%--${bizAccountDto.bizAccount_email}--%>
-<%--${bizAccountDto.bizAccount_pwd}--%>
-<%--${bizAccountDto.bizAccount_name}--%>
-<%--${bizAccountDto.bizAccount_phone}--%>
-<%--${bizAccountDto.bizAccount_picture}--%>
-<%--${bizAccountDto.bizAccount_regdate}--%>
-<%--${bizAccountDto.bizAccount_state_code} </br>--%>
-<%--</div>--%>
 
 
-<%-- QNA TEST    --%>
-<%--<h2>QNA TEST</h2>--%>
-<%--<form id="form" action="<c:url value="/mypage/biz/QNA/write"/>" method="post">--%>
-<%--    <input class="detail" type="text" name="qna_title" value="나에게 질문하는 것을 두려워 말라" autofocus>--%>
-<%--    <input class="detail" type="text" name="qna_content" value="인태 최고" autofocus>--%>
-<%--    <input class="detail" type="text" name="qna_picture" value="핵 깜찍한 인태 사진" autofocus>--%>
-<%--    <input class="detail" type="text" name="qna_writer" value="Biz_1@google.com"--%>
-<%--           autofocus> &lt;%&ndash;qna_writer = ${bizAccountDto.bizAccount_email}}&ndash;%&gt;--%>
-<%--    <input class="detail" type="text" name="qna_name" value="name1"--%>
-<%--           autofocus> &lt;%&ndash;qna_name   = ${bizAccountDto.bizAccount_name}}&ndash;%&gt;--%>
-<%--    <button id="loginBtn">QNA 등록</button>--%>
-<%--</form>--%>
-<%--    --%>
+<%----%>
+<%--사용자가 구매한 모든 구매내역(핫딜)--%>
+<section>
+    <c:forEach var="MyPaymentList" items="${MyPaymentList}">
+
+    </c:forEach>
+</section>
+<%----%>
+
+
+
+
 
 
 <script>

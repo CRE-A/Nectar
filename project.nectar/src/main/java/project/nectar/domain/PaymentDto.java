@@ -18,7 +18,17 @@ public class PaymentDto {
 
     public PaymentDto() {};
 
-
+    public PaymentDto(String imp_uid, String merchant_uid, String user_email, String pay_date, String amount, String card_no, String refund, String bizAccount_email, Integer hotdeal_NUM) {
+        this.imp_uid = imp_uid;
+        this.merchant_uid = merchant_uid;
+        this.user_email = user_email;
+        this.pay_date = pay_date;
+        this.amount = amount;
+        this.card_no = card_no;
+        this.refund = refund;
+        this.bizAccount_email = bizAccount_email;
+        this.hotdeal_NUM = hotdeal_NUM;
+    }
 
     public String getImp_uid() {
         return imp_uid;

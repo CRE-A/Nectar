@@ -41,14 +41,14 @@ public class UserDaoImplTest {
     }
 
 
-    @Test
-    public void insert_Data()throws Exception{
-        userDao.deleteAll();
-//        assertTrue(userDao.count()==500);
-
-        for (Integer i = 1; i <= 500; i++) {
-            UserDto userDto = new UserDto("User_"+i+"@google.com","1234","name"+i,"010-1234-567"+i,"as124dfsdf134");
-            userDao.insert(userDto);
-        }
-    }
+//    @Test
+//    public void insert_Data()throws Exception{
+//        userDao.deleteAll();
+////        assertTrue(userDao.count()==500);
+//
+//        for (Integer i = 1; i <= 500; i++) {
+//            UserDto userDto = new UserDto("User_"+i+"@google.com","1234","name"+i,"010-1234-567"+i,"as124dfsdf134");
+//            userDao.insert(userDto);
+//        }
+//    }
 }

@@ -37,7 +37,6 @@ public class PaymentServiceImpl implements PaymentService {
     //  4.1 [restr 테이블]에 restr_hotdeal_NUM= -1 로 update          >> restrList.jsp 에서 '핫딜 진행중'이라는 알림이 사라진다.
     //  4.2 [restr_menu 테이블]에 restr_menu_hotdeal_NUM = -1 로 update   >> restr.jsp 에서 '핫딜로 이동하기'라는 알림이 사라진다.
 
-
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer insert(PaymentDto paymentDto) throws Exception {
@@ -57,8 +56,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
 
-
-    // cancel() : 결제를 취소한다?
+    // Delete() : 결제를 취소한다(환불요청)?
     //1. [payment 테이블]에서 해당 결제 내역을 delete
     //2. [payment 테이블]에 (hotdeal_NUM)번에 해당하는 총 결제 수 count(*)를 select
     //    핫딜의 총 결제 수(count(*)) = 핫딜 총 판매량(salesVolume)

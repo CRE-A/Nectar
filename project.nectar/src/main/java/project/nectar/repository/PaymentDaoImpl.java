@@ -22,12 +22,12 @@ public class PaymentDaoImpl implements PaymentDao {
     }
 
     @Override
-    public List<HotdealPlusDto> PaymentAndHotdeal_byUser(String user_email) throws Exception{
+    public List<HotdealPlusDto> select_PaymentAndHotdeal_byUser(String user_email) throws Exception{
         return session.selectList(namespace+"select_PaymentAndHotdeal_byUser", user_email);
     }
 
     @Override
-    public List<HotdealPlusDto> PaymentAndHotdeal_byBiz(String bizAccount_email) throws Exception{
+    public List<HotdealPlusDto> select_PaymentAndHotdeal_byBiz(String bizAccount_email) throws Exception{
         return session.selectList(namespace+"select_PaymentAndHotdeal_byBiz", bizAccount_email);
     }
 

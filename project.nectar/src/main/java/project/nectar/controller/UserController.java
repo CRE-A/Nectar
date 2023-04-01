@@ -61,7 +61,7 @@ public class UserController {
             // 사용자(User)에 대한 data
 
 
-            List<HotdealPlusDto> MyPaymentList = paymentDao.PaymentAndHotdeal_byUser(user_email);
+            List<HotdealPlusDto> MyPaymentList = paymentDao.select_PaymentAndHotdeal_byUser(user_email);
             m.addAttribute("MyPaymentList",MyPaymentList);
 //             사용자(User)가 구매한 모든 구매내역에(핫딜) 대한 data
 
