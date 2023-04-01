@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import project.nectar.domain.PaymentDto;
 import project.nectar.service.PaymentService;
 
+
 @Controller
 @RequestMapping("/pay")
 public class PaymentController {
@@ -17,12 +18,12 @@ public class PaymentController {
 
     @PostMapping("/process")
 //    @ResponseBody
-    public String pay(@RequestBody PaymentDto paymentDto, Model m) {
+    public String pay(@RequestBody PaymentDto paymentDto) {
 
 
         try {
             paymentService.insert(paymentDto);
-            m.addAttribute("paymentDto",paymentDto);
+//            m.addAttribute("paymentDto",paymentDto);
 
         } catch (Exception e) {
             e.printStackTrace();

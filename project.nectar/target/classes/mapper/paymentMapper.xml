@@ -12,9 +12,6 @@
     </select>
 
 
-
-
-
     <select id="select_PaymentAndHotdeal_byUser" parameterType="String" resultType="HotdealPlusDto">
         SELECT h.*, p.*
         from payment p inner join hotdeal h on p.hotdeal_NUM = h.hotdeal_NUM
@@ -26,7 +23,6 @@
         from payment p inner join hotdeal h on p.hotdeal_NUM = h.hotdeal_NUM
         where p.bizAccount_email = #{bizAccount_email};
     </select>
-
 
 
     <insert id="insert" parameterType="PaymentDto">
@@ -41,7 +37,6 @@
         delete from payment
         where merchant_uid = #{merchant_uid} AND user_email = #{user_email} AND pay_date = #{pay_date}
     </delete>
-
 
 
 
