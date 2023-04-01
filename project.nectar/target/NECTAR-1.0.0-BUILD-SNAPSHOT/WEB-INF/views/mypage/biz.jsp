@@ -617,10 +617,21 @@
 
 
 <%----%>
-<%--사용자가 구매한 모든 구매내역(핫딜)--%>
+<%-- 사업자가 진행한 핫딜의 결제정보(payment)에 대한 data--%>
 <section>
-    <c:forEach var="MyPaymentList" items="${MyPaymentList}">
-
+    <h2>사업자가 진행한 핫딜의 결제정보(payment)에 대한 data</h2>
+    <c:forEach var="PaymentList" items="${PaymentList}">
+        ${PaymentList.imp_uid}
+        ${PaymentList.merchant_uid}
+        ${PaymentList.user_email}
+        ${PaymentList.pay_date}
+        ${PaymentList.restr_NUM}
+        ${PaymentList.restr_name}
+        ${PaymentList.restr_category_loc}
+        ${PaymentList.restr_menu_food}
+        ${PaymentList.hotdeal_picture}
+        ${PaymentList.hotdeal_useDate}
+        ${PaymentList.hotdeal_eventDuration}
     </c:forEach>
 </section>
 <%----%>

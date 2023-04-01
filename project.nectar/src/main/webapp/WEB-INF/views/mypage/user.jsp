@@ -275,8 +275,19 @@
 <%--//             사용자(User)가 구매한 모든 구매내역에(핫딜) 대한 data   --%>
 <section>
     <div>
+        <h2>사용자(User)가 구매한 핫딜 결제정보(구매내역)</h2>
         <c:forEach var="MyPaymentList" items="${MyPaymentList}">
-
+            ${MyPaymentList.imp_uid}
+            ${MyPaymentList.merchant_uid}
+            ${MyPaymentList.user_email}
+            ${MyPaymentList.pay_date}
+            ${MyPaymentList.restr_NUM}
+            ${MyPaymentList.restr_name}
+            ${MyPaymentList.restr_category_loc}
+            ${MyPaymentList.restr_menu_food}
+            ${MyPaymentList.hotdeal_picture}
+            ${MyPaymentList.hotdeal_useDate}
+            ${MyPaymentList.hotdeal_eventDuration}
         </c:forEach>
     </div>
 </section>
