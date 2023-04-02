@@ -25,8 +25,7 @@ public class QNAController {
 
 
     Authentication authentication;
-    UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-    String writer = userDetails.getUsername();
+
 
 
 
@@ -48,8 +47,9 @@ public class QNAController {
 
 
     @GetMapping("/user/QNA/read")
-    public String ReadQNA_user(Integer qna_NUM, Model m) {
-
+    public String ReadQNA_user(Integer qna_NUM, Model m, Authentication authentication) {
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        String writer = userDetails.getUsername();
 
         try {
             QNADto qnaDto = qnaDao.selectByWriter(qna_NUM, writer);
@@ -86,8 +86,9 @@ public class QNAController {
     }
 
     @GetMapping("/biz/QNA/read")
-    public String ReadQNA_biz(Integer qna_NUM, Model m) {
-
+    public String ReadQNA_biz(Integer qna_NUM, Model m, Authentication authentication) {
+        UserDetails userDetail = (UserDetails)authentication.getPrincipal();
+        String writer = userDetail.getUsername();
 
         try {
             QNADto qnaDto = qnaDao.selectByWriter(qna_NUM, writer);
