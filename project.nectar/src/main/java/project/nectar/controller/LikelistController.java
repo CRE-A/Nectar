@@ -53,7 +53,7 @@ public class LikelistController {
         }
 
         return "redirect:/mypage/user/main";
-    }  // 이건 나중에 /mypage/user 로 위치변경 가능
+    }
 
 
 

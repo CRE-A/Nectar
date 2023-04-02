@@ -615,6 +615,26 @@
 
 
 
+<%----%>
+<%--// 사업자가 요청/문의한 QNA 에 대한 DATA--%>
+<section>
+    <h2>사업자가 요청/문의한 QNA 에 대한 DATA</h2>
+    <c:forEach var="QNADto" items="${QNADto}">
+        ${QNADto.qna_NUM}
+        ${QNADto.qna_title}
+        ${QNADto.qna_content}
+        ${QNADto.qna_picture}
+        ${QNADto.qna_regdate}
+        ${QNADto.qna_writer}
+        ${QNADto.qna_name}
+    </c:forEach>
+</section>
+<%----%>
+
+
+
+
+
 
 <%----%>
 <%-- 사업자가 진행한 핫딜의 결제정보(payment)에 대한 data--%>

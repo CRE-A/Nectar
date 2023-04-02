@@ -5,9 +5,16 @@
 <mapper namespace="project.nectar.repository.QNAMapper">
 
 
-    <select id="selectAll" resultType="QNADto">
+    <select id="selectAll"  resultType="QNADto">
         SELECT *
         FROM qna
+        ORDER BY qna_regdate DESC;
+    </select>
+
+    <select id="selectAllByWriter" parameterType="String" resultType="QNADto">
+        SELECT *
+        FROM qna
+        WHERE qna_writer = #{qna_writer}
         ORDER BY qna_regdate DESC;
     </select>
 
@@ -17,6 +24,11 @@
         WHERE qna_NUM = #{qna_NUM}
     </select>
 
+    <select id="selectByWriter" parameterType="QNADto" resultType="QNADto">
+        SELECT *
+        FROM qna
+        WHERE qna_NUM = #{qna_NUM} AND qna_writer = #{qna_writer}
+    </select>
 
     <insert id="insert" parameterType="QNADto">
         INSERT INTO qna
@@ -24,5 +36,6 @@
         VALUES
             (#{qna_title}, #{qna_content}, #{qna_picture}, now(), #{qna_writer}, #{qna_name})
     </insert>
+
 
 </mapper>

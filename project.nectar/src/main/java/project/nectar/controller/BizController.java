@@ -30,13 +30,12 @@ public class BizController {
     @Autowired
     Request_RestrDao request_restrDao;
     @Autowired
-    Request_RestrMenuDao request_restrMenuDao;
-    @Autowired
     Request_HotdealDao request_hotdealDao;
     @Autowired
     RestrMenuDao restrMenuDao;
     @Autowired
     PaymentDao paymentDao;
+
 
 
     @GetMapping("/main")
@@ -67,6 +66,10 @@ public class BizController {
             m.addAttribute("PaymentList",PaymentList);
             // 사업자가 진행한 핫딜의 결제정보(payment)에 대한 data
 
+            List<QNADto> QNADto = qnaDao.selectAllByWriter(Biz_email);
+            m.addAttribute("QNADto",QNADto);
+            // 사업자가 요청/문의한 QNA 에 대한 data
+
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/";
@@ -91,25 +94,7 @@ public class BizController {
     }
 
 
-
-    @PostMapping("/QNA/write")
-    public String QNA(QNADto qnaDto, RedirectAttributes rattr, Model m){
-
-        try {
-            qnaDao.insert(qnaDto);
-        } catch (Exception e) {
-            e.printStackTrace();
-            rattr.addFlashAttribute("msg","QNA_WRT_ERR");
-            return "redirect:/mypage/biz/main";
-
-        }
-
-        m.addAttribute("qnaDto",qnaDto);
-        return "mypage/successPage/qnaWrtOk";
-    }
-
-
-    @PostMapping("/restr/write")
+    @PostMapping("/reqRestr/write")
     public String registerRestaurant(Request_RestrDto request_restrDto, RedirectAttributes rattr, Model m){
 
         try {
@@ -124,9 +109,8 @@ public class BizController {
         return "mypage/successPage/restrWrtOk";
     }
 
-    @PostMapping("/hotdeal/write")
+    @PostMapping("/reqHotdeal/write")
     public String registerHotdeal(Request_HotdealDto request_hotdealDto, RedirectAttributes rattr, Model m){
-
 
         try {
             request_hotdealDao.insert(request_hotdealDto);          // 핫딜 정보 작성 후 (관리자에게) 심사요청
@@ -139,6 +123,7 @@ public class BizController {
         m.addAttribute("request_hotdealDto",request_hotdealDto);
         return "mypage/successPage/hotdealWrtOk";
     }
+
 
     @PostMapping("/restrMenu/write")
     public String registerRestrMenu(RestrMenuDto restrMenuDto, Model m, String tab){
@@ -154,6 +139,7 @@ public class BizController {
         return "redirect:/mypage/biz/main";
     } // 레스토랑 메뉴 등록
 
+
     @PostMapping("/restrMenu/modify")
     public String modifyRestrMenu(RestrMenuDto restrMenuDto, Model m, String tab){
         try {
@@ -163,6 +149,7 @@ public class BizController {
         }
         return "redirect:/mypage/biz/main";
     }
+
 
     @PostMapping("/restrMenu/delete")
     public String deleteRestrMenu(Integer restr_menu_NUM, Model m, String tab){

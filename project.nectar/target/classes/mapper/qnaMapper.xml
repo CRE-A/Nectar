@@ -5,11 +5,27 @@
 <mapper namespace="project.nectar.repository.QNAMapper">
 
 
-    <select id="selectAll" resultType="QNADto">
+    <select id="selectAll"  resultType="QNADto">
         SELECT *
         FROM qna
         ORDER BY qna_regdate DESC;
     </select>
+
+
+    <select id="selectAllByWriter" parameterType="String" resultType="QNADto">
+        SELECT *
+        FROM qna
+        WHERE qna_writer = #{qna_writer}
+        ORDER BY qna_regdate DESC;
+    </select>
+
+
+<!--    <select id="select_ForUser" parameterType="int" resultType="QNADto">-->
+<!--        SELECT q.*,c.qna_comment-->
+<!--        FROM qna q inner join qna_comment c on q.qna_NUM=c.qna_NUM-->
+<!--        WHERE q.qna_NUM = #{qna_NUM}-->
+<!--    </select>-->
+
 
     <select id="select" parameterType="int" resultType="QNADto">
         SELECT *
@@ -17,12 +33,12 @@
         WHERE qna_NUM = #{qna_NUM}
     </select>
 
-
     <insert id="insert" parameterType="QNADto">
         INSERT INTO qna
         (qna_title, qna_content, qna_picture, qna_regdate, qna_writer, qna_name)
         VALUES
             (#{qna_title}, #{qna_content}, #{qna_picture}, now(), #{qna_writer}, #{qna_name})
     </insert>
+
 
 </mapper>

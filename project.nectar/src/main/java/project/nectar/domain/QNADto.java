@@ -5,11 +5,14 @@ import java.util.Objects;
 public class QNADto {
     private Integer qna_NUM;
     private String qna_title;
-    private String qna_content;
+    private String qna_content;    //  문의 내용
     private String qna_picture;
     private String qna_regdate;
     private String qna_writer;
     private String qna_name;
+    private String qna_comment;     // 문의 사항의 답글
+
+
 
     public QNADto() {this("title","content","no_pic");}
     public QNADto(String qna_title, String qna_content, String qna_picture) {
@@ -74,6 +77,14 @@ public class QNADto {
         this.qna_name = qna_name;
     }
 
+    public String getQna_comment() {
+        return qna_comment;
+    }
+
+    public void setQna_comment(String qna_comment) {
+        this.qna_comment = qna_comment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,6 +108,7 @@ public class QNADto {
                 ", qna_regdate='" + qna_regdate + '\'' +
                 ", qna_writer='" + qna_writer + '\'' +
                 ", qna_name='" + qna_name + '\'' +
+                ", qna_comment='" + qna_comment + '\'' +
                 '}';
     }
 }

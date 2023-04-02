@@ -283,9 +283,7 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         <c:forEach var="QNADto" items="${QNADto}">
-
                             <tr>
                                 <td class="no"> ${QNADto.qna_NUM}</td>
                                 <td class="qnaTitle"><a
@@ -294,6 +292,9 @@
                                 <td class="writer">${QNADto.qna_name}</td>
 
                             </tr>
+                            </br>
+
+
                         </c:forEach>
 
                         </tbody>

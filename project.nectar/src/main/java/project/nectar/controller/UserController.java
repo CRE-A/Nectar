@@ -60,10 +60,13 @@ public class UserController {
             m.addAttribute("userDto",userDto);
             // 사용자(User)에 대한 data
 
-
             List<HotdealPlusDto> MyPaymentList = paymentDao.select_PaymentAndHotdeal_byUser(user_email);
             m.addAttribute("MyPaymentList",MyPaymentList);
-//             사용자(User)가 구매한 핫딜 결제정보(구매내역) 대한 data
+            // 사용자(User)가 구매한 핫딜 결제정보(구매내역) 대한 data
+
+            List<QNADto> QNADto = qnaDao.selectAllByWriter(user_email);
+            m.addAttribute("QNADto",QNADto);
+            // 사용자(User)가 요청/문의한 QNA 에 대한 data
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,36 +90,16 @@ public class UserController {
     }
 
 
-    @PostMapping("/QNA/write")
-    public String QNA(QNADto qnaDto, RedirectAttributes rattr, Model m){
-
-        try {
-            qnaDao.insert(qnaDto);
-        } catch (Exception e) {
-            e.printStackTrace();
-            rattr.addFlashAttribute("msg","QNA_WRT_ERR");
-            return "redirect:/mypage/user/main";
-
-        }
-
-        m.addAttribute("qnaDto",qnaDto);
-        return "mypage/successPage/qnaWrtOk";
-    }
 
 
-    private boolean isAuthenticated() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || AnonymousAuthenticationToken.class.
-                isAssignableFrom(authentication.getClass())) {
-            return false;
-        }
-        return authentication.isAuthenticated();
-    }
 
-    @GetMapping("/home")
-    public String home(){
-        return "redirect:/";
-    }
-
+//    private boolean isAuthenticated() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication == null || AnonymousAuthenticationToken.class.
+//                isAssignableFrom(authentication.getClass())) {
+//            return false;
+//        }
+//        return authentication.isAuthenticated();
+//    }
 
 }

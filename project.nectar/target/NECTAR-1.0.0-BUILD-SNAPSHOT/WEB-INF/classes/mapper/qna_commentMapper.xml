@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.nectar.repository.QnaCommentMapper">
+
+    <select id="selectAll" parameterType="int" resultType="QNADto">
+        SELECT qna_comment
+        FROM qna_comment
+        WHERE qna_NUM=#{qna_NUM};
+        Order by qna_comment_regdate DESC;
+    </select>
+
+    <insert id="insert" parameterType="map">
+        Insert INTO qna_comment
+            (qna_NUM, qna_comment)
+        VALUES
+            (#{qna_NUM},#{qna_comment})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+    DELETE FROM qna_comment
+    WHERE qna_comment_NUM = #{qna_comment_NUM}
+    </delete>
+
+
+</mapper>

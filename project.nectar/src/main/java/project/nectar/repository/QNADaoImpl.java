@@ -19,13 +19,27 @@ public class QNADaoImpl implements QNADao {
         return session.selectList(namespace+"selectAll");
     }
 
+
+    @Override
+    public List<QNADto> selectAllByWriter(String qna_writer){
+        return session.selectList(namespace+"selectAllByWriter", qna_writer);
+    }
+
     @Override
     public QNADto select(Integer qna_NUM){
         return session.selectOne(namespace+"select",qna_NUM);
     }
 
     @Override
-    public int insert(QNADto qnaDto){
+    public QNADto selectByWriter(Integer qna_NUM, String qna_writer){
+        QNADto qnaDto = new QNADto();
+        qnaDto.setQna_NUM(qna_NUM);
+        qnaDto.setQna_writer(qna_writer);
+        return session.selectOne(namespace+"selectByWriter",qnaDto);
+    }
+
+    @Override
+    public Integer insert(QNADto qnaDto){
         return session.insert(namespace+"insert",qnaDto);
     }
 

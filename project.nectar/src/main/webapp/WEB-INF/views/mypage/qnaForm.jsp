@@ -78,6 +78,15 @@
     <section id="content">
         ${qnaDto.qna_content}
     </section>
+
+    <%--form - input 을 이용해서 관리자가 작성한 QNA 의 COMMENT(답변)을     --%>
+    <form  action="<c:url value="/mypage/admin/QNA/addComment"/>" method="post" >
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="hidden" name="qna_NUM" value="${qnaDto.qna_NUM}">
+        <input type="text" name="qna_comment" placeholder="답변을 입력하세요." value="${qnaDto.qna_comment}">
+        <button> 답변 등록</button>
+    </form>
+
     <footer>
         <div class="judge">
             <a href="<c:url value='/mypage/admin/main'/>"><button class="listBtn">목록</button></a>

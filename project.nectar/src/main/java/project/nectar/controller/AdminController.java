@@ -34,6 +34,8 @@ public class AdminController {
     RestrMenuDao restrMenuDao;
     @Autowired
     HotdealService hotdealService;
+    @Autowired
+    QnaCommentDao qnaCommentDao;
 
 
     @GetMapping("/main")
@@ -63,6 +65,9 @@ public class AdminController {
             m.addAttribute("QNADto",QNADto);
             // 요청/문의사항을 담은 QNA 에 대한 data
 
+
+            //ADMIN도 결제 정보에 대한 DATA를 가지고 있어야할 듯
+
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/";
@@ -72,7 +77,7 @@ public class AdminController {
     }
 
 
-    @GetMapping("/restr/read")
+    @GetMapping("/reqRestr/read")
     public String ReadRestr(Integer request_restr_NUM, Model m){
 
         System.out.println("request_restr_NUM = " + request_restr_NUM);
@@ -90,7 +95,7 @@ public class AdminController {
     }
 
 
-    @PostMapping("/restr/register")
+    @PostMapping("/reqRestr/register")
     public String register(Integer request_restr_NUM, RestrDto restrDto, RestrMenuDto restrMenuDto){
 
         try {
@@ -106,7 +111,7 @@ public class AdminController {
         return "redirect:/mypage/admin/main"; // + 사업자에게 등록되었다고 메세지 가게 해야지
     }
 
-    @GetMapping("/restr/deny")
+    @GetMapping("/reqRestr/deny")
     public String RestrDenied(){
         // ???? 아무일도 일어나지 않음.
         //// + 사업자에게 거절 되었다고 메세지 가게 해야지
@@ -114,7 +119,7 @@ public class AdminController {
     }
 
 
-    @GetMapping("/hotdeal/read")
+    @GetMapping("/reqHotdeal/read")
     public  String ReadHotdeal(Integer request_hotdeal_NUM, Model m) {
 
         Request_HotdealDto request_hotdealDto = request_hotdealDao.select(request_hotdeal_NUM);
@@ -126,7 +131,7 @@ public class AdminController {
     }
 
 
-    @PostMapping("/hotdeal/register")
+    @PostMapping("/reqHotdeal/register")
     public String register(HotdealDto hotdealDto) {
 
         try {
@@ -139,23 +144,13 @@ public class AdminController {
         return "redirect:/mypage/admin/main"; // + 사업자에게 등록되었다고 메세지 가게 해야지
     }
 
-    @GetMapping("/hotdeal/deny")
+    @GetMapping("/reqHotdeal/deny")
     public String HotdealDenied() {
         // ???? 아무일도 일어나지 않음.
         //// + 사업자에게 거절 되었다고 메세지 가게 해야지
         return "redirect:/mypage/admin/main";
     }
 
-    @GetMapping("/QNA/read")
-    public String ReadQNA(Integer qna_NUM, Model m) {
-
-        QNADto qnaDto = qnaDao.select(qna_NUM);
-        m.addAttribute("qnaDto",qnaDto);
-        // User, BizAccount 가 문의 한 Q&A 에 대한 data
-
-        return "mypage/qnaForm";
-
-    }
 
     @PostMapping("/profile/delete")
     public String deleteAccount(String user_email){
@@ -169,6 +164,9 @@ public class AdminController {
     // -1 : 댓글 금지,
     // -2 : 결제 금지,
 
+    // b_state_code
+    // ~
+
     @PostMapping("/account/Management")
     public String accountManagement(UserDto userDto){
         userDao.updateStateCode(userDto);
@@ -181,15 +179,6 @@ public class AdminController {
 //        return "redirect:/mypage/admin/main";
 //    }
 }
-
-
-
-
-
-
-
-
-
 
 
 //    @PostMapping("/admin/stateCode")

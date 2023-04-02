@@ -7,7 +7,11 @@ import java.util.List;
 public interface QNADao {
     List<QNADto> selectAll();
 
+    List<QNADto> selectAllByWriter(String qna_writer);
+
     QNADto select(Integer qna_NUM);
 
-    int insert(QNADto qnaDto);
+    QNADto selectByWriter(Integer qna_NUM, String qna_writer);
+
+    Integer insert(QNADto qnaDto);
 }
