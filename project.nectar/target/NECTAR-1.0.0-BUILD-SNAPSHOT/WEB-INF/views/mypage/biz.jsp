@@ -264,7 +264,7 @@
         <div class="content index">
             <h1>매장 등록 필수 정보 입력 ✏️</h1>
             <div class="container item">
-                <form id="" action="<c:url value='/mypage/biz/restr/write'/>" method="post">
+                <form id="" action="<c:url value='/mypage/biz/reqRestr/write'/>" method="post">
                     <%--            --%>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <%--            --%>
@@ -616,7 +616,7 @@
 
 
 <%----%>
-<%--// 사업자가 요청/문의한 QNA 에 대한 DATA--%>
+<%--// 사업자가 요청/문의한 QNA 에 대한 data--%>
 <section>
     <h2>사업자가 요청/문의한 QNA 에 대한 DATA</h2>
     <c:forEach var="QNADto" items="${QNADto}">
@@ -725,7 +725,7 @@
             let radio = $("input[type=radio][name=request_restr_menu_food]:checked");
             let form = radio[0].form;
 
-            form.action = "<c:url value='/mypage/biz/hotdeal/write'/>"
+            form.action = "<c:url value='/mypage/biz/reqHotdeal/write'/>"
             form.method = "post"
             form.submit();
 

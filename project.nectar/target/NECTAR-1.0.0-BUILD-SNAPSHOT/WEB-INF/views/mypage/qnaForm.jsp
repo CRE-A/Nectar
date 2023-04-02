@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication property="principal.username" var="email"/>
 
 
 <!DOCTYPE html>
@@ -43,18 +45,18 @@
         <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
         <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
         <li class="menu item">
-            <security:authorize access="isAnonymous()">
+            <sec:authorize access="isAnonymous()">
                 <a href="<c:url value='/login/login'/>">LOGIN</a>
-            </security:authorize>
-            <security:authorize access="hasRole('USER')">
+            </sec:authorize>
+            <sec:authorize access="hasRole('USER')">
                 <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
-            </security:authorize>
-            <security:authorize access="hasRole('BIZ')">
+            </sec:authorize>
+            <sec:authorize access="hasRole('BIZ')">
                 <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
-            </security:authorize>
-            <security:authorize access="hasRole('ADMIN')">
+            </sec:authorize>
+            <sec:authorize access="hasRole('ADMIN')">
                 <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
-            </security:authorize>
+            </sec:authorize>
         </li>
     </ul>
 </div>
@@ -79,13 +81,37 @@
         ${qnaDto.qna_content}
     </section>
 
-    <%--form - input 을 이용해서 관리자가 작성한 QNA 의 COMMENT(답변)을     --%>
+
+
+
+    <%--   QNA 답변 LIST --%>
+    <h2> QNA 답변 list</h2>
+    <c:forEach var="qnaCommentDto" items="${qnaCommentDto}">
+        ${qnaCommentDto.qna_comment}
+        ${qnaCommentDto.qna_commenter}
+        </br>
+    </c:forEach>
+
+
+
+
+    </br>
+    </br>
+    <%--   QNA 답변 등록 FORM --%>
+    <h2> QNA 답변 등록은 여기서</h2>
     <form  action="<c:url value="/mypage/admin/QNA/addComment"/>" method="post" >
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="hidden" name="qna_NUM" value="${qnaDto.qna_NUM}">
         <input type="text" name="qna_comment" placeholder="답변을 입력하세요." value="${qnaDto.qna_comment}">
+        <input type="hidden" name="qna_commenter" value="${email}">
         <button> 답변 등록</button>
     </form>
+
+    <%--    --%>
+
+
+
+
 
     <footer>
         <div class="judge">

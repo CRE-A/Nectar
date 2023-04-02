@@ -24,9 +24,6 @@ public class QNAController {
     QnaCommentDao qnaCommentDao;
 
 
-    Authentication authentication;
-
-
 
 
     @PostMapping("/user/QNA/write")
@@ -38,7 +35,6 @@ public class QNAController {
             e.printStackTrace();
             rattr.addFlashAttribute("msg","QNA_WRT_ERR");
             return "redirect:/mypage/user/main";
-
         }
 
         m.addAttribute("qnaDto",qnaDto);
@@ -47,12 +43,10 @@ public class QNAController {
 
 
     @GetMapping("/user/QNA/read")
-    public String ReadQNA_user(Integer qna_NUM, Model m, Authentication authentication) {
-        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-        String writer = userDetails.getUsername();
+    public String ReadQNA_user(Integer qna_NUM, Model m, Authentication auth, RedirectAttributes rattr) {
 
         try {
-            QNADto qnaDto = qnaDao.selectByWriter(qna_NUM, writer);
+            QNADto qnaDto = qnaDao.selectByWriter(qna_NUM, getWriter(auth));
             m.addAttribute("qnaDto",qnaDto);
             // User 가 문의 한 Q&A 에 대한 data
 
@@ -62,11 +56,11 @@ public class QNAController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            rattr.addFlashAttribute("msg","QNA_READ_ERR");
+            return "redirect:/mypage/user/main";
         }
-
         return "mypage/qnaForm";
     }
-
 
 
     @PostMapping("/biz/QNA/write")
@@ -85,13 +79,13 @@ public class QNAController {
         return "mypage/successPage/qnaWrtOk";
     }
 
+
+
     @GetMapping("/biz/QNA/read")
-    public String ReadQNA_biz(Integer qna_NUM, Model m, Authentication authentication) {
-        UserDetails userDetail = (UserDetails)authentication.getPrincipal();
-        String writer = userDetail.getUsername();
+    public String ReadQNA_biz(Integer qna_NUM, Model m, Authentication auth, RedirectAttributes rattr) {
 
         try {
-            QNADto qnaDto = qnaDao.selectByWriter(qna_NUM, writer);
+            QNADto qnaDto = qnaDao.selectByWriter(qna_NUM, getWriter(auth));
             m.addAttribute("qnaDto",qnaDto);
             // BizAccount 가 문의 한 Q&A 에 대한 data
 
@@ -101,6 +95,8 @@ public class QNAController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            rattr.addFlashAttribute("msg","QNA_READ_ERR");
+            return "redirect:/mypage/biz/main";
         }
 
         return "mypage/qnaForm";
@@ -108,15 +104,13 @@ public class QNAController {
 
 
 
-
     @GetMapping("/admin/QNA/read")
-    public String ReadQNA(Integer qna_NUM, Model m) {
-
+    public String ReadQNA_admin(Integer qna_NUM, Model m, Authentication auth, RedirectAttributes rattr) {
 
         try {
             QNADto qnaDto = qnaDao.select(qna_NUM);
             m.addAttribute("qnaDto",qnaDto);
-            // User, BizAccount 가 문의 한 Q&A 에 대한 data
+            // 웹사이트 이용자들이 문의/요청 한 Q&A 에 대한 data
 
             List<QNADto> qnaCommentDto = qnaCommentDao.selectAll(qna_NUM);
             m.addAttribute("qnaCommentDto",qnaCommentDto);
@@ -124,39 +118,19 @@ public class QNAController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            rattr.addFlashAttribute("msg","QNA_READ_ERR");
+            return "redirect:/mypage/admin/main";
         }
 
         return "mypage/qnaForm";
-
     }
 
 
-    @PostMapping("/QNA/addComment")
-    public String addComment(Integer qna_NUM, String qna_comment, String qna_commenter){
 
-        try {
-            qnaCommentDao.insertComment(qna_NUM,qna_comment, qna_commenter);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:/mypage/admin/main";
-    };
-
-
-    @PostMapping("/QNA/removeComment")
-    public String removeComment(Integer qna_comment_NUM, String qna_commenter){
-
-        try {
-            qnaCommentDao.deleteComment(qna_comment_NUM, qna_commenter);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:/mypage/admin/main";
-
+    public String getWriter(Authentication auth){
+        UserDetails userDetail = (UserDetails)auth.getPrincipal();
+        return userDetail.getUsername();
     }
-
 
 
 }

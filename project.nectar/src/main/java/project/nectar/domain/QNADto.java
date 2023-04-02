@@ -11,6 +11,7 @@ public class QNADto {
     private String qna_writer;
     private String qna_name;
     private String qna_comment;     // 문의 사항의 답글
+    private String qna_commenter;   // 문의 사항의 답글 단 사람
 
 
 
@@ -85,6 +86,14 @@ public class QNADto {
         this.qna_comment = qna_comment;
     }
 
+    public String getQna_commenter() {
+        return qna_commenter;
+    }
+
+    public void setQna_commenter(String qna_commenter) {
+        this.qna_commenter = qna_commenter;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,6 +118,7 @@ public class QNADto {
                 ", qna_writer='" + qna_writer + '\'' +
                 ", qna_name='" + qna_name + '\'' +
                 ", qna_comment='" + qna_comment + '\'' +
+                ", qna_commenter='" + qna_commenter + '\'' +
                 '}';
     }
 }

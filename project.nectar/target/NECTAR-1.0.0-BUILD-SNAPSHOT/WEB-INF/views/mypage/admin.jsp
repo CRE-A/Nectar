@@ -221,7 +221,7 @@
                             <tr>
                                 <td >${request_restrDto.request_restr_NUM}</td>
                                 <td class="title"><a
-                                        href="<c:url value="/mypage/admin/restr/read?request_restr_NUM=${request_restrDto.request_restr_NUM}"/>">
+                                        href="<c:url value="/mypage/admin/reqRestr/read?request_restr_NUM=${request_restrDto.request_restr_NUM}"/>">
                                         ${request_restrDto.request_restr_name}
                                 </a>
                                 </td>
@@ -256,7 +256,7 @@
                             <tr>
                                 <td class="no">${request_hotdealDto.request_restr_NUM}</td>
                                 <td class="requestRestrName"><a
-                                        href="<c:url value="/mypage/admin/hotdeal/read?request_hotdeal_NUM=${request_hotdealDto.request_hotdeal_NUM}"/>">${request_hotdealDto.request_restr_name}</a>
+                                        href="<c:url value="/mypage/admin/reqHotdeal/read?request_hotdeal_NUM=${request_hotdealDto.request_hotdeal_NUM}"/>">${request_hotdealDto.request_restr_name}</a>
                                 </td>
                                 <td class="writer">${request_hotdealDto.request_restr_menu_food}</td>
                                 <td class="writer">${request_hotdealDto.request_restr_menu_price}</td>

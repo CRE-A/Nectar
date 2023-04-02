@@ -274,9 +274,9 @@
 
 
 <%----%>
-<%--// 사업자가 요청/문의한 QNA 에 대한 DATA--%>
+<%--// 사용자가 요청/문의한 QNA 에 대한 data--%>
 <section>
-    <h2>사업자가 요청/문의한 QNA 에 대한 DATA</h2>
+    <h2>사용자가 요청/문의한 QNA 에 대한 DATA</h2>
     <c:forEach var="QNADto" items="${QNADto}">
         ${QNADto.qna_NUM}
         ${QNADto.qna_title}

@@ -5,10 +5,9 @@
 <mapper namespace="project.nectar.repository.QnaCommentMapper">
 
     <select id="selectAll" parameterType="int" resultType="QNADto">
-        SELECT qna_comment
+        SELECT qna_comment, qna_commenter
         FROM qna_comment
         WHERE qna_NUM=#{qna_NUM};
-        Order by qna_comment_regdate DESC;
     </select>
 
     <insert id="insert" parameterType="map">

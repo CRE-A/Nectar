@@ -8,29 +8,26 @@
     <select id="selectAll"  resultType="QNADto">
         SELECT *
         FROM qna
-        ORDER BY qna_regdate DESC;
+        ORDER BY qna_NUM DESC
     </select>
-
 
     <select id="selectAllByWriter" parameterType="String" resultType="QNADto">
         SELECT *
         FROM qna
         WHERE qna_writer = #{qna_writer}
-        ORDER BY qna_regdate DESC;
+        ORDER BY qna_NUM DESC
     </select>
-
-
-<!--    <select id="select_ForUser" parameterType="int" resultType="QNADto">-->
-<!--        SELECT q.*,c.qna_comment-->
-<!--        FROM qna q inner join qna_comment c on q.qna_NUM=c.qna_NUM-->
-<!--        WHERE q.qna_NUM = #{qna_NUM}-->
-<!--    </select>-->
-
 
     <select id="select" parameterType="int" resultType="QNADto">
         SELECT *
         FROM qna
         WHERE qna_NUM = #{qna_NUM}
+    </select>
+
+    <select id="selectByWriter" parameterType="QNADto" resultType="QNADto">
+        SELECT *
+        FROM qna
+        WHERE qna_NUM = #{qna_NUM} AND qna_writer = #{qna_writer}
     </select>
 
     <insert id="insert" parameterType="QNADto">
