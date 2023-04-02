@@ -21,15 +21,19 @@ public class QnaCommentDaoImpl implements QnaCommentDao {
     }
 
     @Override
-    public Integer insertComment(Integer qna_NUM, String qna_comment)throws Exception{
+    public Integer insertComment(Integer qna_NUM, String qna_comment, String qna_commenter)throws Exception{
         HashMap map = new HashMap();
         map.put("qna_NUM",qna_NUM);
         map.put("qna_comment",qna_comment);
+        map.put("qna_commenter",qna_commenter);
         return session.insert(namespace+"insert",map);
     }
 
     @Override
-    public Integer deleteComment(Integer qna_comment_NUM)throws Exception{
-        return session.delete(namespace+"delete",qna_comment_NUM);
+    public Integer deleteComment(Integer qna_comment_NUM, String qna_commenter)throws Exception{
+        HashMap map = new HashMap();
+        map.put("qna_comment_NUM",qna_comment_NUM);
+        map.put("qna_commenter",qna_commenter);
+        return session.delete(namespace+"delete",map);
     }
 }

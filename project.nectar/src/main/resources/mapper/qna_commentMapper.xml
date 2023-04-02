@@ -13,14 +13,14 @@
 
     <insert id="insert" parameterType="map">
         Insert INTO qna_comment
-            (qna_NUM, qna_comment)
+            (qna_NUM, qna_comment,qna_commenter)
         VALUES
-            (#{qna_NUM},#{qna_comment})
+            (#{qna_NUM},#{qna_comment},#{qna_commenter})
     </insert>
 
-    <delete id="delete" parameterType="int">
+    <delete id="delete" parameterType="map">
     DELETE FROM qna_comment
-    WHERE qna_comment_NUM = #{qna_comment_NUM}
+    WHERE qna_comment_NUM = #{qna_comment_NUM} AND qna_commenter = #{qna_commenter}
     </delete>
 
 

@@ -131,10 +131,10 @@ public class QNAController {
 
 
     @PostMapping("/QNA/addComment")
-    public String addComment(Integer qna_NUM, String qna_comment){
+    public String addComment(Integer qna_NUM, String qna_comment, String qna_commenter){
 
         try {
-            qnaCommentDao.insertComment(qna_NUM,qna_comment);
+            qnaCommentDao.insertComment(qna_NUM,qna_comment, qna_commenter);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,10 +144,10 @@ public class QNAController {
 
 
     @PostMapping("/QNA/removeComment")
-    public String removeComment(Integer qna_comment_NUM){
+    public String removeComment(Integer qna_comment_NUM, String qna_commenter){
 
         try {
-            qnaCommentDao.deleteComment(qna_comment_NUM);
+            qnaCommentDao.deleteComment(qna_comment_NUM, qna_commenter);
 
         } catch (Exception e) {
             e.printStackTrace();
