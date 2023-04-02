@@ -41,8 +41,8 @@ public class Request_RestrDaoImpl implements Request_RestrDao {
     }
 
     @Override
-    public Request_RestrDto selectMyReqHotdeal(String Biz_email){
-        return session.selectOne(namespace + "selectMyReqHotdeal" , Biz_email);
+    public Request_RestrDto selectMyReqRestr(String Biz_email){
+        return session.selectOne(namespace + "selectMyReqRestr" , Biz_email);
     }
 
 }

@@ -73,9 +73,9 @@ public class BizController {
 
         //////////////////////////////////////////////////////////////////////////////////
 
-            Request_RestrDto Request_restrDto = request_restrDao.selectMyReqHotdeal(Biz_email);
+            Request_RestrDto Request_restrDto = request_restrDao.selectMyReqRestr(Biz_email);
             m.addAttribute("Request_restrDto", Request_restrDto);
-            // 사업자가 심사 요청한 레스토랑에 대한 data
+//            // 사업자가 심사 요청한 레스토랑에 대한 data
 
             Request_HotdealDto Request_hotdealDto = request_hotdealDao.selectMyReqHotdeal(Biz_email);
             m.addAttribute("myReqHotdealDto", Request_hotdealDto);

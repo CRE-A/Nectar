@@ -36,6 +36,22 @@ public class Request_Hotedal {
         return "mypage/successPage/hotdealWrtOk";
     }
 
+    @GetMapping("/biz/reqHotdeal/retrial")
+    public String apply_for_retrial(Integer request_hotdeal_NUM){
+
+        try {
+            // 재심 요청 시
+            // request_hotdeal 테이블의 (request_hotdeal)의 심사코드(evaluate code)를 심사대기 상태(0) 로 만든다.
+            Request_HotdealDto request_hotdealDto = request_hotdealDao.select(request_hotdeal_NUM);
+            request_hotdealDto.setEvaluate_code(0);
+            request_hotdealDao.updateState(request_hotdealDto);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return "mypage/successPage/hotdealWrtOk";
+    }
 
 
 
@@ -80,7 +96,6 @@ public class Request_Hotedal {
 
         return "redirect:/mypage/admin/main";
     }
-
 
 
 

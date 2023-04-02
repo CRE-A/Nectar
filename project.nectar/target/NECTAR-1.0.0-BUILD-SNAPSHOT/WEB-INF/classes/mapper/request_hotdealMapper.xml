@@ -36,4 +36,17 @@
     </delete>
 
 
+    <update id="updateState" parameterType="Request_HotdealDto">
+        UPDATE request_hotdeal
+        SET evaluate_msg = #{evaluate_msg}, evaluate_code = #{evaluate_code}
+        WHERE request_hotdeal_NUM = #{request_hotdeal_NUM};
+    </update>
+
+    <select id="selectMyReqHotdeal" parameterType="String" resultType="Request_HotdealDto">
+        SELECT *
+        FROM request_hotdeal
+        WHERE request_bizAccount_email = #{Biz_email}
+        ORDER BY request_hotdeal_regdate DESC
+    </select>
+
 </mapper>

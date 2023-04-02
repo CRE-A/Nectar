@@ -91,7 +91,7 @@
         ${qnaCommentDto.qna_commenter}
         </br>
     </c:forEach>
-
+    <%--  댓글 삭제 BTN도 있어요. /mypage/admin/QNA/removeComment      --%>
 
 
 

@@ -16,5 +16,5 @@ public interface Request_RestrDao {
 
     int updateState(Request_RestrDto request_restrDto);
 
-    Request_RestrDto selectMyReqHotdeal(String Biz_email);
+    Request_RestrDto selectMyReqRestr(String Biz_email);
 }

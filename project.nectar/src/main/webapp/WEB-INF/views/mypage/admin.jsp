@@ -240,6 +240,7 @@
             <div class="container item">
                 <%-- 핫딜 요청 매장 리스트--%>
                 <div class="userList">
+
                     <table>
                         <thead>
                         <tr>
@@ -299,6 +300,9 @@
 
                         </tbody>
                     </table>
+
+
+
                 </div>
 
 

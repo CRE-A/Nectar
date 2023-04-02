@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import project.nectar.domain.Request_HotdealDto;
 import project.nectar.domain.Request_RestrDto;
 import project.nectar.domain.RestrDto;
 import project.nectar.repository.Request_RestrDao;
@@ -35,6 +36,24 @@ public class Request_Restr {
         m.addAttribute("restrDto",request_restrDto);
         return "mypage/successPage/restrWrtOk";
     }
+
+    @GetMapping("/biz/reqRestr/retrial")
+    public String apply_for_retrial(Integer request_restr_NUM){
+
+        try {
+            // 재심 요청 시
+            // request_restr 테이블의 (request_restr)의 심사코드(evaluate code)를 심사대기 상태(0) 로 만든다.
+            Request_RestrDto request_restrDto = request_restrDao.select(request_restr_NUM);
+            request_restrDto.setEvaluate_code(0);
+            request_restrDao.updateState(request_restrDto);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return "mypage/successPage/hotdealWrtOk";
+    }
+
 
 
     @GetMapping("/admin/reqRestr/read")
