@@ -4,7 +4,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.nectar.domain.Request_RestrDto;
-import project.nectar.domain.RestrDto;
 
 import java.util.List;
 
@@ -34,4 +33,16 @@ public class Request_RestrDaoImpl implements Request_RestrDao {
     public int delete(Integer request_restr_NUM){
         return session.delete(namespace+"delete",request_restr_NUM);
     }
+
+
+    @Override
+    public int updateState(Request_RestrDto request_restrDto){
+        return session.update(namespace + "updateState" , request_restrDto);
+    }
+
+    @Override
+    public Request_RestrDto selectMyReqHotdeal(String Biz_email){
+        return session.selectOne(namespace + "selectMyReqHotdeal" , Biz_email);
+    }
+
 }

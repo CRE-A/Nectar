@@ -26,6 +26,11 @@ public class Request_RestrDto {
     private Integer request_restr_viewCnt;
     private Integer request_restr_reviewCnt;
     private Integer request_restr_likeCnt;
+    private String evaluate_msg;        // 심사를 진행한 관리자의 메세지
+    private Integer evaluate_code;      // 심사 코드  0 : 심사 대기
+                                        // 심사 코드  1 :     승인
+                                        // 심사 코드 -1 :     반려
+
 
     public Request_RestrDto(){}
     public Request_RestrDto(Integer request_restr_NUM) {
@@ -216,17 +221,20 @@ public class Request_RestrDto {
         this.request_restr_likeCnt = request_restr_likeCnt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Request_RestrDto that = (Request_RestrDto) o;
-        return Objects.equals(request_restr_NUM, that.request_restr_NUM) && Objects.equals(request_restr_name, that.request_restr_name) && Objects.equals(request_restr_location, that.request_restr_location);
+    public String getEvaluate_msg() {
+        return evaluate_msg;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(request_restr_NUM, request_restr_name, request_restr_location);
+    public void setEvaluate_msg(String evaluate_msg) {
+        this.evaluate_msg = evaluate_msg;
+    }
+
+    public Integer getEvaluate_code() {
+        return evaluate_code;
+    }
+
+    public void setEvaluate_code(Integer evaluate_code) {
+        this.evaluate_code = evaluate_code;
     }
 
     @Override
@@ -255,6 +263,8 @@ public class Request_RestrDto {
                 ", request_restr_viewCnt=" + request_restr_viewCnt +
                 ", request_restr_reviewCnt=" + request_restr_reviewCnt +
                 ", request_restr_likeCnt=" + request_restr_likeCnt +
+                ", evaluate_msg='" + evaluate_msg + '\'' +
+                ", evaluate_code=" + evaluate_code +
                 '}';
     }
 }

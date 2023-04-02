@@ -31,4 +31,17 @@
         where request_restr_NUM=#{request_restr_NUM}
     </delete>
 
+
+    <update id="updateState" parameterType="Request_RestrDto">
+        UPDATE request_restr
+        SET evaluate_msg = #{evaluate_msg}, evaluate_code = #{evaluate_code}
+        WHERE request_restr_NUM = #{request_restr_NUM};
+    </update>
+
+    <select id="selectMyReqRestr" parameterType="String" resultType="Request_RestrDto">
+        SELECT *
+        FROM request_restr
+        WHERE request_bizAccount_email = #{Biz_email}
+    </select>
+
 </mapper>

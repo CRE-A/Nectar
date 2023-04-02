@@ -4,12 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.nectar.domain.BrowserHistoryDto;
+import project.nectar.domain.Request_RestrDto;
 import project.nectar.domain.RestrDto;
 import project.nectar.domain.SearchCondition;
-import project.nectar.repository.BrowserHistoryDao;
-import project.nectar.repository.LikelistDao;
-import project.nectar.repository.RestrDao;
-import project.nectar.repository.ReviewDao;
+import project.nectar.repository.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -25,6 +23,8 @@ public class RestrServiceImpl implements RestrService {
 
     @Autowired
     BrowserHistoryDao browserHistoryDao;
+    @Autowired
+    Request_RestrDao request_restrDao;
 
 
 
@@ -77,17 +77,29 @@ public class RestrServiceImpl implements RestrService {
     }
 
 
-
-    @Override
-    public int insertAll(RestrDto restrDto) throws Exception {
-        return restrDao.insertAll(restrDto);
-    } // TDD
-
-
     @Override
     public int update(RestrDto restrDto) throws Exception {
         return restrDao.update(restrDto);
     } // TDD
+
+
+
+    // insert() : 레스토랑(가게) 게시물을 등록한다?
+    // 1. request_restr 테이블의 (request_restr)의 심사코드(evaluate code)를 승인 상태(1) 로 만든다.
+    // 2. restr 테이블에 승인 판정 받은 data 를 insert
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int insertAll(RestrDto restrDto) throws Exception {
+
+        Request_RestrDto request_restrDto = new Request_RestrDto();
+        request_restrDto.setEvaluate_code(1);
+        request_restrDto.setEvaluate_msg("심사통과");
+        request_restrDao.updateState(request_restrDto);
+
+        return restrDao.insertAll(restrDto);
+    } // TDD
+
 
 }
 

@@ -40,12 +40,9 @@ public class UserController {
     @GetMapping("/main")
     public String UserMyPage(HttpSession session, Model m, Authentication authentication){
 
-        System.out.println("============================================================");
-        System.out.println("mypage/user/maim 지나감");
             UserDetails userDetails = (UserDetails)authentication.getPrincipal();
             String user_email = userDetails.getUsername();
-            System.out.println("user_email = " + user_email);
-        System.out.println("============================================================");
+
 
         try {
             List<ReviewPlusDto> reviewDto = reviewService.getMyReviews(user_email);
@@ -90,6 +87,17 @@ public class UserController {
     }
 
 
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -101,5 +109,3 @@ public class UserController {
 //        }
 //        return authentication.isAuthenticated();
 //    }
-
-}

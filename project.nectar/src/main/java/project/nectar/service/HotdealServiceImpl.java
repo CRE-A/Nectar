@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.nectar.domain.BrowserHistoryDto;
 import project.nectar.domain.HotdealDto;
+import project.nectar.domain.Request_HotdealDto;
 import project.nectar.repository.BrowserHistoryDao;
 import project.nectar.repository.HotdealDao;
+import project.nectar.repository.Request_HotdealDao;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -17,6 +19,8 @@ public class HotdealServiceImpl implements HotdealService {
     HotdealDao hotdealDao;
     @Autowired
     BrowserHistoryDao browserHistoryDao;
+    @Autowired
+    Request_HotdealDao request_hotdealDao;
 
     HttpSession session;
 
@@ -56,8 +60,21 @@ public class HotdealServiceImpl implements HotdealService {
         return hotdealDao.update(hotdealDto);
     }
 
+
+
+    // insert() : 핫딜 게시물을 등록한다?
+    // 1. request_hotdeal 테이블의 (request_hotdeal)의 심사코드(evaluate code)를 승인 상태(1) 로 만든다.
+    // 2. hotdeal 테이블에 승인 판정 받은 data 를 insert
+
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int insert(HotdealDto hotdealDto) throws Exception{
+
+        Request_HotdealDto request_hotdealDto = new Request_HotdealDto();
+        request_hotdealDto.setEvaluate_code(1);
+        request_hotdealDto.setEvaluate_msg("심사통과");
+        request_hotdealDao.updateState(request_hotdealDto);
+
         return hotdealDao.insert(hotdealDto);
     }
 

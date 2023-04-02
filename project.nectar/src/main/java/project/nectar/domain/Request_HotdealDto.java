@@ -22,6 +22,10 @@ public class Request_HotdealDto{                // 핫딜을 요청하는 Dto ; 
     private Integer request_hotdeal_salesVolume;
     private Integer request_hotdeal_MaxSalesVolume;
     private String request_bizAccount_email;
+    private String evaluate_msg;        // 심사를 진행한 관리자의 메세지
+    private Integer evaluate_code;      // 심사 코드  0 : 심사 대기
+                                        // 심사 코드  1 :     승인
+                                        // 심사 코드 -1 :     반려
 
     public Request_HotdealDto(){}
     public Request_HotdealDto(Integer request_hotdeal_NUM) {
@@ -172,17 +176,20 @@ public class Request_HotdealDto{                // 핫딜을 요청하는 Dto ; 
         this.request_bizAccount_email = request_bizAccount_email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Request_HotdealDto that = (Request_HotdealDto) o;
-        return Objects.equals(request_hotdeal_NUM, that.request_hotdeal_NUM) && Objects.equals(request_restr_NUM, that.request_restr_NUM) && Objects.equals(request_restr_menu_NUM, that.request_restr_menu_NUM);
+    public String getEvaluate_msg() {
+        return evaluate_msg;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(request_hotdeal_NUM, request_restr_NUM, request_restr_menu_NUM);
+    public void setEvaluate_msg(String evaluate_msg) {
+        this.evaluate_msg = evaluate_msg;
+    }
+
+    public Integer getEvaluate_code() {
+        return evaluate_code;
+    }
+
+    public void setEvaluate_code(Integer evaluate_code) {
+        this.evaluate_code = evaluate_code;
     }
 
     @Override
@@ -206,6 +213,8 @@ public class Request_HotdealDto{                // 핫딜을 요청하는 Dto ; 
                 ", request_hotdeal_salesVolume=" + request_hotdeal_salesVolume +
                 ", request_hotdeal_MaxSalesVolume=" + request_hotdeal_MaxSalesVolume +
                 ", request_bizAccount_email='" + request_bizAccount_email + '\'' +
+                ", evaluate_msg='" + evaluate_msg + '\'' +
+                ", evaluate_code=" + evaluate_code +
                 '}';
     }
 }

@@ -13,4 +13,8 @@ public interface Request_HotdealDao {
     int insert(Request_HotdealDto request_hotdealDto);
 
     int delete(Integer request_hotdeal_NUM);
+
+    int updateState(Request_HotdealDto request_hotdealDto);
+
+    Request_HotdealDto selectMyReqHotdeal(String Biz_email);
 }

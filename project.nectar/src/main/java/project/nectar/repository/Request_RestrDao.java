@@ -13,4 +13,8 @@ public interface Request_RestrDao {
     int insertAll(Request_RestrDto request_restrDto);
 
     int delete(Integer request_restr_NUM);
+
+    int updateState(Request_RestrDto request_restrDto);
+
+    Request_RestrDto selectMyReqHotdeal(String Biz_email);
 }

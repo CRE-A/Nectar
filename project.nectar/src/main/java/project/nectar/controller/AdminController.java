@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import project.nectar.domain.*;
 import project.nectar.repository.*;
 import project.nectar.service.HotdealService;
+import project.nectar.service.RestrService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,13 +24,11 @@ public class AdminController {
     @Autowired
     Request_RestrDao request_restrDao;
     @Autowired
-    Request_RestrMenuDao request_restrMenuDao;
-    @Autowired
     Request_HotdealDao request_hotdealDao;
     @Autowired
     QNADao qnaDao;
     @Autowired
-    RestrDao restrDao;
+    RestrService restrService;
     @Autowired
     RestrMenuDao restrMenuDao;
     @Autowired
@@ -76,80 +75,6 @@ public class AdminController {
         return "mypage/admin";
     }
 
-
-    @GetMapping("/reqRestr/read")
-    public String ReadRestr(Integer request_restr_NUM, Model m){
-
-        System.out.println("request_restr_NUM = " + request_restr_NUM);
-
-
-        Request_RestrDto request_restrDto = request_restrDao.select(request_restr_NUM);
-        m.addAttribute("request_restrDto",request_restrDto);
-        // 사업자가 등록 요청한 레스토랑에 대한 data
-
-//        List<RestrMenuDto> request_restrMenuDto = request_restrMenuDao.selectAll(request_restr_NUM);
-//        m.addAttribute("request_restrMenuDto",request_restrMenuDto);
-        // 사업자가 등록 요청한 레스토랑 메뉴에 대한 data
-
-        return "mypage/restrReqForm";
-    }
-
-
-    @PostMapping("/reqRestr/register")
-    public String register(Integer request_restr_NUM, RestrDto restrDto, RestrMenuDto restrMenuDto){
-
-        try {
-            restrDao.insertAll(restrDto);
-            request_restrDao.delete(request_restr_NUM);
-
-//            restrMenuDao.insert(restrMenuDto);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/";
-        }
-
-        return "redirect:/mypage/admin/main"; // + 사업자에게 등록되었다고 메세지 가게 해야지
-    }
-
-    @GetMapping("/reqRestr/deny")
-    public String RestrDenied(){
-        // ???? 아무일도 일어나지 않음.
-        //// + 사업자에게 거절 되었다고 메세지 가게 해야지
-        return "redirect:/mypage/admin/main";
-    }
-
-
-    @GetMapping("/reqHotdeal/read")
-    public  String ReadHotdeal(Integer request_hotdeal_NUM, Model m) {
-
-        Request_HotdealDto request_hotdealDto = request_hotdealDao.select(request_hotdeal_NUM);
-        m.addAttribute("request_hotdealDto",request_hotdealDto);
-        // 사업자가 등록 요청한 핫딜 대한 data
-
-        return "mypage/hotdealReqForm";
-
-    }
-
-
-    @PostMapping("/reqHotdeal/register")
-    public String register(HotdealDto hotdealDto) {
-
-        try {
-            hotdealService.insert(hotdealDto); // Service 에서 TX 묶어서 처리해야함
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/";
-        }
-
-        return "redirect:/mypage/admin/main"; // + 사업자에게 등록되었다고 메세지 가게 해야지
-    }
-
-    @GetMapping("/reqHotdeal/deny")
-    public String HotdealDenied() {
-        // ???? 아무일도 일어나지 않음.
-        //// + 사업자에게 거절 되었다고 메세지 가게 해야지
-        return "redirect:/mypage/admin/main";
-    }
 
 
     @PostMapping("/profile/delete")
