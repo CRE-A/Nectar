@@ -303,13 +303,7 @@
 
             <div class="filter-item">
                 <label>지역</label><br>
-<%--                <nav>--%>
-<%--                    <a href="#" class="is-current">서울</a>--%>
-<%--                    <a href="#">인천</a>--%>
-<%--                    <a href="#">경기</a>--%>
-<%--                    <a href="#">더보기</a>--%>
-<%--                    <div class="nav-underline"></div>--%>
-<%--                </nav>--%>
+
 
                 <p id="rocalseoul">
 
@@ -410,7 +404,7 @@
                     <div class="hotdealRest__imgDesc">
                         <div class="hotdealRestr__imgContainer home">
                             <img
-                                    src="https://i.pinimg.com/564x/6b/0b/ea/6b0bea27a1799ba9167d844f337be5e2.jpg"
+                                    src="<c:url value='/uploadFile/${hotdealDto.hotdeal_picture}'/>"
                                     alt=""
                                     class="hotdealRestr__img"
                             />
