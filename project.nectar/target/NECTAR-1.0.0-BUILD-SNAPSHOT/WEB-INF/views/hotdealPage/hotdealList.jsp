@@ -80,7 +80,8 @@
                     <div class="hotdealRest__imgDesc">
                         <div class="hotdealRestr__imgContainer">
                             <img
-                                    src="https://i.pinimg.com/564x/6b/0b/ea/6b0bea27a1799ba9167d844f337be5e2.jpg"
+<%--                                    src="https://i.pinimg.com/564x/6b/0b/ea/6b0bea27a1799ba9167d844f337be5e2.jpg"--%>
+                                    src="<c:url value='/uploadFile/${hotdealDto.hotdeal_picture}'/>"
                                     alt=""
                                     class="hotdealRestr__img"
                             />

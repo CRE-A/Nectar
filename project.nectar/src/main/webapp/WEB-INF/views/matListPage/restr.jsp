@@ -111,25 +111,23 @@
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <img src="<c:url value='/images/pizza.png'/>"/>
-                <%--        <img src="${restrPic.restr_pic_path}" />--%>
-                <%--        restr_pic 테이블에 사진이 여러장(4~5장)이라, foreach를 쓰면서 restr_pic의 list를 나열 --%>
-            </div>
-            <div class="swiper-slide">
-                <img src="<c:url value='/images/pizza.png'/>"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="<c:url value='/images/pizza.png'/>"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="<c:url value='/images/pizza.png'/>"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="<c:url value='/images/pizza.png'/>"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="<c:url value='/images/pizza.png'/>"/>
-            </div>
+                <img src="<c:url value='/uploadFile/${restrDto.restr_picture}'/>" alt="" />
+<%--            </div>--%>
+<%--            <div class="swiper-slide">--%>
+<%--                <img src="<c:url value='/images/pizza.png'/>"/>--%>
+<%--            </div>--%>
+<%--            <div class="swiper-slide">--%>
+<%--                <img src="<c:url value='/images/pizza.png'/>"/>--%>
+<%--            </div>--%>
+<%--            <div class="swiper-slide">--%>
+<%--                <img src="<c:url value='/images/pizza.png'/>"/>--%>
+<%--            </div>--%>
+<%--            <div class="swiper-slide">--%>
+<%--                <img src="<c:url value='/images/pizza.png'/>"/>--%>
+<%--            </div>--%>
+<%--            <div class="swiper-slide">--%>
+<%--                <img src="<c:url value='/images/pizza.png'/>"/>--%>
+<%--            </div>--%>
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
@@ -191,11 +189,6 @@
                             <%--  user가 이곳 레스토랑에 like를 눌렀던 기록이 있니--%>
                             <i class="fa-${not empty likelistDto.restr_NUM ? "solid" : "regular"} fa-heart"></i>
 
-<%--                            <!--로그인 했니? && 로그인한 이메일이랑 likelistDto에 있는 email이랑 같니 ? ❤️ : 빈하트 -->--%>
-<%--                            <i class="fa-${not empty userDto.user_email && (likelistDto.user_email eq userDto.user_email) ? "solid" : "regular"} fa-heart"></i>--%>
-<%--                                                        likelistDto.restr_NUM : ${likelistDto.restr_NUM}--%>
-<%--                                                        likelistDto.user_email : ${likelistDto.user_email}--%>
-<%--                                                        loginUserEmail : ${loginUserEmail}--%>
                         </button>
                     </form>
 
@@ -354,9 +347,8 @@
                 <div class="review__user">
                     <div class="review__user__wrap">
                         <div class="review__picWrap">
-                            <img src="https://hips.hearstapps.com/sev.h-cdn.co/assets/16/40/980x980/square-1475780811-disney-pixar-dug-up.jpg?resize=1200:*" alt=""/>
-                                <%--  나중에 review_picture 이미지 잘 넣어 주세요  --%>
-                                <%--  ${reviewDto.review_picture}}  --%>
+<%--                            <img src="https://hips.hearstapps.com/sev.h-cdn.co/assets/16/40/980x980/square-1475780811-disney-pixar-dug-up.jpg?resize=1200:*" alt=""/>--%>
+                            <img src="<c:url value='/uploadFile/${reviewDto.user_picture}'/>" alt=""/>
                         </div>
                         <span class="reivew__userName">
                                 ${reviewDto.user_name}
@@ -394,9 +386,6 @@
                             <div class="review__picture__wrap">
 <%--                                <img src="<c:url value='/images/pizza.png'/>" alt="" class="reviewPicture"/>--%>
                                 <img src="<c:url value='/uploadFile/${reviewDto.review_picture}'/>" alt="" class="reviewPicture"/>
-<%--                                <img src="C:\Users\user\IdeaProjects\Nectar\project.nectar\src\main\webapp\resources\uploadFile\KakaoTalk_20230403_004726694.jpg" alt=""/>--%>
-<%--                                <img src="${reviewDto.review_picture}" alt=""/>--%>
-                                    <%--              <img src=${reviewDto.review_picture} alt="" class="reviewPicture" />--%>
                             </div>
                         </li>
                     </ul>
@@ -484,7 +473,6 @@
                         </fieldset>
                     </div>
                     <div class="rvButtons">
-                        <!--🍎로그인 되어있을 때만 리뷰 수정 삭제 loginUserEmail 로 체크했는데..확인바라요🍎-->
                         <c:if test="${reviewDto.user_email == userDto.user_email}">
                             <button id="reviewModifyBtn">수정</button>
                             <button id="reviewDelBtn">삭제</button>

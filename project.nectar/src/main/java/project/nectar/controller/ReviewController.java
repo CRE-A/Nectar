@@ -50,7 +50,9 @@ public class ReviewController {
         System.out.println("multipart data 여기까지 잘 넘어옴 ");
 //        String src = req.getParameter("src");
         MultipartFile mf = req.getFile("file");
+//        String path = "C:\\Users\\user\\IdeaProjects\\Nectar\\project.nectar\\src\\main\\webapp\\resources\\uploadFile\\";
         String path = "C:\\Users\\user\\IdeaProjects\\Nectar\\project.nectar\\src\\main\\webapp\\resources\\uploadFile\\";
+
 
         String originFileName = mf.getOriginalFilename(); // 원본 파일 명
         long fileSize = mf.getSize(); // 파일 사이즈

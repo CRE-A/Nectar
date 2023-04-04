@@ -50,7 +50,7 @@ public class ReviewDaoImplTest {
     public void insert_Data() throws Exception{
 
         for(int i=1; i<=110; i++){
-            ReviewDto reviewDto = new ReviewDto(0+i,"User_"+(301-i)+"@google.com", "name"+(301-i), "user_pic", "음식이 나쁘진 않은데, 가격대비 구림 -hb"+i,"asd323",((int)(Math.random()*5)+1));
+            ReviewDto reviewDto = new ReviewDto(0+i,"user_"+(301-i)+"@google.com", "name"+(301-i), "default_profile.jpg", "음식이 나쁘진 않은데, 가격대비 구림 -hb"+i,"review"+((int)(Math.random()*14)+1)+".jpg",((int)(Math.random()*5)+1));
             reviewDao.insert(reviewDto);
         }
     }
@@ -59,7 +59,7 @@ public class ReviewDaoImplTest {
     public void insert_Data2() throws Exception{
 
         for(int i=1; i<=110; i++){
-            ReviewDto reviewDto = new ReviewDto(0+i,"User_"+(501-i)+"@google.com", "name"+(501-i), "user_pic","옥수수 찐만두보다 못하네 ㅉㅉ","kkk323",((int)(Math.random()*5)+1));
+            ReviewDto reviewDto = new ReviewDto(0+i,"user_"+(501-i)+"@google.com", "name"+(501-i), "default_profile.jpg","옥수수 찐만두보다 못하네 ㅉㅉ","review"+((int)(Math.random()*14)+1)+".jpg",((int)(Math.random()*5)+1));
             reviewDao.insert(reviewDto);
         }
     }
@@ -70,7 +70,7 @@ public class ReviewDaoImplTest {
 
         for(int i=1; i<=100; i++){
             for(int j=1; j<=7; j++){
-                ReviewDto reviewDto = new ReviewDto(0+i,"User_"+j+"google.com", "name"+j,"user_pic","나의 리뷰를 이용하라 m.blog.naver.com/intae"+j,"pic_url_path",((int)(Math.random()*5)+1));
+                ReviewDto reviewDto = new ReviewDto(0+i,"user_"+j+"google.com", "name"+j,"default_profile.jpg","나의 리뷰를 이용하라","review"+((int)(Math.random()*14)+1)+".jpg",((int)(Math.random()*5)+1));
                 reviewDao.insert(reviewDto);
             }
         }

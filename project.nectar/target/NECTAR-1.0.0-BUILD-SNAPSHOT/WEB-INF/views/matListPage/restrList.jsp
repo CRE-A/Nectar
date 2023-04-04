@@ -83,7 +83,8 @@
         <!-- 게시글 번호 data-restrNum 에 저장-->
         <li class="restr" data-restrNum="${restrDto.restr_NUM}">
           <a href="<c:url value='/restr/read${ph.sc.queryString}&restr_NUM=${restrDto.restr_NUM}'/>">
-            <img src="./img/pizza.png" alt="" class="restr__img"/>
+<%--            <img src="./img/pizza.png" alt="" class="restr__img"/>--%>
+            <img src="<c:url value='/uploadFile/${restrDto.restr_picture}'/>" alt="" class="restr__img"/>
           </a>
           <div class="restr__content">
             <div class="restr__head">
@@ -140,7 +141,7 @@
             <li class="recentRestr__item">
               <div class="recentRestr__imgContainer">
                 <img
-                        src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c3VzaGl8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
+                        src="<c:url value='/uploadFile/${viewBrowserHistoryList.restr_picture}'/>"
                         alt=""
                         class="recentRestr__img"
                 />
