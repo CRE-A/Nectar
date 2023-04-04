@@ -1,138 +1,228 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Nectar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script
+          src="https://kit.fontawesome.com/43ede2213f.js"
+          crossorigin="anonymous"
+  ></script>
+
+  <!-- CSS -->
+
+  <link rel="stylesheet" href="<c:url value='/css/navbarSearchX.css'/>"/>
+  <link rel="stylesheet" href="<c:url value='/css/registerForm_hb.css'/>"/>
+
+  <style>
+    body{
+      overflow: hidden;
+    }
+  </style>
+
 </head>
-<link rel="stylesheet" href="<c:url value='/css/universial_hb.css'/>">
-<link rel="stylesheet" href="<c:url value='/css/menu_hb.css'/>">
-<link rel="stylesheet" href="<c:url value='/css/registerForm_hb.css'/>">
+
+
 <body>
-
-
-<!-- NAVBAR -->
-<nav id="navbar">
-  <div class="navbar__logo">
-    <a href="<c:url value="/" />">BINA</a>
+<section id="navbar" class="biz">
+  <div class="logo">
+    <a href="<c:url value='/'/>"> <img src="<c:url value='/images/nectarLogo.png'/>" alt="" class="logo__img"/></a>
   </div>
-  <ul class="navbar__menu">
-    <li class="navbar__menu__item active"> <a href="<c:url value="/"/>"> home </a>  </li>
-    <li class="navbar__menu__item "> <a href="<c:url value="/board/list"/>"> Board </a>  </li>
-    <li class="navbar__menu__item "> <a href="<c:url value="/login/login"/>"> Login </a>  </li>
-    <li class="navbar__menu__item "> <a href="<c:url value="/register/add"/>"> Sign in </a>  </li>
+  <ul class="menu">
+    <li class="menu item">
+      <a href="<c:url value='/hotdeal/list'/>">HOTDEAL</a>
+    </li>
+    <li class="menu item">
+      <a href="<c:url value='/restr/list'/>">맛집리스트</a>
+    </li>
+    <li class="menu item">
+      <security:authorize access="isAnonymous()">
+        <a href="<c:url value='/login/login'/>">LOGIN</a>
+      </security:authorize>
+      <security:authorize access="hasRole('USER')">
+        <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+      </security:authorize>
+      <security:authorize access="hasRole('BIZ')">
+        <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+      </security:authorize>
+      <security:authorize access="hasRole('ADMIN')">
+        <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+      </security:authorize>
+    </li>
   </ul>
-</nav>
+</section>
 
-<!-- Register Form -->
+<h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 
-<div class="container">
-  <div class="title">Registration</div>
-  <div class="content">
-    <form action="<c:url value="/register/addBiz"/>" method="post" onsubmit="return registerFormCheck(this)">
+<%-- New Register Form --%>
+
+<section id="register">
+  <div class="container">
+    <h1 class="h1">회원가입</h1>
+    <form name="frm" action="<c:url value="/register/addBiz"/>" id="registerForm" method="post">
       <%--            --%>
-      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <%--            --%>
-      <div class="user-details">
-        <div class="input-box"> <%--   ID 가 email 로 변경   --%>
-          <span class="details}">email</span>
-          <span class="warning" style="color: darkred ; font-weight: bold">${param.msg eq "중복이메일" ? "이미 가입된 이메일입니다." : ""} </span>
-          <input type="text" name="bizAccount_email"  placeholder="Enter your email" required/>
-        </div>
-        <div class="input-box">
-          <span class="details">name</span>
-          <input type="text" name="bizAccount_name" placeholder="Enter your name" required />
-        </div>
-        <div class="input-box">
-          <span class="details">Password</span>
-          <input type="text" name="bizAccount_pwd" placeholder="Enter your password" required />
-        </div>
-        <div class="input-box">
-          <span class="details">Confirm Password</span>
-          <input type="text" name="confirmPwd" placeholder="Confirm your password" required />
-        </div>
-        <div class="input-box">
-          <span class="details">phone</span>
-          <input type="text" name="bizAccount_phone" placeholder="Enter your phoneNumber" required />
-        </div>
 
-        <%--                <div class="input-box"> &lt;%&ndash;   email 이 date of birth로 변경   &ndash;%&gt;--%>
-        <%--                    <span class="details">date of birth</span>--%>
-        <%--                    <input type="text" name="date of birth" placeholder="Enter your date of birth" required />--%>
-        <%--                </div>--%>
-        <%--                <div class="input-box">--%>
-        <%--                    <span class="details">Phone Number</span>--%>
-        <%--                    <input type="text" name="phn" placeholder="Enter your number" required />--%>
-        <%--                </div>--%>
-        <%--            </div>--%>
-        <%--            <div class="gender-details">--%>
-        <%--                <input type="radio" name="gender" id="dot-1" />--%>
-        <%--                <input type="radio" name="gender" id="dot-2" />--%>
-        <%--                <input type="radio" name="gender" id="dot-3" />--%>
-        <%--                <span class="gender-title">Gender</span>--%>
-        <%--                <div class="category">--%>
-        <%--                    <label for="dot-1">--%>
-        <%--                        <span class="dot one"></span>--%>
-        <%--                        <span class="gender">Male</span>--%>
-        <%--                    </label>--%>
-        <%--                    <label for="dot-2">--%>
-        <%--                        <span class="dot two"></span>--%>
-        <%--                        <span class="gender">Female</span>--%>
-        <%--                    </label>--%>
-        <%--                    <label for="dot-3">--%>
-        <%--                        <span class="dot three"></span>--%>
-        <%--                        <span class="gender">Prefer not to say</span>--%>
-        <%--                    </label>--%>
-        <%--                </div>--%>
-        <%--            </div>--%>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <div id="msg">
+      <div class="inputBox">
+        <span id="result">이메일</span>
+        <input type="email" name="bizAccount_email" onkeyup="return emailChk()" required/>
+      </div>
 
-        </div>
-        <div class="button">
-          <input type="submit" value="Register" />
-        </div>
+      <div class="inputBox">
+        <span>이름</span>
+        <input type="text" name="bizAccount_name" required/>
+      </div>
+      <div class="inputBox">
+        <span>핸드폰</span>
+        <input type="text" name="bizAccount_phone" required/>
+      </div>
+      <div class="inputBox">
+        <span id="passResult">비밀번호 - 대문자 혹은 소문자와 숫자를 합해 6자리 이상 12자리 이하</span>
+        <input type="password" name="bizAccount_pwd" pattern="^(?=.*[a-zA-z])(?=.*[0-9]).{6,12}$" required/>
+      </div>
+      <div class="inputBox">
+        <span>비밀번호 확인</span>
+        <input type="password" class="biz_pwd_check" pattern="^(?=.*[a-zA-z])(?=.*[0-9]).{6,12}$" onkeyup="passChk()" required/>
+      </div>
+
+      <button type="submit" id="registerBtn">회원가입</button>
+
     </form>
   </div>
-</div>
+</section>
+
+<%-- / Global Page--%>
 
 
+<%--<div id="MyRestrantlist">--%>
+<%--    <h3>BIZ가 운영중인 레스토랑 </h3>--%>
+<%--    ${restrDto.restr_NUM} </br>--%>
+<%--    ${restrDto.restr_name}</br>--%>
+<%--    ${restrDto.restr_location}</br>--%>
+<%--    ${restrDto.restr_phone}</br>--%>
+<%--    ${restrDto.restr_time}</br>--%>
+<%--    ${restrDto.restr_star}</br>--%>
+<%--    ${restrDto.restr_foodType}</br>--%>
+<%--    ${restrDto.restr_cost}</br>--%>
+<%--    ${restrDto.restr_parking}</br>--%>
+<%--    ${restrDto.restr_tag}</br>--%>
+<%--    ${restrDto.restr_menu}</br>--%>
+<%--    ${restrDto.restr_cost}</br>--%>
+<%--    ${restrDto.restr_menu}</br>--%>
+<%--    ${restrDto.restr_picture}</br>--%>
+<%--    ${restrDto.restr_viewCnt}</br>--%>
+<%--    ${restrDto.restr_reviewCnt}</br>--%>
+<%--    ${restrDto.restr_likeCnt}</br>--%>
+<%--    ----------------------------------</br>--%>
+<%--</div>--%>
+
+
+<%--<br id="BIZ_info">--%>
+<%--<h3>BIZ 에 대한 정보 </h3>--%>
+<%--${bizAccountDto.bizAccount_email}--%>
+<%--${bizAccountDto.bizAccount_pwd}--%>
+<%--${bizAccountDto.bizAccount_name}--%>
+<%--${bizAccountDto.bizAccount_phone}--%>
+<%--${bizAccountDto.bizAccount_picture}--%>
+<%--${bizAccountDto.bizAccount_regdate}--%>
+<%--${bizAccountDto.bizAccount_state_code} </br>--%>
+<%--</div>--%>
+
+
+<%-- QNA TEST    --%>
+<%--<h2>QNA TEST</h2>--%>
+<%--<form id="form" action="<c:url value="/mypage/biz/QNA/write"/>" method="post">--%>
+<%--    <input class="detail" type="text" name="qna_title" value="나에게 질문하는 것을 두려워 말라" autofocus>--%>
+<%--    <input class="detail" type="text" name="qna_content" value="인태 최고" autofocus>--%>
+<%--    <input class="detail" type="text" name="qna_picture" value="핵 깜찍한 인태 사진" autofocus>--%>
+<%--    <input class="detail" type="text" name="qna_writer" value="Biz_1@google.com"--%>
+<%--           autofocus> &lt;%&ndash;qna_writer = ${bizAccountDto.bizAccount_email}}&ndash;%&gt;--%>
+<%--    <input class="detail" type="text" name="qna_name" value="name1"--%>
+<%--           autofocus> &lt;%&ndash;qna_name   = ${bizAccountDto.bizAccount_name}}&ndash;%&gt;--%>
+<%--    <button id="loginBtn">QNA 등록</button>--%>
+<%--</form>--%>
+<%--    --%>
 
 
 <script>
-  function registerFormCheck(frm) {
-    if (frm.user_pwd.value != frm.confirmPwd.value) {
-      setMessage("비밀번호가 일치하지 않습니다. 다시 입력해 주세요.")
-      return false;
+  let passCheck = true;
+  let emailCheck = true;
+
+  function emailChk() {
+    const email = document.frm.bizAccount_email.value;
+    console.log(email)
+    let resultText = document.querySelector("#result");
+
+    if (email.indexOf('@') != -1 && email.indexOf('.com') != -1) {
+
+      <security:authorize access="isAnonymous()">
+      $.ajax({
+        type: 'POST',
+        <%--url:'${pageContext.request.contextPath}/member/readId',--%>
+        url: '<c:url value='/register/readEmail'/>',
+        header: {"Content-Type": "application/json"},
+        dateType: 'json',
+        data: {email: email},
+        success: function (result) {
+          console.log("result = " + result)
+          if (result == true) {
+            resultText.style.color = 'red'
+            resultText.innerHTML = '중복되는 이메일'
+            emailCheck = true
+            inputCheck()
+          } else {
+            resultText.style.color = 'blue'
+            resultText.innerHTML = '사용가능한 이메일'
+            emailCheck = false
+            inputCheck()
+          }
+        }
+      })
+    } else {
+      result.style.color = 'red'
+      result.innerHTML = '일치하지 않는 형식'
     }
-    if (frm.user_email.value.length == 0) {
-      setMessage("이메일을 입력해 주세요.")
-      return false;
-    }
-    if (frm.user_pwd.value.length == 0) {
-      setMessage("비밀번호를 입력해 주세요.")
-      return false;
-    }
-    if (frm.user_name.value.length == 0) {
-      setMessage("이름을 입력해 주세요.")
-      return false;
-    }
-    return true;
+    </security:authorize>
   }
 
-  function setMessage(msg) {
-    document.getElementById("msg").innerHTML = msg;
+  function inputCheck() {
+    if (emailCheck == false) {
+      const submit = document.querySelector("#registerBtn");
+      submit.disabled = false;
+    } else {
+      submit.disabled = true;
+    }
   }
+
+  function passChk() {
+    const pass = document.frm.bizAccount_pwd.value
+    const passChk = document.querySelector(".biz_pwd_check").value;
+    console.log(passChk);
+    let result = document.querySelector("#passResult")
+
+    if(pass == passChk){
+      result.style.color = 'blue'
+      result.innerHTML = '일치하는 비밀번호'
+      passCheck = false
+      inputCheck()
+
+    } else {
+      result.style.color = 'red'
+      result.innerHTML = '일치하지 않는 비밀번호'
+
+      passCheck = true
+      inputCheck()
+    }
+  }
+
+
 </script>
-
-
-
-
-</body>
 </html>
-

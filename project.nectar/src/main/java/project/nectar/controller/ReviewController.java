@@ -1,12 +1,17 @@
 package project.nectar.controller;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import project.nectar.domain.ReviewDto;
 import project.nectar.service.ReviewService;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -16,30 +21,89 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
+//
+//    @PostMapping("/write")
+//    public String write(ReviewDto reviewDto) throws UnsupportedEncodingException {
+//
+////        String filePath = "C:\\Users\\user\\Desktop\\NECTAR\\upload\\";
+//
+//        try {
+////            throw new Exception(); // 강제로 오류 발생시켜서 catch 반응 확인
+//            reviewService.write(reviewDto);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            String comment = URLEncoder.encode(reviewDto.getReview_comment(),"utf-8");
+//            String queryString = "?restr_NUM="+reviewDto.getRestr_NUM()+"&review_comment="+comment
+//                    +"&review_picture="+reviewDto.getReview_picture()+"&review_star="+reviewDto.getReview_star();
+//
+//            return "redirect:/restr/read"+queryString;
+//        }
+//
+//        return  "redirect:/restr/read?restr_NUM="+reviewDto.getRestr_NUM();
+//    }
+//
+//
+
     @PostMapping("/write")
-    public String write(ReviewDto reviewDto) throws UnsupportedEncodingException {
+    public String write(ReviewDto reviewDto, MultipartHttpServletRequest req) throws IOException {
+        System.out.println("multipart data 여기까지 잘 넘어옴 ");
+//        String src = req.getParameter("src");
+        MultipartFile mf = req.getFile("file");
+        String path = "C:\\Users\\user\\IdeaProjects\\Nectar\\project.nectar\\src\\main\\webapp\\resources\\uploadFile\\";
+
+        String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+        long fileSize = mf.getSize(); // 파일 사이즈
+        String type = mf.getContentType();
+
+        System.out.println("type = " + type);
+        System.out.println("originFileName : " + originFileName);
+        System.out.println("fileSize : " + fileSize);
+
+        String safeFile = path + originFileName;
+        System.out.println("최종 safeFile = " + safeFile);
 
         try {
-//            throw new Exception(); // 강제로 오류 발생시켜서 catch 반응 확인
+            mf.transferTo(new File(safeFile));
+
+
+            reviewDto.setReview_picture(originFileName);
+            System.out.println("reviewDto = " + reviewDto);
+
             reviewService.write(reviewDto);
-            return  "redirect:/restr/read?restr_NUM="+reviewDto.getRestr_NUM();
+
+
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
 
         } catch (Exception e) {
             e.printStackTrace();
-            String comment = URLEncoder.encode(reviewDto.getReview_comment(),"utf-8");
-            String queryString = "?restr_NUM="+reviewDto.getRestr_NUM()+"&review_comment="+comment
-                    +"&review_picture="+reviewDto.getReview_picture()+"&review_star="+reviewDto.getReview_star();
-
-            return "redirect:/restr/read"+queryString;
         }
+
+
+//        FileUtils.copyInputStreamToFile(multipart.getInputStream(), new File(filePath, fileName));
+        return  "redirect:/restr/read?restr_NUM="+reviewDto.getRestr_NUM();
     }
+
+
+
+
+
+
 
 
     @PostMapping("/delete")
     public String delete(ReviewDto reviewDto){
 
         try {
-//            throw new Exception(); // 강제로 오류 발생시켜서 catch 반응 확인
+//            throw new Exception(); // 강제로 오류 발생시켜서
+//
+//
+//
+//            catch 반응 확인
             reviewService.delete(reviewDto);
             return "redirect:/restr/read?restr_NUM="+reviewDto.getRestr_NUM();
 
@@ -66,3 +130,4 @@ public class ReviewController {
     }
 
 }
+

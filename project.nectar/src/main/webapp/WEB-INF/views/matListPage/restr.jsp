@@ -4,7 +4,6 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -218,16 +217,13 @@
 
 
     <div class="review-box">
-        <form id="form" action="<c:url value="/review/write"/>" method="post">
+        <form id="form" action="<c:url value="/review/write"/>" method="post" enctype="multipart/form-data">
+            <security:csrfInput/>
             <input type="hidden" name="restr_NUM" value="${restrDto.restr_NUM}">
             <input type="hidden" name="user_email" value="${userDto.user_email}">
             <input type="hidden" name="user_name" value="${userDto.user_name}">
             <input type="hidden" name="user_picture" value="${userDto.user_picture}">
-
-
-            <%--            --%>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-            <%--            --%>
+<%--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
 
             <div class="review__header">${restrDto.restr_name}</div>
             <span class="text">에 대한 솔직한 리뷰를 써주세요.</span>
@@ -335,20 +331,17 @@
                         <input
                                 type="file"
                                 id="reviewPicUpload"
-                                name="review_picture"
+<%--                                name="review_picture"--%>
+                                name="file"
                                 accept="image/jpeg"
                                 required
                         />
                     </div>
-
                     <div class="buttons">
 
-                        <button type="button" id="submitBtn" class="uploadBtn">리뷰작성</button>
-                        <button type="button" class="delBtn">취소</button>
+                        <button type="submit" id="submitBtn" class="uploadBtn">리뷰작성</button>
                     </div>
                 </div>
-
-
 
         </form>
     </div>
@@ -399,7 +392,10 @@
                     <ul class="review__picture__list">
                         <li class="review__picture">
                             <div class="review__picture__wrap">
-                                <img src="<c:url value='/images/pizza.png'/>" alt="" class="reviewPicture"/>
+<%--                                <img src="<c:url value='/images/pizza.png'/>" alt="" class="reviewPicture"/>--%>
+                                <img src="<c:url value='/uploadFile/${reviewDto.review_picture}'/>" alt="" class="reviewPicture"/>
+<%--                                <img src="C:\Users\user\IdeaProjects\Nectar\project.nectar\src\main\webapp\resources\uploadFile\KakaoTalk_20230403_004726694.jpg" alt=""/>--%>
+<%--                                <img src="${reviewDto.review_picture}" alt=""/>--%>
                                     <%--              <img src=${reviewDto.review_picture} alt="" class="reviewPicture" />--%>
                             </div>
                         </li>
@@ -530,37 +526,19 @@
         }); // review-edtior
 
 
-        $("#submitBtn").on("click", () => {
+        <%--$("#submitBtn").on("click", () => {--%>
 
-            let form = $("#form");
-            form.attr("action", "<c:url value='/review/write'/>")
-            form.attr("method", "post")
-            form.submit();
-
-
-        }); // submit
-
-
-        // $(".review").on("click", "#reviewModifyBtn", (e) => {
-
-            // let li = e.target.parentNode;
-            // let form = $("#reviewModifyForm", li);
-            <%--console.log(form)--%>
-            <%--let isReadOnly = $("textarea[name=review_comment]", li).attr("readonly");--%>
+        <%--    let form = $("#form");--%>
+        <%--    alert("btn clicked")--%>
+        <%--    form.attr("action", "<c:url value='/review/write?${_csrf.parameterName}=${_csrf.token}'/>")--%>
+        <%--    &lt;%&ndash;form.attr("action", "<c:url value='/review/write'/>")&ndash;%&gt;--%>
+        <%--    form.attr("method", "post")--%>
+        <%--    form.attr("enctype","multipart/form-data")--%>
+        <%--    form.submit();--%>
 
 
-            <%--// 읽기상태 -> 수정상태--%>
-            <%--if (isReadOnly == "readonly") {--%>
-            <%--    $("textarea[name=review_comment]", li).attr('readonly', false);--%>
-            <%--    e.target.innerHTML = "리뷰등록";--%>
-            <%--    return;--%>
-            <%--}--%>
+        <%--}); // submit--%>
 
-            <%--// 리뷰등록--%>
-
-            <%--form.attr("action", "<c:url value="/review/modify"/>");--%>
-            <%--form.attr("method", "post");--%>
-            <%--form.submit();--%>
 
 
         // });
@@ -591,17 +569,17 @@
         }) //리뷰(review) 수정
 
 
-        $("#reviewDelBtn", ".review").on("click", function (){
+        <%--$("#reviewDelBtn", ".review").on("click", function (){--%>
 
-            let buttons = $(this).parent();
-            let alignContainer = buttons.parent();
-            let li = alignContainer.parent();
-            let form = $("#reviewModifyForm", li);
-            form.attr("action", "<c:url value="/review/delete"/>");
-            form.attr("method", "post");
-            form.submit();
+        <%--    let buttons = $(this).parent();--%>
+        <%--    let alignContainer = buttons.parent();--%>
+        <%--    let li = alignContainer.parent();--%>
+        <%--    let form = $("#reviewModifyForm", li);--%>
+        <%--    form.attr("action", "<c:url value="/review/delete"/>");--%>
+        <%--    form.attr("method", "post");--%>
+        <%--    form.submit();--%>
 
-        }); // 리뷰(review) 삭제
+        <%--}); // 리뷰(review) 삭제--%>
 
 
 

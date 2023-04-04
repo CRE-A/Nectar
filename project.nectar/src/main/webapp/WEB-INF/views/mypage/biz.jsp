@@ -17,23 +17,12 @@
     ></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="<c:url value='/css/navbarHome.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/navbarSearchX.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/biz.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/qna.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/globalPage.css'/>"/>
 
 
-    <style>
-        section#navbar.biz {
-            z-index: 2;
-            width: 100vw;
-            background-color: #e9bea2;
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-        }
-
-    </style>
 </head>
 
 
@@ -173,29 +162,67 @@
             </div>
             <h1>핫딜 판매 내역 💸️</h1>
             <!--핫딜 판매 내역이 없는 경우-->
-            <!--c:if test="$empty hotdealDto}"-->  <!--이거 수정해야함!-->
-            <div class="msg__wrap">
-                <i class="fa-solid fa-circle-info"></i>
-                <h3> 아직 판매된 핫딜 제품이 없습니다. </h3>
-            </div>
-            <!--/c:if-->
-            <div class="container item">
-                <div class="recent-order">
-                    <table>
-                        <tbody>
-                        <%--            salesVolume--%>
-                        <%--            maxSalesVolume--%>
-                        <%--            <c:forEach var="paymentDto" items="${paymentDto}">--%>
-                        <%--              <tr>--%>
-                        <%--                <td class="bno">${paymentDto.}</td>--%>
-                        <%--                <td class="writer">${paymentDto.}</td>--%>
-                        <%--              </tr>--%>
-                        <%--            </c:forEach>--%>
-                        </tbody>
-                    </table>
+            <c:if test="${empty PaymentList}">  <!--이거 수정해야함!-->
+                <div class="msg__wrap">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <h3> 아직 판매된 핫딜 제품이 없습니다. </h3>
                 </div>
+            </c:if>
+
+            <div class="userList">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>주문ID</th>
+                        <th>상품ID</th>
+                        <th>거래일자</th>
+                        <th>메뉴</th>
+                        <th>사용기간</th>
+                        <th>이벤트기간</th>
+                        <th>구매자</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="PaymentList" items="${PaymentList}">
+                        <tr>
+                            <td class="no">   ${PaymentList.imp_uid}</td>
+                            <td class="qnaTitle">   ${PaymentList.merchant_uid}</td>
+                            <td class="writer">${PaymentList.pay_date}</td>
+                            <td class="writer"> ${PaymentList.restr_menu_food}</td>
+                            <td class="writer">${PaymentList.hotdeal_eventDuration}</td>
+                            <td class="writer">${PaymentList.hotdeal_useDate}</td>
+                            <td class="writer"> ${PaymentList.user_email}</td>
+                        </tr>
+                    </c:forEach>
+
+                    </tbody>
+                </table>
+
 
             </div>
+
+
+<%--            &lt;%&ndash;&ndash;%&gt;--%>
+<%--            &lt;%&ndash; 사업자가 진행한 핫딜의 결제정보(payment)에 대한 data&ndash;%&gt;--%>
+<%--            <section>--%>
+<%--                <h2>사업자가 진행한 핫딜의 결제정보(payment)에 대한 data</h2>--%>
+<%--                <c:forEach var="PaymentList" items="${PaymentList}">--%>
+<%--                    ${PaymentList.imp_uid}--%>
+<%--                    ${PaymentList.merchant_uid}--%>
+<%--                    ${PaymentList.user_email}--%>
+<%--                    ${PaymentList.pay_date}--%>
+<%--                    ${PaymentList.restr_NUM}--%>
+<%--                    ${PaymentList.restr_name}--%>
+<%--                    ${PaymentList.restr_category_loc}--%>
+<%--                    ${PaymentList.restr_menu_food}--%>
+<%--                    ${PaymentList.hotdeal_picture}--%>
+<%--                    ${PaymentList.hotdeal_useDate}--%>
+<%--                    ${PaymentList.hotdeal_eventDuration}--%>
+<%--                </c:forEach>--%>
+<%--            </section>--%>
+<%--            &lt;%&ndash;&ndash;%&gt;--%>
+
+
         </div>     <!-- 사업정보-->
         <div class="content index">
             <h1>사업자 정보 </h1>
@@ -621,85 +648,37 @@
         </div>            <!-- 핫딜등록-->
         <div class="content index">
             <h1>문의 남기기 ✏️</h1>
-            <div class="container item">
+            <div class="userList">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>no</th>
+                        <th>제목</th>
+                        <th>이름</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="QNADto" items="${QNADto}">
+                        <tr>
+                            <td class="no"> ${QNADto.qna_NUM}</td>
+                            <td class="qnaTitle"><a
+                                    href="<c:url value="/mypage/biz/QNA/read?qna_NUM= ${QNADto.qna_NUM}"/>">  ${QNADto.qna_title}</a>
+                            </td>
+                            <td class="writer">${QNADto.qna_name}</td>
+                        </tr>
+                    </c:forEach>
 
-                <form id="qnaForm" action="<c:url value='/mypage/biz/QNA/write'/>" method="post">
-                    <%--            --%>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <%--            --%>
-                    <input type="text" name="qna_title" placeholder="제목 : 인태는 못말려">
-                    <textarea name="qna_content" value="" placeholder="내용을 입력하세요 : 제발 누가 좀 말려요"></textarea>
-                    <label for="qna_picutre" class="qna_picutre">
-                        ➕
-                    </label>
-                    <input id="qna_picutre" type="hidden" name="qna_picture"
-                           value="https://images.unsplash.com/photo-1534211698458-e2be12c1a94c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGZsb3dlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60">
-                    <input type="hidden" name="qna_writer" value="${bizAccountDto.bizAccount_email}">
-                    <input type="hidden" name="qna_name" value="${bizAccountDto.bizAccount_name}">
-                    <button type="submit" class="qnaRegBtn">등록</button>
-                </form>
+                    </tbody>
+                </table>
+
+                <button id="writeBtn"> 문의 남기기 </button>
+
 
             </div>
         </div>            <!-- 문의남기기-->
     </div>
 </section>
 
-<%-- / Global Page--%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%----%>
-<%--// 사업자가 요청/문의한 QNA 에 대한 data--%>
-<section>
-    <h2>사업자가 요청/문의한 QNA 에 대한 DATA</h2>
-    <c:forEach var="QNADto" items="${QNADto}">
-        ${QNADto.qna_NUM}
-        ${QNADto.qna_title}
-        ${QNADto.qna_content}
-        ${QNADto.qna_picture}
-        ${QNADto.qna_regdate}
-        ${QNADto.qna_writer}
-        ${QNADto.qna_name}
-    </c:forEach>
-</section>
-<%----%>
-
-
-
-
-
-
-<%----%>
-<%-- 사업자가 진행한 핫딜의 결제정보(payment)에 대한 data--%>
-<section>
-    <h2>사업자가 진행한 핫딜의 결제정보(payment)에 대한 data</h2>
-    <c:forEach var="PaymentList" items="${PaymentList}">
-        ${PaymentList.imp_uid}
-        ${PaymentList.merchant_uid}
-        ${PaymentList.user_email}
-        ${PaymentList.pay_date}
-        ${PaymentList.restr_NUM}
-        ${PaymentList.restr_name}
-        ${PaymentList.restr_category_loc}
-        ${PaymentList.restr_menu_food}
-        ${PaymentList.hotdeal_picture}
-        ${PaymentList.hotdeal_useDate}
-        ${PaymentList.hotdeal_eventDuration}
-    </c:forEach>
-</section>
-<%----%>
 
 
 
@@ -807,6 +786,10 @@
             form.submit();
 
         }) // 레스토랑 메뉴 삭제
+
+        $("#writeBtn").on("click", function (){
+            location.href = "<c:url value='/mypage/biz/QNA/write'/>";
+        }) // 문의글 남기기
 
 
     }) // ready()

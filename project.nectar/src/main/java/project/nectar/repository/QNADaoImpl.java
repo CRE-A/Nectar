@@ -43,4 +43,14 @@ public class QNADaoImpl implements QNADao {
         return session.insert(namespace+"insert",qnaDto);
     }
 
+    @Override
+    public Integer update(QNADto qnaDto){
+        return session.update(namespace + "update", qnaDto);
+    }
+
+    @Override
+    public Integer delete(QNADto qnaDto){
+        return session.delete(namespace + "delete" , qnaDto);
+    }
+
 }

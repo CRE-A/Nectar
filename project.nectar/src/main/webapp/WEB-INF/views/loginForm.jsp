@@ -9,36 +9,27 @@
     <meta charset="UTF-8">
     <title>Nectar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <!-- CSS -->
-    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/navbarSearchX.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/loginform.css'/>"/>
     <%--  script --%>
     <script src="https://kit.fontawesome.com/43ede2213f.js" crossorigin="anonymous"></script>
 
+    <style>
+        #navbar.login{
+            -webkit-box-shadow: 0px 4px 0px -200px rgba(189,189,189,1);
+            -moz-box-shadow: 0px 4px 0px -200px rgba(189,189,189,1);
+            box-shadow: 0px 4px 0px -200px rgba(189,189,189,1);
+        }
+    </style>
+
 </head>
 <body>
 
-<section id="navbar">
+<section id="navbar" class="login">
     <div class="logo">
-        <a href="<c:url value='/'/>"> <img src="<c:url value="/images/nectarLogo.png"/>" alt="" class="logo__img"/></a>
-    </div>
-    <div class="searchBar">
-        <form action="<c:url value="/restr/search"/>" class="search-form" method="get">
-            <button type="button" class="searchBtn" value="검색">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <input type="hidden" name="option" value="searchEngine"/>
-            <input
-                    type="text"
-                    name="keyword"
-                    class="search-input"
-                    value="${ph.sc.keyword}"
-                    placeholder="지역, 식당 또는 음식"
-            />
-            <button type="submit" class="search-button" value="검색">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </form>
+        <a href="<c:url value='/'/>"> <img src="<c:url value='/images/nectarLogo.png'/>" alt="" class="logo__img"/></a>
     </div>
     <ul class="menu">
         <li class="menu item">
@@ -82,7 +73,7 @@
                     <a href="<c:url value="/register/addUser"/>">회원가입 </a>
                 </button>
                 <button>
-                    <a href="<c:url value="/register/addBiz"/>">사업자 회원가입 </a>
+                    <a href="<c:url value="/register/addBizz"/>">사업자 회원가입 </a>
                 </button>
 <%--                <button>--%>
 <%--                    <a href="<c:url value=""/>">이메일찾기 </a>--%>
@@ -138,6 +129,7 @@
     if(${not empty sns_email}){
         document.getElementById("loginBtn").click();
     }
+
 
 
 

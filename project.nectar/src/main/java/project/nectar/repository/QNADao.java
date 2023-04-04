@@ -14,4 +14,8 @@ public interface QNADao {
     QNADto selectByWriter(Integer qna_NUM, String qna_writer);
 
     Integer insert(QNADto qnaDto);
+
+    public Integer update(QNADto qnaDto);
+
+    public Integer delete(QNADto qnaDto);
 }

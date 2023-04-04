@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import project.nectar.domain.AdminDto;
 import project.nectar.domain.BizAccountDto;
 import project.nectar.domain.UserDto;
@@ -58,7 +59,7 @@ public class RegisterController {
 
 
 
-    @GetMapping("/addBiz")
+    @GetMapping("/addBizz")
     public String registerForm_Biz() {
         return "registerFormBiz";
     }
@@ -114,6 +115,41 @@ public class RegisterController {
 
         return biz==null||biz.getBizAccount_email().equals("");
     }
+
+
+
+    @PostMapping("/readEmail")
+    @ResponseBody
+    public Boolean readEmail(String user_email, String bizAccount_email) {
+        boolean chk = true;
+
+        System.out.println("user_email = " + user_email);
+        if (user_email != null) {
+            try {
+                UserDto user = userDao.select(user_email);
+                chk = user == null ? false : true;
+                return chk;
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        if (bizAccount_email != null) {
+            try {
+                BizAccountDto biz = bizAccountDao.select(bizAccount_email);
+                chk = biz == null ? false : true;
+                return chk;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return chk;
+    }
+
+
+
 
 
 

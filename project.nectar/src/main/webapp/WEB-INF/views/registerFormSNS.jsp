@@ -9,26 +9,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<link rel="stylesheet" href="<c:url value='/css/universial_hb.css'/>">
-<link rel="stylesheet" href="<c:url value='/css/menu_hb.css'/>">
-<link rel="stylesheet" href="<c:url value='/css/registerForm_hb.css'/>">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="<c:url value='/css/navbarSearchX.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/registerForm_hb.css'/>"/>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+
+    <style>
+
+        body{
+            overflow: hidden;
+        }
+
+    </style>
+</head>>
 <body>
 
 
 <!-- NAVBAR -->
-<nav id="navbar">
-    <div class="navbar__logo">
-        <a href="<c:url value="/" />">BINA</a>
+<section id="navbar" class="register">
+    <div class="logo">
+        <a href="<c:url value='/'/>"> <img src="<c:url value='/images/nectarLogo.png'/>" alt="" class="logo__img"/></a>
     </div>
-    <ul class="navbar__menu">
-        <li class="navbar__menu__item active"> <a href="<c:url value="/"/>"> home </a>  </li>
-        <li class="navbar__menu__item "> <a href="<c:url value="/board/list"/>"> Board </a>  </li>
-        <li class="navbar__menu__item "> <a href="<c:url value="/login/login"/>"> Login </a>  </li>
-        <li class="navbar__menu__item "> <a href="<c:url value="/register/add"/>"> Sign in </a>  </li>
+    <ul class="menu">
+        <li class="menu item">
+            <a href="<c:url value='/hotdeal/list'/>">HOTDEAL</a>
+        </li>
+        <li class="menu item">
+            <a href="<c:url value='/restr/list'/>">맛집리스트</a>
+        </li>
+        <li class="menu item">
+            <security:authorize access="isAnonymous()">
+                <a href="<c:url value='/login/login'/>">LOGIN</a>
+            </security:authorize>
+            <security:authorize access="hasRole('USER')">
+                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+            </security:authorize>
+            <security:authorize access="hasRole('BIZ')">
+                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+            </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
+                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+            </security:authorize>
+        </li>
     </ul>
-</nav>
-
+</section>
 <!-- Register Form -->
 
 <div class="container">

@@ -28,6 +28,17 @@
 					<!--root로 방문하면(path="/") home.jsp를 보여준다-->
 
 
+
+<!--	&lt;!&ndash; 파일 업로드 데이터 관리 &ndash;&gt;-->
+
+<!--	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+<!--		<beans:property name="maxUploadSize" value="209715200" />   &lt;!&ndash; Max upload size : 20MB &ndash;&gt;-->
+<!--		<beans:property name="maxInMemorySize" value="10485760" /> &lt;!&ndash; Max size of file in memory : 10MB &ndash;&gt;-->
+<!--		<beans:property name="defaultEncoding" value="utf-8"/>-->
+<!--	</beans:bean>-->
+
+
+
 	<!--    Google oAuth -->
 
 	<beans:bean id="googleClientID" class="java.lang.String">
@@ -61,6 +72,10 @@
             /> -->
 		<beans:property name="redirectUri" ref="googleRedirectUrl"/>
 	</beans:bean>
+
+
+
+
 
 </beans:beans>
 

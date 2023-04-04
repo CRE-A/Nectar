@@ -16,11 +16,35 @@
     <link rel="stylesheet" href="<c:url value='/css/popFilter.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/home.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/tagFilter.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/hotdealList.css'/>"/>
     <%--  <link rel="stylesheet" href="<c:url value='/css/tagpic.css'/>" />--%>
+
+    <style>
+
+        .hotdealList {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hotdealRestr__imgContainer {
+            width: 500px;
+            height: 360px;
+        }
+        .hotdealRestr {
+            margin-top: 8px;
+            margin: 5px;
+        }
+
+        #hotdeal {
+            width: 100%;
+        }
+    </style>
 
     <script src="https://kit.fontawesome.com/43ede2213f.js" crossorigin="anonymous"></script>
 </head>
-<br>
+
 <%--NAVBAR--%>
 
 <section id="navbar">
@@ -370,16 +394,13 @@
 
 
 
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
+
 <%--핫딜 리스트 뿌려주기--%>
 <!-- Main -->
+
+<div class="sub_title">
+    <h1>오늘의 핫딜 🔥</h1>
+</div>
 
 <section id="hotdeal">
     <ul class="hotdealList">
@@ -387,7 +408,7 @@
             <li class="hotdealRestr">
                 <a href="<c:url value="/hotdeal/read?hotdeal_NUM=${hotdealDto.hotdeal_NUM}"/>" class="hotdealRestr_wrap">
                     <div class="hotdealRest__imgDesc">
-                        <div class="hotdealRestr__imgContainer">
+                        <div class="hotdealRestr__imgContainer home">
                             <img
                                     src="https://i.pinimg.com/564x/6b/0b/ea/6b0bea27a1799ba9167d844f337be5e2.jpg"
                                     alt=""
@@ -415,18 +436,18 @@
 
                     <%--/////////////////////////////////////////////////////////////////////////////////////--%>
                             <c:if test="${hotdealDto.hotdeal_salesVolume == hotdealDto.hotdeal_MaxSalesVolume}">
-                                <h2 style="color:red"> 준비한 쿠폰이 모두 소진되어 판매가 종료되었습니다. </h2>
+                                <h3 style="color:red; margin-top: 8px"> 준비한 쿠폰이 모두 소진되어 판매가 종료되었습니다. </h3>
                             </c:if>
                     <%--/////////////////////////////////////////////////////////////////////////////////////--%>
 
 
                         </div>
                         <div class="info__hotdealMenu">
-                            <p>${hotdealDto.restr_menu_food}</p>
+                            <span>${hotdealDto.restr_menu_food}</span>
                         </div>
                         <div class="info__hotdealDesc">
                             <div class="hotdealDesc__wrap">
-                                <p>${hotdealDto.hotdeal_desc}</p>
+                                <span>${hotdealDto.hotdeal_desc}</span>
                             </div>
                         </div>
                     </div>

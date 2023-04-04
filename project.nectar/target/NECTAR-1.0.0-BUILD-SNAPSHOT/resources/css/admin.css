@@ -128,3 +128,33 @@ input[name=keyword]:focus {
     outline: none;
 }
 
+
+/**/
+
+
+
+/**/
+
+td.judge{
+    width: 100px;
+}
+td h4.eval{
+    background-color: forestgreen;
+    width: 120px;
+    color: white;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+}
+
+td h4.deny{
+    background-color: red;
+    width: 120px;
+    color: white;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+}
+
+
+

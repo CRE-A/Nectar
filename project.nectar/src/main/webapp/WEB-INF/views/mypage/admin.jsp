@@ -387,20 +387,9 @@
     ></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="<c:url value='/css/navbar.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/navbarSearchX.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/globalPage.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/admin.css'/>"/>
-
-    <style>
-        section#navbar.admin {
-            z-index: 2;
-            width: 100vw;
-            background-color: #e9bea2;
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-        }
-    </style>
 
 </head>
 
@@ -619,12 +608,12 @@
                             <th>사업장</th>
                             <th>메뉴</th>
                             <th>가격책정</th>
+                            <th>심사상태</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <c:forEach var="request_hotdealDto" items="${request_hotdealDto}">
-
                             <tr>
                                 <td class="no">${request_hotdealDto.request_restr_NUM}</td>
                                 <td class="requestRestrName"><a
@@ -632,7 +621,7 @@
                                 </td>
                                 <td class="writer">${request_hotdealDto.request_restr_menu_food}</td>
                                 <td class="writer">${request_hotdealDto.request_restr_menu_price}</td>
-
+                                <td class="judge"> <h4 class="${request_hotdealDto.evaluate_code eq 0 ? "eval" : "deny"}">${request_hotdealDto.evaluate_code eq 0 ? "심사필요" : "심사반려"}</h4> </td>
                             </tr>
                         </c:forEach>
 
@@ -644,7 +633,6 @@
         <div class="content index">
             <h1> F&Q✏️</h1>
             <div class="container item">
-
                 <div class="userList">
                     <table>
                         <thead>
@@ -671,9 +659,6 @@
 
                         </tbody>
                     </table>
-
-
-
                 </div>
 
 

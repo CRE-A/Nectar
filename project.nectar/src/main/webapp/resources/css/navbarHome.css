@@ -1,4 +1,7 @@
+@import url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo.css');
+
 * {
+    font-family: 'NanumSquareNeo';
     margin: 0;
     box-sizing: border-box;
 }
@@ -12,7 +15,7 @@ a {
 
 section#navbar {
     /*z-index: 2;*/
-    width: 100vw;
+    width: 100%;
     /*background-color: #e9bea2;*/
     display: flex;
     justify-content: space-between;

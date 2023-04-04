@@ -29,6 +29,16 @@ section#title {
     border-bottom: 1px solid gray;
 }
 
+input[name="qna_title"] {
+    font-size: 22px;
+    font-weight: bold;
+    border: 0;
+}
+
+input[name="qna_title"]:focus{
+    outline: none;
+}
+
 .user_info {
     display: flex;
     justify-content: space-between;
@@ -41,6 +51,21 @@ section#content {
     border-bottom: 3px solid black;
     margin-bottom: 2rem;
 }
+
+
+
+textarea[name="qna_content"] {
+    width: 100%;
+    padding: 10px 0 0 10px;
+    background-color: transparent;
+    border: 0;
+    resize: none;
+}
+
+textarea:focus{
+    outline: none;
+}
+
 footer {
     display: flex;
     justify-content: center;
@@ -62,4 +87,5 @@ button.denyBtn {
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
+    margin: 5px;
 }

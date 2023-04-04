@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import project.nectar.domain.BizAccountDetailsDto;
+import project.nectar.domain.BizAccountDto;
 import project.nectar.domain.QNADto;
+import project.nectar.domain.UserDto;
+import project.nectar.repository.BizAccountDao;
 import project.nectar.repository.QNADao;
 import project.nectar.repository.QnaCommentDao;
+import project.nectar.repository.UserDao;
 
 import java.util.List;
 
@@ -23,8 +28,27 @@ public class QNAController {
     @Autowired
     QnaCommentDao qnaCommentDao;
 
+    @Autowired
+    BizAccountDao bizAccountDao;
 
+    @Autowired
+    UserDao userDao;
 
+    @GetMapping("/user/QNA/write")
+    public String writeQNA_user(Model m,Authentication authentication){
+
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        String user_email = userDetails.getUsername();
+
+        try {
+            UserDto userDto = userDao.select(user_email);
+            m.addAttribute("userDto",userDto);
+            m.addAttribute("mode", "new");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return  "mypage/qnaForm";
+    }
 
     @PostMapping("/user/QNA/write")
     public String writeQNA_user(QNADto qnaDto, RedirectAttributes rattr, Model m){
@@ -63,11 +87,27 @@ public class QNAController {
     }
 
 
+    @GetMapping("/biz/QNA/write")
+    public String writeQNA_biz(Model m, Authentication authentication){
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        String Biz_email = userDetails.getUsername();
+
+        try {
+            BizAccountDto bizAccountDto = bizAccountDao.select(Biz_email);
+            m.addAttribute("bizAccountDto",bizAccountDto);
+            m.addAttribute("mode", "new");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return "mypage/qnaForm";
+    }
+
     @PostMapping("/biz/QNA/write")
     public String writeQNA_biz(QNADto qnaDto, RedirectAttributes rattr, Model m){
 
         try {
             qnaDao.insert(qnaDto);
+            m.addAttribute("mode", "new");
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg","QNA_WRT_ERR");
@@ -78,7 +118,6 @@ public class QNAController {
         m.addAttribute("qnaDto",qnaDto);
         return "mypage/successPage/qnaWrtOk";
     }
-
 
 
     @GetMapping("/biz/QNA/read")
