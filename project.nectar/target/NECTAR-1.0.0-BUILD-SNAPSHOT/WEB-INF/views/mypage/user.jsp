@@ -105,7 +105,8 @@
                             <li class="likeRestr">
                                 <div class="likeRestr__imgWrap">
                                     <img
-                                            src="https://images.unsplash.com/photo-1627834377411-8da5f4f09de8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fCVFQyVCQyU4MCVFQyU5RCVCNCVFRCU4MSVBQ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
+<%--                                            src="https://images.unsplash.com/photo-1627834377411-8da5f4f09de8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fCVFQyVCQyU4MCVFQyU5RCVCNCVFRCU4MSVBQ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"--%>
+                                            src="<c:url value='/uploadFile/${getMyLikeList.restr_picture}'/>"
                                             alt=""
                                             class="likeRestr__img"
                                     />
@@ -133,7 +134,8 @@
                 <c:forEach var="reviewDto" items="${reviewDto}">
                     <li class="restr">
                         <a href="">
-                            <img src="https://images.unsplash.com/photo-1622896784083-cc051313dbab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGNha2V8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60" alt="" class="restr__img"/>
+                            <img src="<c:url value='/uploadFile/${reviewDto.review_picture}'/>" alt="" class="restr__img"/>
+<%--                            <img src="https://images.unsplash.com/photo-1622896784083-cc051313dbab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGNha2V8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60" alt="" class="restr__img"/>--%>
                         </a>
                         <div class="restr__content">
                             <div class="restr__head">
@@ -150,7 +152,8 @@
                             <div class="restr__review">
                                 <div class="img__wrap">
                                     <img
-                                            src="https://images.unsplash.com/photo-1679164841386-f6897cbe0e02?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
+<%--                                            src="https://images.unsplash.com/photo-1679164841386-f6897cbe0e02?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"--%>
+                                            src="<c:url value='/uploadFile/${userDto.user_picture}'/>"
                                             alt=""
                                             class="user-picture"
                                     />
@@ -182,7 +185,7 @@
                 <div class="userInfo__box">
                     <div class="userInfo__profile">
                         <img
-                                src="https://i.pinimg.com/564x/da/f8/77/daf8770e27db98bad904b66d48168a39.jpg"
+                                src="<c:url value='/uploadFile/${userDto.user_picture}'/>"
                                 alt=""
                                 class="user-profile"
                         />
@@ -215,8 +218,6 @@
                             <span class="details">비밀번호</span>
                             <input type="password" name="user_pwd" readonly value="" required/>
                         </div>
-                        <%--            --%>
-                        <%--            --%>
                         <input type="hidden" name="user_picture"  value="${userDto.user_picture}" required/>
                     </div>
                 </div>
@@ -269,23 +270,6 @@
 
 
             </div>
-            <%--            <div>--%>
-            <%--                <h2>사용자(User)가 구매한 핫딜 결제정보(구매내역)</h2>--%>
-            <%--                <c:forEach var="MyPaymentList" items="${MyPaymentList}">--%>
-            <%--                    ${MyPaymentList.imp_uid}--%>
-            <%--                    ${MyPaymentList.merchant_uid}--%>
-            <%--                    ${MyPaymentList.user_email}--%>
-            <%--                    ${MyPaymentList.pay_date}--%>
-            <%--                    ${MyPaymentList.restr_NUM}--%>
-            <%--                    ${MyPaymentList.restr_name}--%>
-            <%--                    ${MyPaymentList.restr_category_loc}--%>
-            <%--                    ${MyPaymentList.restr_menu_food}--%>
-            <%--                    ${MyPaymentList.hotdeal_picture}--%>
-            <%--                    ${MyPaymentList.hotdeal_useDate}--%>
-            <%--                    ${MyPaymentList.hotdeal_eventDuration}--%>
-            <%--                </c:forEach>--%>
-            <%--            </div>--%>
-
 
 
         </div>

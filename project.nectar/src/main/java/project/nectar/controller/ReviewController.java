@@ -47,30 +47,23 @@ public class ReviewController {
 
     @PostMapping("/write")
     public String write(ReviewDto reviewDto, MultipartHttpServletRequest req) throws IOException {
-        System.out.println("multipart data 여기까지 잘 넘어옴 ");
-//        String src = req.getParameter("src");
+
         MultipartFile mf = req.getFile("file");
-//        String path = "C:\\Users\\user\\IdeaProjects\\Nectar\\project.nectar\\src\\main\\webapp\\resources\\uploadFile\\";
         String path = "C:\\Users\\user\\IdeaProjects\\Nectar\\project.nectar\\src\\main\\webapp\\resources\\uploadFile\\";
-
-
         String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-        long fileSize = mf.getSize(); // 파일 사이즈
-        String type = mf.getContentType();
 
-        System.out.println("type = " + type);
+
+        if(mf.isEmpty()){   // 첨부 파일이 없으면
+            originFileName = "default_review.jpg";
+        }
+
+        reviewDto.setReview_picture(originFileName);
         System.out.println("originFileName : " + originFileName);
-        System.out.println("fileSize : " + fileSize);
-
-        String safeFile = path + originFileName;
-        System.out.println("최종 safeFile = " + safeFile);
+        System.out.println("reviewDto = " + reviewDto);
 
         try {
-            mf.transferTo(new File(safeFile));
-
-
-            reviewDto.setReview_picture(originFileName);
-            System.out.println("reviewDto = " + reviewDto);
+            String safeFile = path + originFileName;
+            mf.transferTo(new File(safeFile));          // path에 FileName의 파일을 저장
 
             reviewService.write(reviewDto);
 
@@ -83,10 +76,13 @@ public class ReviewController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            String comment = URLEncoder.encode(reviewDto.getReview_comment(),"utf-8");
+            String queryString = "?restr_NUM="+reviewDto.getRestr_NUM()+"&review_comment="+comment
+                    +"&review_picture="+reviewDto.getReview_picture()+"&review_star="+reviewDto.getReview_star();
+
+            return "redirect:/restr/read"+queryString;
         }
 
-
-//        FileUtils.copyInputStreamToFile(multipart.getInputStream(), new File(filePath, fileName));
         return  "redirect:/restr/read?restr_NUM="+reviewDto.getRestr_NUM();
     }
 

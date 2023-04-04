@@ -306,7 +306,6 @@
                             id="review-editor"
                             cols="30"
                             rows="10"
-                    <%--                    ${mode=="User_access" ? "" : 'readonly' = "readonly"}--%>
                             placeholder="${userDto.user_name} 님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"
                     >${param.review_comment}</textarea>
                 </div>
@@ -324,7 +323,6 @@
                         <input
                                 type="file"
                                 id="reviewPicUpload"
-<%--                                name="review_picture"--%>
                                 name="file"
                                 accept="image/jpeg"
                                 required
@@ -347,7 +345,6 @@
                 <div class="review__user">
                     <div class="review__user__wrap">
                         <div class="review__picWrap">
-<%--                            <img src="https://hips.hearstapps.com/sev.h-cdn.co/assets/16/40/980x980/square-1475780811-disney-pixar-dug-up.jpg?resize=1200:*" alt=""/>--%>
                             <img src="<c:url value='/uploadFile/${reviewDto.user_picture}'/>" alt=""/>
                         </div>
                         <span class="reivew__userName">
@@ -355,10 +352,6 @@
                         </span>
                     </div>
                 </div>
-
-                    <%-- user_picture 이미지도 잘 넣어 주세요  --%>
-                    <%-- ${reviewDto.user_picture}--%>
-
                 <div class="review__content">
                     <div class="review__content__wrap">
           <span class="review__regdate">
@@ -384,7 +377,6 @@
                     <ul class="review__picture__list">
                         <li class="review__picture">
                             <div class="review__picture__wrap">
-<%--                                <img src="<c:url value='/images/pizza.png'/>" alt="" class="reviewPicture"/>--%>
                                 <img src="<c:url value='/uploadFile/${reviewDto.review_picture}'/>" alt="" class="reviewPicture"/>
                             </div>
                         </li>
@@ -514,18 +506,18 @@
         }); // review-edtior
 
 
-        <%--$("#submitBtn").on("click", () => {--%>
+        $("#submitBtn").on("click", () => {
 
-        <%--    let form = $("#form");--%>
-        <%--    alert("btn clicked")--%>
-        <%--    form.attr("action", "<c:url value='/review/write?${_csrf.parameterName}=${_csrf.token}'/>")--%>
-        <%--    &lt;%&ndash;form.attr("action", "<c:url value='/review/write'/>")&ndash;%&gt;--%>
-        <%--    form.attr("method", "post")--%>
-        <%--    form.attr("enctype","multipart/form-data")--%>
-        <%--    form.submit();--%>
+            let form = $("#form");
+            alert("btn clicked")
+            <%--form.attr("action", "<c:url value='/review/write?${_csrf.parameterName}=${_csrf.token}'/>")--%>
+            form.attr("action", "<c:url value='/review/write'/>")
+            form.attr("method", "post")
+            form.attr("enctype","multipart/form-data")
+            form.submit();
 
 
-        <%--}); // submit--%>
+        }); // submit
 
 
 
