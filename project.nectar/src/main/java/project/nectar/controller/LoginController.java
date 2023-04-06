@@ -1,7 +1,5 @@
 package project.nectar.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,7 +9,7 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
-import project.nectar.auth.SnsLogin;
+import project.nectar.auth.GoogleService;
 import project.nectar.auth.SnsValue;
 import project.nectar.repository.AdminDao;
 import project.nectar.domain.UserDto;
@@ -28,7 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/login")
@@ -91,11 +88,11 @@ public class LoginController {
 
 
     @GetMapping("/auth/google/callback")
-    public String snsLoginCallback(@RequestParam(value = "code", required = false) String code, HttpSession sn, Model m) throws Exception{
+    public String GoogleLoginCallback(@RequestParam(value = "code", required = false) String code, HttpSession sn, Model m) throws Exception{
 
 
-        SnsLogin snsLogin = new SnsLogin(googleSns);                                       // google 소셜 로그인
-        UserDto snsUser = snsLogin.getUserProfile(code);                                   // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
+        GoogleService googleService = new GoogleService(googleSns);                             // google 소셜 로그인
+        UserDto snsUser = googleService.getUserProfile(code);                                   // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
         setSession(sn, snsUser);
 
         if (!isValidEmail(snsUser.getUser_email())) {                                      // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인

@@ -57,14 +57,26 @@ public class PaymentServiceImpl implements PaymentService {
 
 
     // Delete() : 결제를 취소한다(환불요청)?
-    //1. [payment 테이블]에서 해당 결제 내역을 delete
-    //2. [payment 테이블]에 (hotdeal_NUM)번에 해당하는 총 결제 수 count(*)를 select
+    //1  (만약, 핫딜 총 판매량 == 핫딜 최대 판매량 일 경우)
+    //   1.1 [restr 테이블]의  칼럼 restr_hotdeal_NUM 을 'hotdeal_NUM'으로 로 update       >> restrList.jsp 에서 '핫딜 진행중'이라는 알림이 생긴다.
+    //   1.2 [restr_menu 테이블]에 restr_menu_hotdeal_NUM = 'hotdeal_NUM' 으로 update       >> restr.jsp 에서 '핫딜로 이동하기'라는 알림이 생긴다.
+
+    //2. [payment 테이블]에서 해당 결제 내역을 delete
+    //3. [payment 테이블]에 (hotdeal_NUM)번에 해당하는 총 결제 수 count(*)를 select
     //    핫딜의 총 결제 수(count(*)) = 핫딜 총 판매량(salesVolume)
-    //3. [hotdeal 테이블]에 위의 값(핫딜 총 판매량; salesVolume)을 update
+    //4. [hotdeal 테이블]에 핫딜 총 판매량(salesVolume)을 update
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer delete(PaymentDto paymentDto) throws Exception{
+        int hotdeal_NUM = paymentDto.getHotdeal_NUM();;
+
+        HotdealDto hotdealDto = hotdealDao.select(hotdeal_NUM);
+        if(hotdealDto.getHotdeal_salesVolume() == hotdealDto.getHotdeal_MaxSalesVolume()){
+            restrDao.updateHotdeal(new RestrDto(hotdealDto.getRestr_NUM(),hotdeal_NUM));
+            restrMenuDao.updateHotdeal(new RestrMenuDto(hotdealDto.getRestr_menu_NUM(),hotdeal_NUM));
+        };
+
         int delete = paymentDao.delete(paymentDto);
         int salesVolume = paymentDao.count(paymentDto);
         hotdealDao.updateSalesVolume(paymentDto.getHotdeal_NUM(), salesVolume);

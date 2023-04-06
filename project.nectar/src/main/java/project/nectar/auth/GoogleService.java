@@ -13,12 +13,12 @@ import project.nectar.domain.UserDto;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-public class SnsLogin {
+public class GoogleService {
 
     private OAuth20Service oauthService;
     private String profileUrl;
 
-    public SnsLogin(SnsValue sns) {
+    public GoogleService(SnsValue sns) {
         this.oauthService = new ServiceBuilder(sns.getClientId())
                 .apiSecret(sns.getClientSecret())
                 .callback(sns.getRedirectUrl())

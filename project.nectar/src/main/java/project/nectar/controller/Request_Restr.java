@@ -41,6 +41,7 @@ public class Request_Restr {
     public String apply_for_retrial(Integer request_restr_NUM){
 
         try {
+            // 레스토랑 등록 요청이 관리자 심사에서 반려된 후
             // 재심 요청 시
             // request_restr 테이블의 (request_restr)의 심사코드(evaluate code)를 심사대기 상태(0) 로 만든다.
             Request_RestrDto request_restrDto = request_restrDao.select(request_restr_NUM);

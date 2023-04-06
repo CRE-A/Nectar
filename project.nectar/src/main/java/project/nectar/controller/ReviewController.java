@@ -21,29 +21,6 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
-//
-//    @PostMapping("/write")
-//    public String write(ReviewDto reviewDto) throws UnsupportedEncodingException {
-//
-////        String filePath = "C:\\Users\\user\\Desktop\\NECTAR\\upload\\";
-//
-//        try {
-////            throw new Exception(); // 강제로 오류 발생시켜서 catch 반응 확인
-//            reviewService.write(reviewDto);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            String comment = URLEncoder.encode(reviewDto.getReview_comment(),"utf-8");
-//            String queryString = "?restr_NUM="+reviewDto.getRestr_NUM()+"&review_comment="+comment
-//                    +"&review_picture="+reviewDto.getReview_picture()+"&review_star="+reviewDto.getReview_star();
-//
-//            return "redirect:/restr/read"+queryString;
-//        }
-//
-//        return  "redirect:/restr/read?restr_NUM="+reviewDto.getRestr_NUM();
-//    }
-//
-//
 
     @PostMapping("/write")
     public String write(ReviewDto reviewDto, MultipartHttpServletRequest req) throws IOException {
