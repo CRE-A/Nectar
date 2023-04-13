@@ -12,7 +12,7 @@
 
 <br>
 
- 프로젝트 이름의 의미 Meaning of Nectar
+ ####프로젝트 이름의 의미 Meaning of Nectar
 
 <br>
 
@@ -20,7 +20,7 @@
 
 <br>
 
- 프로젝트의 목적 Why we started this project
+ ####프로젝트의 목적 Why we started this project
 
 <br>
 
@@ -36,7 +36,7 @@
 
 <br>
 
-사용언어 Main Languages
+####사용언어 Main Languages
 
 <br>
 
@@ -58,7 +58,7 @@
 
 <br>
 
- 특징적 기술 Key Features
+#### 특징적 기술 Key Features
 
 <br>
 
@@ -82,7 +82,7 @@
 
 <br>
 
-개발환경 Development Environment
+####개발환경 Development Environment
 
 <br>
 
