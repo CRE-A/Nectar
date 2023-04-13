@@ -2,11 +2,9 @@
 
 <img src="https://user-images.githubusercontent.com/121703704/231820636-ee5eb48a-4b49-4843-ba23-fc1d0aea92a2.png" width=400px>
 
-<br>
 
 개인 맞춤 맛집 검색 서비스
 
-<br>
 
 # 💡 프로젝트 소개 Introduction
 
@@ -16,31 +14,30 @@
 
  ### 프로젝트 이름의 의미 Meaning of Nectar
 
-<br>
 
 '넥타르 Nectar'는 그리스 로마 신화에 나오는 신들이 즐기는 음식의 이름입니다. 웹사이트 이용자들이 신들의 만찬처럼 좋은 음식을 즐기기를 바라는 마음을 담아 프로젝트의 이름을 '넥타르 Nectar'로 지었습니다.
 
-<br>
+
 
  ### 프로젝트의 목적 Why we started this project
 
-<br>
+
 
 단순히 지역 또는 음식종류로 맛집을 검색하는 것이 아니라 사용자가 원하는 음식점의 분위기, 주차시설 이용 가능 여부, 반려동물 출입 여부 등 다양한 검색 필터 기능을 이용할 수 있는 웹사이트를 만듦으로써 사용자 친화적인 맛집 검색 웹사이트를 만들고자 하였습니다.
 
-<br>
+
 
 # 💡 프로젝트 기술 소개 Technology List
 
-<br>
+
 
 프로젝트에 사용된 언어와 기술, ERD와 개발환경 등을 소개합니다.
 
-<br>
+
 
 ### 사용언어 Main Languages
 
-<br>
+
 
  <li>JAVA 11</li>
 
@@ -50,19 +47,19 @@
 
  <li>CSS3</li>
 
-<br>
+
 
 ## ERD
 
-<br>
+
 
 <img src="https://user-images.githubusercontent.com/121703704/231819646-b84efc77-bdaa-4dc3-a756-3ca4676c909b.png" width=800px>
 
-<br>
+
 
 ### 특징적 기술 Key Features
 
-<br>
+
 
  <li>로그인 및 회원가입 - Google , Kakao oAuth API 사용 </li>
 
@@ -82,11 +79,11 @@
 
  <li>지도 - Kakao Map API 를 사용하여 현재 사용자 위치와 DB에 저장된 매장의 위치를 카카오 맵상에 표시 </li>
 
-<br>
+
 
 ### 개발환경 Development Environment
 
-<br>
+
 
  <li>IntelliJ IDEA</li>
 
@@ -96,11 +93,11 @@
 
 <li>MySQL </li>
 
-<br>
+
 
 # 💡 팀원 Contributors
 
-<br>
+
 
 ### 오재호
 
@@ -108,4 +105,4 @@
 
 ### 홍혜빈
 
-<br>
+
