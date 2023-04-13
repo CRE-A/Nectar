@@ -56,6 +56,8 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
 
+
+
     // Delete() : 결제를 취소한다(환불요청)?
     //1  (만약, 핫딜 총 판매량 == 핫딜 최대 판매량 일 경우)
     //   1.1 [restr 테이블]의  칼럼 restr_hotdeal_NUM 을 'hotdeal_NUM'으로 로 update       >> restrList.jsp 에서 '핫딜 진행중'이라는 알림이 생긴다.

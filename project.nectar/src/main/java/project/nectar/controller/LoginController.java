@@ -50,9 +50,6 @@ public class LoginController {
     @GetMapping("/login")
     public String loginForm(Model m, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 
-        System.out.println(" ======================================================================================");
-        System.out.println(" GET방식 login/login 지나감 ");
-
         // 만약 로그인이 되어 있으면, 돌아가
         String referrer = request.getHeader("Referer"); // 이전 경로
         if (isAuthenticated()) {
@@ -64,7 +61,6 @@ public class LoginController {
         if(session.getAttribute("prevPage")==null){
             session.setAttribute("prevPage",referrer);
         }
-        System.out.println(" ======================================================================================");
 
 
 
@@ -88,11 +84,11 @@ public class LoginController {
 
 
     @GetMapping("/auth/google/callback")
-    public String GoogleLoginCallback(@RequestParam(value = "code", required = false) String code, HttpSession sn, Model m) throws Exception{
+    public String snsLoginCallback(@RequestParam(value = "code", required = false) String code, HttpSession sn, Model m) throws Exception{
 
 
-        GoogleService googleService = new GoogleService(googleSns);                             // google 소셜 로그인
-        UserDto snsUser = googleService.getUserProfile(code);                                   // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
+        GoogleService googleService = new GoogleService(googleSns);                        // google 소셜 로그인
+        UserDto snsUser = googleService.getUserProfile(code);                              // code 를 이용해서 access_token 받기  >>>  access_token 을 이용해서 사용자 profile 정보 받아오기
         setSession(sn, snsUser);
 
         if (!isValidEmail(snsUser.getUser_email())) {                                      // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
@@ -150,22 +146,3 @@ public class LoginController {
 
 }
 
-
-
-
-
-//
-//    private String checkBeforeLogin(UserDto snsUser, HttpSession session, Model m) {
-//
-//        String email = snsUser.getUser_email();
-//        session.setAttribute("sns_email",email);
-//        session.setAttribute("sns_pwd",snsUser.getUser_pwd());
-//
-//        if (!isValidEmail(email)) {                                                        // 가입되어 있지 않은 email 이면, 회원가입 시키고 로그인
-//            m.addAttribute("userDto", snsUser);
-//            System.out.println("snsUser = " + snsUser);
-//            return "registerFormSNS";
-//        }
-//        return "";
-//    }
-//

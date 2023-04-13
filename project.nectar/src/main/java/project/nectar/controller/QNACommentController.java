@@ -15,6 +15,8 @@ public class QNACommentController{
 
 
 
+    // user (일반회원)
+
     @PostMapping("/user/QNA/addComment")
     public String addComment_user(Integer qna_NUM, String qna_comment, String qna_commenter, RedirectAttributes rattr){
 
@@ -47,6 +49,10 @@ public class QNACommentController{
 
 
 
+
+
+    // biz (사업자회원)
+
     @PostMapping("/biz/QNA/addComment")
     public String addComment_biz(Integer qna_NUM, String qna_comment, String qna_commenter, RedirectAttributes rattr){
 
@@ -78,6 +84,8 @@ public class QNACommentController{
     }
 
 
+
+    // admin (관리자)
 
     @PostMapping("/admin/QNA/addComment")
     public String addComment_admin(Integer qna_NUM, String qna_comment, String qna_commenter, RedirectAttributes rattr){

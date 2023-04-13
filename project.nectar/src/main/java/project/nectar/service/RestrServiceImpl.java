@@ -91,14 +91,8 @@ public class RestrServiceImpl implements RestrService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int insertAll(RestrDto restrDto) throws Exception {
-
-        Request_RestrDto request_restrDto = new Request_RestrDto();
-        request_restrDto.setEvaluate_code(1);
-        request_restrDto.setEvaluate_msg("심사통과");
-        request_restrDao.updateState(request_restrDto);
-
         return restrDao.insertAll(restrDto);
-    } // TDD
+    }
 
 
 }

@@ -59,16 +59,26 @@
         </li>
         <li class="menu item">
             <security:authorize access="isAnonymous()">
-                <a href="<c:url value='/login/login'/>">LOGIN</a>
+                <a href="<c:url value='/login/login'/>"><span> | &nbsp;  로그인</span><i class="fa-solid fa-user"></i></a>
             </security:authorize>
             <security:authorize access="hasRole('USER')">
-                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                </div>
             </security:authorize>
             <security:authorize access="hasRole('BIZ')">
-                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                </div>
+
             </security:authorize>
             <security:authorize access="hasRole('ADMIN')">
-                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                </div>
             </security:authorize>
         </li>
     </ul>
@@ -82,7 +92,6 @@
     <div class="hotdeal__container">
         <div class="hotdeal__imgContainer">
             <img
-<%--                    src="https://img.hellofresh.com/f_auto,fl_lossy,q_auto,w_1200/hellofresh_s3/image/6243263a18a51738954a3a82-044a399e.jpg"--%>
                     src="<c:url value='/uploadFile/${hotdealDto.hotdeal_picture}'/>"
                     alt=""
                     class="hotdeal__img"
@@ -110,12 +119,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="hotdeal__desc">
-              <i>🍟</i>
-              <h4>
-                서귀포 멋진 항구가 보이는 동남아 휴양지 느낌 가득한 카페 레스토랑
-              </h4>
-            </div> -->
+
             <div class="hotdeal__Info">
                 <div class="info">
                     <h4 class="location">매장소개</h4>
@@ -129,7 +133,7 @@
                 </div>
                 <div class="info">
                     <h4 class="foodtype">음식종류</h4>
-                    <p class="food-name">이탈리안</p>
+                    <p class="food-name">일식</p>
                 </div>
                 <div class="info">
                     <h4 class="notice">유의사항 (꼭! 확인해주세요)</h4>
@@ -158,13 +162,13 @@
                     <h4 class="notice">사용 방법</h4>
                     <ul class="noticeList">
                         <li class="notice__item">
-                            구매하신 HOTDEAL은 최신 버전 앱에서만 사용 가능합니다.
+                            구매하신 HOTDEAL은 넥타르홈 > MyPage > 나의쿠폰함  을 통해 확인할 수 있습니다.
                         </li>
                         <li class="notice__item">
-                            결제 시 넥타르 앱 > 내정보 > 구매한 EAT딜을 선택하여 매장에 비치된 QR코드를 스캔합니다.
+                            결제 시 넥타르 홈 > MyPage > 나의쿠폰함 > 구매한 HOTDEAL을 선택하여 직원에게 제시해 주세요.
                         </li>
                         <li class="notice__item">
-                            QR코드 스캔이 불가능할 시 매장 직원에게 화면 하단 12자리 숫자 코드를 보여주세요.
+                            쿠폰 사용에 차질이 있을 시 매장 직원에게 화면 하단 12자리 UID 숫자 코드를 보여주세요.
                         </li>
                         <li class="notice__item">
                             사용 처리가 완료된 HOTDEAL은 재사용 및 환불 불가합니다.
@@ -173,7 +177,7 @@
                 </div>
                 <div class="info">
                     <h4 class="foodtype">문의</h4>
-                    <p class="food-name">넥타르 앱 > 내정보 > 설정 > 고객센터 로 문의주세요.</p>
+                    <p class="food-name">넥타르 홈 > MyPage > Q&A 게시판 을 통해 문의주세요.</p>
                 </div>
             </div>
         </div>
@@ -195,8 +199,6 @@
 </section>
 <script type="text/javascript">
     $(document).ready(function(){
-        <%--var pay = <%=bvo.getPay_coupon() %>;--%>
-        // console.log(pay);
 
         $("#buy").click(function(e){
 
@@ -204,6 +206,13 @@
                 if (!confirm("결재를 진행하기 위해서 로그인이 필요합니다. 로그인 하시겠습니까?")) return;
                 location.href = "<c:url value='/login/login'/> ";
                 return;
+            </security:authorize>
+
+            <security:authorize access="hasRole('ROLE_USER')">     // 로그인 했니?
+            if(${userDto.user_state_code==-2}){                    // 핫딜결제 금지 당한 유저니?
+                alert("회원님은 핫딜쿠폰을 구매할 수 없습니다.");
+                return;
+            }
             </security:authorize>
 
 
@@ -242,52 +251,10 @@
                     $.ajax({
                         type :'POST',
                         contentType:'application/json;charset=utf-8',
-                        url : '/nectar/pay/test',
-                        <%--url : '<c:url value= '/pay/process'/>',--%>
+                        url : '<c:url value= '/pay/process?${_csrf.parameterName}=${_csrf.token}'/>',
                         data : JSON.stringify(result),
-                        dataType: 'json', //서버에서 보내줄 데이터 타입
-
-                        //
-                        // success: function(res){
-                        //
-                        //     if(res == 1){
-                        //         console.log("추가성공");
-                        //         // pay += 5;
-                        //         // $('#pay_coupon').html(pay);
-                        //     }else{
-                        //         console.log("Insert Fail!!!");
-                        //     }
-                        // },
-                        // error:function(){
-                        //     console.log("Insert ajax 통신 실패!!!");
-                        // }
+                        dataType: 'json'
                     }) //ajax
-
-
-
-
-                    <%--$.ajax({--%>
-                    <%--    type :'POST',--%>
-                    <%--    contentType:'application/json;charset=utf-8',--%>
-                    <%--    &lt;%&ndash;url : '<c:url value= '/pay/process'/>',&ndash;%&gt;--%>
-                    <%--    url : '/nectar/insertPayCoupon.do',--%>
-                    <%--    data : JSON.stringify(result),--%>
-                    <%--    dataType: 'json', //서버에서 보내줄 데이터 타입--%>
-                    <%--    success: function(res){--%>
-
-                    <%--        if(res == 1){--%>
-                    <%--            console.log("추가성공");--%>
-                    <%--            // pay += 5;--%>
-                    <%--            // $('#pay_coupon').html(pay);--%>
-                    <%--        }else{--%>
-                    <%--            console.log("Insert Fail!!!");--%>
-                    <%--        }--%>
-                    <%--    },--%>
-                    <%--    error:function(){--%>
-                    <%--        console.log("Insert ajax 통신 실패!!!");--%>
-                    <%--    }--%>
-                    <%--}) //ajax--%>
-
                 }
                 else{//결제 실패시
                     var msg = '결제에 실패했습니다';
@@ -295,7 +262,7 @@
                 }
                 console.log(msg);
             });//pay
-        }); //check1 클릭 이벤트
+        });
     }); //doc.ready
 </script>
 

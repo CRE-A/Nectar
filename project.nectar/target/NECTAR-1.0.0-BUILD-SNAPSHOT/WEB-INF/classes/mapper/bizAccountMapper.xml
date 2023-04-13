@@ -50,8 +50,8 @@
 
     <update id="updateStateCode" parameterType="BizAccountDto">
         UPDATE bizAccount
-        SET   bizAccount_state_code =#{user_state_code}
-        WHERE user_email = #{user_email};
+        SET   bizAccount_state_code =#{bizAccount_state_code}
+        WHERE bizAccount_email = #{bizAccount_email};
     </update>
 
 

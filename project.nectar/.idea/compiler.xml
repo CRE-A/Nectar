@@ -8,22 +8,28 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="2023-04-02 night" />
-        <module name="nectar" />
-        <module name="2023-03-27 noon" />
+        <module name="2023-04-12" />
         <module name="2023-03-12" />
+        <module name="2023-04-05 morning" />
+        <module name="nectar" />
+        <module name="project.nectar" />
+        <module name="2023-03-27 noon" />
+        <module name="ch4" />
+        <module name="NECTAR" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="NECTAR" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="2023-03-12" options="-Xlint:all" />
       <module name="2023-03-27 noon" options="-Xlint:all" />
       <module name="2023-04-02 night" options="-Xlint:all" />
-      <module name="NECTAR" options="" />
+      <module name="2023-04-05 morning" options="-Xlint:all" />
+      <module name="2023-04-12" options="-Xlint:all" />
+      <module name="NECTAR" options="-Xlint:all" />
+      <module name="ch4" options="-Xlint:all" />
       <module name="nectar" options="-Xlint:all" />
+      <module name="project.nectar" options="-Xlint:all" />
     </option>
   </component>
 </project>

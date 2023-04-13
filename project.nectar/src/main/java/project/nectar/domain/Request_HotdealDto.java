@@ -3,7 +3,7 @@ package project.nectar.domain;
 import java.util.Date;
 import java.util.Objects;
 
-public class Request_HotdealDto{                // 핫딜을 요청하는 Dto ; 기존의 HotdealDto 의 모든 칼럼(혹은 iv)에 request_만 추가함
+public class Request_HotdealDto{                // 핫딜을 요청하는 Dto ; 기존의 HotdealDto 의 모든 칼럼 이름 앞에 request_만 추가함
     private Integer request_hotdeal_NUM;
     private Integer request_restr_NUM;
     private String request_restr_name;

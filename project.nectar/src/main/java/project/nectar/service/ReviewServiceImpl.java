@@ -54,7 +54,7 @@ public class ReviewServiceImpl implements ReviewService {
         restrDao.updateReviewCnt(reviewDto.getRestr_NUM(), reviewCnt);
         float avgStar = reviewDao.getAvgStar(reviewDto.getRestr_NUM());
         return restrDao.updateStar(reviewDto.getRestr_NUM(), avgStar);
-    }
+    }   //reviewCnt를 임의로 +1,-1 하던 방식에서  실제 reviewCnt 반영되도록 수정했어요.
 
 
     @Override
@@ -65,7 +65,7 @@ public class ReviewServiceImpl implements ReviewService {
         restrDao.updateReviewCnt(reviewDto.getRestr_NUM(), reviewCnt);
         float avgStar = reviewDao.getAvgStar(reviewDto.getRestr_NUM());
         return restrDao.updateStar(reviewDto.getRestr_NUM(), avgStar);
-    }
+    }   //reviewCnt를 임의로 +1,-1 하던 방식에서  실제 reviewCnt 반영되도록 수정했어요.
 
 
     @Override

@@ -10,7 +10,12 @@ public class UserDto {
     private String user_phone;
     private String user_picture;
     private Date user_regdate;
-    private String user_state_code;  // 상태코드;  0 (default):모든 기능 허용,  1:댓글금지,  2:핫딜구매 금지
+    private String user_state_code;
+                                    //  일반회원 : user_state_code
+                                    //  0 : 일반회원. 사이트 모든 기본 기능 사용 가능(default)
+                                    // -1 : 리뷰작성 금지
+                                    // -2 : 핫딜결제 금지
+                                    // -3 : 계정 정지
     private String authority;       // 페이지 접근 권한; ROLE_USER
     private Integer enabled;
 

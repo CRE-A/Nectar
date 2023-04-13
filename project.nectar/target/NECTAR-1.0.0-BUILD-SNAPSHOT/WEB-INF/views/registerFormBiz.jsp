@@ -44,22 +44,31 @@
     </li>
     <li class="menu item">
       <security:authorize access="isAnonymous()">
-        <a href="<c:url value='/login/login'/>">LOGIN</a>
+        <a href="<c:url value='/login/login'/>"><span> | &nbsp;  로그인</span><i class="fa-solid fa-user"></i></a>
       </security:authorize>
       <security:authorize access="hasRole('USER')">
-        <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+        <div>
+          <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+          <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+        </div>
       </security:authorize>
       <security:authorize access="hasRole('BIZ')">
-        <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+        <div>
+          <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+          <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+        </div>
+
       </security:authorize>
       <security:authorize access="hasRole('ADMIN')">
-        <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+        <div>
+          <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+          <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+        </div>
       </security:authorize>
     </li>
   </ul>
 </section>
 
-<h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 
 <%-- New Register Form --%>
 

@@ -111,13 +111,17 @@ h1.h1{
 }
 .userNameId.item {
     width: 50%;
-    margin-bottom: 40px;
+    margin-bottom: 14px;
 }
 
 .userNameId.item > input,
 .userEmail > input {
     height: 40px;
     margin-right: 8px;
+}
+
+userNameId.item, .userEmail{
+    margin-bottom: 15px;
 }
 .userNameId.item > span,
 .userEmail > span {
@@ -253,3 +257,137 @@ select[name="user_state_code"] {
     color: white;
     font-weight: bold;
 }
+
+
+#writeBtn {
+    background-color: orange;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 0;
+    color: white;
+    margin-top: 30px;
+}
+
+#writeBtn:hover {
+    background-color: white;
+    color: orange;
+
+}
+
+#del_like{
+    background-color: transparent;
+    border: 0;
+    color: gray;
+    cursor: pointer;
+}
+
+#refundBtn {
+    background-color: orange;
+    font-weight: 600;
+    border: 0;
+    width: 120px;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+#refundBtn:hover {
+    background-color: white;
+    border: 1px solid orange;
+    color: orange;
+}
+
+
+.container.item.coupon {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+.container.item.coupon .box {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 100px 0 100px;
+
+}
+
+.container.item.coupon .box:nth-child(1) {
+    background-color: #d3d3d3;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 0 20px;
+}
+
+.imgWrap {
+    width: 150px;
+    height: 150px;
+}
+
+.imgWrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.container.item.coupon .box:nth-child(2){
+    padding: 40px 40px 20px 0px;
+
+}
+
+.box .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-basis: 50%;
+    padding-left: 50px;
+}
+
+.box .wrap{
+    display: flex;
+    align-items: center;
+}
+
+
+.wrap button {
+    background-color: white;
+    border: 1px solid black;
+    width: 93px;
+    height: 40px;
+}
+
+.wrap button:hover {
+    background-color: orange;
+    color: white;
+    color: white;
+    border: 0;
+}
+
+
+
+
+
+/**/
+
+
+.sign {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 10px;
+    right: 20px;
+}
+
+.sign img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+

@@ -57,22 +57,33 @@
         </li>
         <li class="menu item">
             <security:authorize access="isAnonymous()">
-                <a href="<c:url value='/login/login'/>">LOGIN</a>
+                <a href="<c:url value='/login/login'/>"><span> | &nbsp;  로그인</span><i class="fa-solid fa-user"></i></a>
             </security:authorize>
             <security:authorize access="hasRole('USER')">
-                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                </div>
             </security:authorize>
             <security:authorize access="hasRole('BIZ')">
-                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                </div>
+
             </security:authorize>
             <security:authorize access="hasRole('ADMIN')">
-                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                </div>
             </security:authorize>
         </li>
     </ul>
 </section>
 
-<h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
+<br>
+<br>
 
 
 <%--board--%>
@@ -84,19 +95,34 @@
         </header>
         <section id="title">
             <%--        <h1 class="title">${qnaDto.qna_title}   </h1>--%>
-            <input name="qna_title" ${mode == 'new' ? '' : 'readonly = "readonly"'} value="${qnaDto.qna_title}" placeholder="제목을 입력해주세요.">
+            <input name="qna_title" ${mode == 'new' ? '' : 'readonly = "readonly"'} value="${qnaDto.qna_title}"
+                   placeholder="제목을 입력해주세요.">
             <div class="user_info">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <c:if test="${not empty bizAccountDto && empty userDto}">
+
+                <c:if test="${not empty bizAccountDto}">
+                    <input name="qna_NUM" type="hidden" value="${qnaDto.qna_NUM}">
                     <input name="qna_name" type="hidden" value="${bizAccountDto.bizAccount_name}">
                     <input name="qna_writer" type="hidden" value="${bizAccountDto.bizAccount_email}">
-                    <span class="name">${mode == "new" ? bizAccountDto.bizAccount_name : qnaDto.qna_name}(${mode == "new" ? bizAccountDto.bizAccount_email :qnaDto.qna_writer})</span> <span
-                        class="date">${qnaDto.qna_regdate}</span>
+                    <span class="name">${mode == "new" ? bizAccountDto.bizAccount_name : qnaDto.qna_name}(${mode == "new" ? bizAccountDto.bizAccount_email :qnaDto.qna_writer})</span>
+                    <span
+                            class="date">${qnaDto.qna_regdate}</span>
                 </c:if>
-                <c:if test="${not empty userDto && empty bizAccountDto}">
+
+                <c:if test="${not empty userDto}">
+                    <input name="qna_NUM" type="hidden" value="${qnaDto.qna_NUM}">
                     <input name="qna_name" type="hidden" value="${userDto.user_name}">
                     <input name="qna_writer" type="hidden" value="${userDto.user_email}">
-                    <span class="name">${mode == "new" ? userDto.user_name : qnaDto.qna_name}(${mode == "new" ? userDto.user_email : qnaDto.qna_writer})</span> <span
+                    <span class="name">${mode == "new" ? userDto.user_name : qnaDto.qna_name}(${mode == "new" ? userDto.user_email : qnaDto.qna_writer})</span>
+                    <span
+                            class="date">${qnaDto.qna_regdate}</span>
+                </c:if>
+
+                <c:if test="${not empty adminDto}">
+                    <input name="qna_NUM" type="hidden" value="${qnaDto.qna_NUM}">
+                    <input name="qna_name" type="hidden" value="${qnaDto.qna_name}">
+                    <input name="qna_writer" type="hidden" value="${qnaDto.qna_writer}">
+                    <span class="name">${qnaDto.qna_name}(${qnaDto.qna_writer})</span> <span
                         class="date">${qnaDto.qna_regdate}</span>
                 </c:if>
             </div>
@@ -107,29 +133,56 @@
         </section>
     </form>
 
-    <%--   QNA 답변 LIST --%>
-    <h2> QNA 답변 list</h2>
-    <c:forEach var="qnaCommentDto" items="${qnaCommentDto}">
-        ${qnaCommentDto.qna_comment}
-        ${qnaCommentDto.qna_commenter}
-        </br>
-    </c:forEach>
-    <%--  댓글 삭제 BTN도 있어요. /mypage/admin/QNA/removeComment      --%>
+
+    <!--QNA 코멘트 (QNA Comment) -->
+
+    <c:if test="${mode ne 'new'}">
+        <div class="commentContainer">
+            <h3 class="h3" style="margin-bottom: 20px">댓글</h3>
+                <%--        <form id="commentForm" action="<c:url value="/mypage/admin/QNA/addComment"/>" method="post">--%>
+            <form id="commentForm">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <input type="hidden" name="qna_NUM" value="${qnaDto.qna_NUM}">
+                <security:authorize access="hasRole('USER')">
+                    <input type="hidden" name="qna_commenter" value="${userDto.user_email}">
+                </security:authorize>
+                <security:authorize access="hasRole('BIZ')">
+                    <input type="hidden" name="qna_commenter" value="${bizAccountDto.bizAccount_email}">
+                </security:authorize>
+                <security:authorize access="hasRole('ADMIN')">
+                    <input type="hidden" name="qna_commenter" value="${adminDto.admin_email}">
+                </security:authorize>
+
+                <textarea name="qna_comment" cols="30" rows="10" class="content" placeholder="댓글을 입력하세요.."></textarea>
+                <button class="submitBtn" type="button">등록</button>
+
+            </form>
 
 
-    </br>
-    </br>
-    <%--   QNA 답변 등록 FORM --%>
-    <h2> QNA 답변 등록은 여기서</h2>
-    <form action="<c:url value="/mypage/admin/QNA/addComment"/>" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <input type="hidden" name="qna_NUM" value="${qnaDto.qna_NUM}">
-        <input type="text" name="qna_comment" placeholder="답변을 입력하세요." value="${qnaDto.qna_comment}">
-        <input type="hidden" name="qna_commenter" value="${email}">
-        <button> 답변 등록</button>
-    </form>
+            <c:forEach var="qnaCommentDto" items="${qnaCommentDto}">
 
-    <%--    --%>
+                <div class="commentBox">
+                    <form id="myComment">
+                        <input name="qna_commenter" type="text" value="${qnaCommentDto.qna_commenter}" readonly>
+                        <input name="qna_comment" type="text" value="${qnaCommentDto.qna_comment}" readonly>
+                        <p>
+
+                            <span>2023.04.05</span>
+
+                            <security:authorize access="hasRole('ADMIN')">
+                                <button id="cmtModBtn">수정</button>
+                                <button id="cmtDelBtn">삭제</button>
+                            </security:authorize>
+                        </p>
+                    </form>
+                </div>
+                <%--  댓글 삭제 BTN도 있어요. /mypage/admin/QNA/removeComment      --%>
+
+            </c:forEach>
+
+        </div>
+    </c:if>
+
 
     <footer>
 
@@ -147,14 +200,10 @@
             <c:otherwise>
                 <div class="judge">
                     <security:authorize access="hasRole('USER')">
-                        <a href="<c:url value='/mypage/user/main'/>">
-                            <button class="listBtn">수정</button>
-                        </a>
+                        <button class="usermodifyBtn">수정</button>
                     </security:authorize>
                     <security:authorize access="hasRole('BIZ')">
-                        <a href="<c:url value='/mypage/biz/main'/>">
-                            <button class="listBtn">수정</button>
-                        </a>
+                        <button class="bizmodifyBtn">수정</button>
                     </security:authorize>
                 </div>
 
@@ -181,8 +230,9 @@
         </div>
 
 
-
     </footer>
+
+
 </section>
 
 
@@ -190,8 +240,7 @@
 
     $(document).ready(() => {
 
-        $("#userwriteBtn").on("click", function (){
-
+        $("#userwriteBtn").on("click", function () {
             let form = $("#qnaForm");
             form.attr("action", "<c:url value='/mypage/user/QNA/write'/>");
             form.attr("method", "post");
@@ -199,12 +248,68 @@
 
         })// 문의글 남기기
 
-         $("#bizwriteBtn").on("click", function (){
-             let form = $("#qnaForm");
-             form.attr("action", "<c:url value='/mypage/biz/QNA/write'/>");
-             form.attr("method", "post");
-             form.submit();
-        })// 문의글 남기기
+        $("#bizwriteBtn").on("click", function () {
+            let form = $("#qnaForm");
+            form.attr("action", "<c:url value='/mypage/biz/QNA/write'/>");
+            form.attr("method", "post");
+            form.submit();
+        }) // 문의글 남기기
+
+        $(".usermodifyBtn").on("click", function () {
+            let form = $("#qnaForm");
+            let isReadOnly = $("input[name=qna_title]").attr("readonly");
+            console.log($(this));
+            if (isReadOnly == "readonly") {
+                $("input[name=qna_title]").attr("readonly", false);
+                $("textarea[name=qna_content]").attr("readonly", false);
+                $(this)[0].innerText = "등록";
+                return;
+            }
+
+            form.attr("action", "<c:url value='/mypage/user/QNA/modify'/>");
+            form.attr("method", "post");
+            form.submit();
+
+        }) // 문의글 수정하기
+
+        $(".bizmodifyBtn").on("click", function () {
+            let form = $("#qnaForm");
+            let isReadOnly = $("input[name=qna_title]").attr("readonly");
+            console.log($(this));
+
+            if (isReadOnly == "readonly") {
+                $("input[name=qna_title]").attr("readonly", false);
+                $("textarea[name=qna_content]").attr("readonly", false);
+                $(this)[0].innerText = "등록";
+                return;
+            }
+
+            form.attr("action", "<c:url value='/mypage/biz/QNA/modify'/>");
+            form.attr("method", "post");
+            form.submit();
+
+        }) // 문의글 수정하기
+
+
+        $(".submitBtn").on("click",function (){
+            let form = $("#commentForm");
+            <security:authorize access="hasRole('ADMIN')">
+            form.attr("action", "<c:url value="/mypage/admin/QNA/addComment"/>");
+            form.attr("method", "post");
+            </security:authorize>
+
+            <security:authorize access="hasRole('BIZ')">
+            form.attr("action", "<c:url value="/mypage/biz/QNA/addComment"/>");
+            form.attr("method", "post");
+            </security:authorize>
+
+            <security:authorize access="hasRole('USER')">
+            form.attr("action", "<c:url value="/mypage/user/QNA/addComment"/>");
+            form.attr("method", "post");
+            </security:authorize>
+            form.submit();
+        }) // 댓글 등록버튼
+
 
     }) // ready()
 

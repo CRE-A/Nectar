@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.nectar.domain.*;
 import project.nectar.repository.LikelistDao;
@@ -19,9 +21,10 @@ import project.nectar.repository.UserDao;
 import project.nectar.service.ReviewService;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.List;
 
-// 이하 MYPAGE 의 USER 에 관한 모든 내용
+// 이하 MYPAGE 의 USER(일반회원) 에 관한 모든 내용
 @Controller
 @RequestMapping("/mypage/user")
 public class UserController {
@@ -38,7 +41,7 @@ public class UserController {
 
 
     @GetMapping("/main")
-    public String UserMyPage(HttpSession session, Model m, Authentication authentication){
+    public String UserMyPage(HttpSession session, Model m, Authentication authentication, RedirectAttributes rattr){
 
             UserDetails userDetails = (UserDetails)authentication.getPrincipal();
             String user_email = userDetails.getUsername();
@@ -57,7 +60,7 @@ public class UserController {
             m.addAttribute("userDto",userDto);
             // 사용자(User)에 대한 data
 
-            List<HotdealPlusDto> MyPaymentList = paymentDao.select_PaymentAndHotdeal_byUser(user_email);
+            List<HotdealPlusDto> MyPaymentList = paymentDao.select_PaymentInfo_byUser(user_email);
             m.addAttribute("MyPaymentList",MyPaymentList);
             // 사용자(User)가 구매한 핫딜 결제정보(구매내역) 대한 data
 
@@ -67,6 +70,7 @@ public class UserController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            rattr.addFlashAttribute("msg","Mypage_main_ERR");
             return "redirect:/";
         }
 
@@ -74,10 +78,30 @@ public class UserController {
     }
 
     @PostMapping("/profile/modify")
-    public String modifyProfile(UserDto userDto){
-        userDao.update(userDto);
+    public String modifyProfile(UserDto userDto, MultipartHttpServletRequest req, RedirectAttributes rattr){
+
+
+        MultipartFile mf = req.getFile("file");
+        String path = "C:\\Users\\pc\\Desktop\\nectar\\project.nectar\\src\\main\\webapp\\resources\\uploadFile\\";
+        String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+
+        if(mf.isEmpty()){   // 첨부 파일이 없으면
+            originFileName = "default_review.jpg";
+        }
+        userDto.setUser_picture(originFileName);
+
+        try {
+            String safeFile = path + originFileName;
+            mf.transferTo(new File(safeFile));          // path에 FileName의 파일을 저장
+            userDao.update(userDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            rattr.addFlashAttribute("msg","MOD_ERR");
+            return "redirect:/mypage/user/main";
+        }
         return "redirect:/mypage/user/main";
     }
+
 
     @PostMapping("/profile/delete")
     public String deleteProfile(String email, HttpSession session){
@@ -89,23 +113,3 @@ public class UserController {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-//    private boolean isAuthenticated() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication == null || AnonymousAuthenticationToken.class.
-//                isAssignableFrom(authentication.getClass())) {
-//            return false;
-//        }
-//        return authentication.isAuthenticated();
-//    }

@@ -59,16 +59,26 @@
     </li>
     <li class="menu item">
       <security:authorize access="isAnonymous()">
-        <a href="<c:url value='/login/login'/>">LOGIN</a>
+        <a href="<c:url value='/login/login'/>"><span> | &nbsp;  로그인</span><i class="fa-solid fa-user"></i></a>
       </security:authorize>
       <security:authorize access="hasRole('USER')">
-        <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+        <div>
+          <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+          <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+        </div>
       </security:authorize>
       <security:authorize access="hasRole('BIZ')">
-        <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+        <div>
+          <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+          <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+        </div>
+
       </security:authorize>
       <security:authorize access="hasRole('ADMIN')">
-        <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+        <div>
+          <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+          <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+        </div>
       </security:authorize>
     </li>
   </ul>
@@ -107,7 +117,7 @@
               </div>
               <div class="restr__hotdeal">
                 <c:if test="${restrDto.restr_hotdeal_NUM ne '-1'}">
-                  <i class="fa-solid fa-gift"></i>핫딜 진행중</c:if>
+                 🔥핫딜 진행중🔥</c:if>
               </div>
             </div>
           </div>
@@ -124,7 +134,7 @@
   <div id="sideMenu">
     <h2 class="googleLocation">
       <c:choose>
-        <c:when test="${not empty ph.sc.keyword}">#${ph.sc.keyword} 로 찾아본 맛집이에요 🏠</h2></c:when>
+        <c:when test="${not empty ph.sc.keyword}">#${ph.sc.keyword} 으로 찾아본 맛집이에요 🏠</h2></c:when>
         <c:when test="${not empty ph.sc.foodType}">#${ph.sc.foodType} 으로 찾아 본 맛집이에요 🏠</h2></c:when>
         <c:when test="${not empty ph.sc.cost}">#${ph.sc.cost} 로 찾아 본 맛집이에요 🏠</h2></c:when>
         <c:when test="${not empty ph.sc.location}">#${ph.sc.location} 으로 찾아 본 맛집이에요 🏠</h2></c:when>
@@ -138,7 +148,7 @@
       <ul class="recentRestrList">
         <c:forEach var="viewBrowserHistoryList" items="${viewBrowserHistoryList}">
           <div class="recentRestr">
-            <li class="recentRestr__item">
+            <a href="<c:url value='/restr/read?page=1&pageSize=10&restr_NUM=${viewBrowserHistoryList.restr_NUM}'/>" class="recentRestr__item">
               <div class="recentRestr__imgContainer">
                 <img
                         src="<c:url value='/uploadFile/${viewBrowserHistoryList.restr_picture}'/>"
@@ -154,7 +164,7 @@
                 <p> 위치 | <span>${viewBrowserHistoryList.restr_location}</span></p>
                 <p> 가격대 | <span>${viewBrowserHistoryList.restr_cost}</span></p>
               </div>
-            </li>
+            </a>
           </div>
         </c:forEach>
       </ul>
@@ -165,7 +175,7 @@
 </section>
 
 
-<div id="pageBar" style="text-align:center">
+<div id="pageBar">
   <c:if test="${ph.showPrev}">
     <a href="<c:url value="/restr/search${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
   </c:if>

@@ -31,10 +31,27 @@ section#navbar{
     align-items: center;
     font-weight: bold;
     font-size: 20px;
+    margin-right: 30px;
 }
 
 .menu.item > a {
     color: black;
+}
+
+.menu.item > a {
+    color: black;
+}
+
+.menu.item > a,
+.menu.item > div > a{
+    color: black;
+}
+
+.menu.item > a > span,
+.menu.item > div > a > span {
+    font-size: 14px;
+    margin-right: 12px;
+    color: gray;
 }
 .logo {
     margin-left: 30px;

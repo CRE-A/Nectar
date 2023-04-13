@@ -42,44 +42,5 @@ public class UserDetailService implements UserDetailsService {
         return userDetailsDto;
 
 
-
-
     }
-//            BizAccountDetailsDto bizAccountDetailsDto = bizAccountDao.selectByUserEmail(user_email);
-//            if(bizAccountDetailsDto == null) {
-//                AdminDetailsDto adminDetailsDto = adminDao.selectByUserEmail(user_email);
-//                if (adminDetailsDto == null) {
-//                    throw new UsernameNotFoundException("username" + user_email + " not found");
-//                }else{
-//                    return adminDetailsDto;}
-//                }else{
-//                return bizAccountDetailsDto;
-//            }
-//        }
-//        System.out.println("=================Found User==============================");
-//        System.out.println("user_email : "+userDetailsDto.getUsername());
-//        System.out.println("=================email은 일치하네==============================");
-//
-//        return userDetailsDto;
-//    }
-
-
-
-//    @Override
-//    public UserDetails loadUserByUsername(String user_email) throws UsernameNotFoundException {
-//        UserDetailsDto userDetailsDto = userDao.selectByUserEmail(user_email);
-//        if(userDetailsDto == null) {
-//            BizAccountDetailsDto bizAccountDetailsDto = bizAccountDao.selectByUserEmail(user_email);
-//            if(bizAccountDetailsDto == null) {
-//                throw new UsernameNotFoundException("username" + user_email + " not found");
-//            }else{
-//                return bizAccountDetailsDto;
-//            }
-//        }
-//        System.out.println("=================Found User==============================");
-//        System.out.println("user_email : "+userDetailsDto.getUsername());
-//        System.out.println("=================email은 일치하네==============================");
-//
-//        return userDetailsDto;
-//    }
 }

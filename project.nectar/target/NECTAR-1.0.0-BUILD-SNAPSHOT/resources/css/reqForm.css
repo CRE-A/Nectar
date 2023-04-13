@@ -22,7 +22,7 @@ h1.title{
 }
 
 form#form {
-    height: 565px;
+    /*height: 565px;*/
     /*background-color: pink;*/
     display: flex;
     justify-content: center;

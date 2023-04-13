@@ -29,6 +29,8 @@ h3.title .star {
 ul.reaction {
     display: flex;
     padding-bottom: 0.8rem;
+    padding-left: 0;
+    margin-bottom: 30px;
 }
 
 li.reaction {
@@ -54,6 +56,10 @@ li.reaction {
 .swiper-slide img {
     display: block;
     width: 100%;
+}
+
+.swiper-wrapper{
+    margin-bottom: 100px;
 }
 
 @media only screen and (min-width: 769px) {
@@ -96,16 +102,17 @@ li.reaction {
 
 .content {
     display: flex;
+    margin-bottom: 50px;
 }
 
 .section-left {
-    flex-basis: 80%;
+    flex-basis: 70%;
 
 
 }
 
 .section-right {
-    flex-basis: 20%;
+    flex-basis: 30%;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -117,6 +124,12 @@ li.reaction {
 }
 .info>h4 {
     margin-bottom: 10px;
+}
+
+ul.menuList{
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 li.menu {
@@ -132,6 +145,7 @@ li.menu {
 
 
 ul.my-list {
+    padding: 0;
     display: flex;
     justify-content: space-around;
     text-align: center;
@@ -160,24 +174,35 @@ li.myList {
     margin-bottom: 20px;
 }
 
-#likeBtn>i:after{
+#likeBtn>i:after {
+    display: block;
     content: "좋아요";
     color: black;
     position: relative;
-    top: 31px;
+    top: 16px;
     font-size: 0.3em;
-    right: 47px;
+    right: 1px;
 }
-
 
 .tag__wrap > h4 {
     margin-bottom: 1.5rem;
 }
 
+ul.tagList{
+    padding: 0;
+}
+li.tag {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .tag > a {
-    padding: 5px 10px 5px 10px;
+    text-align: center;
+    padding: 5px 13px 5px 13px;
     border-radius: 25px;
     border: 1px solid black;
+    margin-right: 7px;
+    margin-bottom: 10px;
 }
 
 /* Review Write Page */
@@ -185,7 +210,7 @@ li.myList {
 .review__header {
     font-size: 2rem;
     color: orangered;
-    font-weight: bold;
+    font-weight: 900;
     display: inline-block;
     margin-bottom: 10px;
 }
@@ -483,3 +508,23 @@ li.review {
 /*.reviewRating:not(:checked) > label:hover ~ label {*/
 /*    color: #ffd700;*/
 /*}*/
+
+
+
+
+/*rating*/
+
+.review__rating {
+    display: flex;
+}
+
+.review__rating .imgWrap {
+    width: 20px;
+    height: 20px;
+}
+
+.review__rating .imgWrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

@@ -12,16 +12,22 @@
     </select>
 
 
-    <select id="select_PaymentAndHotdeal_byUser" parameterType="String" resultType="HotdealPlusDto">
+    <select id="select_PaymentInfo_byUser" parameterType="String" resultType="HotdealPlusDto">
         SELECT h.*, p.*
         from payment p inner join hotdeal h on p.hotdeal_NUM = h.hotdeal_NUM
         where p.user_email = #{user_email};
     </select>
 
-    <select id="select_PaymentAndHotdeal_byBiz" parameterType="String" resultType="HotdealPlusDto">
+    <select id="select_PaymentInfo_byBiz" parameterType="String" resultType="HotdealPlusDto">
         SELECT h.*, p.*
         from payment p inner join hotdeal h on p.hotdeal_NUM = h.hotdeal_NUM
         where p.bizAccount_email = #{bizAccount_email};
+    </select>
+
+    <select id="select_PaymentInfo_byPayment_NUM" parameterType="int" resultType="HotdealPlusDto">
+        SELECT h.*, p.*
+        from payment p inner join hotdeal h on p.hotdeal_NUM = h.hotdeal_NUM
+        where p.payment_NUM = #{payment_NUM};
     </select>
 
 
@@ -41,21 +47,5 @@
 
 
 </mapper>
-
-
-
-
-
-<!--<select id="select_PaymentAndHotdeal_byUser" parameterType="String" resultType="HotdealPlusDto">-->
-<!--SELECT h.*, p.user_email, p.pay_date, p.amout-->
-<!--from payment p inner join hotdeal h on p.hotdeal_NUM = h.hotdeal_NUM-->
-<!--where user_email = #{user_email};-->
-<!--</select>-->
-
-<!--<select id="select_PaymentAndHotdeal_byBiz" parameterType="String" resultType="HotdealPlusDto">-->
-<!--SELECT h.*, p.user_email, p.pay_date, p.amout,-->
-<!--from payment p inner join hotdeal h on p.hotdeal_NUM = h.hotdeal_NUM-->
-<!--where bizAccount_email = #{bizAccount_email};-->
-<!--</select>-->
 
 

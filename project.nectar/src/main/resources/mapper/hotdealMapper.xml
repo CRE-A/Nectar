@@ -16,6 +16,7 @@
         SELECT *
         FROM hotdeal
         ORDER BY hotdeal_regdate DESC
+        LIMIT 6
     </select>
 
     <select id="select" parameterType="int" resultType="HotdealDto">

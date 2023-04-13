@@ -19,21 +19,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="<c:url value='/css/navbarHome.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/navbarSearchX.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/css/successPage.css'/>"/>
 
 </head>
 
-<style>
-    section#navbar.success {
-        z-index: 2;
-        width: 100vw;
-        background-color: #e9bea2;
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-    }
-</style>
 
 
 <body>
@@ -52,22 +42,32 @@
         </li>
         <li class="menu item">
             <security:authorize access="isAnonymous()">
-                <a href="<c:url value='/login/login'/>">LOGIN</a>
+                <a href="<c:url value='/login/login'/>"><span> | &nbsp;  로그인</span><i class="fa-solid fa-user"></i></a>
             </security:authorize>
             <security:authorize access="hasRole('USER')">
-                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                </div>
             </security:authorize>
             <security:authorize access="hasRole('BIZ')">
-                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                </div>
+
             </security:authorize>
             <security:authorize access="hasRole('ADMIN')">
-                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                </div>
             </security:authorize>
         </li>
     </ul>
 </section>
 
-<h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
+<br>
 
 <section id="info">
     <div class="box">
@@ -79,6 +79,19 @@
         <p>
             문의를 처리하는 데 며칠 소요되며,  ${qnaDto.qna_name} 님의  이메일( ${qnaDto.qna_writer} )로 답변 드리겠습니다. Nectar를 이용해 주셔서 감사합니다.
         </p>
+        <br>
+        <br>
+
+        <security:authorize access="hasRole('USER')">
+            <button style="margin-top : 10px ; background-color: transparent; border: 0 ; font-weight: bold ; font-size: 16px" >  <a href="<c:url value='/mypage/user/main'/>">MY PAGE 로 이동</a></button>
+        </security:authorize>
+        <security:authorize access="hasRole('BIZ')">
+            <button style="margin-top : 10px ;background-color: transparent; border: 0 ; font-weight: bold ; font-size: 16px" >  <a href="<c:url value='/mypage/biz/main'/>">MY PAGE 로 이동</a></button>
+        </security:authorize>
+        <security:authorize access="hasRole('ADMIN')">
+            <button style="margin-top : 10px ; background-color: transparent; border: 0 ; font-weight: bold ; font-size: 16px" >  <a href="<c:url value='/mypage/admin/main'/>">MY PAGE 로 이동</a></button>
+        </security:authorize>
+
     </div>
 </section>
 

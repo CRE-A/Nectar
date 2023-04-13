@@ -4,6 +4,7 @@ package project.nectar.domain;
 import java.util.Date;
 
 public class PaymentDto {
+    private Integer payment_NUM;
     private String imp_uid;
     private String merchant_uid;
     private String user_email;       // 구매자
@@ -14,6 +15,8 @@ public class PaymentDto {
     private String bizAccount_email; // 판매자
     private Integer hotdeal_NUM;
     private Date payment_regdate;
+    private Integer coupon_state_code; //   0 이면 결제 완료,  -1 이면 사용 완료
+
 
 
     public PaymentDto() {};
@@ -28,6 +31,14 @@ public class PaymentDto {
         this.refund = refund;
         this.bizAccount_email = bizAccount_email;
         this.hotdeal_NUM = hotdeal_NUM;
+    }
+
+    public Integer getPayment_NUM() {
+        return payment_NUM;
+    }
+
+    public void setPayment_NUM(Integer payment_NUM) {
+        this.payment_NUM = payment_NUM;
     }
 
     public String getImp_uid() {
@@ -110,10 +121,19 @@ public class PaymentDto {
         this.payment_regdate = payment_regdate;
     }
 
+    public Integer getCoupon_state_code() {
+        return coupon_state_code;
+    }
+
+    public void setCoupon_state_code(Integer coupon_state_code) {
+        this.coupon_state_code = coupon_state_code;
+    }
+
     @Override
     public String toString() {
         return "PaymentDto{" +
-                "imp_uid='" + imp_uid + '\'' +
+                "payment_NUM=" + payment_NUM +
+                ", imp_uid='" + imp_uid + '\'' +
                 ", merchant_uid='" + merchant_uid + '\'' +
                 ", user_email='" + user_email + '\'' +
                 ", pay_date='" + pay_date + '\'' +
@@ -123,6 +143,7 @@ public class PaymentDto {
                 ", bizAccount_email='" + bizAccount_email + '\'' +
                 ", hotdeal_NUM=" + hotdeal_NUM +
                 ", payment_regdate=" + payment_regdate +
+                ", coupon_state_code=" + coupon_state_code +
                 '}';
     }
 }

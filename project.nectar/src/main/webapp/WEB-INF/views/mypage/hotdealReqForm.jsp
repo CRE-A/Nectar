@@ -16,26 +16,14 @@
     ></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="<c:url value='/css/navbarHome.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/css/navbarSearchX.css'/>"/>
     <%--    <link rel="stylesheet" href="<c:url value='/css/globalPage.css'/>"/>--%>
     <link rel="stylesheet" href="<c:url value='/css/reqForm.css'/>"/>
-    <style>
-        section#navbar.req {
-            z-index: 2;
-            width: 100vw;
-            background-color: #e9bea2;
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            color: black;
-        }
 
-    </style>
 </head>
 
-
 <body>
-<section id="navbar" class="req">
+<section id="navbar" class="biz">
     <div class="logo">
         <a href="<c:url value='/'/>"> <img src="<c:url value='/images/nectarLogo.png'/>" alt="" class="logo__img"/></a>
     </div>
@@ -48,22 +36,33 @@
         </li>
         <li class="menu item">
             <security:authorize access="isAnonymous()">
-                <a href="<c:url value='/login/login'/>">LOGIN</a>
+                <a href="<c:url value='/login/login'/>"><span> | &nbsp;  로그인</span><i class="fa-solid fa-user"></i></a>
             </security:authorize>
             <security:authorize access="hasRole('USER')">
-                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                </div>
             </security:authorize>
             <security:authorize access="hasRole('BIZ')">
-                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                </div>
+
             </security:authorize>
             <security:authorize access="hasRole('ADMIN')">
-                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                </div>
             </security:authorize>
         </li>
     </ul>
 </section>
 
-<h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
+<br>
+<br>
 
 <section id="req">
     <div class="container">
@@ -73,6 +72,7 @@
                 <%--            --%>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <%--            --%>
+<%--                    <input type="hidden" name="hotdeal_NUM" value="${request_hotdealDto.request_hotdeal_NUM}">--%>
                     <input type="hidden" name="request_hotdeal_NUM" value="${request_hotdealDto.request_hotdeal_NUM}">
                 <div class="inputBox">
                     <span class="item name">매장명</span>
@@ -92,39 +92,39 @@
                 <div class="inputBox">
                     <span class="item name">기존메뉴</span>
                     <input readonly name="restr_menu_price" type="text" class="item input"
-                           value="${request_hotdealDto.request_restr_menu_price}"/></div>
+                           value="${request_hotdealDto.request_restr_menu_price}원"/></div>
                 <div class="inputBox">
                     <span class="item name">핫딜가격</span>
                     <input readonly name="hotdeal_price" type="text" class="item input"
-                           value="${request_hotdealDto.request_hotdeal_price}"/></div>
+                           value="${request_hotdealDto.request_hotdeal_price}원"/></div>
                 <div class="inputBox">
                     <span class="item name">할인률</span>
                     <input readonly name="hotdeal_discountRate" type="text" class="item input"
-                           value="${request_hotdealDto.request_hotdeal_discountRate}"/></div>
+                           value="${request_hotdealDto.request_hotdeal_discountRate}%"/></div>
                 <div class="inputBox">
                     <span class="item name">메뉴설명</span>
                     <input readonly name="hotdeal_desc" type="text" class="item input"
                            value="${request_hotdealDto.request_hotdeal_desc}"/></div>
                 <div class="inputBox">
-                    <span class="item name">사용기간</span>
+                    <span class="item name">이벤트기간</span>
                     <input readonly name="hotdeal_useDate" type="text" class="item input"
                            value="${request_hotdealDto.request_hotdeal_useDate}"/></div>
                 <div class="inputBox">
-                    <span class="item name">이벤트기간</span>
+                    <span class="item name">사용기간</span>
                     <input readonly name="hotdeal_eventDuration" type="text" class="item input"
-                           value=" ${request_hotdealDto.request_hotdeal_eventDuration}"/></div>
+                           value=" 구매일로부터 ${request_hotdealDto.request_hotdeal_eventDuration}"/></div>
             </div>
 
             <div class="imgContainer">
-                <input type="hidden" value="${request_hotdealDto.request_hotdeal_picture}">
-                <img src="${request_hotdealDto.request_hotdeal_picture}"
-                     alt="">
+                <input type="hidden" name="hotdeal_picture" value="${request_hotdealDto.request_hotdeal_picture}">
+                <img src="<c:url value='/uploadFile/${request_hotdealDto.request_hotdeal_picture}'/>" alt=""
+                     class="reviewPicture"/>
             </div>
         </form>
         <div class="buttons">
-            <button type="button" id="denyBtn">심사반려</button>
-            <button type="button" id="registerBtn">심사완료</button>
-            <button type="button" id="listBtn">목록</button>
+            <button type="button"  id="denyBtn">심사반려</button>
+            <button type="button"  id="registerBtn">승인</button>
+<%--            <button type="button" id="listBtn">목록</button>--%>
         </div>
     </div>
 </section>
@@ -156,23 +156,20 @@
         $("#registerBtn").on("click", function () {
             if (!confirm("핫딜 등록 요청을 완료 하시겠습니까?")) return;
             let form = $("#form");
-            form.attr("action", "<c:url value='/mypage/admin/hotdeal/register'/>");
+            form.attr("action", "<c:url value='/mypage/admin/reqHotdeal/register'/>");
             form.attr("method", "post");
             form.submit();
         });
 
-        $("#listBtn").on("click", function () {
-            location.href = "<c:url value='/mypage/admin/main'/>";
-        });
 
         $("#denyBtn").on("click", function () {
             if (!confirm("핫딜 등록 요청을 반려하시겠습니까?")) return;
             let form = $("#form");
-            form.attr("action", "<c:url value='/mypage/admin/hotdeal/deny'/>");
-            form.attr("method", "get");
+            form.attr("action", "<c:url value='/mypage/admin/reqHotdeal/deny'/>");
+            form.attr("method", "post");
             form.submit();
 
-        });// 버튼을 클릭하면 /board/remove POST 로 요청하기
+        });
 
     })
 </script>

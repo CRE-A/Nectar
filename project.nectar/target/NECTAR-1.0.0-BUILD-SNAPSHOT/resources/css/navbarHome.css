@@ -24,7 +24,6 @@ section#navbar {
 }
 
 
-
 .menu {
     width: 500px;
     list-style: none;
@@ -34,9 +33,18 @@ section#navbar {
     font-size: 20px;
 }
 
-.menu.item > a {
+.menu.item > a,
+.menu.item > div > a{
     color: white;
 }
+
+.menu.item > a > span,
+.menu.item > div > a > span {
+    font-size: 14px;
+    margin-right: 12px;
+    color: white;
+}
+
 .logo {
     margin-left: 30px;
     width: 300px;

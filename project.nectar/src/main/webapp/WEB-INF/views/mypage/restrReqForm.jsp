@@ -29,26 +29,38 @@
 
 <div id="menu">
     <ul>
-        <li id="menu_title"><a href="<c:url value='/'/>">Nectar</a></li>
-        <li><a href="<c:url value='/hotdeal/list'/>">오늘의핫딜</a></li>
-        <li><a href="<c:url value='/restr/list'/>">맛집리스트</a></li>
+        <li class="menu item">
+            <a href="<c:url value='/hotdeal/list'/>">HOTDEAL</a>
+        </li>
+        <li class="menu item">
+            <a href="<c:url value='/restr/list'/>">맛집리스트</a>
+        </li>
         <li class="menu item">
             <security:authorize access="isAnonymous()">
-                <a href="<c:url value='/login/login'/>">LOGIN</a>
+                <a href="<c:url value='/login/login'/>"><span> | &nbsp;  로그인</span><i class="fa-solid fa-user"></i></a>
             </security:authorize>
             <security:authorize access="hasRole('USER')">
-                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                </div>
             </security:authorize>
             <security:authorize access="hasRole('BIZ')">
-                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                </div>
+
             </security:authorize>
             <security:authorize access="hasRole('ADMIN')">
-                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                </div>
             </security:authorize>
         </li>
     </ul>
 </div>
-<h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
 
 
 <section id="req">
@@ -56,7 +68,10 @@
         <h1 class="title">매장심사</h1>
         <form action="" id="form">
             <div class="boxes">
-                <input name="restr_NUM" type="hidden" value="${request_restrDto.request_restr_NUM}"/>
+                <%--            --%>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <%--            --%>
+                <input name="request_restr_NUM" type="hidden" value="${request_restrDto.request_restr_NUM}"/>
                 <div class="inputBox">
                     <span class="item name">이메일</span>
                     <input type="text" readonly name="bizAccount_email" class="item input"
@@ -109,15 +124,15 @@
             </div>
 
             <div class="imgContainer">
-                <input type="hidden" value="${request_restrDto.request_restr_picture}">
-                <img src="${request_restrDto.request_restr_picture}"
-                     alt="">
+                <input type="hidden" name="restr_picture" value="${request_restrDto.request_restr_picture}">
+                <img src="<c:url value='/uploadFile/${request_restrDto.request_restr_picture}'/>" alt=""
+                     class="reviewPicture"/>
             </div>
         </form>
         <div class="buttons">
             <button type="button"  id="denyBtn">심사반려</button>
-            <button type="button"  id="registerBtn">심사완료</button>
-            <button type="button" id="listBtn">목록</button>
+            <button type="button"  id="registerBtn">승인</button>
+<%--            <button type="button" id="listBtn">목록</button>--%>
         </div>
     </div>
 </section>
@@ -145,22 +160,22 @@
         }); // 목록으로 이동
 
         $("#registerBtn").on("click", function () {
-
+            if (!confirm("매장 등록 요청을 허가하시겠습니까?")) return;
             console.log($(this));
             let form = $("#form");
-            form.attr("action", "<c:url value='/mypage/admin/restr/register?request_restr_NUM=${request_restrDto.request_restr_NUM}'/>");
+            form.attr("action", "<c:url value='/mypage/admin/reqRestr/register'/>");
             form.attr("method", "post");
             form.submit();
         }); // 심사완료
 
         $("#denyBtn").on("click", function () {
-            if (!confirm("사업장 등록 요청을 반려하시겠습니까?")) return;
+            if (!confirm("매장 등록 요청을 반려하시겠습니까?")) return;
             let form = $("#form");
-            form.attr("action", "<c:url value='/mypage/admin/restr/deny'/>");
-            form.attr("method", "get");
+            form.attr("action", "<c:url value='/mypage/admin/reqRestr/deny'/>");
+            form.attr("method", "post");
             form.submit();
 
-        });// 버튼을 클릭하면 /board/remove POST 로 요청하기
+        });
 
     })
 </script>

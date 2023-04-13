@@ -10,6 +10,11 @@ public class BizAccountDto {
     private String bizAccount_picture;
     private String bizAccount_regdate;
     private String bizAccount_state_code;
+                                            // 사업자 회원 : bizAccount_state_code
+                                            //  0 : 사업자회원. 사이트 모든 기본 기능 사용 가능(default)
+                                            // -4 : 매장게시정지
+                                            // -5 : 핫딜등록금지
+                                            // -3 : 계정 정지
     private String bizAccount_regNum;
     private String authority;
     private Integer enabled;

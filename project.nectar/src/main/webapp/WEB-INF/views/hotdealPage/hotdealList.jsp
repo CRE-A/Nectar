@@ -54,16 +54,26 @@
         </li>
         <li class="menu item">
             <security:authorize access="isAnonymous()">
-                <a href="<c:url value='/login/login'/>">LOGIN</a>
+                <a href="<c:url value='/login/login'/>"><span> | &nbsp;  로그인</span><i class="fa-solid fa-user"></i></a>
             </security:authorize>
             <security:authorize access="hasRole('USER')">
-                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                </div>
             </security:authorize>
             <security:authorize access="hasRole('BIZ')">
-                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                </div>
+
             </security:authorize>
             <security:authorize access="hasRole('ADMIN')">
-                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                </div>
             </security:authorize>
         </li>
     </ul>
@@ -76,7 +86,7 @@
     <ul class="hotdealList">
         <c:forEach var="hotdealDto" items="${hotdealDto}">
             <li class="hotdealRestr">
-                <a href="<c:url value="/hotdeal/read?hotdeal_NUM=${hotdealDto.hotdeal_NUM}"/>" class="hotdealRestr_wrap">
+                <a href="<c:url value='/hotdeal/read?hotdeal_NUM=${hotdealDto.hotdeal_NUM}'/>" class="hotdealRestr_wrap">
                     <div class="hotdealRest__imgDesc">
                         <div class="hotdealRestr__imgContainer">
                             <img
@@ -88,15 +98,15 @@
                         <div class="hotdealRestr__imgDeem">
                             <div class="left">
                                 <div class="left__item-new">
-                                    <span>new</span>
+                                    <span>NEW</span>
                                 </div>
                                 <div class="left__item-discountRate">
                                     <p>${hotdealDto.hotdeal_discountRate}%</p>
                                 </div>
                             </div>
                             <div class="right">
-                                <div class="right__item-menuPrice">${hotdealDto.restr_menu_price}</div>
-                                <div class="right__item-hotdealPrice">${hotdealDto.hotdeal_price}</div>
+                                <div class="right__item-menuPrice">${hotdealDto.restr_menu_price} 원</div>
+                                <div class="right__item-hotdealPrice">${hotdealDto.hotdeal_price} 원</div>
                             </div>
                         </div>
                     </div>

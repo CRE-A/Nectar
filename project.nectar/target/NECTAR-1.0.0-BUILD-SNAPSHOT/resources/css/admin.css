@@ -157,4 +157,14 @@ td h4.deny{
 }
 
 
+td h4.permit{
+    background-color: #049aff;
+    width: 120px;
+    color: white;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+
+}
+
 

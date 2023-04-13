@@ -39,13 +39,9 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
         else request.setAttribute("LoginFailMessage", "계정을 찾을 수 없습니다.");
 
 
-        System.out.println("=========================================================================");
-        System.out.println("로그인 실패시 loginFail Handler로 옴");
-
         RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login");
         request.setAttribute("LoginFailMessage", "로그인 실패");
 
         dispatcher.forward(request, response);
-        System.out.println("=========================================================================");
     }
 }

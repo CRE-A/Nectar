@@ -23,6 +23,7 @@
         <typeAlias alias="AdminDetailsDto" type="project.nectar.domain.AdminDetailsDto"/>
         <typeAlias alias="PaymentDto" type="project.nectar.domain.PaymentDto"/>
         <typeAlias alias="HotdealPlusDto" type="project.nectar.domain.HotdealPlusDto"/>
+        <typeAlias alias="RefundDto" type="project.nectar.domain.RefundDto"/>
 
     </typeAliases>
 </configuration>

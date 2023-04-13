@@ -60,16 +60,26 @@
         </li>
         <li class="menu item">
             <security:authorize access="isAnonymous()">
-                <a href="<c:url value='/login/login'/>">LOGIN</a>
+                <a href="<c:url value='/login/login'/>"><span> | &nbsp;  로그인</span><i class="fa-solid fa-user"></i></a>
             </security:authorize>
             <security:authorize access="hasRole('USER')">
-                <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+                </div>
             </security:authorize>
             <security:authorize access="hasRole('BIZ')">
-                <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+                </div>
+
             </security:authorize>
             <security:authorize access="hasRole('ADMIN')">
-                <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                <div>
+                    <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+                    <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+                </div>
             </security:authorize>
         </li>
     </ul>
@@ -83,7 +93,8 @@
 
 <section id="home" style='background-image: url("<c:url value='/images/steak.jpg'/>")'>
     <div class="title">
-        <h1 class="title slogan">솔직한 리뷰, 믿을 수 있는 평점!</h1>
+<%--        <h1 class="title slogan">솔직한 리뷰, 믿을 수 있는 평점!</h1>--%>
+        <h1 class="title slogan" style="font-weight: 900">All Food, All The Time</h1>
     </div>
     <div class="searchBar">
         <button class="filterBtn">
@@ -92,30 +103,41 @@
         <form action="<c:url value="/restr/search"/>" class="search-form" method="get" onsubmit="return keywordFormCheck(this)">
             <input type="hidden" name="option" value="searchEngine"/>
             <input
+                    list="topSearchKeyword"
                     type="text"
                     name="keyword"
                     class="search-input"
                     value="${ph.sc.keyword}"
                     placeholder="지역, 식당 또는 음식"
             />
+            <datalist id="topSearchKeyword">
+                <c:forEach var="topSearchKeyword" items="${topSearchKeywordList}">
+                    <option value="${topSearchKeyword.searchKeyword}">
+<%--                    <a href="<c:url value='/restr/search?option=searchEngine&keyword=${topSearchKeyword.searchKeyword}'/>">${topSearchKeyword.searchKeyword}</a>--%>
+<%--                    <a href="<c:url value='/restr/search?option=searchEngine&keyword=${topSearchKeyword.searchKeyword}'/>">${topSearchKeyword.searchKeyword}</a>--%>
+                </c:forEach>
+
+
+            </datalist>
             <button type="submit" class="search-button" value="검색">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </form>
     </div>
 
-    <div clss="top_searched_keyword" style="background-color: yellowgreen; margin : 10px; padding: 10px; ">
-        <span>인기 검색어 : </span>
-        <c:forEach var="topSearchKeyword" items="${topSearchKeywordList}">
-            <a href="<c:url value='/restr/search?option=searchEngine&keyword=${topSearchKeyword.searchKeyword}'/>">${topSearchKeyword.searchKeyword}</a>
-        </c:forEach>
-    </div>
+<%--    <div clss="top_searched_keyword" style=" margin : 10px; padding: 10px; color: white ">--%>
+<%--        <span>인기 검색어 : </span>--%>
+<%--        <c:forEach var="topSearchKeyword" items="${topSearchKeywordList}">--%>
+<%--            <a class="x" style=" margin : 10px; padding: 10px; color: white " href="<c:url value='/restr/search?option=searchEngine&keyword=${topSearchKeyword.searchKeyword}'/>">${topSearchKeyword.searchKeyword}</a>--%>
+<%--        </c:forEach>--%>
+<%--    </div>--%>
 
 
 </section>
 
 
-
+<%--핫딜 리스트 뿌려주기--%>
+<!-- Main -->
 <!-- Tag Filter -->
 <div class="sub_title">
     <h1>믿고 먹는 맛집 리스트 💕</h1>
@@ -229,6 +251,69 @@
         >
     </div>
 </div>
+
+
+<div class="sub_title">
+    <h1>오늘의 핫딜 🔥</h1>
+</div>
+
+<section id="hotdeal" style="margin-bottom: 70px">
+    <ul class="hotdealList">
+        <c:forEach var="hotdealDto" items="${hotdealDto}">
+            <li class="hotdealRestr">
+                <a href="<c:url value="/hotdeal/read?hotdeal_NUM=${hotdealDto.hotdeal_NUM}"/>" class="hotdealRestr_wrap">
+                    <div class="hotdealRest__imgDesc">
+                        <div class="hotdealRestr__imgContainer home">
+                            <img
+                                    src="<c:url value='/uploadFile/${hotdealDto.hotdeal_picture}'/>"
+                                    alt=""
+                                    class="hotdealRestr__img"
+                            />
+                        </div>
+                        <div class="hotdealRestr__imgDeem">
+                            <div class="left">
+                                <div class="left__item-new home">
+                                    <span>NEW</span>
+                                </div>
+                                <div class="left__item-discountRate">
+                                    <p class="home">${hotdealDto.hotdeal_discountRate}%</p>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="right__item-menuPrice">${hotdealDto.restr_menu_price} 원</div>
+                                <div class="right__item-hotdealPrice">${hotdealDto.hotdeal_price} 원</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hotdealRestr__info">
+                        <div class="info__head">
+                            <h1>[${hotdealDto.restr_category_loc}] ${hotdealDto.restr_name}</h1>
+
+                                <%--/////////////////////////////////////////////////////////////////////////////////////--%>
+                            <c:if test="${hotdealDto.hotdeal_salesVolume == hotdealDto.hotdeal_MaxSalesVolume}">
+                                <h3 style="color:red; margin-top: 8px"> 준비한 쿠폰이 모두 소진되어 판매가 종료되었습니다. </h3>
+                            </c:if>
+                                <%--/////////////////////////////////////////////////////////////////////////////////////--%>
+
+
+                        </div>
+                        <div class="info__hotdealMenu">
+                            <span>${hotdealDto.restr_menu_food}</span>
+                        </div>
+                        <div class="info__hotdealDesc">
+                            <div class="hotdealDesc__wrap">
+                                <span>${hotdealDto.hotdeal_desc}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </c:forEach>
+
+    </ul>
+</section>
+
+
 
 <%--Filter Modal--%>
 
@@ -389,68 +474,6 @@
 
 
 
-<%--핫딜 리스트 뿌려주기--%>
-<!-- Main -->
-
-<div class="sub_title">
-    <h1>오늘의 핫딜 🔥</h1>
-</div>
-
-<section id="hotdeal">
-    <ul class="hotdealList">
-        <c:forEach var="hotdealDto" items="${hotdealDto}">
-            <li class="hotdealRestr">
-                <a href="<c:url value="/hotdeal/read?hotdeal_NUM=${hotdealDto.hotdeal_NUM}"/>" class="hotdealRestr_wrap">
-                    <div class="hotdealRest__imgDesc">
-                        <div class="hotdealRestr__imgContainer home">
-                            <img
-                                    src="<c:url value='/uploadFile/${hotdealDto.hotdeal_picture}'/>"
-                                    alt=""
-                                    class="hotdealRestr__img"
-                            />
-                        </div>
-                        <div class="hotdealRestr__imgDeem">
-                            <div class="left">
-                                <div class="left__item-new">
-                                    <span>new</span>
-                                </div>
-                                <div class="left__item-discountRate">
-                                    <p>${hotdealDto.hotdeal_discountRate}%</p>
-                                </div>
-                            </div>
-                            <div class="right">
-                                <div class="right__item-menuPrice">${hotdealDto.restr_menu_price}</div>
-                                <div class="right__item-hotdealPrice">${hotdealDto.hotdeal_price}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hotdealRestr__info">
-                        <div class="info__head">
-                            <h1>[${hotdealDto.restr_category_loc}] ${hotdealDto.restr_name}</h1>
-
-                    <%--/////////////////////////////////////////////////////////////////////////////////////--%>
-                            <c:if test="${hotdealDto.hotdeal_salesVolume == hotdealDto.hotdeal_MaxSalesVolume}">
-                                <h3 style="color:red; margin-top: 8px"> 준비한 쿠폰이 모두 소진되어 판매가 종료되었습니다. </h3>
-                            </c:if>
-                    <%--/////////////////////////////////////////////////////////////////////////////////////--%>
-
-
-                        </div>
-                        <div class="info__hotdealMenu">
-                            <span>${hotdealDto.restr_menu_food}</span>
-                        </div>
-                        <div class="info__hotdealDesc">
-                            <div class="hotdealDesc__wrap">
-                                <span>${hotdealDto.hotdeal_desc}</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </li>
-        </c:forEach>
-
-    </ul>
-</section>
 
 
 

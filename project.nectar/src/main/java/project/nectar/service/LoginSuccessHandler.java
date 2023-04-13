@@ -20,15 +20,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
-        System.out.println("======================================================================= ");
-        System.out.println("로그인 성공 후 여기로오네...");
-
         HttpSession session = request.getSession();
         String auth = authentication.getAuthorities().toString();
-        System.out.println("auth의 getAuthorities = " + auth);
-        System.out.println("authentication.getPrincipal().toString() = " + authentication.getPrincipal().toString());
-        System.out.println("session.getAttribute(\"prevPage\") = " + session.getAttribute("prevPage"));
-        System.out.println("=======================================================================");
 
         // 소셜 로그인, 로그인 후 세션 삭제
         session.removeAttribute("sns_email");

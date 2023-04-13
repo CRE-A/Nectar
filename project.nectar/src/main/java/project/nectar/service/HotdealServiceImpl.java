@@ -69,12 +69,6 @@ public class HotdealServiceImpl implements HotdealService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int insert(HotdealDto hotdealDto) throws Exception{
-
-        Request_HotdealDto request_hotdealDto = new Request_HotdealDto();
-        request_hotdealDto.setEvaluate_code(1);
-        request_hotdealDto.setEvaluate_msg("심사통과");
-        request_hotdealDao.updateState(request_hotdealDto);
-
         return hotdealDao.insert(hotdealDto);
     }
 

@@ -36,7 +36,7 @@ section#home {
     background-color: white;
     border-radius: 50px;
     width: 60%;
-    height: 70px;
+    height: 91px;
     justify-content: space-between;
     align-items: center;
     -webkit-box-shadow: 0px 0px 70px -22px rgba(255, 255, 255, 0.7);
@@ -84,3 +84,5 @@ section#home {
 .search-input:focus {
     outline: none;
 }
+
+

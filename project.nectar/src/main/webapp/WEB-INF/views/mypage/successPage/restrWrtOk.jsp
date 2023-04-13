@@ -39,7 +39,8 @@
 <body>
 <%--NAVBAR--%>
 
-<section id="navbar" class="success">
+<%--NAVBAR--%>
+<section id="navbar" class="biz">
   <div class="logo">
     <a href="<c:url value='/'/>"> <img src="<c:url value='/images/nectarLogo.png'/>" alt="" class="logo__img"/></a>
   </div>
@@ -52,22 +53,33 @@
     </li>
     <li class="menu item">
       <security:authorize access="isAnonymous()">
-        <a href="<c:url value='/login/login'/>">LOGIN</a>
+        <a href="<c:url value='/login/login'/>"><span> | &nbsp;  로그인</span><i class="fa-solid fa-user"></i></a>
       </security:authorize>
       <security:authorize access="hasRole('USER')">
-        <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+        <div>
+          <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+          <a href="<c:url value='/mypage/user/main'/>"><i class="fa-solid fa-user"></i></a>
+        </div>
       </security:authorize>
       <security:authorize access="hasRole('BIZ')">
-        <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+        <div>
+          <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+          <a href="<c:url value='/mypage/biz/main'/>"><i class="fa-solid fa-user-tie"></i></a>
+        </div>
+
       </security:authorize>
       <security:authorize access="hasRole('ADMIN')">
-        <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+        <div>
+          <a href="<c:url value='/login/logout'/>"><span> | &nbsp; 로그아웃</span></a>
+          <a href="<c:url value='/mypage/admin/main'/>"><i class="fa-solid fa-user-secret"></i></a>
+        </div>
       </security:authorize>
     </li>
   </ul>
 </section>
 
-<h4><a href="<c:url value='/login/logout'/>">LogOut</a></h4>
+<br>
+<br>
 
 <section id="info">
   <div class="box">
@@ -77,7 +89,7 @@
     </div>
     <h1>성공적으로 등록되었습니다!</h1>
     <p>
-      사업장 심사에는 최대 일주일 가량 소요될 수 있고 , 빠른 시일 내에 고객님의 이메일( ${restrDto.bizAccount_email} )로 답변 드리겠습니다.  심사 기간 중 추가적인 요청/문의 사항이 있다면 Mypage 하단의 QNA 게시판을 이용해 주십시오. Nectar를 이용해 주셔서 감사합니다.    </p>
+      사업장 심사에는 최대 일주일 가량 소요될 수 있고 , 빠른 시일 내에 고객님의 이메일( ${restrDto.request_bizAccount_email} )로 답변 드리겠습니다.  심사 기간 중 추가적인 요청/문의 사항이 있다면 Mypage 하단의 QNA 게시판을 이용해 주십시오. Nectar를 이용해 주셔서 감사합니다.    </p>
   </div>
 </section>
 

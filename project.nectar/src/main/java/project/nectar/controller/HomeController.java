@@ -39,7 +39,7 @@ public class HomeController {
         } catch (Exception e) {
             e.printStackTrace();
 //            return "redirect:/errpage";
-            return "matListPage/restrList"; // 데이터가 없어서 sql 에러뜸. 일단은 home으로 보내놓겠음.
+            return "matListPage/restrList";
         }
 
         return "home";

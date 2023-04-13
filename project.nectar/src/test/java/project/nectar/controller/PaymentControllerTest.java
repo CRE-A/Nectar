@@ -34,16 +34,17 @@ public class PaymentControllerTest {
 
     @Test
     public void insert_Data() throws Exception{
-        for(int i=1; i<=6; i++){
+        for(int i=1; i<=3; i++){
             PaymentDto paymentDto = new PaymentDto("imp_uid_"+i,"merchant_uid_"+i,"user_"+i+"@google.com","2023-04-01 14:0"+i,"5250","110-222333-444", "","biz_"+(3*i)+"@google.com", i);
             paymentController.pay(paymentDto);
         }
 
 
-        for(int i=4; i<=7; i++){
+        for(int i=4; i<=102; i++){
             PaymentDto paymentDto2 = new PaymentDto("imp_uid_"+i,"merchant_uid_"+i,"user_"+i+"@google.com","2023-04-01 14:0"+i,"5250","110-222333-444", "","biz_3@google.com", 1);
             paymentController.pay(paymentDto2);
         }
+
 
     }
 
@@ -51,10 +52,7 @@ public class PaymentControllerTest {
     @Test
     public void insert_Data2() throws Exception{
 
-        for(int i=8; i<=100; i++){
-            PaymentDto paymentDto3 = new PaymentDto("imp_uid_"+i,"merchant_uid_"+i,"user_"+i+"@google.com","2023-04-01 14:0"+i,"5250","110-222333-444", "","biz_3@google.com", 1);
-            paymentController.pay(paymentDto3);
-        }
+
 
     }
 
@@ -62,12 +60,19 @@ public class PaymentControllerTest {
     @Test
     public void insert_Data3() throws Exception{
 
-        for(int i=101; i<=102; i++){
-            PaymentDto paymentDto3 = new PaymentDto("imp_uid_"+i,"merchant_uid_"+i,"user_"+i+"@google.com","2023-04-01 14:0"+i,"5250","110-222333-444", "","biz_3@google.com", 1);
-            paymentController.pay(paymentDto3);
-        }
+
 
     }
+
+
+    @Test
+    public void insert_Data4() throws Exception{
+        // payment = 103
+            PaymentDto paymentDto3 = new PaymentDto("imp_uid_103","merchant_uid_103","user_1@google.com","2023-04-01 14:0103","5250","110-222333-444", "","biz_6@google.com", 2);
+            paymentController.pay(paymentDto3);
+    }
+
+
 
 
 }

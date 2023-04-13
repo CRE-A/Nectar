@@ -28,6 +28,7 @@ li.restr {
     width: 100%;
     display: flex;
     list-style: none;
+    cursor: pointer;
 }
 
 li > a > img {

@@ -69,7 +69,7 @@ public class RestrController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "errorPage/searchERR";
+            return "searchERR";
 
         }
 
@@ -80,16 +80,11 @@ public class RestrController {
     @GetMapping("/read")
     public String read(LikelistDto likeDto, Integer restr_NUM, SearchCondition sc, Model m, HttpSession session, Authentication authentication){
 
-        System.out.println("===================================================================");
-        System.out.println("resrt/read 방금 지나갔음");
-
         String user_email= "";
         if(isAuthenticated()){       // 로그인이(인증)이 된 경우
             UserDetails userDetails = (UserDetails)authentication.getPrincipal();
             user_email = userDetails.getUsername();
-            System.out.println("user_email = " + user_email);
         }
-            System.out.println("===================================================================");
 
         BrowserHistoryDto bh = new BrowserHistoryDto(session.getId(), user_email,restr_NUM);
         likeDto.setUser_email(user_email);
@@ -125,7 +120,6 @@ public class RestrController {
 
 
 
-    // 아래부터는 (관리자)admin 계정만 접근 가능한 Delete, Write, Modify
 
     @PostMapping("/delete")
     public String delete(Integer restr_NUM, RedirectAttributes rattr, SearchCondition sc){
