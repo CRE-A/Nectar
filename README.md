@@ -40,13 +40,13 @@
 
 <br>
 
-## <li>JAVA 11</li>
+ <li>JAVA 11</li>
 
-## <li>JavaScript ES 6 </li>
+ <li>JavaScript ES 6 </li>
 
-## <li>HTML5 </li>
+ <li>HTML5 </li>
 
-## <li>CSS3</li>
+ <li>CSS3</li>
 
 <br>
 
