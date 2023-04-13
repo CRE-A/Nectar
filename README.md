@@ -10,11 +10,9 @@
 
 # 💡 프로젝트 소개 Introduction
 
-<br>
 
 프로젝트에 대한 간략한 소개와 의의를 설명합니다.
 
-<br>
 
  ### 프로젝트 이름의 의미 Meaning of Nectar
 
