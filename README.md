@@ -37,7 +37,7 @@
 &nbsp; STEP 3 : JSP + Spring BOOT + MyBatis    </br>
 &nbsp; STEP 4 : REACT + Spring Boot + MyBATIS    </br>
 &nbsp; STEP 5 : REACT + Spring Boot + JPA        </br>
-&nbsp; STEP 6 : REACT + NODE.js                  </br></br>
+&nbsp; STEP 6 : REACT + Node.js                  </br></br>
 
 
 
