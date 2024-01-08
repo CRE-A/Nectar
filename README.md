@@ -33,7 +33,7 @@
 
 이 프로젝트는 '연간 개발 계획'의 두번째 스텝(STEP 2)을 위해 만들어졌습니다.
 <li>STEP 1 : JSP   + Spring MVC  + MyBatis     (NECTAR   현재 프로젝트)</li>
-<li>STEP 2 : JSP   + Spring MVC  + MyBatis     (  [CARD FLIP](https://github.com/CRE-A/CardFlip) )</li>
+<li>STEP 2 : JSP   + Spring MVC  + MyBatis     [CARD FLIP](https://github.com/CRE-A/CardFlip) </li>
 <li>STEP 3 : JSP   + Spring BOOT + MyBatis    </li>
 <li>Step 4 : REACT + Spring Boot + MyBATIS    </li>
 <li>Step 5 : REACT + Spring Boot + JPA        </li>
