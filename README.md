@@ -19,11 +19,25 @@
 
 
 
- ### 프로젝트의 목적 Why we started this project
+ ### 프로젝트의 설명 Description
 
 
 
 단순히 지역 또는 음식종류로 맛집을 검색하는 것이 아니라 사용자가 원하는 음식점의 분위기, 주차시설 이용 가능 여부, 반려동물 출입 여부 등 다양한 검색 필터 기능을 이용할 수 있는 웹사이트를 만듦으로써 사용자 친화적인 맛집 검색 웹사이트를 만들고자 하였습니다.
+
+
+
+ ### 프로젝트의 목적 Why we started this project
+
+
+
+이 프로젝트는 '연간 개발 계획'의 두번째 스텝(STEP 2)을 위해 만들어졌습니다.
+<li>STEP 1 : JSP   + Spring MVC  + MyBatis     (NECTAR   현재 프로젝트)</li>
+<li>STEP 2 : JSP   + Spring MVC  + MyBatis     (Card Flip   https://github.com/CRE-A/CardFlip/tree/main)</li>
+<li>STEP 3 : JSP   + Spring BOOT + MyBatis    </li>
+<li>Step 4 : REACT + Spring Boot + MyBATIS    </li>
+<li>Step 5 : REACT + Spring Boot + JPA        </li>
+<li>Step 6 : REACT + NODE.js                  </li>
 
 
 
