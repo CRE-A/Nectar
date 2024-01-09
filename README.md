@@ -1,6 +1,7 @@
 # 💡 NECTAR 넥타르
 
 <img src="https://user-images.githubusercontent.com/121703704/231820636-ee5eb48a-4b49-4843-ba23-fc1d0aea92a2.png" width=400px>
+![image](https://github.com/CRE-A/Nectar/assets/121703704/0d13b04f-c492-42bb-a545-85b7e7949356)
 
 
 개인 맞춤 맛집 검색 서비스
